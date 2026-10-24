@@ -11,6 +11,7 @@ identificador individual sai deste script (LGPD).
 Uso:
     python scripts/gerar_atis.py              # mês mais recente disponível
     python scripts/gerar_atis.py --mes 202607 # mês específico
+    python scripts/gerar_atis.py --ano 2025   # todos os meses publicados do ano
     python scripts/gerar_atis.py --force      # reprocessa mesmo se já existir
 """
 
@@ -308,18 +309,54 @@ def processar(s: requests.Session, mes: str, padrao: re.Pattern, manter_zip: boo
             caminho.unlink(missing_ok=True)
 
 
+def processar_mes(s: requests.Session, mes: str, padrao: re.Pattern, force: bool, manter_zip: bool) -> str:
+    """Processa um mês e devolve o resultado: salvo, existente, indisponivel ou vazio."""
+    if (DIR_DADOS / f"{mes}.json").exists() and not force:
+        print(f"{mes} já processado; use --force para refazer.")
+        return "existente"
+    if not mes_disponivel(s, mes):
+        print(f"{mes} não está disponível no Portal da Transparência.")
+        return "indisponivel"
+    resumo = processar(s, mes, padrao, manter_zip)
+    if resumo["total"] == 0:
+        print(f"{mes}: nenhum servidor corresponde ao padrão de cargo; nada salvo.", file=sys.stderr)
+        return "vazio"
+    salvar(resumo, mes)
+    print(f"Salvo data/{mes}.json — {resumo['total']} ATIs, "
+          f"mediana R$ {resumo['remuneracao_basica_bruta']['mediana']:,.2f}")
+    return "salvo"
+
+
 def main() -> int:
     global PADRAO_CARGO
     p = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    p.add_argument("--mes", help="mês AAAAMM; padrão: mais recente disponível")
+    periodo = p.add_mutually_exclusive_group()
+    periodo.add_argument("--mes", help="mês AAAAMM; padrão: mais recente disponível")
+    periodo.add_argument("--ano", help="ano AAAA: processa todos os meses publicados do ano")
     p.add_argument("--force", action="store_true", help="reprocessa mesmo se data/AAAAMM.json existir")
     p.add_argument("--padrao-cargo", default=PADRAO_CARGO, help="regex aplicada a DESCRICAO_CARGO normalizada")
     p.add_argument("--manter-zip", action="store_true", help="mantém o ZIP em .cache/ após processar")
     args = p.parse_args()
     PADRAO_CARGO = args.padrao_cargo
     padrao = re.compile(PADRAO_CARGO)
-
     s = sessao()
+
+    if args.ano:
+        if not re.fullmatch(r"20\d{2}", args.ano):
+            print(f"--ano deve ter o formato AAAA (recebido: {args.ano}).", file=sys.stderr)
+            return 1
+        resultados = {}
+        for m in range(1, 13):
+            mes = f"{args.ano}{m:02d}"
+            resultados[mes] = processar_mes(s, mes, padrao, args.force, args.manter_zip)
+        atualizar_indice()
+        verificar_coordenadas()
+        print("Resumo:", ", ".join(f"{m[4:]}={r}" for m, r in resultados.items()))
+        if all(r == "indisponivel" for r in resultados.values()):
+            print(f"::error::Nenhum mês de {args.ano} está disponível no Portal da Transparência.", file=sys.stderr)
+            return 1
+        return 1 if "vazio" in resultados.values() else 0
+
     if args.mes and not re.fullmatch(r"20\d{2}(0[1-9]|1[0-2])", args.mes):
         print(f"--mes deve ter o formato AAAAMM (recebido: {args.mes}).", file=sys.stderr)
         return 1
@@ -327,24 +364,12 @@ def main() -> int:
     if not mes:
         print("Nenhum mês disponível nos últimos meses.", file=sys.stderr)
         return 1
-    if args.mes and not (DIR_DADOS / f"{mes}.json").exists() and not mes_disponivel(s, mes):
-        print(f"::error::{mes} não está disponível no Portal da Transparência.", file=sys.stderr)
-        return 1
-    if (DIR_DADOS / f"{mes}.json").exists() and not args.force:
-        print(f"{mes} já processado; use --force para refazer.")
-        atualizar_indice()
-        verificar_coordenadas()
-        return 0
-
-    resumo = processar(s, mes, padrao, args.manter_zip)
-    if resumo["total"] == 0:
-        print("Nenhum servidor corresponde ao padrão de cargo; nada salvo.", file=sys.stderr)
-        return 1
-    salvar(resumo, mes)
-    print(f"Salvo data/{mes}.json — {resumo['total']} ATIs, "
-          f"mediana R$ {resumo['remuneracao_basica_bruta']['mediana']:,.2f}")
+    resultado = processar_mes(s, mes, padrao, args.force, args.manter_zip)
+    atualizar_indice()
     verificar_coordenadas()
-    return 0
+    if resultado == "indisponivel":
+        print(f"::error::{mes} não está disponível no Portal da Transparência.", file=sys.stderr)
+    return 1 if resultado in ("indisponivel", "vazio") else 0
 
 
 if __name__ == "__main__":

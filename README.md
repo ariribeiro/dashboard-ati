@@ -87,6 +87,7 @@ python3 -m venv .venv
 
 .venv/bin/python scripts/gerar_atis.py              # mês mais recente
 .venv/bin/python scripts/gerar_atis.py --mes 202607 # mês específico (útil para histórico)
+.venv/bin/python scripts/gerar_atis.py --ano 2025   # todos os meses publicados do ano
 .venv/bin/python scripts/gerar_atis.py --force      # reprocessa um mês existente
 .venv/bin/python scripts/gerar_atis.py --manter-zip # guarda o ZIP em .cache/
 
@@ -111,11 +112,16 @@ Em **Actions → Dados ATI → Run workflow** há três opções:
 - **Mês** e **Ano**: processam um mês específico (ex.: `03` e `2026`). Com o mês
   em "mais recente" e o ano em branco, o workflow busca o último mês publicado,
   como na execução agendada. Mês sem ano, ou ano sem mês, é recusado.
+- **Mês = "ano inteiro"** com um ano: processa todos os meses publicados daquele
+  ano, um por vez. Meses já existentes são pulados (a menos que `force` esteja
+  marcado) e meses ainda não publicados são ignorados. A execução só falha se o
+  ano não tiver nenhum mês publicado. Doze meses podem levar perto de uma hora.
 - **force**: reprocessa o mês mesmo que `data/AAAAMM.json` já exista.
 
 Um mês ainda não publicado pelo portal falha com uma mensagem de erro, sem
 alterar `data/`. Pela linha de comando:
-`gh workflow run atis.yml -f mes=03 -f ano=2026 -f force=true`.
+`gh workflow run atis.yml -f mes=03 -f ano=2026 -f force=true` ou
+`gh workflow run atis.yml -f mes="ano inteiro" -f ano=2025`.
 
 ## Observações
 

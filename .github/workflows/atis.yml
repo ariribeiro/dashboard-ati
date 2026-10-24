@@ -6,11 +6,12 @@ on:
   workflow_dispatch:
     inputs:
       mes:
-        description: "Mês (deixe em 'mais recente' para buscar o último publicado)"
+        description: "Mês ('mais recente' busca o último publicado; 'ano inteiro' processa todos os meses publicados do ano)"
         type: choice
         default: mais recente
         options:
           - mais recente
+          - ano inteiro
           - "01"
           - "02"
           - "03"
@@ -24,7 +25,7 @@ on:
           - "11"
           - "12"
       ano:
-        description: "Ano com 4 dígitos (obrigatório quando o mês é escolhido)"
+        description: "Ano com 4 dígitos (obrigatório com mês específico ou 'ano inteiro')"
         type: string
         default: ""
       force:
@@ -44,7 +45,7 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
-    timeout-minutes: 60
+    timeout-minutes: 120
     steps:
       - uses: actions/checkout@v4
 
@@ -66,10 +67,14 @@ jobs:
           args=()
           if [ -n "$MES" ] && [ "$MES" != "mais recente" ]; then
             if ! [[ "$ANO" =~ ^20[0-9]{2}$ ]]; then
-              echo "::error::Informe o ano com 4 dígitos (ex.: 2026) ao escolher o mês."
+              echo "::error::Informe o ano com 4 dígitos (ex.: 2026) ao escolher o mês ou 'ano inteiro'."
               exit 1
             fi
-            args+=(--mes "${ANO}${MES}")
+            if [ "$MES" = "ano inteiro" ]; then
+              args+=(--ano "$ANO")
+            else
+              args+=(--mes "${ANO}${MES}")
+            fi
           elif [ -n "$ANO" ]; then
             echo "::error::Escolha o mês junto com o ano."
             exit 1
