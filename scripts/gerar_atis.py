@@ -282,16 +282,19 @@ def atualizar_indice() -> None:
 
 
 def verificar_coordenadas() -> None:
-    """Avisa sobre órgãos de exercício do mês mais recente sem linha em orgaos_coordenadas.csv."""
-    latest = DIR_DADOS / "latest.json"
-    if not latest.exists() or not ARQ_COORDENADAS.exists():
+    """Avisa sobre órgãos de exercício (de qualquer mês) sem linha em orgaos_coordenadas.csv."""
+    if not ARQ_COORDENADAS.exists():
         return
     conhecidos = set(pd.read_csv(ARQ_COORDENADAS, sep=";", dtype=str)["orgao_siape"])
-    orgaos = json.loads(latest.read_text(encoding="utf-8"))["por_orgao_exercicio"]
-    for o in orgaos:
-        if o["nome"] not in conhecidos:
-            # Formato de anotação do GitHub Actions; no terminal aparece como texto comum.
-            print(f"::warning::Órgão sem coordenadas em {ARQ_COORDENADAS.name}: {o['nome']} ({o['qtd']} ATIs)")
+    faltando = {}
+    for arq in sorted(DIR_DADOS.glob("[0-9]" * 6 + ".json")):
+        for o in json.loads(arq.read_text(encoding="utf-8"))["por_orgao_exercicio"]:
+            if o["nome"] not in conhecidos:
+                faltando.setdefault(o["nome"], []).append(arq.stem)
+    for nome, meses in faltando.items():
+        # Formato de anotação do GitHub Actions; no terminal aparece como texto comum.
+        print(f"::warning::Órgão sem coordenadas em {ARQ_COORDENADAS.name}: {nome} "
+              f"({len(meses)} meses, último {meses[-1]})")
 
 
 def processar(s: requests.Session, mes: str, padrao: re.Pattern, manter_zip: bool) -> dict:

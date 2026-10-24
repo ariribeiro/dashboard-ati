@@ -4,7 +4,16 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Painel ATI</title>
-  <meta name="description" content="Dados agregados da carreira de Analista em Tecnologia da Informação do Executivo Federal, a partir do Portal da Transparência.">
+  <meta name="description" content="Dados agregados da carreira de Analista em Tecnologia da Informação do Executivo Federal: quantos são, onde trabalham, carreira e remuneração.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Painel ATI — Analistas em Tecnologia da Informação">
+  <meta property="og:description" content="Quantos são, onde trabalham, carreira e remuneração dos ATIs do Executivo Federal. Dados do Portal da Transparência, atualizados todo mês.">
+  <meta property="og:url" content="https://ariribeiro.github.io/dashboard-ati/">
+  <meta property="og:image" content="https://ariribeiro.github.io/dashboard-ati/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%232a78d6'/%3E%3Ccircle cx='22' cy='40' r='8' fill='%23fff'/%3E%3Ccircle cx='40' cy='26' r='12' fill='%23fff' opacity='.85'/%3E%3C/svg%3E">
   <link rel="stylesheet" href="style.css">
   <script>
     try { const t = localStorage.getItem("tema"); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
@@ -17,88 +26,127 @@
 </head>
 <body>
   <header class="topo">
-    <div>
-      <h1>Analistas em Tecnologia da Informação</h1>
-      <p class="sub">Carreira ATI do Executivo Federal — dados agregados do SIAPE</p>
-    </div>
-    <div class="controles">
-      <label for="mes">Mês de referência</label>
-      <select id="mes"></select>
-      <button id="tema" type="button" aria-label="Alternar modo claro/escuro">◐</button>
+    <div class="topo-conteudo">
+      <div>
+        <p class="sobretitulo">Executivo Federal · Carreira ATI</p>
+        <h1>Analistas em Tecnologia da Informação</h1>
+        <p class="sub">Quantos são, onde trabalham, como está a carreira e quanto recebem, com dados agregados do SIAPE.</p>
+      </div>
+      <div class="controles">
+        <span class="selo">Dados de <strong id="ref-topo">–</strong></span>
+        <label class="sr" for="mes">Mês de referência</label>
+        <select id="mes" title="Mês de referência"></select>
+        <button id="tema" type="button" aria-label="Alternar modo claro/escuro" title="Alternar modo claro/escuro">◐</button>
+      </div>
     </div>
   </header>
 
   <main>
     <p id="erro" class="erro" hidden></p>
 
-    <section class="cards" aria-label="Indicadores principais">
-      <div class="card destaque">
-        <span class="rotulo">ATIs ativos</span>
-        <span class="valor" id="c-total">–</span>
-        <span class="delta" id="c-total-delta"></span>
+    <section class="secao" data-secao="geral" aria-labelledby="t-geral">
+      <div class="secao-cabecalho">
+        <h2 id="t-geral">Visão geral</h2>
       </div>
-      <div class="card">
-        <span class="rotulo">Remuneração básica bruta mediana</span>
-        <span class="valor" id="c-mediana">–</span>
-        <span class="delta" id="c-media"></span>
+
+      <div class="cards">
+        <div class="card" data-tema="geral">
+          <span class="rotulo">ATIs ativos</span>
+          <span class="valor destaque" id="c-total">–</span>
+          <span class="delta" id="c-total-delta"></span>
+          <span class="detalhe" id="c-situacao"></span>
+          <div class="spark" id="s-total" aria-hidden="true"></div>
+        </div>
+        <div class="card" data-tema="remuneracao">
+          <span class="rotulo">Remuneração básica bruta mediana</span>
+          <span class="valor" id="c-mediana">–</span>
+          <span class="delta" id="c-mediana-delta"></span>
+          <span class="detalhe" id="c-media"></span>
+          <div class="spark" id="s-mediana" aria-hidden="true"></div>
+        </div>
+        <div class="card" data-tema="remuneracao">
+          <span class="rotulo">Faixa entre P10 e P90</span>
+          <span class="valor valor-menor" id="c-faixa">–</span>
+          <span class="detalhe" id="c-n"></span>
+        </div>
+        <div class="card" data-tema="carreira">
+          <span class="rotulo">Com função ou cargo comissionado</span>
+          <span class="valor" id="c-funcao">–</span>
+          <span class="detalhe" id="c-funcao-pct"></span>
+        </div>
       </div>
-      <div class="card">
-        <span class="rotulo">Faixa P10 – P90</span>
-        <span class="valor valor-menor" id="c-faixa">–</span>
-        <span class="delta" id="c-n"></span>
-      </div>
-      <div class="card">
-        <span class="rotulo">Com função ou cargo comissionado</span>
-        <span class="valor" id="c-funcao">–</span>
-        <span class="delta" id="c-funcao-pct"></span>
+
+      <div class="grade">
+        <div class="painel destaques">
+          <h3>Destaques do mês</h3>
+          <ul id="destaques"></ul>
+        </div>
+        <figure class="painel">
+          <figcaption><h3>Total de ATIs por mês</h3><p id="hist-total-sub"></p></figcaption>
+          <div class="grafico" id="g-hist-total"></div>
+        </figure>
       </div>
     </section>
 
-    <section class="grade">
+    <section class="secao" data-secao="onde" aria-labelledby="t-onde">
+      <div class="secao-cabecalho">
+        <h2 id="t-onde">Onde trabalham</h2>
+        <p id="onde-desc"></p>
+      </div>
+
       <figure class="painel">
-        <figcaption><h2>Total de ATIs por mês</h2></figcaption>
-        <div class="grafico" id="g-hist-total"></div>
-      </figure>
-      <figure class="painel">
-        <figcaption><h2>Remuneração básica bruta mediana por mês</h2></figcaption>
-        <div class="grafico" id="g-hist-mediana"></div>
-      </figure>
-      <figure class="painel largo">
         <figcaption>
-          <h2>Onde ficam os órgãos de exercício</h2>
-          <p>Cada bolinha está na sede do órgão (ou do prédio que vários órgãos dividem) e mostra quantos ATIs têm exercício nele. Clique numa bolinha para ver os órgãos; as de borda tracejada juntam vários prédios próximos e se abrem ao clicar.</p>
+          <h3>Sede dos órgãos de exercício</h3>
+          <p>Cada bolinha mostra quantos ATIs têm exercício no órgão (ou no prédio que vários órgãos dividem). Clique para ver os órgãos; as de borda tracejada juntam prédios próximos e se abrem ao clicar.</p>
         </figcaption>
         <div class="mapa-orgaos" id="mapa-orgaos" role="region" aria-label="Mapa de órgãos de exercício"></div>
         <p class="nota" id="mapa-nota"></p>
       </figure>
-      <figure class="painel largo">
-        <figcaption><h2>Órgão de exercício</h2><p>15 maiores; demais somados em “Outros”</p></figcaption>
-        <div class="grafico" id="g-exercicio"></div>
-      </figure>
-      <figure class="painel">
-        <figcaption><h2>Faixa de remuneração básica bruta</h2><p id="hist-sub"></p></figcaption>
-        <div class="grafico" id="g-faixas"></div>
-      </figure>
-      <figure class="painel">
-        <figcaption><h2>Classe e padrão</h2><p>Quantidade de ATIs em cada posição da carreira</p></figcaption>
-        <div class="grafico" id="g-classe"></div>
-      </figure>
-      <figure class="painel">
-        <figcaption><h2>UF de exercício</h2></figcaption>
-        <div class="grafico" id="g-uf"></div>
-      </figure>
-      <figure class="painel">
-        <figcaption><h2>Funções e cargos comissionados por tipo</h2></figcaption>
-        <div class="grafico" id="g-funcao"></div>
-      </figure>
-      <figure class="painel">
-        <figcaption><h2>Órgão de lotação</h2></figcaption>
-        <div class="grafico" id="g-lotacao"></div>
-      </figure>
-      <figure class="painel">
-        <figcaption><h2>Situação do vínculo</h2></figcaption>
-        <div class="grafico" id="g-situacao"></div>
-      </figure>
+
+      <div class="grade">
+        <figure class="painel">
+          <figcaption><h3>Órgão de exercício</h3><p>15 maiores; os demais somados em “Outros”</p></figcaption>
+          <div class="grafico" id="g-exercicio"></div>
+        </figure>
+        <figure class="painel">
+          <figcaption><h3>UF de exercício</h3><p id="uf-sub"></p></figcaption>
+          <div class="grafico" id="g-uf"></div>
+        </figure>
+      </div>
+    </section>
+
+    <section class="secao" data-secao="carreira" aria-labelledby="t-carreira">
+      <div class="secao-cabecalho">
+        <h2 id="t-carreira">Carreira</h2>
+        <p>A carreira tem três classes (A, B e C), cada uma dividida em padrões. O ingresso acontece na classe A, padrão I.</p>
+      </div>
+      <div class="grade">
+        <figure class="painel">
+          <figcaption><h3>Classe e padrão</h3><p>ATIs em cada posição da carreira, com o total por classe à direita</p></figcaption>
+          <div class="grafico" id="g-classe"></div>
+        </figure>
+        <figure class="painel">
+          <figcaption><h3>Funções e cargos comissionados</h3><p id="funcao-sub"></p></figcaption>
+          <div class="grafico" id="g-funcao"></div>
+        </figure>
+      </div>
+    </section>
+
+    <section class="secao" data-secao="remuneracao" aria-labelledby="t-remuneracao">
+      <div class="secao-cabecalho">
+        <h2 id="t-remuneracao">Remuneração</h2>
+        <p>Remuneração básica bruta do mês, antes de descontos e sem verbas indenizatórias. Considera apenas quem recebeu valor maior que zero.</p>
+      </div>
+      <div class="grade">
+        <figure class="painel">
+          <figcaption><h3>Distribuição por faixa</h3><p id="hist-sub"></p></figcaption>
+          <div class="grafico" id="g-faixas"></div>
+        </figure>
+        <figure class="painel">
+          <figcaption><h3>Mediana por mês</h3><p id="hist-mediana-sub"></p></figcaption>
+          <div class="grafico" id="g-hist-mediana"></div>
+        </figure>
+      </div>
     </section>
   </main>
 
@@ -106,10 +154,10 @@
     <p>
       Fonte: <a id="fonte" href="https://portaldatransparencia.gov.br/download-de-dados/servidores">Portal da Transparência — Servidores SIAPE</a>.
       Referência: <strong id="ref">–</strong>. Processado em <span id="gerado">–</span>.
+      Mapa: © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>.
     </p>
     <p>
       Cargo filtrado: <code id="filtro"></code>. Somente dados agregados; nenhum dado individual é publicado.
-      Estatísticas de remuneração consideram servidores com remuneração básica bruta maior que zero no mês.
     </p>
   </footer>
 

@@ -62,6 +62,8 @@ mão, `data/orgaos_coordenadas.csv` (separador `;`):
 |---|---|
 | `orgao_siape` | nome do órgão **exatamente** como aparece em `ORG_EXERCICIO` |
 | `sigla` | sigla exibida no mapa |
+| `nome` | nome oficial completo (tooltips) |
+| `nome_curto` | nome curto usado nos eixos dos gráficos |
 | `local` | prédio ou endereço da sede |
 | `lat`, `lon` | coordenadas da sede |
 | `precisao` | `edificio`, `quadra` ou `rua` |

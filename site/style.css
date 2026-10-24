@@ -1,57 +1,93 @@
+/* Cores por seção (paleta validada): azul = visão geral, verde-água = onde
+   trabalham, violeta = carreira, laranja = remuneração. Texto nunca usa essas
+   cores; elas marcam barras, linhas, bolinhas e o acento de cada seção. */
 :root {
   color-scheme: light;
-  --fundo: #f4f4f2;
+  --fundo: #f6f6f3;
   --superficie: #fcfcfb;
-  --borda: #e3e2de;
-  --grade: #e8e7e3;
+  --borda: #e4e3dd;
+  --grade: #e8e7e2;
   --texto: #0b0b0b;
   --texto-2: #52514e;
   --texto-3: #7a7974;
-  --serie: #2a78d6;
-  --serie-area: rgba(42, 120, 214, 0.10);
-  --seq-min: #cde2fb;
-  --seq-max: #104281;
-  --positivo: #0f7b3a;
+  --positivo: #006300;
   --negativo: #b42318;
   --erro-fundo: #fdecea;
+
+  --geral: #2a78d6;
+  --onde: #1baf7a;
+  --onde-forte: #12865d;
+  --carreira: #6250d6;
+  --remuneracao: #eb6834;
+  --geral-lavado: rgba(42, 120, 214, 0.10);
+  --onde-lavado: rgba(27, 175, 122, 0.10);
+  --carreira-lavado: rgba(98, 80, 214, 0.10);
+  --remuneracao-lavado: rgba(235, 104, 52, 0.12);
+  --carreira-seq-min: #e4e0fa;
+  --carreira-seq-max: #2e2470;
+
+  --topo-fundo: linear-gradient(180deg, #e7f0fb 0%, #f6f6f3 100%);
+  --sombra: 0 1px 2px rgba(11, 11, 11, 0.04), 0 4px 16px rgba(11, 11, 11, 0.04);
 }
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     color-scheme: dark;
-    --fundo: #121211;
+    --fundo: #111110;
     --superficie: #1a1a19;
     --borda: #2e2e2c;
     --grade: #2a2a28;
     --texto: #f0efec;
     --texto-2: #c3c2b7;
     --texto-3: #8f8e86;
-    --serie: #3987e5;
-    --serie-area: rgba(57, 135, 229, 0.12);
-    --seq-min: #184f95;
-    --seq-max: #b7d3f6;
-    --positivo: #4cc27a;
+    --positivo: #0ca30c;
     --negativo: #f97066;
     --erro-fundo: #3a1714;
+
+    --geral: #3987e5;
+    --onde: #199e70;
+    --onde-forte: #12865d;
+    --carreira: #9085e9;
+    --remuneracao: #d95926;
+    --geral-lavado: rgba(57, 135, 229, 0.14);
+    --onde-lavado: rgba(25, 158, 112, 0.14);
+    --carreira-lavado: rgba(144, 133, 233, 0.14);
+    --remuneracao-lavado: rgba(217, 89, 38, 0.16);
+    --carreira-seq-min: #3b3180;
+    --carreira-seq-max: #d6d1f8;
+
+    --topo-fundo: linear-gradient(180deg, #14202f 0%, #111110 100%);
+    --sombra: none;
   }
 }
 
 :root[data-theme="dark"] {
   color-scheme: dark;
-  --fundo: #121211;
+  --fundo: #111110;
   --superficie: #1a1a19;
   --borda: #2e2e2c;
   --grade: #2a2a28;
   --texto: #f0efec;
   --texto-2: #c3c2b7;
   --texto-3: #8f8e86;
-  --serie: #3987e5;
-  --serie-area: rgba(57, 135, 229, 0.12);
-  --seq-min: #184f95;
-  --seq-max: #b7d3f6;
-  --positivo: #4cc27a;
+  --positivo: #0ca30c;
   --negativo: #f97066;
   --erro-fundo: #3a1714;
+
+  --geral: #3987e5;
+  --onde: #199e70;
+  --onde-forte: #12865d;
+  --carreira: #9085e9;
+  --remuneracao: #d95926;
+  --geral-lavado: rgba(57, 135, 229, 0.14);
+  --onde-lavado: rgba(25, 158, 112, 0.14);
+  --carreira-lavado: rgba(144, 133, 233, 0.14);
+  --remuneracao-lavado: rgba(217, 89, 38, 0.16);
+  --carreira-seq-min: #3b3180;
+  --carreira-seq-max: #d6d1f8;
+
+  --topo-fundo: linear-gradient(180deg, #14202f 0%, #111110 100%);
+  --sombra: none;
 }
 
 * { box-sizing: border-box; }
@@ -63,26 +99,54 @@ body {
   font: 15px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 }
 
-.topo, main, .rodape {
+.sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* ---------------------------------------------------------------- topo */
+
+.topo { background: var(--topo-fundo); border-bottom: 1px solid var(--borda); }
+.topo-conteudo, main, .rodape {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 16px;
+  padding-left: 16px;
+  padding-right: 16px;
 }
-
-.topo {
+.topo-conteudo {
   display: flex;
   flex-wrap: wrap;
-  gap: 16px;
+  gap: 16px 24px;
   align-items: flex-end;
   justify-content: space-between;
-  padding-top: 28px;
-  padding-bottom: 20px;
+  padding-top: 36px;
+  padding-bottom: 28px;
 }
-.topo h1 { margin: 0; font-size: 1.5rem; line-height: 1.2; }
-.sub { margin: 4px 0 0; color: var(--texto-2); }
+.sobretitulo {
+  margin: 0 0 6px;
+  color: var(--geral);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.topo h1 { margin: 0; font-size: 1.875rem; line-height: 1.15; letter-spacing: -0.01em; }
+.sub { margin: 8px 0 0; color: var(--texto-2); max-width: 60ch; }
 
-.controles { display: flex; gap: 8px; align-items: center; }
-.controles label { color: var(--texto-2); font-size: 0.875rem; }
+.controles { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.selo {
+  font-size: 0.8125rem;
+  color: var(--texto-2);
+  background: var(--superficie);
+  border: 1px solid var(--borda);
+  border-radius: 999px;
+  padding: 6px 12px;
+}
+.selo strong { color: var(--texto); }
 select, button {
   font: inherit;
   color: var(--texto);
@@ -92,6 +156,7 @@ select, button {
   padding: 6px 10px;
 }
 button { cursor: pointer; min-width: 40px; }
+select:focus-visible, button:focus-visible { outline: 2px solid var(--geral); outline-offset: 2px; }
 
 .erro {
   background: var(--erro-fundo);
@@ -100,73 +165,128 @@ button { cursor: pointer; min-width: 40px; }
   border-radius: 8px;
 }
 
-.cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 12px;
-  margin-bottom: 12px;
+/* ---------------------------------------------------------------- seções */
+
+main { padding-top: 8px; }
+.secao { margin-top: 36px; --acento: var(--geral); --lavado: var(--geral-lavado); }
+.secao[data-secao="onde"] { --acento: var(--onde); --lavado: var(--onde-lavado); }
+.secao[data-secao="carreira"] { --acento: var(--carreira); --lavado: var(--carreira-lavado); }
+.secao[data-secao="remuneracao"] { --acento: var(--remuneracao); --lavado: var(--remuneracao-lavado); }
+
+.secao-cabecalho { margin-bottom: 14px; }
+.secao-cabecalho h2 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+  font-size: 1.25rem;
+  letter-spacing: -0.005em;
 }
-.card {
+.secao-cabecalho h2::before {
+  content: "";
+  width: 4px;
+  height: 1.1em;
+  border-radius: 2px;
+  background: var(--acento);
+}
+.secao-cabecalho p { margin: 4px 0 0 14px; color: var(--texto-2); max-width: 100ch; }
+
+.painel, .card {
   background: var(--superficie);
   border: 1px solid var(--borda);
-  border-radius: 12px;
-  padding: 16px;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
+  border-radius: 14px;
+  box-shadow: var(--sombra);
 }
-.rotulo { color: var(--texto-2); font-size: 0.875rem; }
-.valor { font-size: 1.75rem; font-weight: 600; font-variant-numeric: tabular-nums; }
-.destaque .valor { font-size: 3rem; line-height: 1.1; }
-.valor-menor { font-size: 1.25rem; padding-top: 6px; }
-.delta { color: var(--texto-3); font-size: 0.8125rem; min-height: 1.2em; }
-.delta.sobe { color: var(--positivo); }
-.delta.desce { color: var(--negativo); }
-
+.painel { margin: 0; padding: 18px; min-width: 0; }
 .grade {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 12px;
+  gap: 14px;
+  margin-top: 14px;
+  align-items: start;
 }
-.painel {
-  margin: 0;
-  background: var(--superficie);
-  border: 1px solid var(--borda);
-  border-radius: 12px;
-  padding: 16px;
-  min-width: 0;
-}
-.largo { grid-column: 1 / -1; }
-figcaption h2 { margin: 0; font-size: 1rem; }
+figcaption h3, .painel h3 { margin: 0; font-size: 1rem; }
 figcaption p { margin: 2px 0 0; color: var(--texto-2); font-size: 0.8125rem; }
-.grafico { width: 100%; height: 300px; margin-top: 8px; }
+.grafico { width: 100%; height: 300px; margin-top: 10px; }
 
-/* Mapa de órgãos (Leaflet) */
+/* ---------------------------------------------------------------- cards */
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 14px;
+}
+.card {
+  --acento: var(--geral);
+  position: relative;
+  overflow: hidden;
+  padding: 18px 18px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.card[data-tema="remuneracao"] { --acento: var(--remuneracao); }
+.card[data-tema="carreira"] { --acento: var(--carreira); }
+.card::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 3px;
+  background: var(--acento);
+}
+.rotulo { color: var(--texto-2); font-size: 0.875rem; }
+.valor { font-size: 1.875rem; font-weight: 600; line-height: 1.2; margin-top: 4px; }
+.valor.destaque { font-size: 3rem; line-height: 1.05; }
+.valor-menor { font-size: 1.3rem; padding-top: 8px; }
+.delta { color: var(--texto-3); font-size: 0.8125rem; min-height: 1.2em; }
+.delta.sobe { color: var(--positivo); }
+.delta.desce { color: var(--negativo); }
+.detalhe { color: var(--texto-3); font-size: 0.8125rem; }
+.spark { height: 40px; margin-top: 8px; }
+
+/* ---------------------------------------------------------------- destaques */
+
+.destaques ul { list-style: none; margin: 14px 0 0; padding: 0; display: grid; gap: 14px; }
+.destaques li { position: relative; padding-left: 20px; color: var(--texto-2); }
+.destaques li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.5em;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--marcador, var(--geral));
+}
+.destaques li[data-tema="onde"] { --marcador: var(--onde); }
+.destaques li[data-tema="carreira"] { --marcador: var(--carreira); }
+.destaques li[data-tema="remuneracao"] { --marcador: var(--remuneracao); }
+.destaques strong { color: var(--texto); font-weight: 600; }
+
+/* ---------------------------------------------------------------- mapa */
+
 .mapa-orgaos {
   height: 520px;
-  margin-top: 8px;
-  border-radius: 8px;
+  margin-top: 12px;
+  border-radius: 10px;
   background: var(--fundo);
   z-index: 0;
 }
-/* OSM não tem versão escura: inverte o mapa e devolve os matizes. */
 :root[data-theme="dark"] .leaflet-tile-pane { filter: invert(1) hue-rotate(180deg) brightness(0.9) contrast(0.9); }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) .leaflet-tile-pane { filter: invert(1) hue-rotate(180deg) brightness(0.9) contrast(0.9); }
 }
-.nota { margin: 8px 0 0; color: var(--texto-2); font-size: 0.8125rem; }
+.nota { margin: 10px 0 0; color: var(--texto-2); font-size: 0.8125rem; }
 .bolha {
   display: flex;
   align-items: center;
   justify-content: center;
-  box-sizing: border-box;
   border-radius: 50%;
-  background: var(--serie);
-  border: 2px solid var(--superficie);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  background: var(--onde-forte);
+  border: 2px solid #fff;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
   color: #fff;
   font: 600 12px/1 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  font-variant-numeric: tabular-nums;
   cursor: pointer;
 }
 .bolha.agrupada { border-style: dashed; }
@@ -182,13 +302,21 @@ figcaption p { margin: 2px 0 0; color: var(--texto-2); font-size: 0.8125rem; }
 }
 .vistas button + button { border-left: 1px solid var(--borda); }
 .vistas button:hover { background: var(--fundo); }
-.leaflet-popup-content-wrapper, .leaflet-popup-tip {
+.legenda-bolhas {
   background: var(--superficie);
-  color: var(--texto);
+  color: var(--texto-2);
+  border: 1px solid var(--borda);
+  border-radius: 8px;
+  padding: 8px 10px;
+  font-size: 0.75rem;
 }
+.legenda-bolhas .itens { display: flex; align-items: flex-end; gap: 10px; margin-top: 6px; }
+.legenda-bolhas .item { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.legenda-bolhas .circulo { border-radius: 50%; background: var(--onde-forte); border: 2px solid #fff; }
+.leaflet-popup-content-wrapper, .leaflet-popup-tip { background: var(--superficie); color: var(--texto); }
 .leaflet-popup-content { margin: 12px 14px; font-size: 0.8125rem; line-height: 1.4; }
-.leaflet-popup-content table { margin-top: 6px; min-width: 160px; }
-.leaflet-popup-content td { padding: 2px 4px; }
+.leaflet-popup-content table { margin-top: 6px; min-width: 200px; }
+.leaflet-popup-content td { padding: 2px 4px; border-bottom: 1px solid var(--grade); }
 .popup-total { margin: 6px 0 0; font-weight: 600; }
 .popup-aviso { margin: 6px 0 0; color: var(--texto-3); }
 .leaflet-container a.leaflet-popup-close-button { color: var(--texto-3); }
@@ -200,7 +328,9 @@ figcaption p { margin: 2px 0 0; color: var(--texto-2); font-size: 0.8125rem; }
 .leaflet-bar { border-color: var(--borda) !important; }
 .leaflet-control-attribution { font-size: 10px; }
 
-details { margin-top: 8px; font-size: 0.8125rem; color: var(--texto-2); }
+/* ---------------------------------------------------------------- tabelas e rodapé */
+
+details { margin-top: 10px; font-size: 0.8125rem; color: var(--texto-2); }
 summary { cursor: pointer; }
 table { width: 100%; border-collapse: collapse; margin-top: 6px; }
 td, th { text-align: left; padding: 4px 6px; border-bottom: 1px solid var(--grade); }
@@ -209,14 +339,19 @@ td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
 .rodape {
   color: var(--texto-2);
   font-size: 0.8125rem;
-  padding-top: 24px;
-  padding-bottom: 32px;
+  margin-top: 40px;
+  padding-top: 20px;
+  padding-bottom: 36px;
+  border-top: 1px solid var(--borda);
 }
 .rodape a { color: inherit; }
 code { font-size: 0.8125rem; overflow-wrap: anywhere; }
 
 @media (max-width: 760px) {
   .grade { grid-template-columns: minmax(0, 1fr); }
-  .destaque .valor { font-size: 2.5rem; }
+  .topo h1 { font-size: 1.5rem; }
+  .valor.destaque { font-size: 2.5rem; }
   .mapa-orgaos { height: 420px; }
+  .legenda-bolhas { display: none; }
+  .secao-cabecalho p { margin-left: 0; }
 }
