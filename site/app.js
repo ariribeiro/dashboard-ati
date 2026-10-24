@@ -8,6 +8,7 @@ const fmtPct = new Intl.NumberFormat("pt-BR", { style: "percent", maximumFractio
 const fmtReal = new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL", maximumFractionDigits: 0 });
 const fmtMil = (v) => "R$ " + new Intl.NumberFormat("pt-BR", { maximumFractionDigits: 1 }).format(v / 1000) + " mil";
 const MESES = ["jan", "fev", "mar", "abr", "mai", "jun", "jul", "ago", "set", "out", "nov", "dez"];
+const MESES_EXTENSO = ["janeiro", "fevereiro", "março", "abril", "maio", "junho", "julho", "agosto", "setembro", "outubro", "novembro", "dezembro"];
 const fmtMes = (ref) => { const [a, m] = ref.split("-"); return `${MESES[+m - 1]}/${a}`; };
 
 const SITUACOES = {
@@ -615,10 +616,24 @@ async function iniciar() {
   if (typeof echarts === "undefined") throw new Error("biblioteca de gráficos não carregou");
   if (typeof L === "undefined") throw new Error("biblioteca de mapas não carregou");
   [indice] = await Promise.all([json("index.json"), carregarCoordenadas()]);
-  const select = document.getElementById("mes");
-  for (const m of [...indice.meses].reverse()) select.add(new Option(fmtMes(m.mes), m.arquivo));
-  select.addEventListener("change", () => carregarMes(select.value).catch(mostrarErro));
-  await carregarMes(select.value);
+  const selAno = document.getElementById("ano");
+  const selMes = document.getElementById("mes");
+  const anos = [...new Set(indice.meses.map((m) => m.mes.slice(0, 4)))].reverse();
+  for (const a of anos) selAno.add(new Option(a, a));
+
+  // Mês: só os processados do ano escolhido. Ao trocar o ano, mantém o mês se existir; senão, o mais recente.
+  const preencherMeses = (manter) => {
+    const doAno = indice.meses.filter((m) => m.mes.startsWith(selAno.value));
+    selMes.replaceChildren(...doAno.map((m) => new Option(MESES_EXTENSO[+m.mes.slice(5) - 1], m.arquivo)));
+    const mesmo = doAno.find((m) => m.mes.slice(5) === manter);
+    selMes.value = (mesmo ?? doAno.at(-1)).arquivo;
+  };
+  const mesAtual = () => indice.meses.find((m) => m.arquivo === selMes.value)?.mes.slice(5);
+
+  selAno.addEventListener("change", () => { preencherMeses(mesAtual()); carregarMes(selMes.value).catch(mostrarErro); });
+  selMes.addEventListener("change", () => carregarMes(selMes.value).catch(mostrarErro));
+  preencherMeses(null);
+  await carregarMes(selMes.value);
 }
 
 document.getElementById("tema").addEventListener("click", () => {

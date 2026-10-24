@@ -83,6 +83,8 @@ jobs:
           python scripts/gerar_atis.py "${args[@]}"
 
       - name: Commitar data/ se houver mudança
+        # Roda mesmo se um mês falhou no modo "ano inteiro", para guardar os que deram certo.
+        if: ${{ !cancelled() }}
         run: |
           git add data/
           if git diff --cached --quiet; then

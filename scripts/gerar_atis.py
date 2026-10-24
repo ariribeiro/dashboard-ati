@@ -83,7 +83,7 @@ def com_retry(func, tentativas: int = 4, espera: float = 5.0):
             return func()
         except (requests.ConnectionError, requests.Timeout, requests.HTTPError) as erro:
             resp = getattr(erro, "response", None)
-            if resp is not None and resp.status_code < 500 and resp.status_code != 429:
+            if resp is not None and resp.status_code < 500 and resp.status_code not in (403, 429):
                 raise
             if i == tentativas:
                 raise
@@ -92,8 +92,36 @@ def com_retry(func, tentativas: int = 4, espera: float = 5.0):
             espera *= 2
 
 
+_meses_publicados: set[str] | None = None
+
+
+def meses_publicados(s: requests.Session) -> set[str] | None:
+    """Meses SIAPE listados na página de download (variável JS `arquivos`).
+
+    Devolve None se a página não puder ser lida; aí vale a checagem por HEAD.
+    """
+    global _meses_publicados
+    if _meses_publicados is None:
+        def tentar():
+            r = s.get(URL_PAGINA, timeout=60)
+            r.raise_for_status()
+            return r.text
+        try:
+            html = com_retry(tentar)
+        except requests.RequestException as erro:
+            print(f"Não foi possível ler a lista de arquivos do portal ({erro}); usando HEAD.", file=sys.stderr)
+            return None
+        _meses_publicados = {a + m for a, m in re.findall(
+            r'"ano"\s*:\s*"(\d{4})",\s*"mes"\s*:\s*"(\d{2})",[^}]*"origem"\s*:\s*"Servidores_SIAPE"', html)}
+    return _meses_publicados or None
+
+
 def mes_disponivel(s: requests.Session, mes: str) -> bool:
-    """O portal redireciona para o bucket; mês inexistente responde 403/404."""
+    """Consulta a lista do portal; sem ela, faz HEAD (mês inexistente responde 403/404)."""
+    publicados = meses_publicados(s)
+    if publicados is not None:
+        return mes in publicados
+
     def tentar():
         r = s.head(URL_DOWNLOAD.format(mes=mes), allow_redirects=True, timeout=60)
         if r.status_code >= 500 or r.status_code == 429:
@@ -293,8 +321,8 @@ def verificar_coordenadas() -> None:
                 faltando.setdefault(o["nome"], []).append(arq.stem)
     for nome, meses in faltando.items():
         # Formato de anotação do GitHub Actions; no terminal aparece como texto comum.
-        print(f"::warning::Órgão sem coordenadas em {ARQ_COORDENADAS.name}: {nome} "
-              f"({len(meses)} meses, último {meses[-1]})")
+        print(f"::warning::Órgão sem coordenadas em {ARQ_COORDENADAS.name} (aparece como 'sem localização' "
+              f"no mapa; não afeta os dados): {nome} ({len(meses)} meses, último {meses[-1]})")
 
 
 def processar(s: requests.Session, mes: str, padrao: re.Pattern, manter_zip: bool) -> dict:
@@ -351,14 +379,18 @@ def main() -> int:
         resultados = {}
         for m in range(1, 13):
             mes = f"{args.ano}{m:02d}"
-            resultados[mes] = processar_mes(s, mes, padrao, args.force, args.manter_zip)
+            try:
+                resultados[mes] = processar_mes(s, mes, padrao, args.force, args.manter_zip)
+            except (requests.RequestException, zipfile.BadZipFile, KeyError, ValueError) as erro:
+                print(f"::error::{mes} está publicado, mas falhou: {erro}", file=sys.stderr)
+                resultados[mes] = "erro"
         atualizar_indice()
         verificar_coordenadas()
         print("Resumo:", ", ".join(f"{m[4:]}={r}" for m, r in resultados.items()))
         if all(r == "indisponivel" for r in resultados.values()):
             print(f"::error::Nenhum mês de {args.ano} está disponível no Portal da Transparência.", file=sys.stderr)
             return 1
-        return 1 if "vazio" in resultados.values() else 0
+        return 1 if {"vazio", "erro"} & set(resultados.values()) else 0
 
     if args.mes and not re.fullmatch(r"20\d{2}(0[1-9]|1[0-2])", args.mes):
         print(f"--mes deve ter o formato AAAAMM (recebido: {args.mes}).", file=sys.stderr)
