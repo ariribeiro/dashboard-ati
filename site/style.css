@@ -1,0 +1,162 @@
+:root {
+  color-scheme: light;
+  --fundo: #f4f4f2;
+  --superficie: #fcfcfb;
+  --borda: #e3e2de;
+  --grade: #e8e7e3;
+  --texto: #0b0b0b;
+  --texto-2: #52514e;
+  --texto-3: #7a7974;
+  --serie: #2a78d6;
+  --serie-area: rgba(42, 120, 214, 0.10);
+  --seq-min: #cde2fb;
+  --seq-max: #104281;
+  --positivo: #0f7b3a;
+  --negativo: #b42318;
+  --erro-fundo: #fdecea;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --fundo: #121211;
+    --superficie: #1a1a19;
+    --borda: #2e2e2c;
+    --grade: #2a2a28;
+    --texto: #f0efec;
+    --texto-2: #c3c2b7;
+    --texto-3: #8f8e86;
+    --serie: #3987e5;
+    --serie-area: rgba(57, 135, 229, 0.12);
+    --seq-min: #184f95;
+    --seq-max: #b7d3f6;
+    --positivo: #4cc27a;
+    --negativo: #f97066;
+    --erro-fundo: #3a1714;
+  }
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --fundo: #121211;
+  --superficie: #1a1a19;
+  --borda: #2e2e2c;
+  --grade: #2a2a28;
+  --texto: #f0efec;
+  --texto-2: #c3c2b7;
+  --texto-3: #8f8e86;
+  --serie: #3987e5;
+  --serie-area: rgba(57, 135, 229, 0.12);
+  --seq-min: #184f95;
+  --seq-max: #b7d3f6;
+  --positivo: #4cc27a;
+  --negativo: #f97066;
+  --erro-fundo: #3a1714;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--fundo);
+  color: var(--texto);
+  font: 15px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+.topo, main, .rodape {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+.topo {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding-top: 28px;
+  padding-bottom: 20px;
+}
+.topo h1 { margin: 0; font-size: 1.5rem; line-height: 1.2; }
+.sub { margin: 4px 0 0; color: var(--texto-2); }
+
+.controles { display: flex; gap: 8px; align-items: center; }
+.controles label { color: var(--texto-2); font-size: 0.875rem; }
+select, button {
+  font: inherit;
+  color: var(--texto);
+  background: var(--superficie);
+  border: 1px solid var(--borda);
+  border-radius: 8px;
+  padding: 6px 10px;
+}
+button { cursor: pointer; min-width: 40px; }
+
+.erro {
+  background: var(--erro-fundo);
+  color: var(--negativo);
+  padding: 12px 16px;
+  border-radius: 8px;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+  margin-bottom: 12px;
+}
+.card {
+  background: var(--superficie);
+  border: 1px solid var(--borda);
+  border-radius: 12px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.rotulo { color: var(--texto-2); font-size: 0.875rem; }
+.valor { font-size: 1.75rem; font-weight: 600; font-variant-numeric: tabular-nums; }
+.destaque .valor { font-size: 3rem; line-height: 1.1; }
+.valor-menor { font-size: 1.25rem; padding-top: 6px; }
+.delta { color: var(--texto-3); font-size: 0.8125rem; min-height: 1.2em; }
+.delta.sobe { color: var(--positivo); }
+.delta.desce { color: var(--negativo); }
+
+.grade {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+.painel {
+  margin: 0;
+  background: var(--superficie);
+  border: 1px solid var(--borda);
+  border-radius: 12px;
+  padding: 16px;
+  min-width: 0;
+}
+.largo { grid-column: 1 / -1; }
+figcaption h2 { margin: 0; font-size: 1rem; }
+figcaption p { margin: 2px 0 0; color: var(--texto-2); font-size: 0.8125rem; }
+.grafico { width: 100%; height: 300px; margin-top: 8px; }
+
+details { margin-top: 8px; font-size: 0.8125rem; color: var(--texto-2); }
+summary { cursor: pointer; }
+table { width: 100%; border-collapse: collapse; margin-top: 6px; }
+td, th { text-align: left; padding: 4px 6px; border-bottom: 1px solid var(--grade); }
+td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+
+.rodape {
+  color: var(--texto-2);
+  font-size: 0.8125rem;
+  padding-top: 24px;
+  padding-bottom: 32px;
+}
+.rodape a { color: inherit; }
+code { font-size: 0.8125rem; overflow-wrap: anywhere; }
+
+@media (max-width: 760px) {
+  .grade { grid-template-columns: minmax(0, 1fr); }
+  .destaque .valor { font-size: 2.5rem; }
+}

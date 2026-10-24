@@ -1,0 +1,12 @@
+# Arquivos brutos do Portal da Transparência — nunca versionar
+*.zip
+*.csv
+*.part
+.cache/
+
+# Cópia gerada no build do Pages
+site/data/
+
+.venv/
+__pycache__/
+.DS_Store
