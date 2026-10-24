@@ -320,9 +320,15 @@ def main() -> int:
     padrao = re.compile(PADRAO_CARGO)
 
     s = sessao()
+    if args.mes and not re.fullmatch(r"20\d{2}(0[1-9]|1[0-2])", args.mes):
+        print(f"--mes deve ter o formato AAAAMM (recebido: {args.mes}).", file=sys.stderr)
+        return 1
     mes = args.mes or descobrir_mes(s, date.today())
     if not mes:
         print("Nenhum mês disponível nos últimos meses.", file=sys.stderr)
+        return 1
+    if args.mes and not (DIR_DADOS / f"{mes}.json").exists() and not mes_disponivel(s, mes):
+        print(f"::error::{mes} não está disponível no Portal da Transparência.", file=sys.stderr)
         return 1
     if (DIR_DADOS / f"{mes}.json").exists() and not args.force:
         print(f"{mes} já processado; use --force para refazer.")

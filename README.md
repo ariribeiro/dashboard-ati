@@ -104,6 +104,19 @@ O processamento de um mês leva poucos segundos depois do download e usa cerca d
 2. Em **Settings → Pages → Build and deployment → Source**, escolha **GitHub Actions**.
 3. Em **Actions → Dados ATI → Run workflow**, rode o primeiro deploy.
 
+### Rodar o workflow manualmente
+
+Em **Actions → Dados ATI → Run workflow** há três opções:
+
+- **Mês** e **Ano**: processam um mês específico (ex.: `03` e `2026`). Com o mês
+  em "mais recente" e o ano em branco, o workflow busca o último mês publicado,
+  como na execução agendada. Mês sem ano, ou ano sem mês, é recusado.
+- **force**: reprocessa o mês mesmo que `data/AAAAMM.json` já exista.
+
+Um mês ainda não publicado pelo portal falha com uma mensagem de erro, sem
+alterar `data/`. Pela linha de comando:
+`gh workflow run atis.yml -f mes=03 -f ano=2026 -f force=true`.
+
 ## Observações
 
 - **Inatividade**: em repositórios públicos, o GitHub desativa workflows agendados
