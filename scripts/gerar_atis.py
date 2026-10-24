@@ -269,8 +269,12 @@ def atualizar_indice() -> None:
         })
     if not meses:
         return
-    indice = {"atualizado_em": datetime.now(timezone.utc).isoformat(timespec="seconds"), "meses": meses}
-    (DIR_DADOS / "index.json").write_text(json.dumps(indice, ensure_ascii=False, indent=2), encoding="utf-8")
+    # Só regrava quando a lista muda; senão cada execução geraria um commit só com o horário.
+    arq_indice = DIR_DADOS / "index.json"
+    anterior = json.loads(arq_indice.read_text(encoding="utf-8")) if arq_indice.exists() else {}
+    if anterior.get("meses") != meses:
+        indice = {"atualizado_em": datetime.now(timezone.utc).isoformat(timespec="seconds"), "meses": meses}
+        arq_indice.write_text(json.dumps(indice, ensure_ascii=False, indent=2), encoding="utf-8")
     ultimo = DIR_DADOS / meses[-1]["arquivo"]
     (DIR_DADOS / "latest.json").write_text(ultimo.read_text(encoding="utf-8"), encoding="utf-8")
 
