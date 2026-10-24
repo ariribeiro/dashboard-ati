@@ -10,6 +10,10 @@
     try { const t = localStorage.getItem("tema"); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
   </script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.6.0/echarts.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.3/MarkerCluster.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.3/leaflet.markercluster.js"></script>
 </head>
 <body>
   <header class="topo">
@@ -60,8 +64,12 @@
         <div class="grafico" id="g-hist-mediana"></div>
       </figure>
       <figure class="painel largo">
-        <figcaption><h2>ATIs por UF de exercício</h2><p id="mapa-sub"></p></figcaption>
-        <div class="grafico mapa" id="g-mapa"></div>
+        <figcaption>
+          <h2>Onde ficam os órgãos de exercício</h2>
+          <p>Cada bolinha está na sede do órgão (ou do prédio que vários órgãos dividem) e mostra quantos ATIs têm exercício nele. Clique numa bolinha para ver os órgãos; as de borda tracejada juntam vários prédios próximos e se abrem ao clicar.</p>
+        </figcaption>
+        <div class="mapa-orgaos" id="mapa-orgaos" role="region" aria-label="Mapa de órgãos de exercício"></div>
+        <p class="nota" id="mapa-nota"></p>
       </figure>
       <figure class="painel largo">
         <figcaption><h2>Órgão de exercício</h2><p>15 maiores; demais somados em “Outros”</p></figcaption>
@@ -74,6 +82,10 @@
       <figure class="painel">
         <figcaption><h2>Classe e padrão</h2><p>Quantidade de ATIs em cada posição da carreira</p></figcaption>
         <div class="grafico" id="g-classe"></div>
+      </figure>
+      <figure class="painel">
+        <figcaption><h2>UF de exercício</h2></figcaption>
+        <div class="grafico" id="g-uf"></div>
       </figure>
       <figure class="painel">
         <figcaption><h2>Funções e cargos comissionados por tipo</h2></figcaption>

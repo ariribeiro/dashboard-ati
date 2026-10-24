@@ -21,9 +21,8 @@ Portal da Transparência ──► scripts/gerar_atis.py ──► data/*.json �
   - `data/latest.json`: cópia do mês mais recente
   - `data/index.json`: lista de meses com total e mediana (alimenta o histórico)
 - **`site/`** tem HTML, CSS e JS puros, sem build. Lê `data/index.json` e o JSON do
-  mês escolhido. O mapa por UF usa `site/br-uf.json`, a malha estadual do
-  [IBGE](https://servicodados.ibge.gov.br/api/docs/malhas?versao=3) (qualidade
-  mínima, com siglas no lugar dos códigos), versionada no repositório.
+  mês escolhido. O mapa de órgãos usa Leaflet com o mapa do OpenStreetMap e
+  posiciona cada órgão pela tabela `data/orgaos_coordenadas.csv`.
 - **`.github/workflows/atis.yml`** roda no dia 15 de cada mês (12h UTC) ou
   manualmente: gera os dados, commita `data/` se mudou, copia para `site/data/`
   e publica no Pages.
@@ -53,6 +52,32 @@ Esses pontos foram conferidos no arquivo de ago/2026:
   `REMUNERAÇÃO BÁSICA BRUTA (R$)`, só com servidores que têm valor maior que zero
   no mês. As faixas do histograma são fixas para que os meses possam ser
   comparados.
+
+### Mapa de órgãos de exercício
+
+O SIAPE não informa endereço, então a localização vem de uma tabela mantida à
+mão, `data/orgaos_coordenadas.csv` (separador `;`):
+
+| coluna | conteúdo |
+|---|---|
+| `orgao_siape` | nome do órgão **exatamente** como aparece em `ORG_EXERCICIO` |
+| `sigla` | sigla exibida no mapa |
+| `local` | prédio ou endereço da sede |
+| `lat`, `lon` | coordenadas da sede |
+| `precisao` | `edificio`, `quadra` ou `rua` |
+| `fonte` | de onde veio o endereço e a coordenada |
+
+- A coordenada é a da **sede** do órgão. O servidor pode trabalhar num anexo ou
+  numa unidade regional, e o mapa avisa isso.
+- Órgãos no mesmo prédio (ex.: Bloco C da Esplanada) viram uma única bolinha,
+  com a lista de órgãos no popup.
+- Linhas com `lat`/`lon` vazios marcam órgãos sem lugar físico (ex.: "Estados /
+  Municípios / Empresas"). Eles aparecem na nota abaixo do mapa.
+- **Órgão novo:** quando surge um órgão que não está na tabela, o script emite
+  um aviso (`::warning::`, visível no resumo da execução do Actions). Ele aparece
+  como "sem localização" até alguém incluir a linha. Para achar a coordenada,
+  busque o prédio em [openstreetmap.org](https://www.openstreetmap.org), clique
+  com o botão direito → "Mostrar endereço" e copie latitude e longitude.
 
 ## Rodar localmente
 

@@ -1,0 +1,77 @@
+orgao_siape;sigla;local;lat;lon;precisao;fonte
+MIN GESTAO E INOV EM SERV PUBLICOS;MGI;Esplanada dos Ministérios, Bloco K;-15.7947;-47.8738;edificio;OpenStreetMap
+MINISTERIO DO PLANEJAMENTO E ORCAMENTO;MPO;Esplanada dos Ministérios, Bloco K;-15.7947;-47.8738;edificio;OpenStreetMap
+MIN DESENVOLV IND COMERCIO E SERVICOS;MDIC;Esplanada dos Ministérios, Bloco J;-15.79444;-47.87465;edificio;Endereço oficial (gov.br/mdic) + OpenStreetMap
+MIN EMPREEND MICROEMP EMP PEQUENO PORTE;MEMP;Esplanada dos Ministérios, Bloco J;-15.79444;-47.87465;edificio;Endereço oficial (gov.br/memp) + OpenStreetMap
+Ministério da Educação;MEC;Esplanada dos Ministérios, Bloco L;-15.7952;-47.8731;edificio;OpenStreetMap
+MINISTERIO DA FAZENDA;MF;Esplanada dos Ministérios, Bloco P;-15.7959;-47.8697;edificio;OpenStreetMap
+MINISTERIO DA DEFESA;MD;Esplanada dos Ministérios, Bloco Q;-15.7965;-47.8689;edificio;OpenStreetMap
+Ministério de Minas e Energia;MME;Esplanada dos Ministérios, Bloco U;-15.7965;-47.868;edificio;OpenStreetMap
+Ministério do Turismo;MTur;Esplanada dos Ministérios, Bloco U;-15.7965;-47.868;edificio;OpenStreetMap
+MINISTERIO DOS TRANSPORTES;MT;Esplanada dos Ministérios, Bloco R;-15.79674;-47.86724;edificio;OpenStreetMap
+MINISTERIO DE PORTOS E AEROPORTOS;MPor;Esplanada dos Ministérios, Bloco R;-15.79674;-47.86724;edificio;Relatório de gestão MPor 2025 + OpenStreetMap
+MINISTERIO DAS COMUNICACOES;MCom;Esplanada dos Ministérios, Bloco R;-15.79674;-47.86724;edificio;OpenStreetMap
+Ministério da Justiça e Segurança Pública;MJSP;Palácio da Justiça (Esplanada, Bloco T);-15.7973;-47.8659;edificio;OpenStreetMap
+Presidência da República;PR;Palácio do Planalto;-15.799;-47.8608;edificio;OpenStreetMap
+MIN DOS DIR HUM E DA CIDADANIA;MDHC;Esplanada dos Ministérios, Bloco A;-15.79871;-47.87339;edificio;Endereço oficial (gov.br/mdh, 2026) + OpenStreetMap
+MINISTERIO DAS CIDADES;MCID;Esplanada dos Ministérios, Bloco A;-15.79871;-47.87339;edificio;OpenStreetMap
+MINISTERIO DO ESPORTE;MEsp;Esplanada dos Ministérios, Bloco A;-15.79871;-47.87339;edificio;Portaria MESP 157/2024 + OpenStreetMap
+MINISTERIO DO MEIO AMBIENTE;MMA;Esplanada dos Ministérios, Bloco B;-15.79919;-47.87265;edificio;OpenStreetMap
+MINISTERIO DA CULTURA;MinC;Esplanada dos Ministérios, Bloco B;-15.79919;-47.87265;edificio;Plano de Integridade MinC 2023-2024 + OpenStreetMap
+MIN DESENV ASSIS SOCI FAMIL COMBATE FOME;MDS;Esplanada dos Ministérios, Bloco C;-15.79915;-47.87172;edificio;Endereço institucional MDS + OpenStreetMap
+MINISTERIO DOS POVOS INDIGENAS;MPI;Esplanada dos Ministérios, Bloco C;-15.79915;-47.87172;edificio;Relatório de gestão MPI 2025 + OpenStreetMap
+MINISTERIO DA IGUALDADE RACIAL;MIR;Esplanada dos Ministérios, Bloco C;-15.79915;-47.87172;edificio;gov.br/igualdaderacial + OpenStreetMap
+MINISTERIO DAS MULHERES;MMulheres;Esplanada dos Ministérios, Bloco C;-15.79915;-47.87172;edificio;ACT Ministério das Mulheres 2026 + OpenStreetMap
+MIN DO DESENV AGR E AGRIC FAMILIAR;MDA;Esplanada dos Ministérios, Bloco C;-15.79915;-47.87172;edificio;Contrato MDA 2023 + OpenStreetMap
+MINISTERIO DA AGRICULTURA E PECUARIA;MAPA;Esplanada dos Ministérios, Bloco D;-15.79958;-47.87095;edificio;OpenStreetMap
+MINISTERIO DA PESCA E AQUICULTURA;MPA;Esplanada dos Ministérios, Bloco D;-15.79958;-47.87095;edificio;Plano de integridade MPA 2026 + OpenStreetMap
+Ministério da Ciência, Tecnologia, Inovações e Comunicações;MCTI;Esplanada dos Ministérios, Bloco E;-15.7996;-47.8701;edificio;OpenStreetMap
+MINISTERIO DO TRABALHO E EMPREGO;MTE;Esplanada dos Ministérios, Bloco F;-15.79995;-47.86925;edificio;OpenStreetMap
+MINISTERIO DA PREVIDENCIA SOCIAL;MPS;Esplanada dos Ministérios, Bloco F;-15.79995;-47.86925;edificio;gov.br/previdencia + OpenStreetMap
+Ministério da Saúde;MS;Esplanada dos Ministérios, Bloco G;-15.80031;-47.86845;edificio;OpenStreetMap
+Ministério das Relações Exteriores;MRE;Palácio Itamaraty (Esplanada, Bloco H);-15.8007;-47.8673;edificio;OpenStreetMap
+Fundação Alexandre Gusmão;FUNAG;Palácio Itamaraty (Esplanada, Bloco H);-15.8007;-47.8673;edificio;Publicações FUNAG (Bloco H, Anexo II) + OpenStreetMap
+MIN DA INTEG E DO DESENV REGIONAL;MIDR;SGAN 906;-15.7703;-47.8931;edificio;OpenStreetMap (sem confirmação oficial)
+ADVOCACIA-GERAL DA UNIAO;AGU;SAUS Quadra 3;-15.8022;-47.8804;edificio;OpenStreetMap
+Instituto Nacional do Seguro Social;INSS;SAUS Quadra 2;-15.8015;-47.8789;edificio;OpenStreetMap
+Agência Nacional de Telecomunicações;ANATEL;SAUS Quadra 6;-15.8054;-47.8822;edificio;OpenStreetMap
+Fundo Nacional de Desenvolvimento da Educação;FNDE;SBS Quadra 2;-15.801;-47.8834;edificio;OpenStreetMap
+Defensoria Pública da União;DPU;SBS Quadra 2;-15.8002;-47.8832;edificio;OpenStreetMap
+Instituto de Pesquisa Econômica Aplicada;IPEA;SBS Quadra 1;-15.7992;-47.8966;edificio;OpenStreetMap
+Fundação Nacional do Índio;FUNAI;SCS Quadra 9;-15.7951;-47.8935;edificio;OpenStreetMap
+Empresa Brasileira de Serviços Hospitalares;EBSERH;SCS Quadra 9;-15.7956;-47.8936;edificio;OpenStreetMap
+Agência Nacional de Aviação Civil;ANAC;Setor Comercial Sul;-15.7946;-47.8933;edificio;OpenStreetMap
+INST NAC DE TECN DA INFORMACAO;ITI;SCN Quadra 2;-15.7879;-47.8846;edificio;OpenStreetMap
+Fundação de Previdência Complementar do Servidor Público Federal;Funpresp;SCN Quadra 2;-15.7888;-47.8844;edificio;OpenStreetMap
+AGENCIA NACIONAL DE PROTECAO DE DADOS;ANPD;SCN Quadra 6;-15.78661;-47.88975;quadra;ACT ANPD 2026 (Ed. Venâncio 3000) + OpenStreetMap
+Fundação Coordenação de Aperfeiçoamento de Pessoal de Nível Superior;CAPES;SBN Quadra 2;-15.788;-47.8782;edificio;OpenStreetMap
+Agência Nacional de Mineração;ANM;SBN Quadra 2;-15.78773;-47.87965;quadra;Edital ANM 2019 (SBN Q2 Bloco N) + OpenStreetMap
+Instituto Nacional de Colonização e Reforma Agrária;INCRA;Palácio do Desenvolvimento, SBN Quadra 1;-15.79067;-47.8796;edificio;gov.br/incra + OpenStreetMap
+Superintendência do Desenvolvimento do Centro-Oeste;SUDECO;Palácio da Agricultura, SBN Quadra 1;-15.79128;-47.87831;edificio;Documento SEI SUDECO 2022 + OpenStreetMap
+Departamento Nacional de Infraestrutura de Transportes;DNIT;Setor de Autarquias Norte;-15.7898;-47.8751;edificio;OpenStreetMap
+Agência Nacional de Energia Elétrica;ANEEL;SGAN 603;-15.7778;-47.8728;edificio;OpenStreetMap
+Instituto Brasileiro do Meio Ambiente e Recursos Naturais Renováveis;IBAMA;SCEN Trecho 2;-15.7658;-47.8606;edificio;OpenStreetMap
+Conselho Administrativo de Defesa Econômica;CADE;SEPN 515;-15.7417;-47.8976;edificio;OpenStreetMap
+Agência Nacional de Transportes Aquaviários;ANTAQ;SEPN 515;-15.7452;-47.8965;edificio;OpenStreetMap
+Instituto do Patrimônio Histórico e Artístico Nacional;IPHAN;SEPS 713/913;-15.8195;-47.921;edificio;OpenStreetMap
+Instituto Chico Mendes de Conservação da Biodiversidade;ICMBio;EPIG;-15.8042;-47.9257;edificio;OpenStreetMap
+Agência Espacial Brasileira;AEB;EPIG;-15.8159;-47.9432;edificio;OpenStreetMap
+Instituto Nacional de Estudos e Pesquisas Educacionais;INEP;SIG;-15.7881;-47.9138;edificio;OpenStreetMap
+Função Escola Nacional de Administração Pública;ENAP;SPO Área Especial 2-A;-15.8299;-47.9312;edificio;OpenStreetMap
+Agência Nacional de Águas;ANA;Setor Policial Sul;-15.8202;-47.9436;edificio;OpenStreetMap
+Agência Nacional de Vigilância Sanitária;ANVISA;SIA Trecho 5;-15.7997;-47.9532;edificio;OpenStreetMap
+Agência Nacional de Transportes Terrestres;ANTT;Setor de Clubes Esportivos Sul;-15.8099;-47.8449;edificio;OpenStreetMap
+Conselho Nacional de Desenvolvimento Científico e Tecnológico;CNPq;Lago Sul;-15.8591;-47.9272;edificio;OpenStreetMap
+Comissão Nacional de Energia Nuclear;CNEN;Rua General Severiano 90, Botafogo, Rio de Janeiro;-22.95264;-43.17772;edificio;IAEA / contrato IPEN 2018 + OpenStreetMap
+Instituto Nacional da Propriedade Industrial;INPI;Rua Mayrink Veiga 9, Centro, Rio de Janeiro;-22.89931;-43.18051;rua;Editais INPI 2025 + OpenStreetMap
+Agência Nacional do Petróleo, Gás Natural e Biocombustíveis;ANP;Av. Rio Branco 65, Centro, Rio de Janeiro;-22.9007;-43.1791;edificio;OpenStreetMap
+Agência Nacional do Cinema;ANCINE;Av. Graça Aranha, Centro, Rio de Janeiro;-22.9093;-43.1743;edificio;OpenStreetMap
+Agência Nacional de Saúde Suplementar;ANS;Av. Augusto Severo 84, Glória, Rio de Janeiro;-22.91598;-43.17641;rua;Plano de Gestão ANS 2023 + OpenStreetMap
+Fundação Oswaldo Cruz;Fiocruz;Av. Brasil 4365, Manguinhos, Rio de Janeiro;-22.8768;-43.2469;edificio;OpenStreetMap
+Superintendência do Desenvolvimento do Nordeste;SUDENE;Engenho do Meio, Recife;-8.049;-34.9448;edificio;OpenStreetMap
+Prefeitura Municipal de Recife - PE;PCR;Prefeitura do Recife;-8.0544;-34.872;edificio;OpenStreetMap
+Superintendência da Zona Franca de Manaus;SUFRAMA;Distrito Industrial, Manaus;-3.1326;-59.9731;edificio;OpenStreetMap
+Governo do Estado do Rio Grande do Sul;Gov. RS;Palácio Piratini, Porto Alegre;-30.0338;-51.2309;edificio;OpenStreetMap
+Governo do Estado de São Paulo;Gov. SP;Palácio dos Bandeirantes, São Paulo;-23.6016;-46.7124;edificio;OpenStreetMap
+Estados / Municípios / Empresas;;sem localização (cessão genérica no SIAPE);;;;
+Poder Executivo Federal;;sem localização (genérico no SIAPE);;;;

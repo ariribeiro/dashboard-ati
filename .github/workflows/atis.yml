@@ -52,7 +52,10 @@ jobs:
           fi
 
       - name: Montar site
-        run: cp -r data site/data
+        run: |
+          cp -r data site/data
+          # Versiona JS/CSS pelo commit para o navegador não misturar versões em cache.
+          sed -i "s/app\.js\"/app.js?v=${GITHUB_SHA::7}\"/; s/style\.css\"/style.css?v=${GITHUB_SHA::7}\"/" site/index.html
 
       - uses: actions/configure-pages@v5
 

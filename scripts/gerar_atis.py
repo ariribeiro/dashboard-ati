@@ -32,6 +32,7 @@ import requests
 RAIZ = Path(__file__).resolve().parent.parent
 DIR_DADOS = RAIZ / "data"
 DIR_CACHE = RAIZ / ".cache"
+ARQ_COORDENADAS = DIR_DADOS / "orgaos_coordenadas.csv"
 
 URL_DOWNLOAD = "https://portaldatransparencia.gov.br/download-de-dados/servidores/{mes}_Servidores_SIAPE"
 URL_PAGINA = "https://portaldatransparencia.gov.br/download-de-dados/servidores"
@@ -279,6 +280,19 @@ def atualizar_indice() -> None:
     (DIR_DADOS / "latest.json").write_text(ultimo.read_text(encoding="utf-8"), encoding="utf-8")
 
 
+def verificar_coordenadas() -> None:
+    """Avisa sobre órgãos de exercício do mês mais recente sem linha em orgaos_coordenadas.csv."""
+    latest = DIR_DADOS / "latest.json"
+    if not latest.exists() or not ARQ_COORDENADAS.exists():
+        return
+    conhecidos = set(pd.read_csv(ARQ_COORDENADAS, sep=";", dtype=str)["orgao_siape"])
+    orgaos = json.loads(latest.read_text(encoding="utf-8"))["por_orgao_exercicio"]
+    for o in orgaos:
+        if o["nome"] not in conhecidos:
+            # Formato de anotação do GitHub Actions; no terminal aparece como texto comum.
+            print(f"::warning::Órgão sem coordenadas em {ARQ_COORDENADAS.name}: {o['nome']} ({o['qtd']} ATIs)")
+
+
 def processar(s: requests.Session, mes: str, padrao: re.Pattern, manter_zip: bool) -> dict:
     caminho = baixar(s, mes)
     try:
@@ -313,6 +327,7 @@ def main() -> int:
     if (DIR_DADOS / f"{mes}.json").exists() and not args.force:
         print(f"{mes} já processado; use --force para refazer.")
         atualizar_indice()
+        verificar_coordenadas()
         return 0
 
     resumo = processar(s, mes, padrao, args.manter_zip)
@@ -322,6 +337,7 @@ def main() -> int:
     salvar(resumo, mes)
     print(f"Salvo data/{mes}.json — {resumo['total']} ATIs, "
           f"mediana R$ {resumo['remuneracao_basica_bruta']['mediana']:,.2f}")
+    verificar_coordenadas()
     return 0
 
 

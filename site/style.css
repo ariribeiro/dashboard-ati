@@ -14,11 +14,6 @@
   --positivo: #0f7b3a;
   --negativo: #b42318;
   --erro-fundo: #fdecea;
-  --mapa-0: #e8e7e3;
-  --mapa-1: #86b6ef;
-  --mapa-2: #3987e5;
-  --mapa-3: #1c5cab;
-  --mapa-4: #0d366b;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -38,11 +33,6 @@
     --positivo: #4cc27a;
     --negativo: #f97066;
     --erro-fundo: #3a1714;
-    --mapa-0: #2a2a28;
-    --mapa-1: #184f95;
-    --mapa-2: #2a78d6;
-    --mapa-3: #6da7ec;
-    --mapa-4: #b7d3f6;
   }
 }
 
@@ -62,11 +52,6 @@
   --positivo: #4cc27a;
   --negativo: #f97066;
   --erro-fundo: #3a1714;
-  --mapa-0: #2a2a28;
-  --mapa-1: #184f95;
-  --mapa-2: #2a78d6;
-  --mapa-3: #6da7ec;
-  --mapa-4: #b7d3f6;
 }
 
 * { box-sizing: border-box; }
@@ -155,7 +140,65 @@ button { cursor: pointer; min-width: 40px; }
 figcaption h2 { margin: 0; font-size: 1rem; }
 figcaption p { margin: 2px 0 0; color: var(--texto-2); font-size: 0.8125rem; }
 .grafico { width: 100%; height: 300px; margin-top: 8px; }
-.grafico.mapa { height: 480px; }
+
+/* Mapa de órgãos (Leaflet) */
+.mapa-orgaos {
+  height: 520px;
+  margin-top: 8px;
+  border-radius: 8px;
+  background: var(--fundo);
+  z-index: 0;
+}
+/* OSM não tem versão escura: inverte o mapa e devolve os matizes. */
+:root[data-theme="dark"] .leaflet-tile-pane { filter: invert(1) hue-rotate(180deg) brightness(0.9) contrast(0.9); }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .leaflet-tile-pane { filter: invert(1) hue-rotate(180deg) brightness(0.9) contrast(0.9); }
+}
+.nota { margin: 8px 0 0; color: var(--texto-2); font-size: 0.8125rem; }
+.bolha {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  border-radius: 50%;
+  background: var(--serie);
+  border: 2px solid var(--superficie);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  color: #fff;
+  font: 600 12px/1 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-variant-numeric: tabular-nums;
+  cursor: pointer;
+}
+.bolha.agrupada { border-style: dashed; }
+.vistas { display: flex; }
+.vistas button {
+  border: 0;
+  border-radius: 0;
+  background: var(--superficie);
+  color: var(--texto);
+  font-size: 0.8125rem;
+  padding: 6px 10px;
+  min-width: 0;
+}
+.vistas button + button { border-left: 1px solid var(--borda); }
+.vistas button:hover { background: var(--fundo); }
+.leaflet-popup-content-wrapper, .leaflet-popup-tip {
+  background: var(--superficie);
+  color: var(--texto);
+}
+.leaflet-popup-content { margin: 12px 14px; font-size: 0.8125rem; line-height: 1.4; }
+.leaflet-popup-content table { margin-top: 6px; min-width: 160px; }
+.leaflet-popup-content td { padding: 2px 4px; }
+.popup-total { margin: 6px 0 0; font-weight: 600; }
+.popup-aviso { margin: 6px 0 0; color: var(--texto-3); }
+.leaflet-container a.leaflet-popup-close-button { color: var(--texto-3); }
+.leaflet-bar a, .leaflet-bar a:hover {
+  background: var(--superficie);
+  color: var(--texto);
+  border-bottom-color: var(--borda);
+}
+.leaflet-bar { border-color: var(--borda) !important; }
+.leaflet-control-attribution { font-size: 10px; }
 
 details { margin-top: 8px; font-size: 0.8125rem; color: var(--texto-2); }
 summary { cursor: pointer; }
@@ -175,5 +218,5 @@ code { font-size: 0.8125rem; overflow-wrap: anywhere; }
 @media (max-width: 760px) {
   .grade { grid-template-columns: minmax(0, 1fr); }
   .destaque .valor { font-size: 2.5rem; }
-  .grafico.mapa { height: 420px; }
+  .mapa-orgaos { height: 420px; }
 }

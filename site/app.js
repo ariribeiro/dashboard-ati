@@ -165,66 +165,133 @@ function mapaClassePadrao(id, itens) {
   tabela(id, ["Classe", "Padrão", "ATIs"], itens.map((d) => [d.classe, d.padrao, fmtInt.format(d.qtd)]));
 }
 
-// Faixas fixas: a distribuição é muito concentrada no DF, então uma escala
-// contínua apagaria os demais estados.
-const FAIXAS_MAPA = [
-  { min: 1, max: 9, label: "1 a 9", cor: "--mapa-1" },
-  { min: 10, max: 49, label: "10 a 49", cor: "--mapa-2" },
-  { min: 50, max: 199, label: "50 a 199", cor: "--mapa-3" },
-  { min: 200, label: "200 ou mais", cor: "--mapa-4" },
-];
+// ---------------------------------------------------------------- mapa de órgãos
 
-function mapaUF(id, itens) {
-  const qtd = Object.fromEntries(itens.map((d) => [d.nome, d.qtd]));
-  const semUF = qtd["Não informado"] ?? 0;
-  const ufs = echarts.getMap("BR").geoJSON.features.map((f) => f.properties.name);
-  const corDe = (v) => cor(v === 0 ? "--mapa-0" : FAIXAS_MAPA.findLast((f) => v >= f.min).cor);
-  // No hover o estado mantém a cor da faixa e ganha só uma borda de destaque.
-  const dados = ufs.map((uf) => {
-    const v = qtd[uf] ?? 0;
-    return { name: uf, value: v, emphasis: { itemStyle: { areaColor: corDe(v) } } };
+// Tiles padrão do OpenStreetMap (sem chave). No modo escuro, o CSS inverte as cores do mapa.
+const TILES = "https://tile.openstreetmap.org/{z}/{x}/{y}.png";
+const DF = L.latLngBounds([-16.06, -48.29], [-15.49, -47.30]);
+
+let coordenadas = new Map();
+let mapa = null;
+let camadaBolhas = null;
+let limites = { brasilia: null, brasil: null };
+
+function temaEscuro() {
+  const raiz = document.documentElement;
+  return raiz.dataset.theme ? raiz.dataset.theme === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+}
+
+function escapar(s) {
+  return String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
+}
+
+async function carregarCoordenadas() {
+  const r = await fetch(BASE_DADOS + "orgaos_coordenadas.csv", { cache: "no-cache" });
+  if (!r.ok) throw new Error(`orgaos_coordenadas.csv: HTTP ${r.status}`);
+  const [cab, ...linhas] = (await r.text()).trim().split(/\r?\n/);
+  const campos = cab.split(";");
+  for (const linha of linhas) {
+    const o = Object.fromEntries(linha.split(";").map((v, i) => [campos[i], v]));
+    coordenadas.set(o.orgao_siape, { ...o, lat: parseFloat(o.lat), lon: parseFloat(o.lon) });
+  }
+}
+
+// Diâmetro proporcional à área: raiz da quantidade.
+function iconeBolha(qtd, max, agrupado = false) {
+  const d = Math.round(26 + 38 * Math.sqrt(qtd / max));
+  return L.divIcon({
+    className: "",
+    html: `<span class="bolha${agrupado ? " agrupada" : ""}" style="width:${d}px;height:${d}px">${fmtInt.format(qtd)}</span>`,
+    iconSize: [d, d],
   });
-  document.getElementById("mapa-sub").textContent = semUF
-    ? `${fmtInt.format(semUF)} ATIs sem UF informada no SIAPE não aparecem no mapa`
-    : "";
+}
 
-  grafico(id, {
-    tooltip: { ...temaBase().tooltip, trigger: "item",
-      formatter: (p) => `${p.name}<br><b>${fmtInt.format(p.value || 0)}</b> ATIs` },
-    visualMap: {
-      type: "piecewise",
-      pieces: [{ value: 0, label: "Nenhum", color: cor("--mapa-0") },
-        ...FAIXAS_MAPA.map((f) => ({ min: f.min, max: f.max, label: f.label, color: cor(f.cor) }))],
-      orient: "vertical",
-      left: 8,
-      bottom: 8,
-      itemWidth: 14,
-      itemHeight: 14,
-      itemGap: 6,
-      textStyle: { color: cor("--texto-2") },
+function criarMapa() {
+  mapa = L.map("mapa-orgaos", {
+    scrollWheelZoom: false,
+    dragging: !L.Browser.mobile,
+    zoomSnap: 0.5,
+  });
+  L.tileLayer(TILES, {
+    maxZoom: 19,
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+  }).addTo(mapa);
+
+  const Vistas = L.Control.extend({
+    options: { position: "topright" },
+    onAdd() {
+      const div = L.DomUtil.create("div", "vistas leaflet-bar");
+      div.innerHTML = '<button type="button" data-vista="brasilia">Brasília</button><button type="button" data-vista="brasil">Brasil</button>';
+      L.DomEvent.disableClickPropagation(div);
+      div.addEventListener("click", (e) => {
+        const vista = e.target.dataset.vista;
+        if (vista && limites[vista]) mapa.fitBounds(limites[vista], { padding: [24, 24] });
+      });
+      return div;
     },
-    series: [{
-      type: "map",
-      map: "BR",
-      data: dados,
-      roam: !estreito(),
-      scaleLimit: { min: 1, max: 12 },
-      layoutCenter: estreito() ? ["60%", "40%"] : ["50%", "50%"],
-      layoutSize: estreito() ? "78%" : "96%",
-      selectedMode: false,
-      itemStyle: { borderColor: cor("--superficie"), borderWidth: 1 },
-      emphasis: { itemStyle: { borderColor: cor("--texto"), borderWidth: 1.5 }, label: { show: true, color: cor("--texto") } },
-      label: {
-        show: true,
-        formatter: (p) => (p.value > 0 ? `${p.name} ${fmtInt.format(p.value)}` : ""),
-        color: cor("--texto"),
-        textBorderColor: cor("--superficie"),
-        textBorderWidth: 3,
-        fontWeight: 600,
-      },
-    }],
   });
-  tabela(id, ["UF", "ATIs"], itens.map((d) => [d.nome, fmtInt.format(d.qtd)]));
+  new Vistas().addTo(mapa);
+}
+
+function mapaOrgaos(orgaos) {
+  if (!mapa) criarMapa();
+
+  // Agrupa por coordenada: vários órgãos dividem o mesmo prédio (ex.: blocos da Esplanada).
+  const locais = new Map();
+  let semLocal = 0;
+  const semLocalNomes = [];
+  for (const o of orgaos) {
+    const c = coordenadas.get(o.nome);
+    if (!c || Number.isNaN(c.lat)) {
+      semLocal += o.qtd;
+      semLocalNomes.push(`${o.nome} (${fmtInt.format(o.qtd)})`);
+      continue;
+    }
+    const chave = `${c.lat},${c.lon}`;
+    if (!locais.has(chave)) locais.set(chave, { local: c.local, lat: c.lat, lon: c.lon, precisao: c.precisao, qtd: 0, orgaos: [] });
+    const l = locais.get(chave);
+    l.qtd += o.qtd;
+    l.orgaos.push({ sigla: c.sigla, nome: o.nome, qtd: o.qtd });
+  }
+
+  const max = Math.max(...[...locais.values()].map((l) => l.qtd));
+  camadaBolhas?.remove();
+  camadaBolhas = L.markerClusterGroup({
+    showCoverageOnHover: false,
+    maxClusterRadius: 60,
+    iconCreateFunction: (cluster) =>
+      iconeBolha(cluster.getAllChildMarkers().reduce((s, m) => s + m.options.qtd, 0), max, true),
+  });
+
+  for (const l of locais.values()) {
+    l.orgaos.sort((a, b) => b.qtd - a.qtd);
+    const linhas = l.orgaos.map((o) =>
+      `<tr><td title="${escapar(o.nome)}">${escapar(o.sigla || o.nome)}</td><td class="num">${fmtInt.format(o.qtd)}</td></tr>`).join("");
+    const aviso = l.precisao === "edificio" ? "" : `<p class="popup-aviso">Localização aproximada (${l.precisao === "rua" ? "rua" : "quadra"}).</p>`;
+    L.marker([l.lat, l.lon], { icon: iconeBolha(l.qtd, max), qtd: l.qtd, title: `${l.local}: ${l.qtd} ATIs`, riseOnHover: true })
+      .bindPopup(`<strong>${escapar(l.local)}</strong><table>${linhas}</table>` +
+        (l.orgaos.length > 1 ? `<p class="popup-total">${fmtInt.format(l.qtd)} ATIs no prédio</p>` : "") + aviso)
+      .addTo(camadaBolhas);
+  }
+  camadaBolhas.addTo(mapa);
+
+  const pontos = [...locais.values()].map((l) => [l.lat, l.lon]);
+  limites.brasil = L.latLngBounds(pontos);
+  limites.brasilia = L.latLngBounds(pontos.filter((p) => DF.contains(p)));
+  if (!mapa._vistaInicial) {
+    mapa.fitBounds(limites.brasilia.isValid() ? limites.brasilia : limites.brasil, { padding: [24, 24] });
+    mapa._vistaInicial = true;
+  }
+
+  const fora = [...locais.values()].filter((l) => !DF.contains([l.lat, l.lon])).reduce((s, l) => s + l.qtd, 0);
+  const partes = [];
+  if (fora) partes.push(`${fmtInt.format(fora)} ATIs em órgãos com sede fora do DF: use o botão “Brasil” para vê-los.`);
+  if (semLocal) partes.push(`${fmtInt.format(semLocal)} sem localização: ${semLocalNomes.join(", ")}.`);
+  partes.push("A posição é a da sede do órgão; o servidor pode trabalhar em um anexo ou unidade regional.");
+  document.getElementById("mapa-nota").textContent = partes.join(" ");
+
+  tabela("mapa-orgaos", ["Local", "Órgãos", "ATIs"], [...locais.values()].sort((a, b) => b.qtd - a.qtd)
+    .map((l) => [l.local, l.orgaos.map((o) => o.sigla || o.nome).join(", "), fmtInt.format(l.qtd)]));
 }
 
 function rgb(hex) {
@@ -296,8 +363,9 @@ function renderizar() {
   linhaHistorica("g-hist-total", meses, indice.meses.map((m) => m.total), (v) => fmtInt.format(v));
   linhaHistorica("g-hist-mediana", meses, indice.meses.map((m) => m.mediana), fmtMil);
 
-  mapaUF("g-mapa", d.por_uf);
+  mapaOrgaos(d.por_orgao_exercicio);
   barrasHorizontais("g-exercicio", topComOutros(d.por_orgao_exercicio, TOP_ORGAOS));
+  barrasHorizontais("g-uf", d.por_uf);
   barrasHorizontais("g-lotacao", d.por_orgao_lotacao);
   barrasHorizontais("g-funcao", d.funcao.por_sigla);
   barrasHorizontais("g-situacao", d.por_situacao);
@@ -332,11 +400,8 @@ function mostrarErro(e) {
 
 async function iniciar() {
   if (typeof echarts === "undefined") throw new Error("biblioteca de gráficos não carregou");
-  const malha = await fetch("br-uf.json").then((r) => {
-    if (!r.ok) throw new Error(`br-uf.json: HTTP ${r.status}`);
-    return r.json();
-  });
-  echarts.registerMap("BR", malha);
+  if (typeof L === "undefined") throw new Error("biblioteca de mapas não carregou");
+  await carregarCoordenadas();
   indice = await json("index.json");
   const select = document.getElementById("mes");
   for (const m of [...indice.meses].reverse()) select.add(new Option(fmtMes(m.mes), m.arquivo));
@@ -346,10 +411,7 @@ async function iniciar() {
 
 document.getElementById("tema").addEventListener("click", () => {
   const raiz = document.documentElement;
-  const escuroAgora = raiz.dataset.theme
-    ? raiz.dataset.theme === "dark"
-    : matchMedia("(prefers-color-scheme: dark)").matches;
-  raiz.dataset.theme = escuroAgora ? "light" : "dark";
+  raiz.dataset.theme = temaEscuro() ? "light" : "dark";
   try { localStorage.setItem("tema", raiz.dataset.theme); } catch (e) {}
   renderizar();
 });
@@ -358,7 +420,7 @@ matchMedia("(prefers-color-scheme: dark)").addEventListener("change", renderizar
 let espera;
 window.addEventListener("resize", () => {
   clearTimeout(espera);
-  espera = setTimeout(() => { Object.values(graficos).forEach((g) => g.resize()); renderizar(); }, 150);
+  espera = setTimeout(() => { Object.values(graficos).forEach((g) => g.resize()); mapa?.invalidateSize(); renderizar(); }, 150);
 });
 
 iniciar().catch(mostrarErro);

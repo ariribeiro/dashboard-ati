@@ -1,6 +1,7 @@
 # Arquivos brutos do Portal da Transparência — nunca versionar
 *.zip
 *.csv
+!data/orgaos_coordenadas.csv
 *.part
 .cache/
 
