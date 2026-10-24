@@ -165,6 +165,68 @@ function mapaClassePadrao(id, itens) {
   tabela(id, ["Classe", "Padrão", "ATIs"], itens.map((d) => [d.classe, d.padrao, fmtInt.format(d.qtd)]));
 }
 
+// Faixas fixas: a distribuição é muito concentrada no DF, então uma escala
+// contínua apagaria os demais estados.
+const FAIXAS_MAPA = [
+  { min: 1, max: 9, label: "1 a 9", cor: "--mapa-1" },
+  { min: 10, max: 49, label: "10 a 49", cor: "--mapa-2" },
+  { min: 50, max: 199, label: "50 a 199", cor: "--mapa-3" },
+  { min: 200, label: "200 ou mais", cor: "--mapa-4" },
+];
+
+function mapaUF(id, itens) {
+  const qtd = Object.fromEntries(itens.map((d) => [d.nome, d.qtd]));
+  const semUF = qtd["Não informado"] ?? 0;
+  const ufs = echarts.getMap("BR").geoJSON.features.map((f) => f.properties.name);
+  const corDe = (v) => cor(v === 0 ? "--mapa-0" : FAIXAS_MAPA.findLast((f) => v >= f.min).cor);
+  // No hover o estado mantém a cor da faixa e ganha só uma borda de destaque.
+  const dados = ufs.map((uf) => {
+    const v = qtd[uf] ?? 0;
+    return { name: uf, value: v, emphasis: { itemStyle: { areaColor: corDe(v) } } };
+  });
+  document.getElementById("mapa-sub").textContent = semUF
+    ? `${fmtInt.format(semUF)} ATIs sem UF informada no SIAPE não aparecem no mapa`
+    : "";
+
+  grafico(id, {
+    tooltip: { ...temaBase().tooltip, trigger: "item",
+      formatter: (p) => `${p.name}<br><b>${fmtInt.format(p.value || 0)}</b> ATIs` },
+    visualMap: {
+      type: "piecewise",
+      pieces: [{ value: 0, label: "Nenhum", color: cor("--mapa-0") },
+        ...FAIXAS_MAPA.map((f) => ({ min: f.min, max: f.max, label: f.label, color: cor(f.cor) }))],
+      orient: "vertical",
+      left: 8,
+      bottom: 8,
+      itemWidth: 14,
+      itemHeight: 14,
+      itemGap: 6,
+      textStyle: { color: cor("--texto-2") },
+    },
+    series: [{
+      type: "map",
+      map: "BR",
+      data: dados,
+      roam: !estreito(),
+      scaleLimit: { min: 1, max: 12 },
+      layoutCenter: estreito() ? ["60%", "40%"] : ["50%", "50%"],
+      layoutSize: estreito() ? "78%" : "96%",
+      selectedMode: false,
+      itemStyle: { borderColor: cor("--superficie"), borderWidth: 1 },
+      emphasis: { itemStyle: { borderColor: cor("--texto"), borderWidth: 1.5 }, label: { show: true, color: cor("--texto") } },
+      label: {
+        show: true,
+        formatter: (p) => (p.value > 0 ? `${p.name} ${fmtInt.format(p.value)}` : ""),
+        color: cor("--texto"),
+        textBorderColor: cor("--superficie"),
+        textBorderWidth: 3,
+        fontWeight: 600,
+      },
+    }],
+  });
+  tabela(id, ["UF", "ATIs"], itens.map((d) => [d.nome, fmtInt.format(d.qtd)]));
+}
+
 function rgb(hex) {
   const n = parseInt(hex.replace("#", ""), 16);
   return [(n >> 16) & 255, (n >> 8) & 255, n & 255];
@@ -234,9 +296,9 @@ function renderizar() {
   linhaHistorica("g-hist-total", meses, indice.meses.map((m) => m.total), (v) => fmtInt.format(v));
   linhaHistorica("g-hist-mediana", meses, indice.meses.map((m) => m.mediana), fmtMil);
 
+  mapaUF("g-mapa", d.por_uf);
   barrasHorizontais("g-exercicio", topComOutros(d.por_orgao_exercicio, TOP_ORGAOS));
   barrasHorizontais("g-lotacao", d.por_orgao_lotacao);
-  barrasHorizontais("g-uf", d.por_uf);
   barrasHorizontais("g-funcao", d.funcao.por_sigla);
   barrasHorizontais("g-situacao", d.por_situacao);
   histogramaFaixas("g-faixas", rem);
@@ -270,6 +332,11 @@ function mostrarErro(e) {
 
 async function iniciar() {
   if (typeof echarts === "undefined") throw new Error("biblioteca de gráficos não carregou");
+  const malha = await fetch("br-uf.json").then((r) => {
+    if (!r.ok) throw new Error(`br-uf.json: HTTP ${r.status}`);
+    return r.json();
+  });
+  echarts.registerMap("BR", malha);
   indice = await json("index.json");
   const select = document.getElementById("mes");
   for (const m of [...indice.meses].reverse()) select.add(new Option(fmtMes(m.mes), m.arquivo));

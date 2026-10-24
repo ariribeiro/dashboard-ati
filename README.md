@@ -21,7 +21,9 @@ Portal da Transparência ──► scripts/gerar_atis.py ──► data/*.json �
   - `data/latest.json`: cópia do mês mais recente
   - `data/index.json`: lista de meses com total e mediana (alimenta o histórico)
 - **`site/`** tem HTML, CSS e JS puros, sem build. Lê `data/index.json` e o JSON do
-  mês escolhido.
+  mês escolhido. O mapa por UF usa `site/br-uf.json`, a malha estadual do
+  [IBGE](https://servicodados.ibge.gov.br/api/docs/malhas?versao=3) (qualidade
+  mínima, com siglas no lugar dos códigos), versionada no repositório.
 - **`.github/workflows/atis.yml`** roda no dia 15 de cada mês (12h UTC) ou
   manualmente: gera os dados, commita `data/` se mudou, copia para `site/data/`
   e publica no Pages.
