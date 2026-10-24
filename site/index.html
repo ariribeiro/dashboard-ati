@@ -25,6 +25,23 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.3/leaflet.markercluster.js"></script>
 </head>
 <body>
+  <div class="barra" id="barra" inert>
+    <div class="barra-conteudo">
+      <a class="barra-titulo" href="#">Painel ATI</a>
+      <span class="barra-resumo"><strong data-ref>–</strong><span class="barra-numeros" id="barra-numeros"></span></span>
+      <nav class="barra-nav" aria-label="Seções">
+        <a href="#s-geral" data-secao="geral">Visão geral</a>
+        <a href="#s-onde" data-secao="onde">Onde trabalham</a>
+        <a href="#s-carreira" data-secao="carreira">Carreira</a>
+        <a href="#s-remuneracao" data-secao="remuneracao">Remuneração</a>
+      </nav>
+      <div class="barra-controles">
+        <select data-campo="mes" aria-label="Mês de referência" title="Mês de referência"></select>
+        <select data-campo="ano" aria-label="Ano de referência" title="Ano de referência"></select>
+      </div>
+    </div>
+  </div>
+
   <header class="topo">
     <div class="topo-conteudo">
       <div>
@@ -33,11 +50,11 @@
         <p class="sub">Quantos são, onde trabalham, como está a carreira e quanto recebem, com dados agregados do SIAPE.</p>
       </div>
       <div class="controles">
-        <span class="selo">Dados de <strong id="ref-topo">–</strong></span>
+        <span class="selo">Dados de <strong data-ref>–</strong></span>
         <label class="sr" for="mes">Mês de referência</label>
-        <select id="mes" title="Mês de referência"></select>
+        <select id="mes" data-campo="mes" title="Mês de referência"></select>
         <label class="sr" for="ano">Ano de referência</label>
-        <select id="ano" title="Ano de referência"></select>
+        <select id="ano" data-campo="ano" title="Ano de referência"></select>
         <button id="tema" type="button" aria-label="Alternar modo claro/escuro" title="Alternar modo claro/escuro">◐</button>
       </div>
     </div>
@@ -46,7 +63,7 @@
   <main>
     <p id="erro" class="erro" hidden></p>
 
-    <section class="secao" data-secao="geral" aria-labelledby="t-geral">
+    <section class="secao" id="s-geral" data-secao="geral" aria-labelledby="t-geral">
       <div class="secao-cabecalho">
         <h2 id="t-geral">Visão geral</h2>
       </div>
@@ -90,7 +107,7 @@
       </div>
     </section>
 
-    <section class="secao" data-secao="onde" aria-labelledby="t-onde">
+    <section class="secao" id="s-onde" data-secao="onde" aria-labelledby="t-onde">
       <div class="secao-cabecalho">
         <h2 id="t-onde">Onde trabalham</h2>
         <p id="onde-desc"></p>
@@ -117,7 +134,7 @@
       </div>
     </section>
 
-    <section class="secao" data-secao="carreira" aria-labelledby="t-carreira">
+    <section class="secao" id="s-carreira" data-secao="carreira" aria-labelledby="t-carreira">
       <div class="secao-cabecalho">
         <h2 id="t-carreira">Carreira</h2>
         <p>A carreira tem três classes (A, B e C), cada uma dividida em padrões. O ingresso acontece na classe A, padrão I.</p>
@@ -134,7 +151,7 @@
       </div>
     </section>
 
-    <section class="secao" data-secao="remuneracao" aria-labelledby="t-remuneracao">
+    <section class="secao" id="s-remuneracao" data-secao="remuneracao" aria-labelledby="t-remuneracao">
       <div class="secao-cabecalho">
         <h2 id="t-remuneracao">Remuneração</h2>
         <p>Remuneração básica bruta do mês, antes de descontos e sem verbas indenizatórias. Considera apenas quem recebeu valor maior que zero.</p>
@@ -155,7 +172,7 @@
   <footer class="rodape">
     <p>
       Fonte: <a id="fonte" href="https://portaldatransparencia.gov.br/download-de-dados/servidores">Portal da Transparência — Servidores SIAPE</a>.
-      Referência: <strong id="ref">–</strong>. Processado em <span id="gerado">–</span>.
+      Referência: <strong data-ref>–</strong>. Processado em <span id="gerado">–</span>.
       Mapa: © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>.
     </p>
     <p>

@@ -584,7 +584,8 @@ function renderizar() {
   linhaHistorica("g-hist-mediana", serieMediana, "--remuneracao", fmtMil);
   document.getElementById("hist-mediana-sub").textContent = lacunas(serieMediana);
 
-  for (const id of ["ref", "ref-topo"]) document.getElementById(id).textContent = fmtMes(d.referencia);
+  for (const el of document.querySelectorAll("[data-ref]")) el.textContent = fmtMes(d.referencia);
+  document.getElementById("barra-numeros").textContent = `${fmtInt.format(d.total)} ATIs · mediana ${fmtMil(rem.mediana)}`;
   document.getElementById("gerado").textContent = new Date(d.gerado_em).toLocaleDateString("pt-BR");
   document.getElementById("filtro").textContent = d.filtro_cargo;
   document.getElementById("fonte").href = d.fonte.url;
@@ -616,24 +617,57 @@ async function iniciar() {
   if (typeof echarts === "undefined") throw new Error("biblioteca de gráficos não carregou");
   if (typeof L === "undefined") throw new Error("biblioteca de mapas não carregou");
   [indice] = await Promise.all([json("index.json"), carregarCoordenadas()]);
-  const selAno = document.getElementById("ano");
-  const selMes = document.getElementById("mes");
+  // Os seletores existem no cabeçalho e na barra fixa; ficam sempre sincronizados.
+  const selAnos = [...document.querySelectorAll('select[data-campo="ano"]')];
+  const selMeses = [...document.querySelectorAll('select[data-campo="mes"]')];
   const anos = [...new Set(indice.meses.map((m) => m.mes.slice(0, 4)))].reverse();
-  for (const a of anos) selAno.add(new Option(a, a));
+  for (const s of selAnos) for (const a of anos) s.add(new Option(a, a));
 
   // Mês: só os processados do ano escolhido. Ao trocar o ano, mantém o mês se existir; senão, o mais recente.
-  const preencherMeses = (manter) => {
-    const doAno = indice.meses.filter((m) => m.mes.startsWith(selAno.value));
-    selMes.replaceChildren(...doAno.map((m) => new Option(MESES_EXTENSO[+m.mes.slice(5) - 1], m.arquivo)));
-    const mesmo = doAno.find((m) => m.mes.slice(5) === manter);
-    selMes.value = (mesmo ?? doAno.at(-1)).arquivo;
+  const selecionar = (ano, manterMes) => {
+    const doAno = indice.meses.filter((m) => m.mes.startsWith(ano));
+    const escolhido = doAno.find((m) => m.mes.slice(5) === manterMes) ?? doAno.at(-1);
+    for (const s of selAnos) s.value = ano;
+    for (const s of selMeses) {
+      s.replaceChildren(...doAno.map((m) => new Option(MESES_EXTENSO[+m.mes.slice(5) - 1], m.arquivo)));
+      s.value = escolhido.arquivo;
+    }
+    return escolhido.arquivo;
   };
-  const mesAtual = () => indice.meses.find((m) => m.arquivo === selMes.value)?.mes.slice(5);
+  const mesSelecionado = () => indice.meses.find((m) => m.arquivo === selMeses[0].value)?.mes.slice(5);
 
-  selAno.addEventListener("change", () => { preencherMeses(mesAtual()); carregarMes(selMes.value).catch(mostrarErro); });
-  selMes.addEventListener("change", () => carregarMes(selMes.value).catch(mostrarErro));
-  preencherMeses(null);
-  await carregarMes(selMes.value);
+  for (const s of selAnos) {
+    s.addEventListener("change", () => carregarMes(selecionar(s.value, mesSelecionado())).catch(mostrarErro));
+  }
+  for (const s of selMeses) {
+    s.addEventListener("change", () => {
+      for (const outro of selMeses) outro.value = s.value;
+      carregarMes(s.value).catch(mostrarErro);
+    });
+  }
+  await carregarMes(selecionar(anos[0], null));
+  // Link direto para uma seção (#s-onde etc.): o navegador rolou antes dos gráficos existirem.
+  if (location.hash) document.getElementById(location.hash.slice(1))?.scrollIntoView({ behavior: "instant" });
+}
+
+// ---------------------------------------------------------------- barra fixa
+
+// Aparece quando o cabeçalho sai da tela; destaca a seção que está no meio da tela.
+function iniciarBarra() {
+  const barra = document.getElementById("barra");
+  new IntersectionObserver(([e]) => {
+    barra.classList.toggle("visivel", !e.isIntersecting);
+    barra.inert = e.isIntersecting;
+  }).observe(document.querySelector(".topo"));
+
+  const links = new Map([...barra.querySelectorAll(".barra-nav a")].map((a) => [a.getAttribute("href").slice(1), a]));
+  const observador = new IntersectionObserver((entradas) => {
+    for (const e of entradas) {
+      if (!e.isIntersecting) continue;
+      for (const [id, a] of links) a.toggleAttribute("aria-current", id === e.target.id);
+    }
+  }, { rootMargin: "-45% 0px -50% 0px" });
+  for (const id of links.keys()) observador.observe(document.getElementById(id));
 }
 
 document.getElementById("tema").addEventListener("click", () => {
@@ -650,4 +684,5 @@ window.addEventListener("resize", () => {
   espera = setTimeout(() => { Object.values(graficos).forEach((g) => g.resize()); mapa?.invalidateSize(); renderizar(); }, 150);
 });
 
+iniciarBarra();
 iniciar().catch(mostrarErro);
