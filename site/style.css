@@ -14,19 +14,23 @@
   --negativo: #b42318;
   --erro-fundo: #fdecea;
 
-  --geral: #2a78d6;
-  --onde: #1baf7a;
-  --onde-forte: #12865d;
-  --carreira: #6250d6;
-  --remuneracao: #eb6834;
-  --geral-lavado: rgba(42, 120, 214, 0.10);
-  --onde-lavado: rgba(27, 175, 122, 0.10);
-  --carreira-lavado: rgba(98, 80, 214, 0.10);
-  --remuneracao-lavado: rgba(235, 104, 52, 0.12);
-  --carreira-seq-min: #e4e0fa;
-  --carreira-seq-max: #2e2470;
+  --geral: #0D2B5C;
+  --onde: #0A8F45;
+  --onde-forte: #087A3B;
+  --carreira: #2563B0;
+  --remuneracao: #DCA500;
+  --geral-lavado: rgba(13, 43, 92, 0.08);
+  --onde-lavado: rgba(10, 143, 69, 0.10);
+  --carreira-lavado: rgba(37, 99, 176, 0.10);
+  --remuneracao-lavado: rgba(220, 165, 0, 0.14);
+  --carreira-seq-min: #d6e2f5;
+  --carreira-seq-max: #0D2B5C;
 
-  --topo-fundo: linear-gradient(180deg, #e7f0fb 0%, #f6f6f3 100%);
+  /* Identidade visual ATI */
+  --marca: #0D2B5C;
+  --marca-amarelo: #F4C400;
+  --marca-texto: #0D2B5C;
+  --topo-fundo: linear-gradient(135deg, #0D2B5C 0%, #123a78 100%);
   --sombra: 0 1px 2px rgba(11, 11, 11, 0.04), 0 4px 16px rgba(11, 11, 11, 0.04);
 }
 
@@ -44,19 +48,22 @@
     --negativo: #f97066;
     --erro-fundo: #3a1714;
 
-    --geral: #3987e5;
-    --onde: #199e70;
-    --onde-forte: #12865d;
-    --carreira: #9085e9;
-    --remuneracao: #d95926;
-    --geral-lavado: rgba(57, 135, 229, 0.14);
-    --onde-lavado: rgba(25, 158, 112, 0.14);
-    --carreira-lavado: rgba(144, 133, 233, 0.14);
-    --remuneracao-lavado: rgba(217, 89, 38, 0.16);
-    --carreira-seq-min: #3b3180;
-    --carreira-seq-max: #d6d1f8;
+    --geral: #A9BCE3;
+    --onde: #24A35D;
+    --onde-forte: #087A3B;
+    --carreira: #4F86D6;
+    --remuneracao: #D9AA00;
+    --geral-lavado: rgba(169, 188, 227, 0.12);
+    --onde-lavado: rgba(36, 163, 93, 0.14);
+    --carreira-lavado: rgba(79, 134, 214, 0.14);
+    --remuneracao-lavado: rgba(217, 170, 0, 0.16);
+    --carreira-seq-min: #1a3566;
+    --carreira-seq-max: #c3d5f3;
 
-    --topo-fundo: linear-gradient(180deg, #14202f 0%, #111110 100%);
+    --marca: #0D2B5C;
+    --marca-amarelo: #F4C400;
+    --marca-texto: #ffffff;
+    --topo-fundo: linear-gradient(135deg, #0D2B5C 0%, #0a2147 100%);
     --sombra: none;
   }
 }
@@ -74,23 +81,28 @@
   --negativo: #f97066;
   --erro-fundo: #3a1714;
 
-  --geral: #3987e5;
-  --onde: #199e70;
-  --onde-forte: #12865d;
-  --carreira: #9085e9;
-  --remuneracao: #d95926;
-  --geral-lavado: rgba(57, 135, 229, 0.14);
-  --onde-lavado: rgba(25, 158, 112, 0.14);
-  --carreira-lavado: rgba(144, 133, 233, 0.14);
-  --remuneracao-lavado: rgba(217, 89, 38, 0.16);
-  --carreira-seq-min: #3b3180;
-  --carreira-seq-max: #d6d1f8;
+  --geral: #A9BCE3;
+  --onde: #24A35D;
+  --onde-forte: #087A3B;
+  --carreira: #4F86D6;
+  --remuneracao: #D9AA00;
+  --geral-lavado: rgba(169, 188, 227, 0.12);
+  --onde-lavado: rgba(36, 163, 93, 0.14);
+  --carreira-lavado: rgba(79, 134, 214, 0.14);
+  --remuneracao-lavado: rgba(217, 170, 0, 0.16);
+  --carreira-seq-min: #1a3566;
+  --carreira-seq-max: #c3d5f3;
 
-  --topo-fundo: linear-gradient(180deg, #14202f 0%, #111110 100%);
+  --marca: #0D2B5C;
+  --marca-amarelo: #F4C400;
+  --marca-texto: #ffffff;
+  --topo-fundo: linear-gradient(135deg, #0D2B5C 0%, #0a2147 100%);
   --sombra: none;
 }
 
 * { box-sizing: border-box; }
+
+h1, h2, h3, .valor, .barra-titulo, .sobretitulo, .slogan { font-family: "Montserrat", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
 
 body {
   margin: 0;
@@ -110,7 +122,7 @@ body {
 
 /* ---------------------------------------------------------------- topo */
 
-.topo { background: var(--topo-fundo); border-bottom: 1px solid var(--borda); }
+.topo { background: var(--topo-fundo); color: #fff; }
 .topo-conteudo, main, .rodape {
   max-width: 1200px;
   margin: 0 auto;
@@ -120,33 +132,47 @@ body {
 .topo-conteudo {
   display: flex;
   flex-wrap: wrap;
-  gap: 16px 24px;
-  align-items: flex-end;
+  gap: 20px 28px;
+  align-items: center;
   justify-content: space-between;
-  padding-top: 36px;
-  padding-bottom: 28px;
+  padding-top: 32px;
+  padding-bottom: 30px;
 }
+.marca-bloco { display: flex; align-items: center; gap: 24px; min-width: 0; }
+.logo-ati { display: block; height: 72px; width: auto; flex: none; }
+.marca-texto { border-left: 1px solid rgba(255, 255, 255, 0.25); padding-left: 24px; min-width: 0; }
 .sobretitulo {
   margin: 0 0 6px;
-  color: var(--geral);
+  color: var(--marca-amarelo);
   font-size: 0.8125rem;
-  font-weight: 600;
-  letter-spacing: 0.04em;
+  font-weight: 700;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
 }
-.topo h1 { margin: 0; font-size: 1.875rem; line-height: 1.15; letter-spacing: -0.01em; }
-.sub { margin: 8px 0 0; color: var(--texto-2); max-width: 60ch; }
+.topo h1 { margin: 0; font-size: 1.75rem; line-height: 1.15; letter-spacing: -0.01em; color: #fff; }
+.sub { margin: 8px 0 0; color: rgba(255, 255, 255, 0.78); max-width: 60ch; }
+.faixa-marca { display: flex; height: 4px; }
+.faixa-marca span { flex: 1; }
+.faixa-marca span:nth-child(1) { background: #0A8F45; }
+.faixa-marca span:nth-child(2) { background: var(--marca-amarelo); }
+.faixa-marca span:nth-child(3) { background: #2563B0; }
 
-.controles { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.controles { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin-left: auto; }
 .selo {
   font-size: 0.8125rem;
-  color: var(--texto-2);
-  background: var(--superficie);
-  border: 1px solid var(--borda);
+  color: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.25);
   border-radius: 999px;
   padding: 6px 12px;
 }
-.selo strong { color: var(--texto); }
+.selo strong { color: #fff; }
+.topo select, .topo button {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.28);
+}
+.topo select option { color: #0b0b0b; background: #fff; }
+.topo select:focus-visible, .topo button:focus-visible { outline-color: var(--marca-amarelo); }
 select, button {
   font: inherit;
   color: var(--texto);
@@ -156,7 +182,7 @@ select, button {
   padding: 6px 10px;
 }
 button { cursor: pointer; min-width: 40px; }
-select:focus-visible, button:focus-visible { outline: 2px solid var(--geral); outline-offset: 2px; }
+select:focus-visible, button:focus-visible { outline: 2px solid var(--carreira); outline-offset: 2px; }
 
 .erro {
   background: var(--erro-fundo);
@@ -190,7 +216,8 @@ html { scroll-behavior: smooth; }
   align-items: center;
   gap: 16px;
 }
-.barra-titulo { font-weight: 700; color: var(--texto); text-decoration: none; white-space: nowrap; }
+.barra-titulo { display: flex; align-items: center; gap: 8px; font-weight: 700; color: var(--marca-texto); text-decoration: none; white-space: nowrap; }
+.barra-titulo svg { height: 26px; width: auto; }
 .barra-resumo { display: flex; gap: 10px; color: var(--texto-2); font-size: 0.8125rem; white-space: nowrap; }
 .barra-resumo strong { color: var(--texto); }
 .barra-nav { display: flex; gap: 2px; margin-left: auto; }
@@ -409,11 +436,18 @@ td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
   border-top: 1px solid var(--borda);
 }
 .rodape a { color: inherit; }
+.rodape-marca { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; color: var(--marca-texto); }
+.rodape-marca svg { height: 28px; width: auto; }
+.slogan { font-weight: 700; font-size: 0.875rem; }
+.slogan span { color: var(--onde); }
 code { font-size: 0.8125rem; overflow-wrap: anywhere; }
 
 @media (max-width: 760px) {
   .grade { grid-template-columns: minmax(0, 1fr); }
-  .topo h1 { font-size: 1.5rem; }
+  .topo h1 { font-size: 1.35rem; }
+  .logo-ati { height: 52px; }
+  .marca-bloco { gap: 16px; }
+  .marca-texto { padding-left: 16px; }
   .valor.destaque { font-size: 2.5rem; }
   .mapa-orgaos { height: 420px; }
   .legenda-bolhas { display: none; }

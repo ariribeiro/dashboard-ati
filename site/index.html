@@ -13,7 +13,10 @@
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%232a78d6'/%3E%3Ccircle cx='22' cy='40' r='8' fill='%23fff'/%3E%3Ccircle cx='40' cy='26' r='12' fill='%23fff' opacity='.85'/%3E%3C/svg%3E">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-14 -10 192 160'%3E%3Crect x='-14' y='-10' width='192' height='160' rx='32' fill='%23fff'/%3E%3Cpath d='M60 0H92L152 130H114L76 44L46 112H8Z' fill='%230D2B5C'/%3E%3Cg stroke='%23fff' stroke-width='6' paint-order='stroke'%3E%3Cpath d='M2 120C34 90 100 80 156 94C106 102 50 112 14 134Z' fill='%230A8F45'/%3E%3Cpath d='M20 138C56 116 110 106 162 110C114 118 66 128 44 140Z' fill='%23F4C400'/%3E%3C/g%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&display=swap">
   <link rel="stylesheet" href="style.css">
   <script>
     try { const t = localStorage.getItem("tema"); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
@@ -27,7 +30,7 @@
 <body>
   <div class="barra" id="barra" inert>
     <div class="barra-conteudo">
-      <a class="barra-titulo" href="#">Painel ATI</a>
+      <a class="barra-titulo" href="#"><svg viewBox="-2 -2 168 144" aria-hidden="true"><g fill="currentColor"><path d="M60 0H92L152 130H114L76 44L46 112H8Z"/></g><g style="stroke: var(--superficie)" stroke-width="6" paint-order="stroke" stroke-linejoin="round"><path d="M2 120C34 90 100 80 156 94C106 102 50 112 14 134Z" fill="#0A8F45"/><path d="M20 138C56 116 110 106 162 110C114 118 66 128 44 140Z" fill="#F4C400"/></g></svg>Painel ATI</a>
       <span class="barra-resumo"><strong data-ref>–</strong><span class="barra-numeros" id="barra-numeros"></span></span>
       <nav class="barra-nav" aria-label="Seções">
         <a href="#s-geral" data-secao="geral">Visão geral</a>
@@ -44,10 +47,13 @@
 
   <header class="topo">
     <div class="topo-conteudo">
-      <div>
-        <p class="sobretitulo">Executivo Federal · Carreira ATI</p>
-        <h1>Analistas em Tecnologia da Informação</h1>
-        <p class="sub">Quantos são, onde trabalham, como está a carreira e quanto recebem, com dados agregados do SIAPE.</p>
+      <div class="marca-bloco">
+        <svg class="logo-ati" viewBox="-2 -2 310 144" role="img" aria-label="ATI — Analista em Tecnologia da Informação"><g fill="#fff"><path d="M60 0H92L152 130H114L76 44L46 112H8Z"/><path d="M160 0H266V28H227V130H199V28H160Z"/><rect x="276" y="0" width="29" height="130"/></g><g stroke="#0D2B5C" stroke-width="5" paint-order="stroke" stroke-linejoin="round"><path d="M2 120C34 90 100 80 156 94C106 102 50 112 14 134Z" fill="#0A8F45"/><path d="M20 138C56 116 110 106 162 110C114 118 66 128 44 140Z" fill="#F4C400"/></g></svg>
+        <div class="marca-texto">
+          <p class="sobretitulo">Tecnologia que transforma. Estado que avança.</p>
+          <h1>Analistas em Tecnologia da Informação</h1>
+          <p class="sub">Quantos são, onde trabalham, como está a carreira e quanto recebem, com dados agregados do SIAPE.</p>
+        </div>
       </div>
       <div class="controles">
         <span class="selo">Dados de <strong data-ref>–</strong></span>
@@ -58,6 +64,7 @@
         <button id="tema" type="button" aria-label="Alternar modo claro/escuro" title="Alternar modo claro/escuro">◐</button>
       </div>
     </div>
+    <div class="faixa-marca" aria-hidden="true"><span></span><span></span><span></span></div>
   </header>
 
   <main>
@@ -170,6 +177,7 @@
   </main>
 
   <footer class="rodape">
+    <div class="rodape-marca"><svg viewBox="-2 -2 168 144" aria-hidden="true"><g fill="currentColor"><path d="M60 0H92L152 130H114L76 44L46 112H8Z"/></g><g style="stroke: var(--superficie)" stroke-width="6" paint-order="stroke" stroke-linejoin="round"><path d="M2 120C34 90 100 80 156 94C106 102 50 112 14 134Z" fill="#0A8F45"/><path d="M20 138C56 116 110 106 162 110C114 118 66 128 44 140Z" fill="#F4C400"/></g></svg><span class="slogan">Tecnologia que transforma. <span>Estado que avança.</span></span></div>
     <p>
       Fonte: <a id="fonte" href="https://portaldatransparencia.gov.br/download-de-dados/servidores">Portal da Transparência — Servidores SIAPE</a>.
       Referência: <strong data-ref>–</strong>. Processado em <span id="gerado">–</span>.
