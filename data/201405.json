@@ -1,0 +1,353 @@
+{
+  "referencia": "2014-05",
+  "gerado_em": "2026-10-28T18:46:20+00:00",
+  "fonte": {
+    "nome": "Portal da Transparência — Servidores SIAPE",
+    "url": "https://portaldatransparencia.gov.br/download-de-dados/servidores",
+    "arquivo": "https://portaldatransparencia.gov.br/download-de-dados/servidores/201405_Servidores_SIAPE"
+  },
+  "filtro_cargo": "^ANALISTA EM TECNOL(OGIA)? DA INFORMACAO$",
+  "total": 380,
+  "por_situacao": [
+    {
+      "nome": "ATIVO PERMANENTE",
+      "qtd": 377
+    },
+    {
+      "nome": "ATIVO EM OUTRO ORGAO",
+      "qtd": 3
+    }
+  ],
+  "por_orgao_exercicio": [
+    {
+      "nome": "Ministério do Planejamento, Desenvolvimento e Gestão",
+      "qtd": 156
+    },
+    {
+      "nome": "Presidência da República",
+      "qtd": 24
+    },
+    {
+      "nome": "Ministério da Justiça e Segurança Pública",
+      "qtd": 15
+    },
+    {
+      "nome": "Ministério do Desenvolvimento Social",
+      "qtd": 11
+    },
+    {
+      "nome": "Ministério da Previdência Social",
+      "qtd": 11
+    },
+    {
+      "nome": "Ministério das Relações Exteriores",
+      "qtd": 7
+    },
+    {
+      "nome": "Ministério do Desenvolvimento Regional",
+      "qtd": 7
+    },
+    {
+      "nome": "Ministério da Educação",
+      "qtd": 7
+    },
+    {
+      "nome": "Ministério do Meio Ambiente",
+      "qtd": 7
+    },
+    {
+      "nome": "Ministério das Comunicações",
+      "qtd": 7
+    },
+    {
+      "nome": "Ministério da Infraestrutura",
+      "qtd": 7
+    },
+    {
+      "nome": "Ministério da Defesa",
+      "qtd": 6
+    },
+    {
+      "nome": "Ministério do Desenvolvimento Agrário",
+      "qtd": 6
+    },
+    {
+      "nome": "Ministério das Cidades",
+      "qtd": 6
+    },
+    {
+      "nome": "Ministério da Saúde",
+      "qtd": 6
+    },
+    {
+      "nome": "Função Escola Nacional de Administração Pública",
+      "qtd": 5
+    },
+    {
+      "nome": "Ministério da Economia",
+      "qtd": 5
+    },
+    {
+      "nome": "Ministério da Agricultura, Pecuária e Abastecimento",
+      "qtd": 5
+    },
+    {
+      "nome": "Ministério da Indústria, Comércio Exterior e Serviços",
+      "qtd": 5
+    },
+    {
+      "nome": "Ministério da Cultura",
+      "qtd": 5
+    },
+    {
+      "nome": "Instituto do Patrimônio Histórico e Artístico Nacional",
+      "qtd": 5
+    },
+    {
+      "nome": "Departamento Nacional de Infraestrutura de Transportes",
+      "qtd": 5
+    },
+    {
+      "nome": "Instituto Nacional de Colonização e Reforma Agrária",
+      "qtd": 5
+    },
+    {
+      "nome": "Advocacia-Geral da União",
+      "qtd": 4
+    },
+    {
+      "nome": "Instituto Federal de Brasília",
+      "qtd": 4
+    },
+    {
+      "nome": "Ministério do Esporte",
+      "qtd": 4
+    },
+    {
+      "nome": "Ministério de Minas e Energia",
+      "qtd": 4
+    },
+    {
+      "nome": "Ministério da Ciência, Tecnologia, Inovações e Comunicações",
+      "qtd": 3
+    },
+    {
+      "nome": "Ministério do Trabalho e Emprego",
+      "qtd": 3
+    },
+    {
+      "nome": "Conselho Administrativo de Defesa Econômica",
+      "qtd": 3
+    },
+    {
+      "nome": "Instituto Brasileiro do Meio Ambiente e Recursos Naturais Renováveis",
+      "qtd": 3
+    },
+    {
+      "nome": "Instituto Nacional de Estudos e Pesquisas Educacionais",
+      "qtd": 3
+    },
+    {
+      "nome": "Fundo Nacional de Desenvolvimento da Educação",
+      "qtd": 3
+    },
+    {
+      "nome": "Fundação Coordenação de Aperfeiçoamento de Pessoal de Nível Superior",
+      "qtd": 2
+    },
+    {
+      "nome": "Departamento Nacional de Produção Mineral",
+      "qtd": 2
+    },
+    {
+      "nome": "Instituto Chico Mendes de Conservação da Biodiversidade",
+      "qtd": 2
+    },
+    {
+      "nome": "Ministério do Turismo",
+      "qtd": 2
+    },
+    {
+      "nome": "Instituto Brasileiro de Museus",
+      "qtd": 2
+    },
+    {
+      "nome": "Instituto de Pesquisa Econômica Aplicada",
+      "qtd": 1
+    },
+    {
+      "nome": "Conselho Nacional de Desenvolvimento Científico e Tecnológico",
+      "qtd": 1
+    },
+    {
+      "nome": "Agência Nacional de Energia Elétrica",
+      "qtd": 1
+    },
+    {
+      "nome": "Agência Nacional de Águas",
+      "qtd": 1
+    },
+    {
+      "nome": "Agência Nacional de Telecomunicações",
+      "qtd": 1
+    },
+    {
+      "nome": "Empresa Brasileira de Serviços Hospitalares",
+      "qtd": 1
+    },
+    {
+      "nome": "Fundação Nacional de Saúde",
+      "qtd": 1
+    },
+    {
+      "nome": "Agência Nacional de Transportes Aquaviários",
+      "qtd": 1
+    },
+    {
+      "nome": "Instituto Nacional do Seguro Social",
+      "qtd": 1
+    },
+    {
+      "nome": "Agência Nacional de Vigilância Sanitária",
+      "qtd": 1
+    },
+    {
+      "nome": "Fundação Nacional do Índio",
+      "qtd": 1
+    },
+    {
+      "nome": "Controladoria-Geral da União",
+      "qtd": 1
+    },
+    {
+      "nome": "Fundação Cultural Palmares",
+      "qtd": 1
+    }
+  ],
+  "por_orgao_lotacao": [
+    {
+      "nome": "Ministério do Planejamento, Desenvolvimento e Gestão",
+      "qtd": 380
+    }
+  ],
+  "por_uf": [
+    {
+      "nome": "Não informado",
+      "qtd": 380
+    }
+  ],
+  "por_classe_padrao": [
+    {
+      "classe": "A",
+      "padrao": "I",
+      "qtd": 124
+    },
+    {
+      "classe": "A",
+      "padrao": "II",
+      "qtd": 38
+    },
+    {
+      "classe": "A",
+      "padrao": "III",
+      "qtd": 107
+    },
+    {
+      "classe": "A",
+      "padrao": "IV",
+      "qtd": 111
+    }
+  ],
+  "funcao": {
+    "com_funcao": 112,
+    "por_sigla": [
+      {
+        "nome": "DAS",
+        "qtd": 101
+      },
+      {
+        "nome": "FCT",
+        "qtd": 5
+      },
+      {
+        "nome": "CGE",
+        "qtd": 2
+      },
+      {
+        "nome": "CD",
+        "qtd": 1
+      },
+      {
+        "nome": "FGR",
+        "qtd": 1
+      },
+      {
+        "nome": "CCT",
+        "qtd": 1
+      },
+      {
+        "nome": "GF",
+        "qtd": 1
+      }
+    ]
+  },
+  "remuneracao_basica_bruta": {
+    "n": 379,
+    "media": 9012.51,
+    "mediana": 8556.24,
+    "p10": 7775.82,
+    "p90": 11345.6,
+    "histograma": [
+      {
+        "min": 0,
+        "max": 10000,
+        "qtd": 295
+      },
+      {
+        "min": 10000,
+        "max": 12500,
+        "qtd": 58
+      },
+      {
+        "min": 12500,
+        "max": 15000,
+        "qtd": 25
+      },
+      {
+        "min": 15000,
+        "max": 17500,
+        "qtd": 1
+      },
+      {
+        "min": 17500,
+        "max": 20000,
+        "qtd": 0
+      },
+      {
+        "min": 20000,
+        "max": 22500,
+        "qtd": 0
+      },
+      {
+        "min": 22500,
+        "max": 25000,
+        "qtd": 0
+      },
+      {
+        "min": 25000,
+        "max": 30000,
+        "qtd": 0
+      },
+      {
+        "min": 30000,
+        "max": 35000,
+        "qtd": 0
+      },
+      {
+        "min": 35000,
+        "max": null,
+        "qtd": 0
+      }
+    ]
+  }
+}
