@@ -1,17 +1,17 @@
 {
-  "referencia": "2026-08",
-  "gerado_em": "2026-10-24T19:21:41+00:00",
+  "referencia": "2026-09",
+  "gerado_em": "2026-11-06T14:40:39+00:00",
   "fonte": {
     "nome": "Portal da Transparência — Servidores SIAPE",
     "url": "https://portaldatransparencia.gov.br/download-de-dados/servidores",
-    "arquivo": "https://portaldatransparencia.gov.br/download-de-dados/servidores/202608_Servidores_SIAPE"
+    "arquivo": "https://portaldatransparencia.gov.br/download-de-dados/servidores/202609_Servidores_SIAPE"
   },
   "filtro_cargo": "^ANALISTA EM TECNOL(OGIA)? DA INFORMACAO$",
-  "total": 757,
+  "total": 762,
   "por_situacao": [
     {
       "nome": "ATIVO PERMANENTE",
-      "qtd": 714
+      "qtd": 719
     },
     {
       "nome": "ATIVO EM OUTRO ORGAO",
@@ -21,15 +21,15 @@
   "por_orgao_exercicio": [
     {
       "nome": "MIN GESTAO E INOV EM SERV PUBLICOS",
-      "qtd": 263
+      "qtd": 248
     },
     {
       "nome": "MIN DESENV ASSIS SOCI FAMIL COMBATE FOME",
-      "qtd": 28
+      "qtd": 30
     },
     {
       "nome": "MINISTERIO DO TRABALHO E EMPREGO",
-      "qtd": 23
+      "qtd": 25
     },
     {
       "nome": "Ministério da Justiça e Segurança Pública",
@@ -37,18 +37,22 @@
     },
     {
       "nome": "Presidência da República",
-      "qtd": 20
+      "qtd": 21
     },
     {
       "nome": "MINISTERIO DA AGRICULTURA E PECUARIA",
-      "qtd": 19
+      "qtd": 20
     },
     {
       "nome": "MIN DA INTEG E DO DESENV REGIONAL",
-      "qtd": 15
+      "qtd": 16
     },
     {
-      "nome": "MINISTERIO DOS TRANSPORTES",
+      "nome": "Ministério da Saúde",
+      "qtd": 16
+    },
+    {
+      "nome": "Ministério das Relações Exteriores",
       "qtd": 15
     },
     {
@@ -56,35 +60,31 @@
       "qtd": 15
     },
     {
-      "nome": "Ministério da Saúde",
+      "nome": "MINISTERIO DOS TRANSPORTES",
       "qtd": 15
-    },
-    {
-      "nome": "Ministério das Relações Exteriores",
-      "qtd": 14
     },
     {
       "nome": "MINISTERIO DA FAZENDA",
       "qtd": 13
     },
     {
-      "nome": "Fundação Nacional do Índio",
+      "nome": "Ministério da Educação",
+      "qtd": 13
+    },
+    {
+      "nome": "INST NAC DE TECN DA INFORMACAO",
       "qtd": 13
     },
     {
       "nome": "Ministério de Minas e Energia",
-      "qtd": 12
-    },
-    {
-      "nome": "Ministério da Educação",
-      "qtd": 12
-    },
-    {
-      "nome": "INST NAC DE TECN DA INFORMACAO",
       "qtd": 11
     },
     {
-      "nome": "MINISTERIO DO MEIO AMBIENTE",
+      "nome": "Fundação Nacional do Índio",
+      "qtd": 11
+    },
+    {
+      "nome": "Fundo Nacional de Desenvolvimento da Educação",
       "qtd": 10
     },
     {
@@ -92,19 +92,23 @@
       "qtd": 10
     },
     {
-      "nome": "MINISTERIO DA CULTURA",
-      "qtd": 10
-    },
-    {
       "nome": "Agência Nacional de Águas",
       "qtd": 10
     },
     {
-      "nome": "Fundo Nacional de Desenvolvimento da Educação",
+      "nome": "MINISTERIO DO MEIO AMBIENTE",
       "qtd": 9
     },
     {
       "nome": "Ministério da Ciência, Tecnologia, Inovações e Comunicações",
+      "qtd": 9
+    },
+    {
+      "nome": "MINISTERIO DA CULTURA",
+      "qtd": 9
+    },
+    {
+      "nome": "Instituto do Patrimônio Histórico e Artístico Nacional",
       "qtd": 8
     },
     {
@@ -116,19 +120,19 @@
       "qtd": 8
     },
     {
-      "nome": "MINISTERIO DAS CIDADES",
-      "qtd": 7
+      "nome": "Função Escola Nacional de Administração Pública",
+      "qtd": 8
     },
     {
       "nome": "Instituto Nacional de Estudos e Pesquisas Educacionais",
       "qtd": 7
     },
     {
-      "nome": "Instituto do Patrimônio Histórico e Artístico Nacional",
+      "nome": "Instituto Chico Mendes de Conservação da Biodiversidade",
       "qtd": 7
     },
     {
-      "nome": "Instituto Chico Mendes de Conservação da Biodiversidade",
+      "nome": "MINISTERIO DAS CIDADES",
       "qtd": 7
     },
     {
@@ -144,15 +148,11 @@
       "qtd": 6
     },
     {
-      "nome": "Função Escola Nacional de Administração Pública",
-      "qtd": 6
-    },
-    {
-      "nome": "MINISTERIO DAS MULHERES",
-      "qtd": 6
-    },
-    {
       "nome": "Agência Nacional de Telecomunicações",
+      "qtd": 5
+    },
+    {
+      "nome": "MINISTERIO DAS COMUNICACOES",
       "qtd": 5
     },
     {
@@ -168,12 +168,20 @@
       "qtd": 5
     },
     {
+      "nome": "MINISTERIO DA PREVIDENCIA SOCIAL",
+      "qtd": 5
+    },
+    {
       "nome": "Estados / Municípios / Empresas",
       "qtd": 5
     },
     {
-      "nome": "MINISTERIO DAS COMUNICACOES",
-      "qtd": 4
+      "nome": "Agência Nacional de Aviação Civil",
+      "qtd": 5
+    },
+    {
+      "nome": "MINISTERIO DAS MULHERES",
+      "qtd": 5
     },
     {
       "nome": "Comissão Nacional de Energia Nuclear",
@@ -184,15 +192,11 @@
       "qtd": 4
     },
     {
-      "nome": "MINISTERIO DA PREVIDENCIA SOCIAL",
+      "nome": "MINISTERIO DO PLANEJAMENTO E ORCAMENTO",
       "qtd": 4
     },
     {
       "nome": "Agência Nacional de Transportes Aquaviários",
-      "qtd": 4
-    },
-    {
-      "nome": "MINISTERIO DO ESPORTE",
       "qtd": 4
     },
     {
@@ -204,11 +208,11 @@
       "qtd": 4
     },
     {
-      "nome": "Agência Nacional de Aviação Civil",
-      "qtd": 4
+      "nome": "Instituto de Pesquisa Econômica Aplicada",
+      "qtd": 3
     },
     {
-      "nome": "Instituto de Pesquisa Econômica Aplicada",
+      "nome": "Superintendência da Zona Franca de Manaus",
       "qtd": 3
     },
     {
@@ -224,7 +228,7 @@
       "qtd": 3
     },
     {
-      "nome": "MINISTERIO DO PLANEJAMENTO E ORCAMENTO",
+      "nome": "AGENCIA NACIONAL DE PROTECAO DE DADOS",
       "qtd": 3
     },
     {
@@ -240,19 +244,27 @@
       "qtd": 3
     },
     {
+      "nome": "MINISTERIO DO ESPORTE",
+      "qtd": 3
+    },
+    {
       "nome": "MINISTERIO DOS POVOS INDIGENAS",
       "qtd": 3
     },
     {
-      "nome": "AGENCIA NACIONAL DE PROTECAO DE DADOS",
+      "nome": "Superintendência do Desenvolvimento do Nordeste",
+      "qtd": 3
+    },
+    {
+      "nome": "MINISTERIO DA IGUALDADE RACIAL",
+      "qtd": 2
+    },
+    {
+      "nome": "Agência Nacional do Cinema",
       "qtd": 2
     },
     {
       "nome": "Instituto Nacional da Propriedade Industrial",
-      "qtd": 2
-    },
-    {
-      "nome": "Superintendência da Zona Franca de Manaus",
       "qtd": 2
     },
     {
@@ -276,23 +288,15 @@
       "qtd": 2
     },
     {
-      "nome": "Superintendência do Desenvolvimento do Nordeste",
-      "qtd": 2
-    },
-    {
-      "nome": "MINISTERIO DA IGUALDADE RACIAL",
-      "qtd": 1
-    },
-    {
       "nome": "Poder Executivo Federal",
       "qtd": 1
     },
     {
-      "nome": "Agência Nacional do Cinema",
+      "nome": "Agência Nacional de Saúde Suplementar",
       "qtd": 1
     },
     {
-      "nome": "Agência Nacional de Saúde Suplementar",
+      "nome": "Superintendência de Seguros Privados",
       "qtd": 1
     },
     {
@@ -327,7 +331,7 @@
   "por_orgao_lotacao": [
     {
       "nome": "MIN GESTAO E INOV EM SERV PUBLICOS",
-      "qtd": 756
+      "qtd": 761
     },
     {
       "nome": "Poder Executivo Federal",
@@ -337,15 +341,19 @@
   "por_uf": [
     {
       "nome": "DF",
-      "qtd": 579
+      "qtd": 720
     },
     {
       "nome": "Não informado",
-      "qtd": 166
+      "qtd": 24
     },
     {
       "nome": "RJ",
-      "qtd": 10
+      "qtd": 14
+    },
+    {
+      "nome": "AM",
+      "qtd": 1
     },
     {
       "nome": "MG",
@@ -354,13 +362,22 @@
     {
       "nome": "RS",
       "qtd": 1
+    },
+    {
+      "nome": "PE",
+      "qtd": 1
     }
   ],
   "por_classe_padrao": [
     {
       "classe": "A",
       "padrao": "I",
-      "qtd": 364
+      "qtd": 271
+    },
+    {
+      "classe": "A",
+      "padrao": "II",
+      "qtd": 100
     },
     {
       "classe": "A",
@@ -368,116 +385,107 @@
       "qtd": 1
     },
     {
-      "classe": "A",
-      "padrao": "V",
-      "qtd": 3
-    },
-    {
       "classe": "B",
       "padrao": "I",
-      "qtd": 2
+      "qtd": 5
     },
     {
       "classe": "B",
       "padrao": "II",
-      "qtd": 4
+      "qtd": 3
     },
     {
       "classe": "B",
       "padrao": "III",
-      "qtd": 17
+      "qtd": 9
     },
     {
       "classe": "B",
       "padrao": "IV",
-      "qtd": 41
+      "qtd": 20
     },
     {
       "classe": "B",
+      "padrao": "V",
+      "qtd": 54
+    },
+    {
+      "classe": "B",
+      "padrao": "VI",
+      "qtd": 61
+    },
+    {
+      "classe": "C",
+      "padrao": "I",
+      "qtd": 27
+    },
+    {
+      "classe": "C",
+      "padrao": "II",
+      "qtd": 23
+    },
+    {
+      "classe": "C",
+      "padrao": "III",
+      "qtd": 30
+    },
+    {
+      "classe": "C",
+      "padrao": "IV",
+      "qtd": 46
+    },
+    {
+      "classe": "C",
       "padrao": "V",
       "qtd": 81
     },
     {
-      "classe": "B",
-      "padrao": "VI",
-      "qtd": 21
-    },
-    {
       "classe": "C",
-      "padrao": "I",
+      "padrao": "VI",
       "qtd": 31
-    },
-    {
-      "classe": "C",
-      "padrao": "II",
-      "qtd": 12
-    },
-    {
-      "classe": "C",
-      "padrao": "III",
-      "qtd": 43
-    },
-    {
-      "classe": "C",
-      "padrao": "IV",
-      "qtd": 70
-    },
-    {
-      "classe": "C",
-      "padrao": "V",
-      "qtd": 64
-    },
-    {
-      "classe": "C",
-      "padrao": "VI",
-      "qtd": 3
     }
   ],
   "funcao": {
-    "com_funcao": 404,
+    "com_funcao": 422,
     "por_sigla": [
       {
         "nome": "FEX",
-        "qtd": 378
+        "qtd": 399
       },
       {
         "nome": "CCX",
-        "qtd": 15
+        "qtd": 16
       },
       {
         "nome": "CCT",
-        "qtd": 5
+        "qtd": 4
       },
       {
         "nome": "CGE",
-        "qtd": 3
-      },
-      {
-        "nome": "GF",
         "qtd": 2
       },
       {
-        "nome": "GTS",
+        "nome": "GF",
         "qtd": 1
       }
     ]
   },
   "remuneracao_basica_bruta": {
-    "n": 742,
-    "media": 17011.69,
-    "mediana": 15606.67,
-    "p10": 11122.08,
-    "p90": 24999.93,
+    "n": 750,
+    "media": 17493.78,
+    "mediana": 16061.59,
+    "p10": 11150.8,
+    "p90": 25864.18,
     "histograma": [
       {
         "min": 0,
         "max": 10000,
-        "qtd": 41
+        "qtd": 4
       },
       {
         "min": 10000,
         "max": 12500,
-        "qtd": 223
+        "qtd": 244
       },
       {
         "min": 12500,
@@ -487,32 +495,32 @@
       {
         "min": 15000,
         "max": 17500,
-        "qtd": 83
+        "qtd": 103
       },
       {
         "min": 17500,
         "max": 20000,
-        "qtd": 107
+        "qtd": 84
       },
       {
         "min": 20000,
         "max": 22500,
-        "qtd": 76
+        "qtd": 97
       },
       {
         "min": 22500,
         "max": 25000,
-        "qtd": 84
+        "qtd": 73
       },
       {
         "min": 25000,
         "max": 30000,
-        "qtd": 67
+        "qtd": 83
       },
       {
         "min": 30000,
         "max": 35000,
-        "qtd": 8
+        "qtd": 9
       },
       {
         "min": 35000,
