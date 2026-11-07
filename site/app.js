@@ -153,14 +153,44 @@ function lacunas({ rotulos, valores }) {
 
 const isolado = (valores, i) => valores[i] !== null && valores[i - 1] == null && valores[i + 1] == null;
 
-function linhaHistorica(id, serie, corVar, formatar) {
+// Altas de 30 ou mais ATIs em um mês (entrada de turmas); meses seguidos viram uma marca só.
+function degraus(valores) {
+  const marcas = [];
+  for (let i = 1; i < valores.length; i++) {
+    const [a, b] = [valores[i - 1], valores[i]];
+    if (a == null || b == null || b - a < 30) continue;
+    const ultima = marcas.at(-1);
+    if (ultima && ultima.fim === i - 1) { ultima.fim = i; ultima.dif += b - a; }
+    else marcas.push({ fim: i, dif: b - a });
+  }
+  return marcas;
+}
+
+// opcoes: zero (eixo a partir de 0, com área), degraus (marca altas), selecionado (rótulo do mês escolhido)
+function linhaHistorica(id, serie, corVar, formatar, opcoes = {}) {
   const { rotulos, valores } = serie;
+  const ano = (r) => +r.slice(4);
+  const anos = new Set(rotulos.map(ano)).size;
+  const passo = estreito() ? (anos > 4 ? 3 : 1) : (anos > 8 ? 2 : 1);
+  const primeiroAno = ano(rotulos[0]);
+  const marcas = opcoes.degraus ? degraus(valores) : [];
   grafico(id, {
     tooltip: { ...temaBase().tooltip, trigger: "axis", axisPointer: { type: "line", lineStyle: { color: cor("--texto-3") } },
       formatter: (ps) => `${ps[0].name}<br><b>${ps[0].value == null ? "sem dados" : formatar(ps[0].value)}</b>` },
-    grid: { ...temaBase().grid, right: 72 },
-    xAxis: eixoCategoria(rotulos, { boundaryGap: false }),
-    yAxis: eixoValor({ scale: true, axisLabel: { color: cor("--texto-3"), formatter: (v) => formatar(v) } }),
+    grid: { ...temaBase().grid, right: 72, top: 24 },
+    xAxis: eixoCategoria(rotulos, {
+      boundaryGap: false,
+      axisLabel: {
+        color: cor("--texto-2"),
+        // Só janeiro, a cada `passo` anos, rotulado pelo ano.
+        interval: (i, r) => r.startsWith("jan/") && (ano(r) - primeiroAno) % passo === 0,
+        formatter: (r) => r.slice(4),
+      },
+    }),
+    yAxis: eixoValor({
+      ...(opcoes.zero ? { min: 0 } : { scale: true }),
+      axisLabel: { color: cor("--texto-3"), formatter: (v) => formatar(v) },
+    }),
     series: [{
       type: "line",
       data: valores,
@@ -170,9 +200,24 @@ function linhaHistorica(id, serie, corVar, formatar) {
       symbolSize: (v, p) => (isolado(valores, p.dataIndex) || rotulos.length === 1 ? 8 : 0),
       lineStyle: { width: 2, color: cor(corVar), cap: "round", join: "round" },
       itemStyle: { color: cor(corVar), borderColor: cor("--superficie"), borderWidth: 2 },
-      areaStyle: { color: cor(corVar + "-lavado") },
+      // Área só quando o eixo parte do zero; senão ela exageraria as diferenças.
+      areaStyle: opcoes.zero ? { color: cor(corVar + "-lavado") } : undefined,
       endLabel: { show: true, color: cor("--texto"), formatter: (p) => formatar(p.value) },
       emphasis: { focus: "none" },
+      markPoint: marcas.length ? {
+        symbol: "circle",
+        symbolSize: 8,
+        itemStyle: { color: cor(corVar), borderColor: cor("--superficie"), borderWidth: 2 },
+        label: { position: "left", distance: 6, color: cor("--texto-2"), fontSize: 11, fontWeight: 600, formatter: (p) => p.name },
+        data: marcas.map((m) => ({ name: `+${fmtInt.format(m.dif)}`, coord: [m.fim, valores[m.fim]] })),
+      } : undefined,
+      markLine: opcoes.selecionado && rotulos.length > 1 ? {
+        silent: true,
+        symbol: "none",
+        lineStyle: { color: cor("--texto-3"), type: "solid", width: 1 },
+        label: { show: false },
+        data: [{ xAxis: opcoes.selecionado }],
+      } : undefined,
     }],
   });
   tabela(id, ["Mês", "Valor"], rotulos.map((m, i) => [m, valores[i] == null ? "sem dados" : formatar(valores[i])]));
@@ -554,8 +599,10 @@ function renderizar() {
   sparkline("s-total", serieTotal, "--geral");
   sparkline("s-mediana", serieMediana, "--remuneracao");
   destaques(d, anterior);
-  linhaHistorica("g-hist-total", serieTotal, "--geral", (v) => fmtInt.format(v));
-  document.getElementById("hist-total-sub").textContent = lacunas(serieTotal);
+  const selecionado = fmtMes(d.referencia);
+  linhaHistorica("g-hist-total", serieTotal, "--geral", (v) => fmtInt.format(v), { zero: true, degraus: true, selecionado });
+  document.getElementById("hist-total-sub").textContent =
+    ["Os números marcam meses com entrada de 30 ou mais ATIs; a linha vertical é o mês selecionado.", lacunas(serieTotal)].join(" ").trim();
 
   // Onde trabalham
   const lot = d.por_orgao_lotacao[0];
@@ -581,8 +628,9 @@ function renderizar() {
   // Remuneração
   histogramaFaixas("g-faixas", rem);
   document.getElementById("hist-sub").textContent = `${fmtInt.format(rem.n)} ATIs; linha na mediana e faixa sombreada entre P10 e P90`;
-  linhaHistorica("g-hist-mediana", serieMediana, "--remuneracao", fmtMil);
-  document.getElementById("hist-mediana-sub").textContent = lacunas(serieMediana);
+  linhaHistorica("g-hist-mediana", serieMediana, "--remuneracao", fmtMil, { selecionado });
+  document.getElementById("hist-mediana-sub").textContent =
+    ["Valores nominais, sem correção pela inflação.", lacunas(serieMediana)].join(" ").trim();
 
   for (const el of document.querySelectorAll("[data-ref]")) el.textContent = fmtMes(d.referencia);
   document.getElementById("barra-numeros").textContent = `${fmtInt.format(d.total)} ATIs · mediana ${fmtMil(rem.mediana)}`;
