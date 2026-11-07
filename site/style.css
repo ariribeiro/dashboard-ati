@@ -440,6 +440,15 @@ td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
 .rodape-marca svg { height: 28px; width: auto; }
 .slogan { font-weight: 700; font-size: 0.875rem; }
 .slogan span { color: var(--onde); }
+.autoria {
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid var(--borda);
+}
+.autoria strong { color: var(--texto); }
+.autoria .linkedin { color: var(--texto-2); margin-left: 4px; }
+.autoria .linkedin:hover { color: #0A66C2; }
+.autoria .linkedin svg { width: 18px; height: 18px; vertical-align: -4px; }
 code { font-size: 0.8125rem; overflow-wrap: anywhere; }
 
 @media (max-width: 760px) {
