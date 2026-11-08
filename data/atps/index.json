@@ -1,10 +1,58 @@
 {
-  "atualizado_em": "2026-11-08T17:33:02+00:00",
+  "atualizado_em": "2026-11-08T17:43:49+00:00",
   "meses": [
+    {
+      "mes": "2026-01",
+      "arquivo": "202601.json",
+      "total": 1159,
+      "mediana": 17248.87
+    },
+    {
+      "mes": "2026-02",
+      "arquivo": "202602.json",
+      "total": 1157,
+      "mediana": 17248.87
+    },
+    {
+      "mes": "2026-03",
+      "arquivo": "202603.json",
+      "total": 1156,
+      "mediana": 17248.87
+    },
+    {
+      "mes": "2026-04",
+      "arquivo": "202604.json",
+      "total": 1154,
+      "mediana": 17248.87
+    },
+    {
+      "mes": "2026-05",
+      "arquivo": "202605.json",
+      "total": 1154,
+      "mediana": 17248.87
+    },
+    {
+      "mes": "2026-06",
+      "arquivo": "202606.json",
+      "total": 1154,
+      "mediana": 17248.87
+    },
+    {
+      "mes": "2026-07",
+      "arquivo": "202607.json",
+      "total": 1230,
+      "mediana": 17248.87
+    },
     {
       "mes": "2026-08",
       "arquivo": "202608.json",
       "total": 1375,
+      "mediana": 16885.79
+    },
+    {
+      "mes": "2026-09",
+      "arquivo": "202609.json",
+      "total": 1390,
       "mediana": 16885.79
     }
   ]
