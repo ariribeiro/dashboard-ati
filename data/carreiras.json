@@ -46,5 +46,53 @@
       40000,
       45000
     ]
+  },
+  "ace": {
+    "sigla": "ACE",
+    "plural": "ACEs",
+    "nome": "Analista de Comércio Exterior",
+    "padrao_cargo": "^ANALISTA (DE )?COM(ERCIO)? EXT(ERIOR)?$",
+    "marca": "neutra",
+    "nome_plural": "Analistas de Comércio Exterior",
+    "ingresso": null,
+    "classes": {
+      "S": "Especial"
+    },
+    "faixas": [
+      0,
+      20000,
+      25000,
+      27500,
+      30000,
+      32500,
+      35000,
+      37500,
+      40000,
+      45000
+    ]
+  },
+  "aie": {
+    "sigla": "AIE",
+    "plural": "AIEs",
+    "nome": "Analista de Infraestrutura",
+    "padrao_cargo": "^ANALISTA (DE )?INFRA-?ESTRUT(URA)?$",
+    "marca": "neutra",
+    "nome_plural": "Analistas de Infraestrutura",
+    "ingresso": null,
+    "classes": {
+      "S": "Especial"
+    },
+    "faixas": [
+      0,
+      17500,
+      20000,
+      22500,
+      25000,
+      27500,
+      30000,
+      32500,
+      35000,
+      40000
+    ]
   }
 }

@@ -2,15 +2,16 @@
 
 Painéis estáticos de carreiras do Executivo Federal, hoje **Analista em
 Tecnologia da Informação (ATI)**, **Analista Técnico de Políticas Sociais
-(ATPS)** e **Especialista em Políticas Públicas e Gestão Governamental
-(EPPGG)**. São publicados no GitHub Pages e atualizados todo mês por GitHub
+(ATPS)**, **Especialista em Políticas Públicas e Gestão Governamental
+(EPPGG)**, **Analista de Comércio Exterior (ACE)** e **Analista de
+Infraestrutura (AIE)**. São publicados no GitHub Pages e atualizados todo mês por GitHub
 Actions com dados do [Portal da Transparência](https://portaldatransparencia.gov.br/download-de-dados/servidores).
 
 | Página | Endereço |
 |---|---|
 | Página inicial (escolha da carreira) | `/` |
-| Painel de uma carreira | `/painel.html?carreira=ati` (ou `atps`, `eppgg`) |
-| Links curtos, com prévia própria para redes sociais | `/ati/`, `/atps/`, `/eppgg/` |
+| Painel de uma carreira | `/painel.html?carreira=ati` (ou `atps`, `eppgg`, `ace`, `aie`) |
+| Links curtos, com prévia própria para redes sociais | `/ati/`, `/atps/`, `/eppgg/`, `/ace/`, `/aie/` |
 
 Só são publicados **dados agregados**. Nenhum nome, CPF, matrícula ou
 identificador individual sai do script (LGPD).
@@ -71,6 +72,14 @@ Esses pontos foram conferidos no arquivo de ago/2026:
     B → C → S, e S é exibida como "Especial". Não há classe A nos dados, e o
     ingresso não está configurado. A remuneração (R$ 25–37 mil sem função) usa
     faixas próprias no histograma.
+  - **ACE**: `ANALISTA DE COMERCIO EXTERIOR` (436 em ago/2026, a maioria no
+    MDIC). Classes B, C e S ("Especial"); ingresso não configurado. Usa as
+    mesmas faixas da EPPGG.
+  - **AIE**: `ANALISTA DE INFRA-ESTRUTURA` (1.033 em ago/2026, espalhados
+    pelos ministérios de infraestrutura). Classes A, B, C e S ("Especial");
+    ingresso não configurado. Não inclui `ESPECIALISTA EM INFRA-ESTRUTURA
+    SENIOR` nem `ANALISTA EM INFRA-ESTRUT DE TRANSPORTES` (DNIT), que são
+    outros cargos. Faixas próprias no histograma (R$ 17,5–40 mil).
 - **Função comissionada**: não aparece na linha do cargo. Fica numa linha
   separada do mesmo `Id_SERVIDOR_PORTAL`, com `DESCRICAO_CARGO` "Sem informação"
   e `SIGLA_FUNCAO` preenchida (FEX, CCX…). O script conta o servidor como "com
