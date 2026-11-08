@@ -5,7 +5,11 @@
     "nome": "Analista em Tecnologia da Informação",
     "padrao_cargo": "^ANALISTA EM TECNOL(OGIA)? DA INFORMACAO$",
     "marca": "ati",
-    "nome_plural": "Analistas em Tecnologia da Informação"
+    "nome_plural": "Analistas em Tecnologia da Informação",
+    "ingresso": {
+      "classe": "A",
+      "padrao": "I"
+    }
   },
   "atps": {
     "sigla": "ATPS",
@@ -13,6 +17,34 @@
     "nome": "Analista Técnico de Políticas Sociais",
     "padrao_cargo": "^ANALISTA TECN(ICO)? (EM|DE) POLITICAS SOCIAIS$",
     "marca": "neutra",
-    "nome_plural": "Analistas Técnicos de Políticas Sociais"
+    "nome_plural": "Analistas Técnicos de Políticas Sociais",
+    "ingresso": {
+      "classe": "A",
+      "padrao": "I"
+    }
+  },
+  "eppgg": {
+    "sigla": "EPPGG",
+    "plural": "EPPGG",
+    "nome": "Especialista em Políticas Públicas e Gestão Governamental",
+    "padrao_cargo": "^ESP(ECIALISTA)? (EM )?POL(ITICAS)? PUBL(ICAS)? (E )?GEST(AO)? GOVERN(AMENTAL)?$",
+    "marca": "neutra",
+    "nome_plural": "Especialistas em Políticas Públicas e Gestão Governamental",
+    "ingresso": null,
+    "classes": {
+      "S": "Especial"
+    },
+    "faixas": [
+      0,
+      20000,
+      25000,
+      27500,
+      30000,
+      32500,
+      35000,
+      37500,
+      40000,
+      45000
+    ]
   }
 }

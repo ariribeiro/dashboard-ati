@@ -266,6 +266,7 @@ html { scroll-behavior: smooth; }
 .barra-nav a[data-secao="onde"] { --acento: var(--onde); --lavado: var(--onde-lavado); }
 .barra-nav a[data-secao="carreira"] { --acento: var(--carreira); --lavado: var(--carreira-lavado); }
 .barra-nav a[data-secao="remuneracao"] { --acento: var(--remuneracao); --lavado: var(--remuneracao-lavado); }
+.barra-nav a[hidden] { display: none; }
 .barra-nav a::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--acento); }
 .barra-nav a:hover { background: var(--fundo); color: var(--texto); }
 .barra-nav a[aria-current] { background: var(--lavado); color: var(--texto); font-weight: 600; }

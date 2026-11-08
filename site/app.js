@@ -4,6 +4,9 @@ const BASE_DADOS = "data/";
 // Carreira do painel: ?carreira=atps (padrão: ati). Configuração em data/carreiras.json.
 let SLUG = new URLSearchParams(location.search).get("carreira") || "ati";
 let P = "ATIs"; // plural da sigla, usado nos textos
+let CFG = {}; // entrada da carreira em data/carreiras.json
+// Rótulo de exibição da classe (no SIAPE, "S" é a classe Especial em algumas carreiras).
+const rotuloClasse = (c) => CFG.classes?.[c] ?? c;
 const FAVICON_NEUTRO = "data:image/svg+xml," + encodeURIComponent(
   '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="#0D2B5C"/>' +
   '<rect x="14" y="34" width="8" height="16" rx="2" fill="#fff"/><rect x="28" y="24" width="8" height="26" rx="2" fill="#fff"/>' +
@@ -269,7 +272,8 @@ function histogramaFaixas(id, rem) {
         axisLabel: { color: cor("--texto-2"), interval: 0, fontSize: 11, rotate: estreito() ? 45 : 0 } }),
       { type: "value", min: 0, max: faixas.length, show: false },
     ],
-    yAxis: eixoValor(),
+    // Folga no topo: o número da barra mais alta não encosta no rótulo da mediana.
+    yAxis: eixoValor({ boundaryGap: [0, "20%"] }),
     grid: { ...temaBase().grid, right: 8, top: 36, bottom: 24 },
     series: [
       {
@@ -319,11 +323,12 @@ function mapaClassePadrao(id, itens) {
   }));
   grafico(id, {
     tooltip: { ...temaBase().tooltip, trigger: "item",
-      formatter: (p) => `Classe ${classes[p.value[1]]}, padrão ${padroes[p.value[0]]}<br><b>${fmtInt.format(p.value[2])}</b> ${P}` },
+      formatter: (p) => `Classe ${rotuloClasse(classes[p.value[1]])}, padrão ${padroes[p.value[0]]}<br><b>${fmtInt.format(p.value[2])}</b> ${P}` },
     grid: { ...temaBase().grid, right: 8, bottom: 24 },
     xAxis: eixoCategoria(padroes, { name: "Padrão", nameLocation: "middle", nameGap: 28, nameTextStyle: { color: cor("--texto-3") } }),
     yAxis: [
-      eixoCategoria(classes, { name: "Classe", nameTextStyle: { color: cor("--texto-3") }, inverse: true, axisLine: { show: false } }),
+      eixoCategoria(classes, { name: "Classe", nameTextStyle: { color: cor("--texto-3") }, inverse: true, axisLine: { show: false },
+        axisLabel: { color: cor("--texto-2"), formatter: rotuloClasse } }),
       eixoCategoria(classes, { inverse: true, position: "right", axisLine: { show: false }, name: "Total", nameTextStyle: { color: cor("--texto-3") },
         axisLabel: { color: cor("--texto"), fontWeight: 600, formatter: (c) => fmtInt.format(totais[c]) } }),
     ],
@@ -335,7 +340,7 @@ function mapaClassePadrao(id, itens) {
       label: { show: true, formatter: (p) => fmtInt.format(p.value[2]), fontWeight: 600 },
     }],
   });
-  tabela(id, ["Classe", "Padrão", P], itens.map((d) => [d.classe, d.padrao, fmtInt.format(d.qtd)]));
+  tabela(id, ["Classe", "Padrão", P], itens.map((d) => [rotuloClasse(d.classe), d.padrao, fmtInt.format(d.qtd)]));
 }
 
 function rgb(hex) {
@@ -515,7 +520,10 @@ function delta(el, atualV, anteriorV, formatar, rotulo, colorir = true) {
   if (colorir) el.classList.add(d > 0 ? "sobe" : "desce");
 }
 
-const inicioCarreira = (d) => d.por_classe_padrao.find((c) => c.classe === "A" && c.padrao === "I")?.qtd ?? 0;
+// Servidores na posição de ingresso (carreiras.json "ingresso"); null se a carreira não a define.
+const inicioCarreira = (d) => (CFG.ingresso
+  ? d.por_classe_padrao.find((c) => c.classe === CFG.ingresso.classe && c.padrao === CFG.ingresso.padrao)?.qtd ?? 0
+  : null);
 
 // Maior variação positiva entre meses consecutivos do índice.
 function maiorAltaMensal() {
@@ -547,8 +555,11 @@ function destaques(d, ant) {
 
   const ai = inicioCarreira(d);
   const aiAnt = ant ? inicioCarreira(ant) : null;
-  itens.push(["carreira", `<strong>${fmtInt.format(ai)} ${P} (${fmtPct.format(ai / d.total)})</strong> estão no início da carreira, classe A, padrão I` +
-    (aiAnt !== null && aiAnt !== ai ? ` (eram ${fmtInt.format(aiAnt)} em ${refAnt}).` : ".")]);
+  if (ai !== null) {
+    const { classe, padrao } = CFG.ingresso;
+    itens.push(["carreira", `<strong>${fmtInt.format(ai)} ${P} (${fmtPct.format(ai / d.total)})</strong> estão no início da carreira, classe ${rotuloClasse(classe)}, padrão ${padrao}` +
+      (aiAnt !== null && aiAnt !== ai ? ` (eram ${fmtInt.format(aiAnt)} em ${refAnt}).` : ".")]);
+  }
 
   const med = d.remuneracao_basica_bruta.mediana;
   const medAnt = ant?.remuneracao_basica_bruta.mediana;
@@ -828,6 +839,11 @@ function renderizar() {
   document.getElementById("uf-sub").textContent = semUF ? `Em ${fmtInt.format(semUF)} casos o SIAPE não informa a UF` : "";
 
   // Carreira
+  const classesMes = [...new Set(d.por_classe_padrao.map((c) => c.classe))].sort().map(rotuloClasse);
+  const listaClasses = classesMes.length > 1 ? `${classesMes.slice(0, -1).join(", ")} e ${classesMes.at(-1)}` : classesMes[0];
+  document.getElementById("carreira-desc").textContent =
+    `Em ${fmtMes(d.referencia)}, os ${P} estão ${classesMes.length > 1 ? "nas classes" : "na classe"} ${listaClasses}, cada uma dividida em padrões.` +
+    (CFG.ingresso ? ` O ingresso acontece na classe ${rotuloClasse(CFG.ingresso.classe)}, padrão ${CFG.ingresso.padrao}.` : "");
   mapaClassePadrao("g-classe", d.por_classe_padrao);
   barrasHorizontais("g-funcao", d.funcao.por_sigla, "--carreira");
   document.getElementById("funcao-sub").textContent =
@@ -875,6 +891,7 @@ function mostrarErro(e) {
 function aplicarCarreira(carreiras) {
   const c = carreiras[SLUG];
   P = c.plural;
+  CFG = c;
   document.title = `Painel ${c.sigla}`;
   document.documentElement.dataset.marca = c.marca;
   for (const el of document.querySelectorAll("[data-sigla]")) el.textContent = c.sigla;

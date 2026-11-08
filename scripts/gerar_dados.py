@@ -55,7 +55,8 @@ COL_REM = "REMUNERAÇÃO BÁSICA BRUTA (R$)"
 SEM_VALOR = re.compile(r"^(-1|SEM INFORM.*|INVALIDO)?$")
 TAMANHO_CHUNK = 200_000
 
-# Faixas fixas (R$) para manter o histograma comparável entre meses.
+# Faixas fixas (R$) para manter o histograma comparável entre meses. Uma carreira
+# com remuneração em outro patamar pode definir as suas em carreiras.json ("faixas").
 FAIXAS = [0, 10_000, 12_500, 15_000, 17_500, 20_000, 22_500, 25_000, 30_000, 35_000]
 ROMANOS = {"I": 1, "II": 2, "III": 3, "IV": 4, "V": 5, "VI": 6, "VII": 7, "VIII": 8, "IX": 9, "X": 10}
 
@@ -226,8 +227,8 @@ def contagem(serie: pd.Series) -> list[dict]:
     return [{"nome": str(k), "qtd": int(v)} for k, v in cont.items()]
 
 
-def histograma(valores: pd.Series) -> list[dict]:
-    limites = FAIXAS + [float("inf")]
+def histograma(valores: pd.Series, faixas: list[int] = FAIXAS) -> list[dict]:
+    limites = list(faixas) + [float("inf")]
     faixas = []
     for minimo, maximo in zip(limites[:-1], limites[1:]):
         qtd = int(((valores >= minimo) & (valores < maximo)).sum())
@@ -239,7 +240,7 @@ def chave_padrao(p: str) -> int:
     return ROMANOS.get(p, int(p) if p.isdigit() else 99)
 
 
-def agregar(atis: pd.DataFrame, rem: pd.Series, mes: str, padrao_cargo: str) -> dict:
+def agregar(atis: pd.DataFrame, rem: pd.Series, mes: str, cfg: dict) -> dict:
     classe_padrao = (
         atis.assign(CLASSE_CARGO=atis["CLASSE_CARGO"].fillna("?"), PADRAO_CARGO=atis["PADRAO_CARGO"].fillna("?"))
         .groupby(["CLASSE_CARGO", "PADRAO_CARGO"]).size().reset_index(name="qtd")
@@ -259,7 +260,7 @@ def agregar(atis: pd.DataFrame, rem: pd.Series, mes: str, padrao_cargo: str) -> 
             "url": URL_PAGINA,
             "arquivo": URL_DOWNLOAD.format(mes=mes),
         },
-        "filtro_cargo": padrao_cargo,
+        "filtro_cargo": cfg["padrao_cargo"],
         "total": int(len(atis)),
         "por_situacao": contagem(atis["SITUACAO_VINCULO"]),
         "por_orgao_exercicio": contagem(atis["ORG_EXERCICIO"]),
@@ -279,7 +280,7 @@ def agregar(atis: pd.DataFrame, rem: pd.Series, mes: str, padrao_cargo: str) -> 
             "mediana": round(float(valores.median()), 2),
             "p10": round(float(valores.quantile(0.10)), 2),
             "p90": round(float(valores.quantile(0.90)), 2),
-            "histograma": histograma(valores),
+            "histograma": histograma(valores, cfg.get("faixas", FAIXAS)),
         },
     }
 
@@ -351,7 +352,7 @@ def processar(s: requests.Session, mes: str, carreiras: dict[str, dict], manter_
             print("  " + ", ".join(f"{len(df)} {carreiras[c]['plural']}" for c, df in tabelas.items()))
             print("Lendo remuneração...")
             rem = ler_remuneracao(zf, mes, set().union(*(set(df.index) for df in tabelas.values())))
-        return {c: agregar(df, rem, mes, carreiras[c]["padrao_cargo"]) for c, df in tabelas.items()}
+        return {c: agregar(df, rem, mes, carreiras[c]) for c, df in tabelas.items()}
     finally:
         if not manter_zip:
             caminho.unlink(missing_ok=True)

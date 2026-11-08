@@ -1,15 +1,16 @@
 # Painéis de carreiras
 
 Painéis estáticos de carreiras do Executivo Federal, hoje **Analista em
-Tecnologia da Informação (ATI)** e **Analista Técnico de Políticas Sociais
-(ATPS)**. São publicados no GitHub Pages e atualizados todo mês por GitHub
+Tecnologia da Informação (ATI)**, **Analista Técnico de Políticas Sociais
+(ATPS)** e **Especialista em Políticas Públicas e Gestão Governamental
+(EPPGG)**. São publicados no GitHub Pages e atualizados todo mês por GitHub
 Actions com dados do [Portal da Transparência](https://portaldatransparencia.gov.br/download-de-dados/servidores).
 
 | Página | Endereço |
 |---|---|
 | Página inicial (escolha da carreira) | `/` |
-| Painel de uma carreira | `/painel.html?carreira=ati`, `/painel.html?carreira=atps` |
-| Links curtos, com prévia própria para redes sociais | `/ati/`, `/atps/` |
+| Painel de uma carreira | `/painel.html?carreira=ati` (ou `atps`, `eppgg`) |
+| Links curtos, com prévia própria para redes sociais | `/ati/`, `/atps/`, `/eppgg/` |
 
 Só são publicados **dados agregados**. Nenhum nome, CPF, matrícula ou
 identificador individual sai do script (LGPD).
@@ -21,9 +22,16 @@ Portal da Transparência ──► scripts/gerar_dados.py ──► data/<carrei
      (ZIP mensal SIAPE)        (pandas, em chunks)        (versionado)
 ```
 
-- **`data/carreiras.json`** lista as carreiras: sigla, plural, nome, regex do
-  cargo no SIAPE e identidade visual (`"ati"` usa a marca da ATI; `"neutra"`, a
-  sigla em texto).
+- **`data/carreiras.json`** lista as carreiras. Campos:
+
+  | campo | uso |
+  |---|---|
+  | `sigla`, `plural`, `nome`, `nome_plural` | textos do painel |
+  | `padrao_cargo` | regex do cargo no SIAPE (texto sem acentos, maiúsculo) |
+  | `marca` | `"ati"` usa a marca da ATI; `"neutra"`, a sigla em texto |
+  | `ingresso` | classe e padrão de entrada (`{"classe": "A", "padrao": "I"}`), ou `null` se não confirmado; sem ele o painel omite o destaque "no início da carreira" |
+  | `classes` | opcional; rótulo de exibição por código do SIAPE (ex.: `{"S": "Especial"}`) |
+  | `faixas` | opcional; limites (R$) do histograma de remuneração, para carreiras em outro patamar salarial |
 - **`scripts/gerar_dados.py`** descobre o mês mais recente publicado, baixa o ZIP
   `AAAAMM_Servidores_SIAPE` **uma vez**, lê `AAAAMM_Cadastro.csv` e
   `AAAAMM_Remuneracao.csv` em chunks, separa os servidores de cada carreira, junta
@@ -58,6 +66,11 @@ Esses pontos foram conferidos no arquivo de ago/2026:
     `ANALISTA - ANALISTA DE TECNOL DA INFORM` (Conab).
   - **ATPS**: `ANALISTA TECN EM POLITICAS SOCIAIS` (1.375 servidores em ago/2026,
     lotação centralizada no MGI, classes A–C e padrões I–VI, como a ATI).
+  - **EPPGG**: `ESP POL PUBL GESTAO GOVERNAMENTAL` (1.064 em ago/2026, lotação no
+    MGI). As classes ocupadas são B, C e S; pela remuneração, a ordem é
+    B → C → S, e S é exibida como "Especial". Não há classe A nos dados, e o
+    ingresso não está configurado. A remuneração (R$ 25–37 mil sem função) usa
+    faixas próprias no histograma.
 - **Função comissionada**: não aparece na linha do cargo. Fica numa linha
   separada do mesmo `Id_SERVIDOR_PORTAL`, com `DESCRICAO_CARGO` "Sem informação"
   e `SIGLA_FUNCAO` preenchida (FEX, CCX…). O script conta o servidor como "com
@@ -171,9 +184,9 @@ alterar `data/`. Pela linha de comando:
 1. Ache o nome do cargo no SIAPE (coluna `DESCRICAO_CARGO` do cadastro; vem
    abreviado) e escreva uma regex para ele.
 2. Acrescente a carreira em `data/carreiras.json` (sigla, plural, nome, nome no
-   plural, regex e `"marca": "neutra"`), em `options` da entrada `carreira` do
-   workflow e, se quiser link curto, copie `site/atps/` para `site/<carreira>/`
-   trocando a sigla.
+   plural, regex, `"marca": "neutra"` e, se for o caso, `ingresso`, `classes` e
+   `faixas`), em `options` da entrada `carreira` do workflow e, se quiser link
+   curto, copie `site/atps/` para `site/<carreira>/` trocando a sigla.
 3. Rode o workflow com "ano inteiro" para cada ano a partir de 2013. Os meses só
    são baixados uma vez, e as carreiras que já têm dados não mudam.
 4. Inclua em `data/orgaos_coordenadas.csv` os órgãos que o script apontar nos

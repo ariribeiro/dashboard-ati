@@ -36,6 +36,7 @@ on:
           - todas
           - ati
           - atps
+          - eppgg
       force:
         description: "Reprocessar o mês mesmo se já existir"
         type: boolean
