@@ -1,27 +1,27 @@
 {
-  "referencia": "2026-08",
-  "gerado_em": "2026-11-08T17:52:34+00:00",
+  "referencia": "2026-09",
+  "gerado_em": "2026-11-08T18:35:45+00:00",
   "fonte": {
     "nome": "Portal da Transparência — Servidores SIAPE",
     "url": "https://portaldatransparencia.gov.br/download-de-dados/servidores",
-    "arquivo": "https://portaldatransparencia.gov.br/download-de-dados/servidores/202608_Servidores_SIAPE"
+    "arquivo": "https://portaldatransparencia.gov.br/download-de-dados/servidores/202609_Servidores_SIAPE"
   },
   "filtro_cargo": "^ESP(ECIALISTA)? (EM )?POL(ITICAS)? PUBL(ICAS)? (E )?GEST(AO)? GOVERN(AMENTAL)?$",
   "total": 1064,
   "por_situacao": [
     {
       "nome": "ATIVO PERMANENTE",
-      "qtd": 778
+      "qtd": 777
     },
     {
       "nome": "ATIVO EM OUTRO ORGAO",
-      "qtd": 286
+      "qtd": 287
     }
   ],
   "por_orgao_exercicio": [
     {
       "nome": "MIN GESTAO E INOV EM SERV PUBLICOS",
-      "qtd": 242
+      "qtd": 241
     },
     {
       "nome": "Conselho Administrativo de Defesa Econômica",
@@ -37,7 +37,7 @@
     },
     {
       "nome": "Presidência da República",
-      "qtd": 50
+      "qtd": 51
     },
     {
       "nome": "MINISTERIO DA FAZENDA",
@@ -65,7 +65,7 @@
     },
     {
       "nome": "MINISTERIO DAS CIDADES",
-      "qtd": 20
+      "qtd": 21
     },
     {
       "nome": "MIN DO DESENV AGR E AGRIC FAMILIAR",
@@ -73,7 +73,7 @@
     },
     {
       "nome": "Ministério da Justiça e Segurança Pública",
-      "qtd": 19
+      "qtd": 18
     },
     {
       "nome": "Ministério da Saúde",
@@ -85,7 +85,7 @@
     },
     {
       "nome": "MINISTERIO DA AGRICULTURA E PECUARIA",
-      "qtd": 16
+      "qtd": 15
     },
     {
       "nome": "MINISTERIO DO PLANEJAMENTO E ORCAMENTO",
@@ -96,19 +96,19 @@
       "qtd": 13
     },
     {
-      "nome": "Ministério da Ciência, Tecnologia, Inovações e Comunicações",
-      "qtd": 13
-    },
-    {
       "nome": "MINISTERIO DE PORTOS E AEROPORTOS",
       "qtd": 13
     },
     {
-      "nome": "MINISTERIO DA CULTURA",
+      "nome": "Ministério da Ciência, Tecnologia, Inovações e Comunicações",
       "qtd": 12
     },
     {
       "nome": "MIN DOS DIR HUM E DA CIDADANIA",
+      "qtd": 12
+    },
+    {
+      "nome": "MINISTERIO DA CULTURA",
       "qtd": 11
     },
     {
@@ -128,16 +128,16 @@
       "qtd": 9
     },
     {
+      "nome": "MINISTERIO DO TRABALHO E EMPREGO",
+      "qtd": 9
+    },
+    {
       "nome": "MINISTERIO DA IGUALDADE RACIAL",
       "qtd": 9
     },
     {
       "nome": "Câmara dos Deputados",
       "qtd": 9
-    },
-    {
-      "nome": "MINISTERIO DO TRABALHO E EMPREGO",
-      "qtd": 8
     },
     {
       "nome": "Instituto Brasileiro de Museus",
@@ -153,6 +153,14 @@
     },
     {
       "nome": "AGENCIA NACIONAL DE PROTECAO DE DADOS",
+      "qtd": 7
+    },
+    {
+      "nome": "MIN EMPREEND MICROEMP EMP PEQUENO PORTE",
+      "qtd": 7
+    },
+    {
+      "nome": "MINISTERIO DOS TRANSPORTES",
       "qtd": 7
     },
     {
@@ -176,22 +184,6 @@
       "qtd": 6
     },
     {
-      "nome": "MIN EMPREEND MICROEMP EMP PEQUENO PORTE",
-      "qtd": 6
-    },
-    {
-      "nome": "MINISTERIO DOS TRANSPORTES",
-      "qtd": 6
-    },
-    {
-      "nome": "Agência Nacional do Cinema",
-      "qtd": 5
-    },
-    {
-      "nome": "MINISTERIO DAS MULHERES",
-      "qtd": 5
-    },
-    {
       "nome": "MINISTERIO DO ESPORTE",
       "qtd": 5
     },
@@ -204,11 +196,19 @@
       "qtd": 4
     },
     {
+      "nome": "Agência Nacional do Cinema",
+      "qtd": 4
+    },
+    {
       "nome": "MINISTERIO DOS POVOS INDIGENAS",
       "qtd": 4
     },
     {
       "nome": "Ministério do Turismo",
+      "qtd": 4
+    },
+    {
+      "nome": "MINISTERIO DAS MULHERES",
       "qtd": 4
     },
     {
@@ -320,6 +320,10 @@
       "qtd": 1
     },
     {
+      "nome": "Governo do Estado do Rio de Janeiro",
+      "qtd": 1
+    },
+    {
       "nome": "Fundação Alexandre Gusmão",
       "qtd": 1
     },
@@ -393,26 +397,26 @@
   "por_uf": [
     {
       "nome": "DF",
-      "qtd": 758
+      "qtd": 950
     },
     {
       "nome": "Não informado",
-      "qtd": 254
+      "qtd": 54
     },
     {
       "nome": "RJ",
-      "qtd": 23
+      "qtd": 29
     },
     {
       "nome": "MG",
+      "qtd": 7
+    },
+    {
+      "nome": "SP",
       "qtd": 6
     },
     {
       "nome": "RS",
-      "qtd": 5
-    },
-    {
-      "nome": "SP",
       "qtd": 5
     },
     {
@@ -506,90 +510,90 @@
     }
   ],
   "funcao": {
-    "com_funcao": 530,
+    "com_funcao": 529,
     "por_sigla": [
       {
         "nome": "FEX",
-        "qtd": 446
+        "qtd": 444
       },
       {
         "nome": "CCX",
-        "qtd": 73
+        "qtd": 76
       },
       {
         "nome": "CCT",
-        "qtd": 6
+        "qtd": 5
       },
       {
         "nome": "CA",
         "qtd": 2
       },
       {
-        "nome": "CGE",
-        "qtd": 2
+        "nome": "CCD",
+        "qtd": 1
       },
       {
-        "nome": "CCD",
+        "nome": "CGE",
         "qtd": 1
       }
     ]
   },
   "remuneracao_basica_bruta": {
-    "n": 993,
-    "media": 38423.76,
+    "n": 988,
+    "media": 38508.59,
     "mediana": 36694.0,
-    "p10": 25002.32,
-    "p90": 48890.47,
+    "p10": 26437.35,
+    "p90": 48599.57,
     "histograma": [
       {
         "min": 0,
         "max": 20000,
-        "qtd": 3
+        "qtd": 1
       },
       {
         "min": 20000,
         "max": 25000,
-        "qtd": 7
+        "qtd": 0
       },
       {
         "min": 25000,
         "max": 27500,
-        "qtd": 103
+        "qtd": 102
       },
       {
         "min": 27500,
         "max": 30000,
-        "qtd": 44
+        "qtd": 48
       },
       {
         "min": 30000,
         "max": 32500,
-        "qtd": 5
+        "qtd": 7
       },
       {
         "min": 32500,
         "max": 35000,
-        "qtd": 34
+        "qtd": 36
       },
       {
         "min": 35000,
         "max": 37500,
-        "qtd": 348
+        "qtd": 352
       },
       {
         "min": 37500,
         "max": 40000,
-        "qtd": 66
+        "qtd": 63
       },
       {
         "min": 40000,
         "max": 45000,
-        "qtd": 128
+        "qtd": 123
       },
       {
         "min": 45000,
         "max": null,
-        "qtd": 255
+        "qtd": 256
       }
     ]
   }

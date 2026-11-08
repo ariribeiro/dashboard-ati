@@ -1,0 +1,600 @@
+{
+  "referencia": "2026-09",
+  "gerado_em": "2026-11-08T18:35:45+00:00",
+  "fonte": {
+    "nome": "Portal da Transparência — Servidores SIAPE",
+    "url": "https://portaldatransparencia.gov.br/download-de-dados/servidores",
+    "arquivo": "https://portaldatransparencia.gov.br/download-de-dados/servidores/202609_Servidores_SIAPE"
+  },
+  "filtro_cargo": "^ESP(ECIALISTA)? (EM )?POL(ITICAS)? PUBL(ICAS)? (E )?GEST(AO)? GOVERN(AMENTAL)?$",
+  "total": 1064,
+  "por_situacao": [
+    {
+      "nome": "ATIVO PERMANENTE",
+      "qtd": 777
+    },
+    {
+      "nome": "ATIVO EM OUTRO ORGAO",
+      "qtd": 287
+    }
+  ],
+  "por_orgao_exercicio": [
+    {
+      "nome": "MIN GESTAO E INOV EM SERV PUBLICOS",
+      "qtd": 241
+    },
+    {
+      "nome": "Conselho Administrativo de Defesa Econômica",
+      "qtd": 61
+    },
+    {
+      "nome": "MIN DESENV ASSIS SOCI FAMIL COMBATE FOME",
+      "qtd": 57
+    },
+    {
+      "nome": "MIN DESENVOLV IND COMERCIO E SERVICOS",
+      "qtd": 55
+    },
+    {
+      "nome": "Presidência da República",
+      "qtd": 51
+    },
+    {
+      "nome": "MINISTERIO DA FAZENDA",
+      "qtd": 38
+    },
+    {
+      "nome": "Ministério da Educação",
+      "qtd": 36
+    },
+    {
+      "nome": "Instituto de Pesquisa Econômica Aplicada",
+      "qtd": 32
+    },
+    {
+      "nome": "Função Escola Nacional de Administração Pública",
+      "qtd": 28
+    },
+    {
+      "nome": "Ministério de Minas e Energia",
+      "qtd": 25
+    },
+    {
+      "nome": "MINISTERIO DO MEIO AMBIENTE",
+      "qtd": 23
+    },
+    {
+      "nome": "MINISTERIO DAS CIDADES",
+      "qtd": 21
+    },
+    {
+      "nome": "MIN DO DESENV AGR E AGRIC FAMILIAR",
+      "qtd": 19
+    },
+    {
+      "nome": "Ministério da Justiça e Segurança Pública",
+      "qtd": 18
+    },
+    {
+      "nome": "Ministério da Saúde",
+      "qtd": 18
+    },
+    {
+      "nome": "MIN DA INTEG E DO DESENV REGIONAL",
+      "qtd": 16
+    },
+    {
+      "nome": "MINISTERIO DA AGRICULTURA E PECUARIA",
+      "qtd": 15
+    },
+    {
+      "nome": "MINISTERIO DO PLANEJAMENTO E ORCAMENTO",
+      "qtd": 15
+    },
+    {
+      "nome": "MINISTERIO DA PREVIDENCIA SOCIAL",
+      "qtd": 13
+    },
+    {
+      "nome": "MINISTERIO DE PORTOS E AEROPORTOS",
+      "qtd": 13
+    },
+    {
+      "nome": "Ministério da Ciência, Tecnologia, Inovações e Comunicações",
+      "qtd": 12
+    },
+    {
+      "nome": "MIN DOS DIR HUM E DA CIDADANIA",
+      "qtd": 12
+    },
+    {
+      "nome": "MINISTERIO DA CULTURA",
+      "qtd": 11
+    },
+    {
+      "nome": "MINISTERIO DAS COMUNICACOES",
+      "qtd": 10
+    },
+    {
+      "nome": "Instituto Chico Mendes de Conservação da Biodiversidade",
+      "qtd": 10
+    },
+    {
+      "nome": "ADVOCACIA-GERAL DA UNIAO",
+      "qtd": 10
+    },
+    {
+      "nome": "Agência Nacional do Petróleo, Gás Natural e Biocombustíveis",
+      "qtd": 9
+    },
+    {
+      "nome": "MINISTERIO DO TRABALHO E EMPREGO",
+      "qtd": 9
+    },
+    {
+      "nome": "MINISTERIO DA IGUALDADE RACIAL",
+      "qtd": 9
+    },
+    {
+      "nome": "Câmara dos Deputados",
+      "qtd": 9
+    },
+    {
+      "nome": "Instituto Brasileiro de Museus",
+      "qtd": 8
+    },
+    {
+      "nome": "Agência Nacional de Vigilância Sanitária",
+      "qtd": 8
+    },
+    {
+      "nome": "Agência Nacional de Aviação Civil",
+      "qtd": 7
+    },
+    {
+      "nome": "AGENCIA NACIONAL DE PROTECAO DE DADOS",
+      "qtd": 7
+    },
+    {
+      "nome": "MIN EMPREEND MICROEMP EMP PEQUENO PORTE",
+      "qtd": 7
+    },
+    {
+      "nome": "MINISTERIO DOS TRANSPORTES",
+      "qtd": 7
+    },
+    {
+      "nome": "Agência Nacional de Saúde Suplementar",
+      "qtd": 7
+    },
+    {
+      "nome": "Defensoria Pública da União",
+      "qtd": 7
+    },
+    {
+      "nome": "MINISTERIO DA DEFESA",
+      "qtd": 6
+    },
+    {
+      "nome": "Fundação Oswaldo Cruz",
+      "qtd": 6
+    },
+    {
+      "nome": "Instituto do Patrimônio Histórico e Artístico Nacional",
+      "qtd": 6
+    },
+    {
+      "nome": "MINISTERIO DO ESPORTE",
+      "qtd": 5
+    },
+    {
+      "nome": "Controladoria-Geral da União",
+      "qtd": 4
+    },
+    {
+      "nome": "MINISTERIO DA PESCA E AQUICULTURA",
+      "qtd": 4
+    },
+    {
+      "nome": "Agência Nacional do Cinema",
+      "qtd": 4
+    },
+    {
+      "nome": "MINISTERIO DOS POVOS INDIGENAS",
+      "qtd": 4
+    },
+    {
+      "nome": "Ministério do Turismo",
+      "qtd": 4
+    },
+    {
+      "nome": "MINISTERIO DAS MULHERES",
+      "qtd": 4
+    },
+    {
+      "nome": "Governo do Distrito Federal",
+      "qtd": 3
+    },
+    {
+      "nome": "Agência Nacional de Águas",
+      "qtd": 3
+    },
+    {
+      "nome": "Instituto de Pesquisas Jardim Botânico do Rio de Janeiro",
+      "qtd": 2
+    },
+    {
+      "nome": "Vice Presidência da República",
+      "qtd": 2
+    },
+    {
+      "nome": "Fundação Nacional do Índio",
+      "qtd": 2
+    },
+    {
+      "nome": "Instituto Nacional de Colonização e Reforma Agrária",
+      "qtd": 2
+    },
+    {
+      "nome": "INST NAC DE TECN DA INFORMACAO",
+      "qtd": 2
+    },
+    {
+      "nome": "Agência Nacional de Transportes Aquaviários",
+      "qtd": 2
+    },
+    {
+      "nome": "Estados / Municípios / Administração Direta Autárquica e Fundacional",
+      "qtd": 2
+    },
+    {
+      "nome": "Senado Federal",
+      "qtd": 2
+    },
+    {
+      "nome": "Fundação Coordenação de Aperfeiçoamento de Pessoal de Nível Superior",
+      "qtd": 2
+    },
+    {
+      "nome": "Estados / Municípios / Empresas",
+      "qtd": 2
+    },
+    {
+      "nome": "Fundação Biblioteca Nacional",
+      "qtd": 2
+    },
+    {
+      "nome": "Agência Nacional de Transportes Terrestres",
+      "qtd": 2
+    },
+    {
+      "nome": "Supremo Tribunal Federal",
+      "qtd": 2
+    },
+    {
+      "nome": "Governo do Estado do Rio Grande do Sul",
+      "qtd": 2
+    },
+    {
+      "nome": "Conselho da Justiça Federal",
+      "qtd": 2
+    },
+    {
+      "nome": "FUNDACAO CASA DE RUI BARBOSA",
+      "qtd": 1
+    },
+    {
+      "nome": "Comissão Nacional de Energia Nuclear",
+      "qtd": 1
+    },
+    {
+      "nome": "Superintendência Nacional de Previdência Complementar",
+      "qtd": 1
+    },
+    {
+      "nome": "Agência Nacional de Energia Elétrica",
+      "qtd": 1
+    },
+    {
+      "nome": "Tribunal Regional do Trabalho - DF",
+      "qtd": 1
+    },
+    {
+      "nome": "Agência Nacional de Telecomunicações",
+      "qtd": 1
+    },
+    {
+      "nome": "Governo do Estado do Paraná",
+      "qtd": 1
+    },
+    {
+      "nome": "Governo do Estado de São Paulo",
+      "qtd": 1
+    },
+    {
+      "nome": "Tribunal Superior Eleitoral",
+      "qtd": 1
+    },
+    {
+      "nome": "Comando do Exército",
+      "qtd": 1
+    },
+    {
+      "nome": "Governo do Estado do Rio de Janeiro",
+      "qtd": 1
+    },
+    {
+      "nome": "Fundação Alexandre Gusmão",
+      "qtd": 1
+    },
+    {
+      "nome": "Agência Nacional de Mineração",
+      "qtd": 1
+    },
+    {
+      "nome": "Agência Espacial Brasileira",
+      "qtd": 1
+    },
+    {
+      "nome": "Caixa Econômica Federal",
+      "qtd": 1
+    },
+    {
+      "nome": "Tribunal Regional Federal",
+      "qtd": 1
+    },
+    {
+      "nome": "Tribunal Regional Federal da 1ª Região - DF",
+      "qtd": 1
+    },
+    {
+      "nome": "Governo do Estado de Pernambuco",
+      "qtd": 1
+    },
+    {
+      "nome": "Prefeitura Municipal de Recife - PE",
+      "qtd": 1
+    },
+    {
+      "nome": "Fundação de Previdência Complementar do Servidor Público Federal",
+      "qtd": 1
+    },
+    {
+      "nome": "Fundação Joaquim Nabuco",
+      "qtd": 1
+    },
+    {
+      "nome": "Ministério das Relações Exteriores",
+      "qtd": 1
+    },
+    {
+      "nome": "Tribunal de Justiça",
+      "qtd": 1
+    },
+    {
+      "nome": "Fundação Nacional de Saúde",
+      "qtd": 1
+    },
+    {
+      "nome": "Governo do Estado do Piauí",
+      "qtd": 1
+    },
+    {
+      "nome": "Fundo Nacional de Desenvolvimento da Educação",
+      "qtd": 1
+    },
+    {
+      "nome": "Procuradoria-Geral da República",
+      "qtd": 1
+    }
+  ],
+  "por_orgao_lotacao": [
+    {
+      "nome": "MIN GESTAO E INOV EM SERV PUBLICOS",
+      "qtd": 1064
+    }
+  ],
+  "por_uf": [
+    {
+      "nome": "DF",
+      "qtd": 950
+    },
+    {
+      "nome": "Não informado",
+      "qtd": 54
+    },
+    {
+      "nome": "RJ",
+      "qtd": 29
+    },
+    {
+      "nome": "MG",
+      "qtd": 7
+    },
+    {
+      "nome": "SP",
+      "qtd": 6
+    },
+    {
+      "nome": "RS",
+      "qtd": 5
+    },
+    {
+      "nome": "SC",
+      "qtd": 4
+    },
+    {
+      "nome": "GO",
+      "qtd": 3
+    },
+    {
+      "nome": "TO",
+      "qtd": 1
+    },
+    {
+      "nome": "ES",
+      "qtd": 1
+    },
+    {
+      "nome": "RN",
+      "qtd": 1
+    },
+    {
+      "nome": "CE",
+      "qtd": 1
+    },
+    {
+      "nome": "PE",
+      "qtd": 1
+    },
+    {
+      "nome": "PI",
+      "qtd": 1
+    }
+  ],
+  "por_classe_padrao": [
+    {
+      "classe": "B",
+      "padrao": "III",
+      "qtd": 174
+    },
+    {
+      "classe": "B",
+      "padrao": "V",
+      "qtd": 6
+    },
+    {
+      "classe": "C",
+      "padrao": "II",
+      "qtd": 1
+    },
+    {
+      "classe": "C",
+      "padrao": "III",
+      "qtd": 8
+    },
+    {
+      "classe": "C",
+      "padrao": "IV",
+      "qtd": 3
+    },
+    {
+      "classe": "C",
+      "padrao": "V",
+      "qtd": 8
+    },
+    {
+      "classe": "S",
+      "padrao": "I",
+      "qtd": 7
+    },
+    {
+      "classe": "S",
+      "padrao": "II",
+      "qtd": 8
+    },
+    {
+      "classe": "S",
+      "padrao": "III",
+      "qtd": 19
+    },
+    {
+      "classe": "S",
+      "padrao": "IV",
+      "qtd": 8
+    },
+    {
+      "classe": "S",
+      "padrao": "V",
+      "qtd": 822
+    }
+  ],
+  "funcao": {
+    "com_funcao": 529,
+    "por_sigla": [
+      {
+        "nome": "FEX",
+        "qtd": 444
+      },
+      {
+        "nome": "CCX",
+        "qtd": 76
+      },
+      {
+        "nome": "CCT",
+        "qtd": 5
+      },
+      {
+        "nome": "CA",
+        "qtd": 2
+      },
+      {
+        "nome": "CCD",
+        "qtd": 1
+      },
+      {
+        "nome": "CGE",
+        "qtd": 1
+      }
+    ]
+  },
+  "remuneracao_basica_bruta": {
+    "n": 988,
+    "media": 38508.59,
+    "mediana": 36694.0,
+    "p10": 26437.35,
+    "p90": 48599.57,
+    "histograma": [
+      {
+        "min": 0,
+        "max": 20000,
+        "qtd": 1
+      },
+      {
+        "min": 20000,
+        "max": 25000,
+        "qtd": 0
+      },
+      {
+        "min": 25000,
+        "max": 27500,
+        "qtd": 102
+      },
+      {
+        "min": 27500,
+        "max": 30000,
+        "qtd": 48
+      },
+      {
+        "min": 30000,
+        "max": 32500,
+        "qtd": 7
+      },
+      {
+        "min": 32500,
+        "max": 35000,
+        "qtd": 36
+      },
+      {
+        "min": 35000,
+        "max": 37500,
+        "qtd": 352
+      },
+      {
+        "min": 37500,
+        "max": 40000,
+        "qtd": 63
+      },
+      {
+        "min": 40000,
+        "max": 45000,
+        "qtd": 123
+      },
+      {
+        "min": 45000,
+        "max": null,
+        "qtd": 256
+      }
+    ]
+  }
+}
