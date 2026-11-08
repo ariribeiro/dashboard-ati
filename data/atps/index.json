@@ -1,6 +1,12 @@
 {
-  "atualizado_em": "2026-11-08T22:49:22+00:00",
+  "atualizado_em": "2026-11-08T23:38:57+00:00",
   "meses": [
+    {
+      "mes": "2020-01",
+      "arquivo": "202001.json",
+      "total": 765,
+      "mediana": 10108.66
+    },
     {
       "mes": "2021-01",
       "arquivo": "202101.json",
