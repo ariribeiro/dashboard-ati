@@ -571,6 +571,201 @@ function destaques(d, ant) {
     itens.map(([tema, html]) => `<li data-tema="${tema}">${html}</li>`).join("");
 }
 
+// ---------------------------------------------------------------- tendência
+
+// Alta mensal a partir da qual o mês conta como entrada de turma.
+const LIMIAR_ENTRADA = 10;
+const HORIZONTE_MESES = 15 * 12;
+const JANELA_PIOR = 24;
+const numMes = (ref) => { const [a, m] = ref.split("-").map(Number); return a * 12 + m - 1; };
+const refDeNum = (n) => `${Math.floor(n / 12)}-${String((n % 12) + 1).padStart(2, "0")}`;
+const anual = (r) => 1 - (1 - r) ** 12;
+const fmtPct1 = new Intl.NumberFormat("pt-BR", { style: "percent", minimumFractionDigits: 1, maximumFractionDigits: 1 });
+
+// Variações entre meses consecutivos, separadas em meses de entrada e meses comuns.
+function analisarFluxo() {
+  const ms = indice.meses;
+  const pares = [];
+  for (let i = 1; i < ms.length; i++) {
+    const n = numMes(ms[i].mes);
+    if (n - numMes(ms[i - 1].mes) !== 1) continue;
+    pares.push({ n, base: ms[i - 1].total, total: ms[i].total, dif: ms[i].total - ms[i - 1].total });
+  }
+  const comuns = pares.filter((p) => p.dif < LIMIAR_ENTRADA);
+  // Taxa mensal de saída líquida: perda somada ÷ estoque exposto somado.
+  const taxa = (lista) => {
+    const base = lista.reduce((s, p) => s + p.base, 0);
+    return base ? Math.max(0, lista.reduce((s, p) => s - p.dif, 0) / base) : 0;
+  };
+
+  // Turmas: meses de entrada separados por no máximo 2 meses viram uma só.
+  const turmas = [];
+  for (const p of pares.filter((p) => p.dif >= LIMIAR_ENTRADA)) {
+    const t = turmas.at(-1);
+    if (t && p.n - t.fim <= 2) { t.fim = p.n; t.entrada += p.dif; t.depois = p.total; }
+    else turmas.push({ ini: p.n, fim: p.n, entrada: p.dif, antes: p.base, depois: p.total });
+  }
+
+  const ultimo = numMes(ms.at(-1).mes);
+  const recentes = comuns.filter((p) => p.n > ultimo - 60);
+  let pior = { taxa: 0 };
+  for (const p of comuns) {
+    const janela = comuns.filter((q) => q.n >= p.n && q.n < p.n + JANELA_PIOR);
+    if (janela.length < JANELA_PIOR * 0.75) continue;
+    const t = taxa(janela);
+    if (t > pior.taxa) pior = { taxa: t, ini: janela[0].n, fim: janela.at(-1).n };
+  }
+
+  const cenarios = [
+    { id: "recente", nome: "Ritmo dos últimos 5 anos", taxa: taxa(recentes), cor: "--onde" },
+    { id: "historico", nome: "Média de toda a série", taxa: taxa(comuns), cor: "--carreira" },
+    { id: "pior", nome: `Pior período (${fmtMes(refDeNum(pior.ini - 1))} a ${fmtMes(refDeNum(pior.fim))})`, taxa: pior.taxa, cor: "--negativo" },
+  ];
+
+  // Intervalos entre turmas: perda líquida desde o fim da entrada até a próxima turma (ou o mês mais recente).
+  const totalEm = new Map(ms.map((m) => [numMes(m.mes), m.total]));
+  const intervalos = turmas.map((t, i) => {
+    const prox = turmas[i + 1];
+    const fim = prox ? prox.ini - 1 : ultimo;
+    const perda = t.depois - totalEm.get(fim);
+    return { turma: t, fim, meses: fim - t.fim, perda, emAndamento: !prox };
+  });
+
+  return { cenarios, turmas, intervalos, ultimo, totalAtual: ms.at(-1).total };
+}
+
+// Meses até o total cair de `de` para `ate` à taxa mensal `r`.
+const mesesAte = (de, ate, r) => (r > 0 && ate < de ? Math.log(ate / de) / Math.log(1 - r) : Infinity);
+
+function graficoProjecao(id, fluxo) {
+  const { rotulos, valores } = serieMensal("total");
+  const n0 = numMes(indice.meses[0].mes);
+  const ultimoIdx = fluxo.ultimo - n0;
+  for (let k = 1; k <= HORIZONTE_MESES; k++) { rotulos.push(fmtMes(refDeNum(fluxo.ultimo + k))); valores.push(null); }
+  const projecoes = fluxo.cenarios.map((c) => rotulos.map((_, i) =>
+    i < ultimoIdx ? null : Math.round(fluxo.totalAtual * (1 - c.taxa) ** (i - ultimoIdx))));
+  // Rótulo só no último ponto (endLabel do ECharts falha com séries que começam em null).
+  const comRotulo = (dados) => dados.map((v, i) => (i === dados.length - 1 && !estreito()
+    ? { value: v, label: { show: true, position: "right", color: cor("--texto"), formatter: (p) => fmtInt.format(p.value) } }
+    : v));
+  const referencias = fluxo.turmas.slice(-2);
+  const ano = (r) => +r.slice(4);
+  const passo = estreito() ? 5 : 2;
+
+  grafico(id, {
+    tooltip: { ...temaBase().tooltip, trigger: "axis", axisPointer: { type: "line", lineStyle: { color: cor("--texto-3") } },
+      formatter: (ps) => {
+        const linhas = ps.filter((p) => p.value != null && !(p.seriesIndex > 0 && p.dataIndex === ultimoIdx))
+          .map((p) => `${p.marker}${p.seriesName}: <b>${fmtInt.format(p.value)}</b>`);
+        return `${ps[0].name}<br>${linhas.join("<br>") || "sem dados"}`;
+      } },
+    legend: { bottom: 0, icon: "roundRect", itemWidth: 14, itemHeight: 3, textStyle: { color: cor("--texto-2"), fontSize: 12 } },
+    grid: { ...temaBase().grid, right: 48, top: 24, bottom: estreito() ? 84 : 40 },
+    xAxis: eixoCategoria(rotulos, {
+      boundaryGap: false,
+      axisLabel: { color: cor("--texto-2"), interval: (i, r) => r.startsWith("jan/") && ano(r) % passo === 0, formatter: (r) => r.slice(4) },
+    }),
+    yAxis: eixoValor({ min: 0 }),
+    series: [
+      {
+        name: "Real",
+        type: "line",
+        data: valores,
+        symbol: "none",
+        lineStyle: { width: 2, color: cor("--geral") },
+        itemStyle: { color: cor("--geral") },
+        areaStyle: { color: cor("--geral-lavado") },
+        markLine: {
+          silent: true,
+          symbol: "none",
+          lineStyle: { color: cor("--texto-3"), type: "dotted", width: 1 },
+          label: { position: "insideStartTop", color: cor("--texto-2"), fontSize: 11 },
+          data: referencias.map((t) => ({ yAxis: t.antes, label: { formatter: `antes da entrada de ${fmtMes(refDeNum(t.ini))}: ${fmtInt.format(t.antes)}` } })),
+        },
+      },
+      ...fluxo.cenarios.map((c, j) => ({
+        name: c.nome,
+        type: "line",
+        data: comRotulo(projecoes[j]),
+        symbol: "circle",
+        symbolSize: (v, p) => (p.dataIndex === rotulos.length - 1 ? 6 : 0),
+        showAllSymbol: true,
+        lineStyle: { width: 2, type: "dashed", color: cor(c.cor) },
+        itemStyle: { color: cor(c.cor) },
+      })),
+    ],
+  });
+
+  const passoTabela = 12;
+  const linhasTabela = [];
+  for (let i = ultimoIdx; i < rotulos.length; i += passoTabela) {
+    linhasTabela.push([rotulos[i], ...projecoes.map((p) => fmtInt.format(p[i]))]);
+  }
+  tabela(id, ["Mês", ...fluxo.cenarios.map((c) => c.nome)], linhasTabela);
+}
+
+function anoPrevisto(fluxo, meses) {
+  if (!Number.isFinite(meses)) return { texto: "nunca", anos: Infinity };
+  const ref = refDeNum(fluxo.ultimo + Math.ceil(meses));
+  return { texto: ref.slice(0, 4), anos: meses / 12 };
+}
+
+function renderizarTendencia() {
+  const fluxo = analisarFluxo();
+  if (!fluxo.turmas.length) return;
+  const { cenarios, turmas, intervalos, totalAtual, ultimo } = fluxo;
+  const refAtual = fmtMes(refDeNum(ultimo));
+  const [recente, historico, pior] = cenarios;
+
+  document.getElementById("m-limiar").textContent = LIMIAR_ENTRADA;
+  document.getElementById("tendencia-desc").textContent =
+    `Fora dos meses de concurso, o total de ATIs só cai. Hoje a carreira perde cerca de ${fmtPct1.format(anual(recente.taxa))} ao ano ` +
+    `(${fmtInt.format(Math.round(totalAtual * anual(recente.taxa)))} ATIs por ano sobre os ${fmtInt.format(totalAtual)} de ${refAtual}). ` +
+    "A projeção mostra para onde o total iria se nenhuma turma nova entrasse.";
+
+  graficoProjecao("g-projecao", fluxo);
+  document.getElementById("proj-sub").textContent =
+    `Linha cheia: total real. Tracejadas: projeção a partir de ${refAtual}, sem novas entradas, com a taxa de saída de cada período. ` +
+    "Linhas pontilhadas: total antes das duas últimas entradas de turma.";
+  document.getElementById("proj-nota").textContent =
+    `Taxas de saída líquida por ano: ${cenarios.map((c) => `${c.nome.toLowerCase()}, ${fmtPct1.format(anual(c.taxa))}`).join("; ")}.`;
+
+  // Retorno ao nível de antes de cada uma das duas últimas turmas.
+  const refs = turmas.slice(-2).reverse();
+  const tRet = document.getElementById("t-retorno");
+  tRet.innerHTML = `<thead><tr><th>Cenário</th>${refs.map((t) =>
+    `<th class="num">Voltar a ${fmtInt.format(t.antes)}<small>antes de ${fmtMes(refDeNum(t.ini))}</small></th>`).join("")}</tr></thead>`;
+  const corpo = tRet.createTBody();
+  for (const c of cenarios) {
+    const tr = corpo.insertRow();
+    tr.insertCell().innerHTML = `<span class="cenario" style="background:${cor(c.cor)}"></span>${escapar(c.nome)}<small>${fmtPct1.format(anual(c.taxa))} ao ano</small>`;
+    for (const t of refs) {
+      const p = anoPrevisto(fluxo, mesesAte(totalAtual, t.antes, c.taxa));
+      const td = tr.insertCell();
+      td.className = "num";
+      td.innerHTML = Number.isFinite(p.anos)
+        ? `<strong>${p.texto}</strong><small>em ${fmtInt.format(Math.round(p.anos))} ${Math.round(p.anos) === 1 ? "ano" : "anos"}</small>`
+        : "nunca";
+    }
+  }
+
+  const tInt = document.getElementById("t-intervalos");
+  tInt.innerHTML = '<thead><tr><th>Turma</th><th class="num">Entraram</th><th class="num">Meses sem entrada</th><th class="num">Saldo perdido</th><th class="num">% da turma</th></tr></thead>';
+  const corpoInt = tInt.createTBody();
+  for (const it of intervalos) {
+    const tr = corpoInt.insertRow();
+    // Turma com menos de 6 meses: o saldo ainda mistura nomeações tardias e não diz nada.
+    const curto = it.meses < 6;
+    const periodo = curto ? "acabou de entrar"
+      : `${fmtMes(refDeNum(it.turma.fim + 1))} a ${fmtMes(refDeNum(it.fim))}${it.emAndamento ? " (em andamento)" : ""}`;
+    tr.insertCell().innerHTML = `${fmtMes(refDeNum(it.turma.ini))}<small>${periodo}</small>`;
+    for (const v of [fmtInt.format(it.turma.entrada), fmtInt.format(it.meses),
+      curto ? "–" : fmtInt.format(it.perda), curto ? "–" : fmtPct.format(it.perda / it.turma.entrada)]) {
+      const td = tr.insertCell(); td.className = "num"; td.textContent = v;
+    }
+  }
+}
+
 // ---------------------------------------------------------------- render
 
 function renderizar() {
@@ -603,6 +798,8 @@ function renderizar() {
   linhaHistorica("g-hist-total", serieTotal, "--geral", (v) => fmtInt.format(v), { zero: true, degraus: true, selecionado });
   document.getElementById("hist-total-sub").textContent =
     ["Os números marcam meses com entrada de 30 ou mais ATIs; a linha vertical é o mês selecionado.", lacunas(serieTotal)].join(" ").trim();
+
+  renderizarTendencia();
 
   // Onde trabalham
   const lot = d.por_orgao_lotacao[0];
