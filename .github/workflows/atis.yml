@@ -1,4 +1,4 @@
-name: Dados ATI
+name: Dados das carreiras
 
 on:
   schedule:
@@ -28,6 +28,14 @@ on:
         description: "Ano com 4 dígitos (obrigatório com mês específico ou 'ano inteiro')"
         type: string
         default: ""
+      carreira:
+        description: "Carreira (padrão: todas de data/carreiras.json)"
+        type: choice
+        default: todas
+        options:
+          - todas
+          - ati
+          - atps
       force:
         description: "Reprocessar o mês mesmo se já existir"
         type: boolean
@@ -63,6 +71,7 @@ jobs:
           MES: ${{ inputs.mes }}
           ANO: ${{ inputs.ano }}
           FORCE: ${{ inputs.force }}
+          CARREIRA: ${{ inputs.carreira }}
         run: |
           args=()
           if [ -n "$MES" ] && [ "$MES" != "mais recente" ]; then
@@ -80,7 +89,8 @@ jobs:
             exit 1
           fi
           [ "$FORCE" = "true" ] && args+=(--force)
-          python scripts/gerar_atis.py "${args[@]}"
+          [ -n "$CARREIRA" ] && [ "$CARREIRA" != "todas" ] && args+=(--carreira "$CARREIRA")
+          python scripts/gerar_dados.py "${args[@]}"
 
       - name: Commitar data/ se houver mudança
         # Roda mesmo se um mês falhou no modo "ano inteiro", para guardar os que deram certo.
@@ -90,12 +100,13 @@ jobs:
           if git diff --cached --quiet; then
             echo "Sem mudanças em data/."
           else
-            # Meses alterados neste run (ex.: "2026-03"), não necessariamente o mais recente.
-            refs=$(git diff --cached --name-only -- 'data/[0-9]*.json' \
-              | sed -E 's#data/([0-9]{4})([0-9]{2})\.json#\1-\2#' | paste -sd ' ' -)
+            # Meses e carreiras alterados neste run (ex.: "dados 2026-03 (ati,atps)").
+            alterados=$(git diff --cached --name-only -- 'data/*/[0-9]*.json')
+            refs=$(echo "$alterados" | sed -nE 's#^data/[^/]+/([0-9]{4})([0-9]{2})\.json$#\1-\2#p' | sort -u | paste -sd ' ' -)
+            carreiras=$(echo "$alterados" | sed -nE 's#^data/([^/]+)/.*#\1#p' | sort -u | paste -sd ',' -)
             git config user.name "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git commit -m "dados ATI ${refs:-índice}"
+            git commit -m "dados ${refs:-índice}${carreiras:+ ($carreiras)}"
             git push
           fi
 
@@ -103,7 +114,7 @@ jobs:
         run: |
           cp -r data site/data
           # Versiona JS/CSS pelo commit para o navegador não misturar versões em cache.
-          sed -i "s/app\.js\"/app.js?v=${GITHUB_SHA::7}\"/; s/style\.css\"/style.css?v=${GITHUB_SHA::7}\"/" site/index.html
+          sed -i "s/app\.js\"/app.js?v=${GITHUB_SHA::7}\"/; s/style\.css\"/style.css?v=${GITHUB_SHA::7}\"/" site/*.html
 
       - uses: actions/configure-pages@v5
 

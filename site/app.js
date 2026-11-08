@@ -1,6 +1,13 @@
 "use strict";
 
 const BASE_DADOS = "data/";
+// Carreira do painel: ?carreira=atps (padrão: ati). Configuração em data/carreiras.json.
+let SLUG = new URLSearchParams(location.search).get("carreira") || "ati";
+let P = "ATIs"; // plural da sigla, usado nos textos
+const FAVICON_NEUTRO = "data:image/svg+xml," + encodeURIComponent(
+  '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="#0D2B5C"/>' +
+  '<rect x="14" y="34" width="8" height="16" rx="2" fill="#fff"/><rect x="28" y="24" width="8" height="26" rx="2" fill="#fff"/>' +
+  '<rect x="42" y="14" width="8" height="36" rx="2" fill="#F4C400"/></svg>');
 const TOP_ORGAOS = 15;
 
 const fmtInt = new Intl.NumberFormat("pt-BR");
@@ -102,7 +109,7 @@ function grafico(id, opcoes) {
 }
 
 // itens: [{ nome, qtd, completo? }]
-function barrasHorizontais(id, itens, corVar, rotulo = "ATIs") {
+function barrasHorizontais(id, itens, corVar, rotulo = P) {
   const larguraRotulo = estreito() ? 120 : 200;
   const ordenados = [...itens].reverse();
   // Altura proporcional ao número de barras, para listas curtas não sobrarem vazias.
@@ -255,7 +262,7 @@ function histogramaFaixas(id, rem) {
     return faixas.length;
   };
   grafico(id, {
-    tooltip: { ...temaBase().tooltip, trigger: "item", formatter: (p) => `${nomes[p.dataIndex]}<br><b>${fmtInt.format(p.value)}</b> ATIs` },
+    tooltip: { ...temaBase().tooltip, trigger: "item", formatter: (p) => `${nomes[p.dataIndex]}<br><b>${fmtInt.format(p.value)}</b> ${P}` },
     xAxis: [
       eixoCategoria(curtos, { name: "R$ mil", nameLocation: "middle", nameTextStyle: { color: cor("--texto-3") },
         nameGap: estreito() ? 52 : 28,
@@ -294,7 +301,7 @@ function histogramaFaixas(id, rem) {
       },
     ],
   });
-  tabela(id, ["Faixa", "ATIs"], nomes.map((n, i) => [n, fmtInt.format(faixas[i].qtd)]));
+  tabela(id, ["Faixa", P], nomes.map((n, i) => [n, fmtInt.format(faixas[i].qtd)]));
 }
 
 function mapaClassePadrao(id, itens) {
@@ -312,7 +319,7 @@ function mapaClassePadrao(id, itens) {
   }));
   grafico(id, {
     tooltip: { ...temaBase().tooltip, trigger: "item",
-      formatter: (p) => `Classe ${classes[p.value[1]]}, padrão ${padroes[p.value[0]]}<br><b>${fmtInt.format(p.value[2])}</b> ATIs` },
+      formatter: (p) => `Classe ${classes[p.value[1]]}, padrão ${padroes[p.value[0]]}<br><b>${fmtInt.format(p.value[2])}</b> ${P}` },
     grid: { ...temaBase().grid, right: 8, bottom: 24 },
     xAxis: eixoCategoria(padroes, { name: "Padrão", nameLocation: "middle", nameGap: 28, nameTextStyle: { color: cor("--texto-3") } }),
     yAxis: [
@@ -328,7 +335,7 @@ function mapaClassePadrao(id, itens) {
       label: { show: true, formatter: (p) => fmtInt.format(p.value[2]), fontWeight: 600 },
     }],
   });
-  tabela(id, ["Classe", "Padrão", "ATIs"], itens.map((d) => [d.classe, d.padrao, fmtInt.format(d.qtd)]));
+  tabela(id, ["Classe", "Padrão", P], itens.map((d) => [d.classe, d.padrao, fmtInt.format(d.qtd)]));
 }
 
 function rgb(hex) {
@@ -418,7 +425,7 @@ function atualizarLegenda(max) {
     options: { position: "bottomleft" },
     onAdd() {
       const div = L.DomUtil.create("div", "legenda-bolhas");
-      div.innerHTML = "ATIs por local<div class='itens'>" + exemplos.map((v) => {
+      div.innerHTML = `${P} por local<div class='itens'>` + exemplos.map((v) => {
         const d = diametro(v, max);
         return `<div class="item"><span class="circulo" style="width:${d}px;height:${d}px"></span>${fmtInt.format(v)}</div>`;
       }).join("") + "</div>";
@@ -464,9 +471,9 @@ function mapaOrgaos(orgaos) {
       `<tr><td title="${escapar(o.completo)}"><strong>${escapar(o.sigla || o.curto)}</strong> ${o.sigla && o.curto !== o.sigla ? escapar(o.curto) : ""}</td>` +
       `<td class="num">${fmtInt.format(o.qtd)}</td></tr>`).join("");
     const aviso = l.precisao === "edificio" ? "" : `<p class="popup-aviso">Localização aproximada (${l.precisao === "rua" ? "rua" : "quadra"}).</p>`;
-    L.marker([l.lat, l.lon], { icon: iconeBolha(l.qtd, max), qtd: l.qtd, title: `${l.local}: ${l.qtd} ATIs`, riseOnHover: true })
+    L.marker([l.lat, l.lon], { icon: iconeBolha(l.qtd, max), qtd: l.qtd, title: `${l.local}: ${l.qtd} ${P}`, riseOnHover: true })
       .bindPopup(`<strong>${escapar(l.local)}</strong><table>${linhas}</table>` +
-        (l.orgaos.length > 1 ? `<p class="popup-total">${fmtInt.format(l.qtd)} ATIs no prédio</p>` : "") + aviso)
+        (l.orgaos.length > 1 ? `<p class="popup-total">${fmtInt.format(l.qtd)} ${P} no prédio</p>` : "") + aviso)
       .addTo(camadaBolhas);
   }
   camadaBolhas.addTo(mapa);
@@ -482,12 +489,12 @@ function mapaOrgaos(orgaos) {
 
   const fora = [...locais.values()].filter((l) => !DF.contains([l.lat, l.lon])).reduce((s, l) => s + l.qtd, 0);
   const partes = [];
-  if (fora) partes.push(`${fmtInt.format(fora)} ATIs em órgãos com sede fora do DF: use o botão “Brasil” para vê-los.`);
+  if (fora) partes.push(`${fmtInt.format(fora)} ${P} em órgãos com sede fora do DF: use o botão “Brasil” para vê-los.`);
   if (semLocal) partes.push(`${fmtInt.format(semLocal)} sem localização: ${semLocalNomes.join(", ")}.`);
   partes.push("A posição é a da sede do órgão; o servidor pode trabalhar em um anexo ou unidade regional.");
   document.getElementById("mapa-nota").textContent = partes.join(" ");
 
-  tabela("mapa-orgaos", ["Local", "Órgãos", "ATIs"], [...locais.values()].sort((a, b) => b.qtd - a.qtd)
+  tabela("mapa-orgaos", ["Local", "Órgãos", P], [...locais.values()].sort((a, b) => b.qtd - a.qtd)
     .map((l) => [l.local, l.orgaos.map((o) => o.sigla || o.curto).join(", "), fmtInt.format(l.qtd)]));
 }
 
@@ -530,17 +537,17 @@ function destaques(d, ant) {
     const dif = d.total - ant.total;
     if (dif > 0) {
       const recorde = dif === maiorAltaMensal() ? ", a maior alta mensal da série" : "";
-      itens.push(["geral", `<strong>${fmtInt.format(dif)} ATIs a mais</strong> que em ${refAnt}${recorde}.`]);
+      itens.push(["geral", `<strong>${fmtInt.format(dif)} ${P} a mais</strong> que em ${refAnt}${recorde}.`]);
     } else if (dif < 0) {
-      itens.push(["geral", `<strong>${fmtInt.format(-dif)} ATIs a menos</strong> que em ${refAnt}.`]);
+      itens.push(["geral", `<strong>${fmtInt.format(-dif)} ${P} a menos</strong> que em ${refAnt}.`]);
     } else {
-      itens.push(["geral", `Total estável em relação a ${refAnt}: <strong>${fmtInt.format(d.total)} ATIs</strong>.`]);
+      itens.push(["geral", `Total estável em relação a ${refAnt}: <strong>${fmtInt.format(d.total)} ${P}</strong>.`]);
     }
   }
 
   const ai = inicioCarreira(d);
   const aiAnt = ant ? inicioCarreira(ant) : null;
-  itens.push(["carreira", `<strong>${fmtInt.format(ai)} ATIs (${fmtPct.format(ai / d.total)})</strong> estão no início da carreira, classe A, padrão I` +
+  itens.push(["carreira", `<strong>${fmtInt.format(ai)} ${P} (${fmtPct.format(ai / d.total)})</strong> estão no início da carreira, classe A, padrão I` +
     (aiAnt !== null && aiAnt !== ai ? ` (eram ${fmtInt.format(aiAnt)} em ${refAnt}).` : ".")]);
 
   const med = d.remuneracao_basica_bruta.mediana;
@@ -548,10 +555,10 @@ function destaques(d, ant) {
   if (medAnt && Math.abs(med - medAnt) >= 100) {
     const verbo = med < medAnt ? "caiu" : "subiu";
     const contexto = med < medAnt && aiAnt !== null && ai > aiAnt
-      ? ", no mesmo período em que cresceu o número de ATIs no início da carreira" : "";
+      ? `, no mesmo período em que cresceu o número de ${P} no início da carreira` : "";
     itens.push(["remuneracao", `A mediana da remuneração básica bruta ${verbo} de <strong>${fmtMil(medAnt)}</strong> para <strong>${fmtMil(med)}</strong>${contexto}.`]);
   } else {
-    itens.push(["remuneracao", `Metade dos ATIs recebe até <strong>${fmtMil(med)}</strong> de remuneração básica bruta.`]);
+    itens.push(["remuneracao", `Metade dos ${P} recebe até <strong>${fmtMil(med)}</strong> de remuneração básica bruta.`]);
   }
 
   const [maior, ...demais] = d.por_orgao_exercicio;
@@ -708,17 +715,23 @@ function anoPrevisto(fluxo, meses) {
   return { texto: ref.slice(0, 4), anos: meses / 12 };
 }
 
+// Abaixo disso não há como medir saídas nem turmas (ex.: carreira recém-incluída).
+const MESES_MINIMOS_TENDENCIA = 24;
+
 function renderizarTendencia() {
   const fluxo = analisarFluxo();
-  if (!fluxo.turmas.length) return;
+  const suficiente = indice.meses.length >= MESES_MINIMOS_TENDENCIA && fluxo.turmas.length > 0;
+  document.getElementById("s-tendencia").hidden = !suficiente;
+  document.querySelector('.barra-nav a[href="#s-tendencia"]').hidden = !suficiente;
+  if (!suficiente) return;
   const { cenarios, turmas, intervalos, totalAtual, ultimo } = fluxo;
   const refAtual = fmtMes(refDeNum(ultimo));
   const [recente, historico, pior] = cenarios;
 
   document.getElementById("m-limiar").textContent = LIMIAR_ENTRADA;
   document.getElementById("tendencia-desc").textContent =
-    `Fora dos meses de concurso, o total de ATIs só cai. Hoje a carreira perde cerca de ${fmtPct1.format(anual(recente.taxa))} ao ano ` +
-    `(${fmtInt.format(Math.round(totalAtual * anual(recente.taxa)))} ATIs por ano sobre os ${fmtInt.format(totalAtual)} de ${refAtual}). ` +
+    `Fora dos meses de concurso, o total de ${P} só cai. Hoje a carreira perde cerca de ${fmtPct1.format(anual(recente.taxa))} ao ano ` +
+    `(${fmtInt.format(Math.round(totalAtual * anual(recente.taxa)))} ${P} por ano sobre os ${fmtInt.format(totalAtual)} de ${refAtual}). ` +
     "A projeção mostra para onde o total iria se nenhuma turma nova entrasse.";
 
   graficoProjecao("g-projecao", fluxo);
@@ -803,7 +816,7 @@ function renderizar() {
   const lot = d.por_orgao_lotacao[0];
   const orgLot = lot && orgao(lot.nome);
   document.getElementById("onde-desc").textContent = lot
-    ? `A carreira é centralizada: ${fmtInt.format(lot.qtd)} dos ${fmtInt.format(d.total)} ATIs estão lotados ${orgLot.sigla ? `no ${orgLot.sigla}` : `em ${orgLot.curto}`} e têm exercício em ${fmtInt.format(d.por_orgao_exercicio.length)} órgãos.`
+    ? `A carreira é centralizada: ${fmtInt.format(lot.qtd)} dos ${fmtInt.format(d.total)} ${P} estão lotados ${orgLot.sigla ? `no ${orgLot.sigla}` : `em ${orgLot.curto}`} e têm exercício em ${fmtInt.format(d.por_orgao_exercicio.length)} órgãos.`
     : "";
   mapaOrgaos(d.por_orgao_exercicio);
   barrasHorizontais("g-exercicio", topComOutros(d.por_orgao_exercicio, TOP_ORGAOS).map((o) => {
@@ -818,17 +831,17 @@ function renderizar() {
   mapaClassePadrao("g-classe", d.por_classe_padrao);
   barrasHorizontais("g-funcao", d.funcao.por_sigla, "--carreira");
   document.getElementById("funcao-sub").textContent =
-    `${fmtInt.format(d.funcao.com_funcao)} ATIs (${fmtPct.format(d.funcao.com_funcao / d.total)}) ocupam função ou cargo comissionado, por tipo`;
+    `${fmtInt.format(d.funcao.com_funcao)} ${P} (${fmtPct.format(d.funcao.com_funcao / d.total)}) ocupam função ou cargo comissionado, por tipo`;
 
   // Remuneração
   histogramaFaixas("g-faixas", rem);
-  document.getElementById("hist-sub").textContent = `${fmtInt.format(rem.n)} ATIs; linha na mediana e faixa sombreada entre P10 e P90`;
+  document.getElementById("hist-sub").textContent = `${fmtInt.format(rem.n)} ${P}; linha na mediana e faixa sombreada entre P10 e P90`;
   linhaHistorica("g-hist-mediana", serieMediana, "--remuneracao", fmtMil, { selecionado });
   document.getElementById("hist-mediana-sub").textContent =
     ["Valores nominais, sem correção pela inflação.", lacunas(serieMediana)].join(" ").trim();
 
   for (const el of document.querySelectorAll("[data-ref]")) el.textContent = fmtMes(d.referencia);
-  document.getElementById("barra-numeros").textContent = `${fmtInt.format(d.total)} ATIs · mediana ${fmtMil(rem.mediana)}`;
+  document.getElementById("barra-numeros").textContent = `${fmtInt.format(d.total)} ${P} · mediana ${fmtMil(rem.mediana)}`;
   document.getElementById("gerado").textContent = new Date(d.gerado_em).toLocaleDateString("pt-BR");
   document.getElementById("filtro").textContent = d.filtro_cargo;
   document.getElementById("fonte").href = d.fonte.url;
@@ -842,10 +855,12 @@ async function json(caminho) {
   return r.json();
 }
 
+const dadosCarreira = (arquivo) => json(`${SLUG}/${arquivo}`);
+
 async function carregarMes(arquivo) {
   const pos = indice.meses.findIndex((m) => m.arquivo === arquivo);
   const arqAnt = pos > 0 ? indice.meses[pos - 1].arquivo : null;
-  [atual, anterior] = await Promise.all([json(arquivo), arqAnt ? json(arqAnt) : null]);
+  [atual, anterior] = await Promise.all([dadosCarreira(arquivo), arqAnt ? dadosCarreira(arqAnt) : null]);
   renderizar();
 }
 
@@ -856,10 +871,30 @@ function mostrarErro(e) {
   console.error(e);
 }
 
+// Nome, sigla e identidade visual da carreira escolhida.
+function aplicarCarreira(carreiras) {
+  const c = carreiras[SLUG];
+  P = c.plural;
+  document.title = `Painel ${c.sigla}`;
+  document.documentElement.dataset.marca = c.marca;
+  for (const el of document.querySelectorAll("[data-sigla]")) el.textContent = c.sigla;
+  for (const el of document.querySelectorAll("[data-plural]")) el.textContent = c.plural;
+  for (const el of document.querySelectorAll("[data-nome-plural]")) el.textContent = c.nome_plural;
+  if (c.marca !== "ati") document.getElementById("favicon").href = FAVICON_NEUTRO;
+
+  const sel = document.getElementById("carreira");
+  for (const [slug, cfg] of Object.entries(carreiras)) sel.add(new Option(cfg.sigla, slug));
+  sel.value = SLUG;
+  sel.addEventListener("change", () => { location.search = `?carreira=${sel.value}`; });
+}
+
 async function iniciar() {
   if (typeof echarts === "undefined") throw new Error("biblioteca de gráficos não carregou");
   if (typeof L === "undefined") throw new Error("biblioteca de mapas não carregou");
-  [indice] = await Promise.all([json("index.json"), carregarCoordenadas()]);
+  const carreiras = await json("carreiras.json");
+  if (!carreiras[SLUG]) SLUG = Object.keys(carreiras)[0];
+  aplicarCarreira(carreiras);
+  [indice] = await Promise.all([dadosCarreira("index.json"), carregarCoordenadas()]);
   // Os seletores existem no cabeçalho e na barra fixa; ficam sempre sincronizados.
   const selAnos = [...document.querySelectorAll('select[data-campo="ano"]')];
   const selMeses = [...document.querySelectorAll('select[data-campo="mes"]')];

@@ -1,0 +1,18 @@
+{
+  "ati": {
+    "sigla": "ATI",
+    "plural": "ATIs",
+    "nome": "Analista em Tecnologia da Informação",
+    "padrao_cargo": "^ANALISTA EM TECNOL(OGIA)? DA INFORMACAO$",
+    "marca": "ati",
+    "nome_plural": "Analistas em Tecnologia da Informação"
+  },
+  "atps": {
+    "sigla": "ATPS",
+    "plural": "ATPS",
+    "nome": "Analista Técnico de Políticas Sociais",
+    "padrao_cargo": "^ANALISTA TECN(ICO)? (EM|DE) POLITICAS SOCIAIS$",
+    "marca": "neutra",
+    "nome_plural": "Analistas Técnicos de Políticas Sociais"
+  }
+}

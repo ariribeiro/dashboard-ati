@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Painel de carreiras</title>
+  <meta name="description" content="Dados agregados de carreiras do Executivo Federal: quantos são, onde trabalham, carreira e remuneração.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Painel de carreiras do Executivo Federal">
+  <meta property="og:description" content="Quantos são, onde trabalham, carreira e remuneração. Dados do Portal da Transparência, atualizados todo mês.">
+  <meta property="og:url" content="https://ariribeiro.github.io/dashboard-ati/painel.html">
+  <meta property="og:image" content="https://ariribeiro.github.io/dashboard-ati/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" id="favicon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-14 -10 192 160'%3E%3Crect x='-14' y='-10' width='192' height='160' rx='32' fill='%23fff'/%3E%3Cpath d='M60 0H92L152 130H114L76 44L46 112H8Z' fill='%230D2B5C'/%3E%3Cg stroke='%23fff' stroke-width='6' paint-order='stroke'%3E%3Cpath d='M2 120C34 90 100 80 156 94C106 102 50 112 14 134Z' fill='%230A8F45'/%3E%3Cpath d='M20 138C56 116 110 106 162 110C114 118 66 128 44 140Z' fill='%23F4C400'/%3E%3C/g%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&display=swap">
+  <link rel="stylesheet" href="style.css">
+  <script>
+    try { const t = localStorage.getItem("tema"); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
+    // Evita piscar o logo da ATI em carreiras sem marca própria (confirmado depois por data/carreiras.json).
+    if ((new URLSearchParams(location.search).get("carreira") || "ati") !== "ati") document.documentElement.dataset.marca = "neutra";
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.6.0/echarts.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.3/MarkerCluster.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.3/leaflet.markercluster.js"></script>
+</head>
+<body>
+  <div class="barra" id="barra" inert>
+    <div class="barra-conteudo">
+      <a class="barra-titulo" href="#"><svg class="marca-ati" viewBox="-2 -2 168 144" aria-hidden="true"><g fill="currentColor"><path d="M60 0H92L152 130H114L76 44L46 112H8Z"/></g><g style="stroke: var(--superficie)" stroke-width="6" paint-order="stroke" stroke-linejoin="round"><path d="M2 120C34 90 100 80 156 94C106 102 50 112 14 134Z" fill="#0A8F45"/><path d="M20 138C56 116 110 106 162 110C114 118 66 128 44 140Z" fill="#F4C400"/></g></svg>Painel <span data-sigla>ATI</span></a>
+      <span class="barra-resumo"><strong data-ref>–</strong><span class="barra-numeros" id="barra-numeros"></span></span>
+      <nav class="barra-nav" aria-label="Seções">
+        <a href="#s-geral" data-secao="geral">Visão geral</a>
+        <a href="#s-tendencia" data-secao="geral">Tendência</a>
+        <a href="#s-onde" data-secao="onde">Onde trabalham</a>
+        <a href="#s-carreira" data-secao="carreira">Carreira</a>
+        <a href="#s-remuneracao" data-secao="remuneracao">Remuneração</a>
+      </nav>
+      <div class="barra-controles">
+        <select data-campo="mes" aria-label="Mês de referência" title="Mês de referência"></select>
+        <select data-campo="ano" aria-label="Ano de referência" title="Ano de referência"></select>
+      </div>
+    </div>
+  </div>
+
+  <header class="topo">
+    <div class="topo-conteudo">
+      <div class="marca-bloco">
+        <span class="logo-texto marca-neutra" data-sigla aria-hidden="true">ATI</span>
+        <svg class="logo-ati marca-ati" viewBox="-2 -2 310 144" role="img" aria-label="ATI — Analista em Tecnologia da Informação"><g fill="#fff"><path d="M60 0H92L152 130H114L76 44L46 112H8Z"/><path d="M160 0H266V28H227V130H199V28H160Z"/><rect x="276" y="0" width="29" height="130"/></g><g stroke="#0D2B5C" stroke-width="5" paint-order="stroke" stroke-linejoin="round"><path d="M2 120C34 90 100 80 156 94C106 102 50 112 14 134Z" fill="#0A8F45"/><path d="M20 138C56 116 110 106 162 110C114 118 66 128 44 140Z" fill="#F4C400"/></g></svg>
+        <div class="marca-texto">
+          <p class="sobretitulo marca-ati">Tecnologia que transforma. Estado que avança.</p>
+          <p class="sobretitulo marca-neutra">Executivo Federal · Carreira <span data-sigla>ATI</span></p>
+          <h1 data-nome-plural>Analistas em Tecnologia da Informação</h1>
+          <p class="sub">Quantos são, onde trabalham, como está a carreira e quanto recebem, com dados agregados do SIAPE.</p>
+        </div>
+      </div>
+      <div class="controles">
+        <label class="sr" for="carreira">Carreira</label>
+        <select id="carreira" title="Carreira"></select>
+        <span class="selo">Dados de <strong data-ref>–</strong></span>
+        <label class="sr" for="mes">Mês de referência</label>
+        <select id="mes" data-campo="mes" title="Mês de referência"></select>
+        <label class="sr" for="ano">Ano de referência</label>
+        <select id="ano" data-campo="ano" title="Ano de referência"></select>
+        <button id="tema" type="button" aria-label="Alternar modo claro/escuro" title="Alternar modo claro/escuro">◐</button>
+      </div>
+    </div>
+    <div class="faixa-marca" aria-hidden="true"><span></span><span></span><span></span></div>
+  </header>
+
+  <main>
+    <p id="erro" class="erro" hidden></p>
+
+    <section class="secao" id="s-geral" data-secao="geral" aria-labelledby="t-geral">
+      <div class="secao-cabecalho">
+        <h2 id="t-geral">Visão geral</h2>
+      </div>
+
+      <div class="cards">
+        <div class="card" data-tema="geral">
+          <span class="rotulo"><span data-plural>ATIs</span> ativos</span>
+          <span class="valor destaque" id="c-total">–</span>
+          <span class="delta" id="c-total-delta"></span>
+          <span class="detalhe" id="c-situacao"></span>
+          <div class="spark" id="s-total" aria-hidden="true"></div>
+        </div>
+        <div class="card" data-tema="remuneracao">
+          <span class="rotulo">Remuneração básica bruta mediana</span>
+          <span class="valor" id="c-mediana">–</span>
+          <span class="delta" id="c-mediana-delta"></span>
+          <span class="detalhe" id="c-media"></span>
+          <div class="spark" id="s-mediana" aria-hidden="true"></div>
+        </div>
+        <div class="card" data-tema="remuneracao">
+          <span class="rotulo">Faixa entre P10 e P90</span>
+          <span class="valor valor-menor" id="c-faixa">–</span>
+          <span class="detalhe" id="c-n"></span>
+        </div>
+        <div class="card" data-tema="carreira">
+          <span class="rotulo">Com função ou cargo comissionado</span>
+          <span class="valor" id="c-funcao">–</span>
+          <span class="detalhe" id="c-funcao-pct"></span>
+        </div>
+      </div>
+
+      <div class="grade">
+        <div class="painel destaques">
+          <h3>Destaques do mês</h3>
+          <ul id="destaques"></ul>
+        </div>
+        <figure class="painel">
+          <figcaption><h3>Total de <span data-plural>ATIs</span> por mês</h3><p id="hist-total-sub"></p></figcaption>
+          <div class="grafico" id="g-hist-total"></div>
+        </figure>
+      </div>
+    </section>
+
+    <section class="secao" id="s-tendencia" data-secao="geral" aria-labelledby="t-tendencia">
+      <div class="secao-cabecalho">
+        <h2 id="t-tendencia">Tendência sem novos concursos</h2>
+        <p id="tendencia-desc"></p>
+      </div>
+
+      <figure class="painel">
+        <figcaption>
+          <h3>Projeção do total de <span data-plural>ATIs</span></h3>
+          <p id="proj-sub"></p>
+        </figcaption>
+        <div class="grafico grafico-alto" id="g-projecao"></div>
+        <p class="nota" id="proj-nota"></p>
+      </figure>
+
+      <div class="grade">
+        <div class="painel">
+          <h3>Quando as saídas anulam as entradas</h3>
+          <p class="painel-sub">Ano em que o total voltaria ao nível de antes de cada entrada de turma, se ninguém mais entrar.</p>
+          <div class="tabela-rolagem"><table class="tabela-fixa" id="t-retorno"></table></div>
+        </div>
+        <div class="painel">
+          <h3>O que aconteceu entre um concurso e outro</h3>
+          <p class="painel-sub">Perda líquida de <span data-plural>ATIs</span> nos meses sem entrada, comparada com o tamanho da turma que tinha acabado de entrar.</p>
+          <div class="tabela-rolagem"><table class="tabela-fixa" id="t-intervalos"></table></div>
+        </div>
+      </div>
+
+      <details class="metodo">
+        <summary>Como a projeção é feita e o que ela não considera</summary>
+        <ul>
+          <li>Um mês com alta de <span id="m-limiar">10</span> ou mais <span data-plural>ATIs</span> é tratado como mês de entrada de turma. Todos os outros meses servem para medir a <strong>taxa de saída líquida</strong>: quantos <span data-plural>ATIs</span> a carreira perde por mês, em proporção ao total do mês anterior.</li>
+          <li>A projeção aplica essa taxa ao total mais recente, mês a mês, sem novas entradas. Como a taxa é proporcional, a perda em números absolutos diminui conforme o total cai.</li>
+          <li>Os três cenários usam a taxa de períodos diferentes: os últimos 5 anos, toda a série e a pior janela de 24 meses já registrada.</li>
+          <li>O SIAPE só permite ver o saldo de cada mês, não quem entrou e quem saiu. Nos meses de entrada de turma, as saídas ficam escondidas no saldo, então a taxa pode estar um pouco subestimada.</li>
+          <li>Conta como saída tudo o que tira o servidor do cargo: exoneração (inclusive posse em outro concurso), aposentadoria, falecimento. A projeção não sabe o motivo.</li>
+          <li>Não considera crescimento da demanda por TI, criação de vagas, nem mudanças de remuneração ou de regras da carreira que possam mudar o ritmo de saída.</li>
+        </ul>
+      </details>
+    </section>
+
+    <section class="secao" id="s-onde" data-secao="onde" aria-labelledby="t-onde">
+      <div class="secao-cabecalho">
+        <h2 id="t-onde">Onde trabalham</h2>
+        <p id="onde-desc"></p>
+      </div>
+
+      <figure class="painel">
+        <figcaption>
+          <h3>Sede dos órgãos de exercício</h3>
+          <p>Cada bolinha mostra quantos <span data-plural>ATIs</span> têm exercício no órgão (ou no prédio que vários órgãos dividem). Clique para ver os órgãos; as de borda tracejada juntam prédios próximos e se abrem ao clicar.</p>
+        </figcaption>
+        <div class="mapa-orgaos" id="mapa-orgaos" role="region" aria-label="Mapa de órgãos de exercício"></div>
+        <p class="nota" id="mapa-nota"></p>
+      </figure>
+
+      <div class="grade">
+        <figure class="painel">
+          <figcaption><h3>Órgão de exercício</h3><p>15 maiores; os demais somados em “Outros”</p></figcaption>
+          <div class="grafico" id="g-exercicio"></div>
+        </figure>
+        <figure class="painel">
+          <figcaption><h3>UF de exercício</h3><p id="uf-sub"></p></figcaption>
+          <div class="grafico" id="g-uf"></div>
+        </figure>
+      </div>
+    </section>
+
+    <section class="secao" id="s-carreira" data-secao="carreira" aria-labelledby="t-carreira">
+      <div class="secao-cabecalho">
+        <h2 id="t-carreira">Carreira</h2>
+        <p>A carreira tem três classes (A, B e C), cada uma dividida em padrões. O ingresso acontece na classe A, padrão I.</p>
+      </div>
+      <div class="grade">
+        <figure class="painel">
+          <figcaption><h3>Classe e padrão</h3><p><span data-plural>ATIs</span> em cada posição da carreira, com o total por classe à direita</p></figcaption>
+          <div class="grafico" id="g-classe"></div>
+        </figure>
+        <figure class="painel">
+          <figcaption><h3>Funções e cargos comissionados</h3><p id="funcao-sub"></p></figcaption>
+          <div class="grafico" id="g-funcao"></div>
+        </figure>
+      </div>
+    </section>
+
+    <section class="secao" id="s-remuneracao" data-secao="remuneracao" aria-labelledby="t-remuneracao">
+      <div class="secao-cabecalho">
+        <h2 id="t-remuneracao">Remuneração</h2>
+        <p>Remuneração básica bruta do mês, antes de descontos e sem verbas indenizatórias. Considera apenas quem recebeu valor maior que zero.</p>
+      </div>
+      <div class="grade">
+        <figure class="painel">
+          <figcaption><h3>Distribuição por faixa</h3><p id="hist-sub"></p></figcaption>
+          <div class="grafico" id="g-faixas"></div>
+        </figure>
+        <figure class="painel">
+          <figcaption><h3>Mediana por mês</h3><p id="hist-mediana-sub"></p></figcaption>
+          <div class="grafico" id="g-hist-mediana"></div>
+        </figure>
+      </div>
+    </section>
+  </main>
+
+  <footer class="rodape">
+    <div class="rodape-marca marca-ati"><svg viewBox="-2 -2 168 144" aria-hidden="true"><g fill="currentColor"><path d="M60 0H92L152 130H114L76 44L46 112H8Z"/></g><g style="stroke: var(--superficie)" stroke-width="6" paint-order="stroke" stroke-linejoin="round"><path d="M2 120C34 90 100 80 156 94C106 102 50 112 14 134Z" fill="#0A8F45"/><path d="M20 138C56 116 110 106 162 110C114 118 66 128 44 140Z" fill="#F4C400"/></g></svg><span class="slogan">Tecnologia que transforma. <span>Estado que avança.</span></span></div>
+    <p>
+      Fonte: <a id="fonte" href="https://portaldatransparencia.gov.br/download-de-dados/servidores">Portal da Transparência — Servidores SIAPE</a>.
+      Referência: <strong data-ref>–</strong>. Processado em <span id="gerado">–</span>.
+      Mapa: © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>.
+    </p>
+    <p>
+      Cargo filtrado: <code id="filtro"></code>. Somente dados agregados; nenhum dado individual é publicado.
+    </p>
+    <p class="autoria">
+      Desenvolvido por <strong>Ari Ribeiro</strong>, Analista em Tecnologia da Informação ·
+      <a href="mailto:contato@ariribeiro.dev">contato@ariribeiro.dev</a>
+      <a class="linkedin" href="https://www.linkedin.com/in/arivaldo-ribeiro-26472823/" target="_blank" rel="noopener" aria-label="LinkedIn de Ari Ribeiro" title="LinkedIn">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>
+      </a>
+    </p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

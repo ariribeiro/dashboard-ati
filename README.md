@@ -1,8 +1,15 @@
-# Painel ATI
+# Painéis de carreiras
 
-Painel estático da carreira de **Analista em Tecnologia da Informação (ATI)** do
-Executivo Federal, publicado no GitHub Pages e atualizado todo mês por GitHub
+Painéis estáticos de carreiras do Executivo Federal, hoje **Analista em
+Tecnologia da Informação (ATI)** e **Analista Técnico de Políticas Sociais
+(ATPS)**. São publicados no GitHub Pages e atualizados todo mês por GitHub
 Actions com dados do [Portal da Transparência](https://portaldatransparencia.gov.br/download-de-dados/servidores).
+
+| Página | Endereço |
+|---|---|
+| Página inicial (escolha da carreira) | `/` |
+| Painel de uma carreira | `/painel.html?carreira=ati`, `/painel.html?carreira=atps` |
+| Links curtos, com prévia própria para redes sociais | `/ati/`, `/atps/` |
 
 Só são publicados **dados agregados**. Nenhum nome, CPF, matrícula ou
 identificador individual sai do script (LGPD).
@@ -10,19 +17,28 @@ identificador individual sai do script (LGPD).
 ## Arquitetura
 
 ```
-Portal da Transparência ──► scripts/gerar_atis.py ──► data/*.json ──► site/ (HTML + JS + ECharts) ──► GitHub Pages
-     (ZIP mensal SIAPE)        (pandas, em chunks)      (versionado)
+Portal da Transparência ──► scripts/gerar_dados.py ──► data/<carreira>/*.json ──► site/ (HTML + JS + ECharts) ──► GitHub Pages
+     (ZIP mensal SIAPE)        (pandas, em chunks)        (versionado)
 ```
 
-- **`scripts/gerar_atis.py`** descobre o mês mais recente publicado, baixa o ZIP
-  `AAAAMM_Servidores_SIAPE`, lê `AAAAMM_Cadastro.csv` e `AAAAMM_Remuneracao.csv`
-  em chunks, filtra os ATIs, junta pela coluna `Id_SERVIDOR_PORTAL` e grava:
-  - `data/AAAAMM.json`: agregados do mês
-  - `data/latest.json`: cópia do mês mais recente
-  - `data/index.json`: lista de meses com total e mediana (alimenta o histórico)
-- **`site/`** tem HTML, CSS e JS puros, sem build. Lê `data/index.json` e o JSON do
-  mês escolhido. O mapa de órgãos usa Leaflet com o mapa do OpenStreetMap e
-  posiciona cada órgão pela tabela `data/orgaos_coordenadas.csv`.
+- **`data/carreiras.json`** lista as carreiras: sigla, plural, nome, regex do
+  cargo no SIAPE e identidade visual (`"ati"` usa a marca da ATI; `"neutra"`, a
+  sigla em texto).
+- **`scripts/gerar_dados.py`** descobre o mês mais recente publicado, baixa o ZIP
+  `AAAAMM_Servidores_SIAPE` **uma vez**, lê `AAAAMM_Cadastro.csv` e
+  `AAAAMM_Remuneracao.csv` em chunks, separa os servidores de cada carreira, junta
+  pela coluna `Id_SERVIDOR_PORTAL` e grava, para cada carreira:
+  - `data/<carreira>/AAAAMM.json`: agregados do mês
+  - `data/<carreira>/latest.json`: cópia do mês mais recente
+  - `data/<carreira>/index.json`: lista de meses com total e mediana (alimenta o histórico)
+
+  Um mês só é baixado se faltar para alguma carreira, e só as carreiras que
+  faltam são gravadas. Por isso, incluir uma carreira nova e rodar "ano inteiro"
+  preenche o histórico dela sem tocar nas outras.
+- **`site/`** tem HTML, CSS e JS puros, sem build. `painel.html` lê a carreira do
+  endereço, `data/<carreira>/index.json` e o JSON do mês escolhido. O mapa de
+  órgãos usa Leaflet com o mapa do OpenStreetMap e posiciona cada órgão pela
+  tabela `data/orgaos_coordenadas.csv`, compartilhada entre as carreiras.
 - **`.github/workflows/atis.yml`** roda no dia 15 de cada mês (12h UTC) ou
   manualmente: gera os dados, commita `data/` se mudou, copia para `site/data/`
   e publica no Pages.
@@ -34,13 +50,14 @@ Esses pontos foram conferidos no arquivo de ago/2026:
 - **URL**: `https://portaldatransparencia.gov.br/download-de-dados/servidores/AAAAMM_Servidores_SIAPE`
   redireciona para um ZIP (~85 MB, ~620 MB descompactado). Um mês ainda não
   publicado responde HTTP 403.
-- **Cargo**: no SIAPE o nome vem abreviado como `ANALISTA EM TECNOL DA INFORMACAO`.
-  O filtro padrão é a regex `^ANALISTA EM TECNOL(OGIA)? DA INFORMACAO$`, aplicada
-  ao texto sem acentos e em maiúsculas. Ela deixa de fora outros cargos parecidos
-  que não são da carreira ATI: `ANALISTA DE TEC DA INFORMACAO` (PCCTAE das
-  universidades), `ANALISTA DE TECNOL DA INFORMACAO - 40H` (EBSERH) e
-  `ANALISTA - ANALISTA DE TECNOL DA INFORM` (Conab). Para mudar o filtro, use
-  `--padrao-cargo`.
+- **Cargo**: no SIAPE o nome vem abreviado. A regex de cada carreira, em
+  `data/carreiras.json`, é aplicada ao texto sem acentos e em maiúsculas.
+  - **ATI**: `ANALISTA EM TECNOL DA INFORMACAO`. A regex deixa de fora cargos
+    parecidos que não são da carreira: `ANALISTA DE TEC DA INFORMACAO` (PCCTAE das
+    universidades), `ANALISTA DE TECNOL DA INFORMACAO - 40H` (EBSERH) e
+    `ANALISTA - ANALISTA DE TECNOL DA INFORM` (Conab).
+  - **ATPS**: `ANALISTA TECN EM POLITICAS SOCIAIS` (1.375 servidores em ago/2026,
+    lotação centralizada no MGI, classes A–C e padrões I–VI, como a ATI).
 - **Função comissionada**: não aparece na linha do cargo. Fica numa linha
   separada do mesmo `Id_SERVIDOR_PORTAL`, com `DESCRICAO_CARGO` "Sem informação"
   e `SIGLA_FUNCAO` preenchida (FEX, CCX…). O script conta o servidor como "com
@@ -86,7 +103,7 @@ mão, `data/orgaos_coordenadas.csv` (separador `;`):
 A seção "Tendência" é calculada no navegador, só com `data/index.json`, e se
 atualiza sozinha a cada mês processado:
 
-- Um mês com alta de 10 ou mais ATIs é tratado como **entrada de turma**. Meses
+- Um mês com alta de 10 ou mais servidores é tratado como **entrada de turma**. Meses
   de entrada separados por até 2 meses formam uma turma só.
 - Nos outros meses, mede-se a **taxa de saída líquida**: perda somada ÷ total do
   mês anterior somado. Há três cenários: últimos 5 anos, toda a série e a pior
@@ -96,6 +113,7 @@ atualiza sozinha a cada mês processado:
   últimas turmas.
 - A tabela "entre um concurso e outro" compara a perda líquida de cada intervalo
   sem entradas com o tamanho da turma anterior.
+- A seção fica oculta enquanto a carreira tiver menos de 24 meses processados.
 - Limitações: o SIAPE agregado só mostra o saldo, não quem entrou ou saiu; nos
   meses de entrada as saídas ficam escondidas. Saída inclui exoneração,
   aposentadoria e falecimento. A projeção não considera demanda, novas vagas nem
@@ -107,15 +125,16 @@ atualiza sozinha a cada mês processado:
 python3 -m venv .venv
 .venv/bin/pip install -r requirements.txt
 
-.venv/bin/python scripts/gerar_atis.py              # mês mais recente
-.venv/bin/python scripts/gerar_atis.py --mes 202607 # mês específico (útil para histórico)
-.venv/bin/python scripts/gerar_atis.py --ano 2025   # todos os meses publicados do ano
-.venv/bin/python scripts/gerar_atis.py --force      # reprocessa um mês existente
-.venv/bin/python scripts/gerar_atis.py --manter-zip # guarda o ZIP em .cache/
+.venv/bin/python scripts/gerar_dados.py                 # mês mais recente, todas as carreiras
+.venv/bin/python scripts/gerar_dados.py --mes 202607    # mês específico (útil para histórico)
+.venv/bin/python scripts/gerar_dados.py --ano 2025      # todos os meses publicados do ano
+.venv/bin/python scripts/gerar_dados.py --carreira atps # só uma carreira
+.venv/bin/python scripts/gerar_dados.py --force         # reprocessa um mês existente
+.venv/bin/python scripts/gerar_dados.py --manter-zip    # guarda o ZIP em .cache/
 
 # ver o site
 rm -rf site/data && cp -r data site/data
-python3 -m http.server -d site 8000   # http://localhost:8000
+python3 -m http.server -d site 8000   # http://localhost:8000 (painel: /painel.html?carreira=atps)
 ```
 
 O processamento de um mês leva poucos segundos depois do download e usa cerca de
@@ -125,11 +144,11 @@ O processamento de um mês leva poucos segundos depois do download e usa cerca d
 
 1. Envie o repositório para o GitHub.
 2. Em **Settings → Pages → Build and deployment → Source**, escolha **GitHub Actions**.
-3. Em **Actions → Dados ATI → Run workflow**, rode o primeiro deploy.
+3. Em **Actions → Dados das carreiras → Run workflow**, rode o primeiro deploy.
 
 ### Rodar o workflow manualmente
 
-Em **Actions → Dados ATI → Run workflow** há três opções:
+Em **Actions → Dados das carreiras → Run workflow** há quatro opções:
 
 - **Mês** e **Ano**: processam um mês específico (ex.: `03` e `2026`). Com o mês
   em "mais recente" e o ano em branco, o workflow busca o último mês publicado,
@@ -138,12 +157,27 @@ Em **Actions → Dados ATI → Run workflow** há três opções:
   ano, um por vez. Meses já existentes são pulados (a menos que `force` esteja
   marcado) e meses ainda não publicados são ignorados. A execução só falha se o
   ano não tiver nenhum mês publicado. Doze meses podem levar perto de uma hora.
-- **force**: reprocessa o mês mesmo que `data/AAAAMM.json` já exista.
+- **carreira**: "todas" (padrão), ou só uma. Útil com `force`, para reprocessar
+  uma carreira sem mexer na outra.
+- **force**: reprocessa o mês mesmo que `data/<carreira>/AAAAMM.json` já exista.
 
 Um mês ainda não publicado pelo portal falha com uma mensagem de erro, sem
 alterar `data/`. Pela linha de comando:
 `gh workflow run atis.yml -f mes=03 -f ano=2026 -f force=true` ou
 `gh workflow run atis.yml -f mes="ano inteiro" -f ano=2025`.
+
+## Incluir outra carreira
+
+1. Ache o nome do cargo no SIAPE (coluna `DESCRICAO_CARGO` do cadastro; vem
+   abreviado) e escreva uma regex para ele.
+2. Acrescente a carreira em `data/carreiras.json` (sigla, plural, nome, nome no
+   plural, regex e `"marca": "neutra"`), em `options` da entrada `carreira` do
+   workflow e, se quiser link curto, copie `site/atps/` para `site/<carreira>/`
+   trocando a sigla.
+3. Rode o workflow com "ano inteiro" para cada ano a partir de 2013. Os meses só
+   são baixados uma vez, e as carreiras que já têm dados não mudam.
+4. Inclua em `data/orgaos_coordenadas.csv` os órgãos que o script apontar nos
+   avisos.
 
 ## Observações
 

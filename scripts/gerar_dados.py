@@ -1,4 +1,4 @@
-"""Gera dados agregados da carreira de Analista em Tecnologia da Informação (ATI).
+"""Gera dados agregados das carreiras configuradas em data/carreiras.json (ATI, ATPS...).
 
 Fonte: Portal da Transparência, download mensal "Servidores_SIAPE"
 (https://portaldatransparencia.gov.br/download-de-dados/servidores).
@@ -8,11 +8,16 @@ Cada ZIP mensal contém AAAAMM_Cadastro.csv e AAAAMM_Remuneracao.csv
 Somente dados agregados são gravados — nenhum nome, CPF, matrícula ou
 identificador individual sai deste script (LGPD).
 
+Um único download por mês gera os dados de todas as carreiras, gravados em
+data/<carreira>/AAAAMM.json. Um mês só é baixado se faltar para alguma carreira,
+e só as carreiras que faltam são gravadas.
+
 Uso:
-    python scripts/gerar_atis.py              # mês mais recente disponível
-    python scripts/gerar_atis.py --mes 202607 # mês específico
-    python scripts/gerar_atis.py --ano 2025   # todos os meses publicados do ano
-    python scripts/gerar_atis.py --force      # reprocessa mesmo se já existir
+    python scripts/gerar_dados.py                 # mês mais recente disponível
+    python scripts/gerar_dados.py --mes 202607    # mês específico
+    python scripts/gerar_dados.py --ano 2025      # todos os meses publicados do ano
+    python scripts/gerar_dados.py --force         # reprocessa mesmo se já existir
+    python scripts/gerar_dados.py --carreira atps # só uma carreira
 """
 
 from __future__ import annotations
@@ -34,14 +39,11 @@ RAIZ = Path(__file__).resolve().parent.parent
 DIR_DADOS = RAIZ / "data"
 DIR_CACHE = RAIZ / ".cache"
 ARQ_COORDENADAS = DIR_DADOS / "orgaos_coordenadas.csv"
+ARQ_CARREIRAS = DIR_DADOS / "carreiras.json"
 
 URL_DOWNLOAD = "https://portaldatransparencia.gov.br/download-de-dados/servidores/{mes}_Servidores_SIAPE"
 URL_PAGINA = "https://portaldatransparencia.gov.br/download-de-dados/servidores"
-USER_AGENT = "Mozilla/5.0 (dashboard-ati; +https://github.com)"
-
-# No SIAPE o cargo aparece abreviado ("ANALISTA EM TECNOL DA INFORMACAO").
-# A regex é aplicada sobre o texto normalizado (sem acentos, maiúsculo).
-PADRAO_CARGO = r"^ANALISTA EM TECNOL(OGIA)? DA INFORMACAO$"
+USER_AGENT = "Mozilla/5.0 (dashboard-carreiras; +https://github.com/ariribeiro/dashboard-ati)"
 
 COLS_CADASTRO = [
     "Id_SERVIDOR_PORTAL", "DESCRICAO_CARGO", "CLASSE_CARGO", "PADRAO_CARGO",
@@ -175,32 +177,37 @@ def ler_csv(arquivo_zip: zipfile.ZipFile, nome: str, colunas: list[str]):
         )
 
 
-def ler_cadastro(zf: zipfile.ZipFile, mes: str, padrao: re.Pattern) -> pd.DataFrame:
-    """Retorna uma linha por ATI, com UF e indicador de função consolidados."""
+def ler_cadastro(zf: zipfile.ZipFile, mes: str, padroes: dict[str, re.Pattern]) -> dict[str, pd.DataFrame]:
+    """Uma tabela por carreira, uma linha por servidor, com UF e função consolidados.
+
+    No SIAPE o cargo aparece abreviado ("ANALISTA EM TECNOL DA INFORMACAO"); cada
+    regex de carreiras.json é aplicada ao texto normalizado (sem acentos, maiúsculo).
+    """
     nome = f"{mes}_Cadastro.csv"
 
-    # 1ª passada: linhas do cargo ATI.
-    partes = []
+    # 1ª passada: linhas do cargo de cada carreira.
+    partes = {c: [] for c in padroes}
     for chunk in ler_csv(zf, nome, COLS_CADASTRO):
         cargo = chunk["DESCRICAO_CARGO"].map(normalizar)
-        partes.append(chunk[cargo.str.match(padrao)])
-    atis = pd.concat(partes).drop_duplicates(COL_ID).set_index(COL_ID)
-    ids = set(atis.index)
+        for c, padrao in padroes.items():
+            partes[c].append(chunk[cargo.str.match(padrao)])
+    tabelas = {c: pd.concat(ps).drop_duplicates(COL_ID).set_index(COL_ID) for c, ps in partes.items()}
+    ids = set().union(*(set(df.index) for df in tabelas.values()))
 
-    # 2ª passada: linhas sem cargo do mesmo servidor (função comissionada,
+    # 2ª passada: linhas sem cargo dos mesmos servidores (função comissionada,
     # exercício descentralizado). Linhas de outro cargo/vínculo são ignoradas.
-    partes = []
+    extras = []
     for chunk in ler_csv(zf, nome, COLS_CADASTRO):
         extra = chunk[chunk[COL_ID].isin(ids)]
-        partes.append(extra[vazio(extra["DESCRICAO_CARGO"])])
-    extras = pd.concat(partes)
+        extras.append(extra[vazio(extra["DESCRICAO_CARGO"])])
+    extras = pd.concat(extras)
 
-    com_funcao = extras[~vazio(extras["SIGLA_FUNCAO"])]
-    atis["FUNCAO"] = com_funcao.drop_duplicates(COL_ID).set_index(COL_ID)["SIGLA_FUNCAO"]
-
+    funcao = extras[~vazio(extras["SIGLA_FUNCAO"])].drop_duplicates(COL_ID).set_index(COL_ID)["SIGLA_FUNCAO"]
     uf_extra = extras[~vazio(extras["UF_EXERCICIO"])].drop_duplicates(COL_ID).set_index(COL_ID)["UF_EXERCICIO"]
-    atis["UF"] = atis["UF_EXERCICIO"].mask(vazio(atis["UF_EXERCICIO"])).fillna(uf_extra).fillna("Não informado")
-    return atis
+    for df in tabelas.values():
+        df["FUNCAO"] = funcao
+        df["UF"] = df["UF_EXERCICIO"].mask(vazio(df["UF_EXERCICIO"])).fillna(uf_extra).fillna("Não informado")
+    return tabelas
 
 
 def ler_remuneracao(zf: zipfile.ZipFile, mes: str, ids: set[str]) -> pd.Series:
@@ -232,7 +239,7 @@ def chave_padrao(p: str) -> int:
     return ROMANOS.get(p, int(p) if p.isdigit() else 99)
 
 
-def agregar(atis: pd.DataFrame, rem: pd.Series, mes: str) -> dict:
+def agregar(atis: pd.DataFrame, rem: pd.Series, mes: str, padrao_cargo: str) -> dict:
     classe_padrao = (
         atis.assign(CLASSE_CARGO=atis["CLASSE_CARGO"].fillna("?"), PADRAO_CARGO=atis["PADRAO_CARGO"].fillna("?"))
         .groupby(["CLASSE_CARGO", "PADRAO_CARGO"]).size().reset_index(name="qtd")
@@ -252,7 +259,7 @@ def agregar(atis: pd.DataFrame, rem: pd.Series, mes: str) -> dict:
             "url": URL_PAGINA,
             "arquivo": URL_DOWNLOAD.format(mes=mes),
         },
-        "filtro_cargo": PADRAO_CARGO,
+        "filtro_cargo": padrao_cargo,
         "total": int(len(atis)),
         "por_situacao": contagem(atis["SITUACAO_VINCULO"]),
         "por_orgao_exercicio": contagem(atis["ORG_EXERCICIO"]),
@@ -279,17 +286,25 @@ def agregar(atis: pd.DataFrame, rem: pd.Series, mes: str) -> dict:
 
 # ---------------------------------------------------------------- saída
 
-def salvar(resumo: dict, mes: str) -> None:
-    DIR_DADOS.mkdir(exist_ok=True)
-    texto = json.dumps(resumo, ensure_ascii=False, indent=2)
-    (DIR_DADOS / f"{mes}.json").write_text(texto, encoding="utf-8")
-    atualizar_indice()
+def carregar_carreiras() -> dict[str, dict]:
+    return json.loads(ARQ_CARREIRAS.read_text(encoding="utf-8"))
 
 
-def atualizar_indice() -> None:
-    """Reconstrói index.json e latest.json a partir dos AAAAMM.json existentes."""
+def arquivo_mes(carreira: str, mes: str) -> Path:
+    return DIR_DADOS / carreira / f"{mes}.json"
+
+
+def salvar(resumo: dict, carreira: str, mes: str) -> None:
+    destino = arquivo_mes(carreira, mes)
+    destino.parent.mkdir(parents=True, exist_ok=True)
+    destino.write_text(json.dumps(resumo, ensure_ascii=False, indent=2), encoding="utf-8")
+
+
+def atualizar_indice(carreira: str) -> None:
+    """Reconstrói index.json e latest.json da carreira a partir dos AAAAMM.json existentes."""
+    pasta = DIR_DADOS / carreira
     meses = []
-    for arq in sorted(DIR_DADOS.glob("[0-9]" * 6 + ".json")):
+    for arq in sorted(pasta.glob("[0-9]" * 6 + ".json")):
         d = json.loads(arq.read_text(encoding="utf-8"))
         meses.append({
             "mes": d["referencia"],
@@ -300,13 +315,13 @@ def atualizar_indice() -> None:
     if not meses:
         return
     # Só regrava quando a lista muda; senão cada execução geraria um commit só com o horário.
-    arq_indice = DIR_DADOS / "index.json"
+    arq_indice = pasta / "index.json"
     anterior = json.loads(arq_indice.read_text(encoding="utf-8")) if arq_indice.exists() else {}
     if anterior.get("meses") != meses:
         indice = {"atualizado_em": datetime.now(timezone.utc).isoformat(timespec="seconds"), "meses": meses}
         arq_indice.write_text(json.dumps(indice, ensure_ascii=False, indent=2), encoding="utf-8")
-    ultimo = DIR_DADOS / meses[-1]["arquivo"]
-    (DIR_DADOS / "latest.json").write_text(ultimo.read_text(encoding="utf-8"), encoding="utf-8")
+    ultimo = pasta / meses[-1]["arquivo"]
+    (pasta / "latest.json").write_text(ultimo.read_text(encoding="utf-8"), encoding="utf-8")
 
 
 def verificar_coordenadas() -> None:
@@ -315,62 +330,72 @@ def verificar_coordenadas() -> None:
         return
     conhecidos = set(pd.read_csv(ARQ_COORDENADAS, sep=";", dtype=str)["orgao_siape"])
     faltando = {}
-    for arq in sorted(DIR_DADOS.glob("[0-9]" * 6 + ".json")):
+    for arq in sorted(DIR_DADOS.glob("*/" + "[0-9]" * 6 + ".json"), key=lambda a: a.stem):
         for o in json.loads(arq.read_text(encoding="utf-8"))["por_orgao_exercicio"]:
             if o["nome"] not in conhecidos:
-                faltando.setdefault(o["nome"], []).append(arq.stem)
+                faltando.setdefault(o["nome"], []).append(f"{arq.parent.name}/{arq.stem}")
     for nome, meses in faltando.items():
         # Formato de anotação do GitHub Actions; no terminal aparece como texto comum.
         print(f"::warning::Órgão sem coordenadas em {ARQ_COORDENADAS.name} (aparece como 'sem localização' "
               f"no mapa; não afeta os dados): {nome} ({len(meses)} meses, último {meses[-1]})")
 
 
-def processar(s: requests.Session, mes: str, padrao: re.Pattern, manter_zip: bool) -> dict:
+def processar(s: requests.Session, mes: str, carreiras: dict[str, dict], manter_zip: bool) -> dict[str, dict]:
+    """Baixa o mês uma vez e devolve o resumo de cada carreira pedida."""
     caminho = baixar(s, mes)
     try:
         with zipfile.ZipFile(caminho) as zf:
             print("Lendo cadastro...")
-            atis = ler_cadastro(zf, mes, padrao)
-            print(f"  {len(atis)} ATIs")
+            padroes = {c: re.compile(cfg["padrao_cargo"]) for c, cfg in carreiras.items()}
+            tabelas = ler_cadastro(zf, mes, padroes)
+            print("  " + ", ".join(f"{len(df)} {carreiras[c]['plural']}" for c, df in tabelas.items()))
             print("Lendo remuneração...")
-            rem = ler_remuneracao(zf, mes, set(atis.index))
-        return agregar(atis, rem, mes)
+            rem = ler_remuneracao(zf, mes, set().union(*(set(df.index) for df in tabelas.values())))
+        return {c: agregar(df, rem, mes, carreiras[c]["padrao_cargo"]) for c, df in tabelas.items()}
     finally:
         if not manter_zip:
             caminho.unlink(missing_ok=True)
 
 
-def processar_mes(s: requests.Session, mes: str, padrao: re.Pattern, force: bool, manter_zip: bool) -> str:
+def processar_mes(s: requests.Session, mes: str, carreiras: dict[str, dict], force: bool, manter_zip: bool) -> str:
     """Processa um mês e devolve o resultado: salvo, existente, indisponivel ou vazio."""
-    if (DIR_DADOS / f"{mes}.json").exists() and not force:
+    pendentes = {c: cfg for c, cfg in carreiras.items() if force or not arquivo_mes(c, mes).exists()}
+    if not pendentes:
         print(f"{mes} já processado; use --force para refazer.")
         return "existente"
     if not mes_disponivel(s, mes):
         print(f"{mes} não está disponível no Portal da Transparência.")
         return "indisponivel"
-    resumo = processar(s, mes, padrao, manter_zip)
-    if resumo["total"] == 0:
-        print(f"{mes}: nenhum servidor corresponde ao padrão de cargo; nada salvo.", file=sys.stderr)
-        return "vazio"
-    salvar(resumo, mes)
-    print(f"Salvo data/{mes}.json — {resumo['total']} ATIs, "
-          f"mediana R$ {resumo['remuneracao_basica_bruta']['mediana']:,.2f}")
-    return "salvo"
+    resultado = "salvo"
+    for c, resumo in processar(s, mes, pendentes, manter_zip).items():
+        if resumo["total"] == 0:
+            print(f"{mes}: nenhum servidor corresponde ao padrão de cargo de {c}; nada salvo.", file=sys.stderr)
+            resultado = "vazio"
+            continue
+        salvar(resumo, c, mes)
+        print(f"Salvo data/{c}/{mes}.json — {resumo['total']} {carreiras[c]['plural']}, "
+              f"mediana R$ {resumo['remuneracao_basica_bruta']['mediana']:,.2f}")
+    return resultado
 
 
 def main() -> int:
-    global PADRAO_CARGO
+    todas = carregar_carreiras()
     p = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     periodo = p.add_mutually_exclusive_group()
     periodo.add_argument("--mes", help="mês AAAAMM; padrão: mais recente disponível")
     periodo.add_argument("--ano", help="ano AAAA: processa todos os meses publicados do ano")
-    p.add_argument("--force", action="store_true", help="reprocessa mesmo se data/AAAAMM.json existir")
-    p.add_argument("--padrao-cargo", default=PADRAO_CARGO, help="regex aplicada a DESCRICAO_CARGO normalizada")
+    p.add_argument("--carreira", action="append", choices=list(todas),
+                   help="processa só esta carreira (pode repetir); padrão: todas de data/carreiras.json")
+    p.add_argument("--force", action="store_true", help="reprocessa mesmo se data/<carreira>/AAAAMM.json existir")
     p.add_argument("--manter-zip", action="store_true", help="mantém o ZIP em .cache/ após processar")
     args = p.parse_args()
-    PADRAO_CARGO = args.padrao_cargo
-    padrao = re.compile(PADRAO_CARGO)
+    carreiras = {c: todas[c] for c in (args.carreira or todas)}
     s = sessao()
+
+    def finalizar():
+        for c in carreiras:
+            atualizar_indice(c)
+        verificar_coordenadas()
 
     if args.ano:
         if not re.fullmatch(r"20\d{2}", args.ano):
@@ -380,12 +405,11 @@ def main() -> int:
         for m in range(1, 13):
             mes = f"{args.ano}{m:02d}"
             try:
-                resultados[mes] = processar_mes(s, mes, padrao, args.force, args.manter_zip)
+                resultados[mes] = processar_mes(s, mes, carreiras, args.force, args.manter_zip)
             except (requests.RequestException, zipfile.BadZipFile, KeyError, ValueError) as erro:
                 print(f"::error::{mes} está publicado, mas falhou: {erro}", file=sys.stderr)
                 resultados[mes] = "erro"
-        atualizar_indice()
-        verificar_coordenadas()
+        finalizar()
         print("Resumo:", ", ".join(f"{m[4:]}={r}" for m, r in resultados.items()))
         if all(r == "indisponivel" for r in resultados.values()):
             print(f"::error::Nenhum mês de {args.ano} está disponível no Portal da Transparência.", file=sys.stderr)
@@ -399,9 +423,8 @@ def main() -> int:
     if not mes:
         print("Nenhum mês disponível nos últimos meses.", file=sys.stderr)
         return 1
-    resultado = processar_mes(s, mes, padrao, args.force, args.manter_zip)
-    atualizar_indice()
-    verificar_coordenadas()
+    resultado = processar_mes(s, mes, carreiras, args.force, args.manter_zip)
+    finalizar()
     if resultado == "indisponivel":
         print(f"::error::{mes} não está disponível no Portal da Transparência.", file=sys.stderr)
     return 1 if resultado in ("indisponivel", "vazio") else 0
