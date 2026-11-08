@@ -1,0 +1,331 @@
+{
+  "referencia": "2021-05",
+  "gerado_em": "2026-11-08T22:47:52+00:00",
+  "fonte": {
+    "nome": "Portal da Transparência — Servidores SIAPE",
+    "url": "https://portaldatransparencia.gov.br/download-de-dados/servidores",
+    "arquivo": "https://portaldatransparencia.gov.br/download-de-dados/servidores/202105_Servidores_SIAPE"
+  },
+  "filtro_cargo": "^ANALISTA TECN(ICO)? (EM|DE) POLITICAS SOCIAIS$",
+  "total": 761,
+  "por_situacao": [
+    {
+      "nome": "ATIVO PERMANENTE",
+      "qtd": 647
+    },
+    {
+      "nome": "ATIVO EM OUTRO ORGAO",
+      "qtd": 114
+    }
+  ],
+  "por_orgao_exercicio": [
+    {
+      "nome": "Ministério da Saúde",
+      "qtd": 328
+    },
+    {
+      "nome": "Ministério do Desenvolvimento Social",
+      "qtd": 152
+    },
+    {
+      "nome": "Ministério da Economia",
+      "qtd": 56
+    },
+    {
+      "nome": "Ministério da Mulher, Família e Direitos Humanos",
+      "qtd": 40
+    },
+    {
+      "nome": "Ministério da Justiça e Segurança Pública",
+      "qtd": 33
+    },
+    {
+      "nome": "Ministério da Agricultura, Pecuária e Abastecimento",
+      "qtd": 30
+    },
+    {
+      "nome": "Ministério da Educação",
+      "qtd": 24
+    },
+    {
+      "nome": "Ministério do Desenvolvimento Regional",
+      "qtd": 15
+    },
+    {
+      "nome": "Função Escola Nacional de Administração Pública",
+      "qtd": 13
+    },
+    {
+      "nome": "Controladoria-Geral da União",
+      "qtd": 12
+    },
+    {
+      "nome": "Defensoria Pública da União",
+      "qtd": 11
+    },
+    {
+      "nome": "Presidência da República",
+      "qtd": 10
+    },
+    {
+      "nome": "Fundação Oswaldo Cruz",
+      "qtd": 4
+    },
+    {
+      "nome": "Instituto Nacional de Colonização e Reforma Agrária",
+      "qtd": 4
+    },
+    {
+      "nome": "Ministério do Turismo",
+      "qtd": 4
+    },
+    {
+      "nome": "Fundação Nacional do Índio",
+      "qtd": 3
+    },
+    {
+      "nome": "Estados / Municípios / Empresas",
+      "qtd": 3
+    },
+    {
+      "nome": "Advocacia-Geral da União",
+      "qtd": 2
+    },
+    {
+      "nome": "Poder Executivo Federal",
+      "qtd": 2
+    },
+    {
+      "nome": "Ministério da Ciência, Tecnologia, Inovações e Comunicações",
+      "qtd": 2
+    },
+    {
+      "nome": "Universidade Federal da Bahia",
+      "qtd": 1
+    },
+    {
+      "nome": "Ministério Público do Distrito Federal e Territórios",
+      "qtd": 1
+    },
+    {
+      "nome": "Fundação Universidade Federal do Tocantins",
+      "qtd": 1
+    },
+    {
+      "nome": "Instituto do Patrimônio Histórico e Artístico Nacional",
+      "qtd": 1
+    },
+    {
+      "nome": "Empresa Brasileira de Serviços Hospitalares",
+      "qtd": 1
+    },
+    {
+      "nome": "Instituto Federal Goiano",
+      "qtd": 1
+    },
+    {
+      "nome": "Conselho Administrativo de Defesa Econômica",
+      "qtd": 1
+    },
+    {
+      "nome": "Câmara dos Deputados",
+      "qtd": 1
+    },
+    {
+      "nome": "Prefeitura Municipal",
+      "qtd": 1
+    },
+    {
+      "nome": "Agência Nacional de Águas",
+      "qtd": 1
+    },
+    {
+      "nome": "Instituto Chico Mendes de Conservação da Biodiversidade",
+      "qtd": 1
+    },
+    {
+      "nome": "Governo do Estado Espírito Santo",
+      "qtd": 1
+    },
+    {
+      "nome": "Tribunal Regional Eleitoral - DF",
+      "qtd": 1
+    }
+  ],
+  "por_orgao_lotacao": [
+    {
+      "nome": "Ministério da Saúde",
+      "qtd": 375
+    },
+    {
+      "nome": "Ministério do Desenvolvimento Social",
+      "qtd": 186
+    },
+    {
+      "nome": "Ministério da Economia",
+      "qtd": 42
+    },
+    {
+      "nome": "Ministério da Mulher, Família e Direitos Humanos",
+      "qtd": 38
+    },
+    {
+      "nome": "Ministério da Agricultura, Pecuária e Abastecimento",
+      "qtd": 37
+    },
+    {
+      "nome": "Ministério da Justiça e Segurança Pública",
+      "qtd": 31
+    },
+    {
+      "nome": "Ministério da Educação",
+      "qtd": 30
+    },
+    {
+      "nome": "Ministério do Desenvolvimento Regional",
+      "qtd": 13
+    },
+    {
+      "nome": "Ministério do Turismo",
+      "qtd": 7
+    },
+    {
+      "nome": "Poder Executivo Federal",
+      "qtd": 2
+    }
+  ],
+  "por_uf": [
+    {
+      "nome": "Não informado",
+      "qtd": 761
+    }
+  ],
+  "por_classe_padrao": [
+    {
+      "classe": "A",
+      "padrao": "I",
+      "qtd": 11
+    },
+    {
+      "classe": "A",
+      "padrao": "II",
+      "qtd": 4
+    },
+    {
+      "classe": "A",
+      "padrao": "III",
+      "qtd": 50
+    },
+    {
+      "classe": "A",
+      "padrao": "IV",
+      "qtd": 30
+    },
+    {
+      "classe": "A",
+      "padrao": "V",
+      "qtd": 453
+    },
+    {
+      "classe": "B",
+      "padrao": "I",
+      "qtd": 213
+    }
+  ],
+  "funcao": {
+    "com_funcao": 293,
+    "por_sigla": [
+      {
+        "nome": "FPE",
+        "qtd": 136
+      },
+      {
+        "nome": "DAS",
+        "qtd": 94
+      },
+      {
+        "nome": "FGR",
+        "qtd": 47
+      },
+      {
+        "nome": "RGA",
+        "qtd": 11
+      },
+      {
+        "nome": "FCT",
+        "qtd": 2
+      },
+      {
+        "nome": "GF",
+        "qtd": 1
+      },
+      {
+        "nome": "CD",
+        "qtd": 1
+      },
+      {
+        "nome": "CCT",
+        "qtd": 1
+      }
+    ]
+  },
+  "remuneracao_basica_bruta": {
+    "n": 717,
+    "media": 11736.58,
+    "mediana": 10879.52,
+    "p10": 9615.47,
+    "p90": 15331.1,
+    "histograma": [
+      {
+        "min": 0,
+        "max": 10000,
+        "qtd": 75
+      },
+      {
+        "min": 10000,
+        "max": 12500,
+        "qtd": 392
+      },
+      {
+        "min": 12500,
+        "max": 15000,
+        "qtd": 176
+      },
+      {
+        "min": 15000,
+        "max": 17500,
+        "qtd": 67
+      },
+      {
+        "min": 17500,
+        "max": 20000,
+        "qtd": 6
+      },
+      {
+        "min": 20000,
+        "max": 22500,
+        "qtd": 1
+      },
+      {
+        "min": 22500,
+        "max": 25000,
+        "qtd": 0
+      },
+      {
+        "min": 25000,
+        "max": 30000,
+        "qtd": 0
+      },
+      {
+        "min": 30000,
+        "max": 35000,
+        "qtd": 0
+      },
+      {
+        "min": 35000,
+        "max": null,
+        "qtd": 0
+      }
+    ]
+  }
+}
