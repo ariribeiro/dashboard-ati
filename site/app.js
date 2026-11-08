@@ -153,17 +153,10 @@ function lacunas({ rotulos, valores }) {
 
 const isolado = (valores, i) => valores[i] !== null && valores[i - 1] == null && valores[i + 1] == null;
 
-// Altas de 30 ou mais ATIs em um mês (entrada de turmas); meses seguidos viram uma marca só.
-function degraus(valores) {
-  const marcas = [];
-  for (let i = 1; i < valores.length; i++) {
-    const [a, b] = [valores[i - 1], valores[i]];
-    if (a == null || b == null || b - a < 30) continue;
-    const ultima = marcas.at(-1);
-    if (ultima && ultima.fim === i - 1) { ultima.fim = i; ultima.dif += b - a; }
-    else marcas.push({ fim: i, dif: b - a });
-  }
-  return marcas;
+// Entradas de turma (mesmo critério da seção de tendência), como índices da série mensal.
+function degraus() {
+  const n0 = numMes(indice.meses[0].mes);
+  return analisarFluxo().turmas.map((tm) => ({ fim: tm.fim - n0, dif: tm.entrada }));
 }
 
 // opcoes: zero (eixo a partir de 0, com área), degraus (marca altas), selecionado (rótulo do mês escolhido)
@@ -173,7 +166,7 @@ function linhaHistorica(id, serie, corVar, formatar, opcoes = {}) {
   const anos = new Set(rotulos.map(ano)).size;
   const passo = estreito() ? (anos > 4 ? 3 : 1) : (anos > 8 ? 2 : 1);
   const primeiroAno = ano(rotulos[0]);
-  const marcas = opcoes.degraus ? degraus(valores) : [];
+  const marcas = opcoes.degraus ? degraus() : [];
   grafico(id, {
     tooltip: { ...temaBase().tooltip, trigger: "axis", axisPointer: { type: "line", lineStyle: { color: cor("--texto-3") } },
       formatter: (ps) => `${ps[0].name}<br><b>${ps[0].value == null ? "sem dados" : formatar(ps[0].value)}</b>` },
@@ -617,9 +610,9 @@ function analisarFluxo() {
   }
 
   const cenarios = [
-    { id: "recente", nome: "Ritmo dos últimos 5 anos", taxa: taxa(recentes), cor: "--onde" },
-    { id: "historico", nome: "Média de toda a série", taxa: taxa(comuns), cor: "--carreira" },
-    { id: "pior", nome: `Pior período (${fmtMes(refDeNum(pior.ini - 1))} a ${fmtMes(refDeNum(pior.fim))})`, taxa: pior.taxa, cor: "--negativo" },
+    { id: "recente", nome: "Ritmo dos últimos 5 anos", taxa: taxa(recentes), cor: "--cenario-1" },
+    { id: "historico", nome: "Média de toda a série", taxa: taxa(comuns), cor: "--cenario-2" },
+    { id: "pior", nome: `Pior período (${fmtMes(refDeNum(pior.ini - 1))} a ${fmtMes(refDeNum(pior.fim))})`, taxa: pior.taxa, cor: "--cenario-3" },
   ];
 
   // Intervalos entre turmas: perda líquida desde o fim da entrada até a próxima turma (ou o mês mais recente).
@@ -638,9 +631,13 @@ function analisarFluxo() {
 const mesesAte = (de, ate, r) => (r > 0 && ate < de ? Math.log(ate / de) / Math.log(1 - r) : Infinity);
 
 function graficoProjecao(id, fluxo) {
-  const { rotulos, valores } = serieMensal("total");
+  // Só os últimos 5 anos de dados reais: o histórico completo já está em "Total de ATIs por mês".
+  const serie = serieMensal("total");
   const n0 = numMes(indice.meses[0].mes);
-  const ultimoIdx = fluxo.ultimo - n0;
+  const corte = Math.max(0, numMes(`${Math.floor(fluxo.ultimo / 12) - 5}-01`) - n0);
+  const rotulos = serie.rotulos.slice(corte);
+  const valores = serie.valores.slice(corte);
+  const ultimoIdx = fluxo.ultimo - n0 - corte;
   for (let k = 1; k <= HORIZONTE_MESES; k++) { rotulos.push(fmtMes(refDeNum(fluxo.ultimo + k))); valores.push(null); }
   const projecoes = fluxo.cenarios.map((c) => rotulos.map((_, i) =>
     i < ultimoIdx ? null : Math.round(fluxo.totalAtual * (1 - c.taxa) ** (i - ultimoIdx))));
@@ -672,14 +669,15 @@ function graficoProjecao(id, fluxo) {
         type: "line",
         data: valores,
         symbol: "none",
-        lineStyle: { width: 2, color: cor("--geral") },
-        itemStyle: { color: cor("--geral") },
-        areaStyle: { color: cor("--geral-lavado") },
+        // Histórico em cinza neutro; o destaque fica com as projeções (escala azul).
+        lineStyle: { width: 2, color: cor("--real") },
+        itemStyle: { color: cor("--real") },
+        areaStyle: { color: cor("--real-lavado") },
         markLine: {
           silent: true,
           symbol: "none",
           lineStyle: { color: cor("--texto-3"), type: "dotted", width: 1 },
-          label: { position: "insideStartTop", color: cor("--texto-2"), fontSize: 11 },
+          label: { position: "insideStartBottom", color: cor("--texto-2"), fontSize: 11 },
           data: referencias.map((t) => ({ yAxis: t.antes, label: { formatter: `antes da entrada de ${fmtMes(refDeNum(t.ini))}: ${fmtInt.format(t.antes)}` } })),
         },
       },
@@ -797,7 +795,7 @@ function renderizar() {
   const selecionado = fmtMes(d.referencia);
   linhaHistorica("g-hist-total", serieTotal, "--geral", (v) => fmtInt.format(v), { zero: true, degraus: true, selecionado });
   document.getElementById("hist-total-sub").textContent =
-    ["Os números marcam meses com entrada de 30 ou mais ATIs; a linha vertical é o mês selecionado.", lacunas(serieTotal)].join(" ").trim();
+    ["Os números marcam as entradas de turma (soma dos meses seguidos com alta); a linha vertical é o mês selecionado.", lacunas(serieTotal)].join(" ").trim();
 
   renderizarTendencia();
 

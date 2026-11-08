@@ -25,6 +25,11 @@
   --remuneracao-lavado: rgba(220, 165, 0, 0.14);
   --carreira-seq-min: #d6e2f5;
   --carreira-seq-max: #0D2B5C;
+  --cenario-1: #86b6ef;
+  --cenario-2: #2a78d6;
+  --cenario-3: #184f95;
+  --real: #8f8e86;
+  --real-lavado: rgba(143, 142, 134, 0.10);
 
   /* Identidade visual ATI */
   --marca: #0D2B5C;
@@ -59,6 +64,11 @@
     --remuneracao-lavado: rgba(217, 170, 0, 0.16);
     --carreira-seq-min: #1a3566;
     --carreira-seq-max: #c3d5f3;
+    --cenario-1: #2a78d6;
+    --cenario-2: #6da7ec;
+    --cenario-3: #b7d3f6;
+    --real: #76756f;
+    --real-lavado: rgba(118, 117, 111, 0.14);
 
     --marca: #0D2B5C;
     --marca-amarelo: #F4C400;
@@ -92,6 +102,11 @@
   --remuneracao-lavado: rgba(217, 170, 0, 0.16);
   --carreira-seq-min: #1a3566;
   --carreira-seq-max: #c3d5f3;
+  --cenario-1: #2a78d6;
+  --cenario-2: #6da7ec;
+  --cenario-3: #b7d3f6;
+  --real: #76756f;
+  --real-lavado: rgba(118, 117, 111, 0.14);
 
   --marca: #0D2B5C;
   --marca-amarelo: #F4C400;
