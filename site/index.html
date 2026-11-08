@@ -34,6 +34,7 @@
       <span class="barra-resumo"><strong data-ref>–</strong><span class="barra-numeros" id="barra-numeros"></span></span>
       <nav class="barra-nav" aria-label="Seções">
         <a href="#s-geral" data-secao="geral">Visão geral</a>
+        <a href="#s-tendencia" data-secao="geral">Tendência</a>
         <a href="#s-onde" data-secao="onde">Onde trabalham</a>
         <a href="#s-carreira" data-secao="carreira">Carreira</a>
         <a href="#s-remuneracao" data-secao="remuneracao">Remuneração</a>
@@ -112,6 +113,47 @@
           <div class="grafico" id="g-hist-total"></div>
         </figure>
       </div>
+    </section>
+
+    <section class="secao" id="s-tendencia" data-secao="geral" aria-labelledby="t-tendencia">
+      <div class="secao-cabecalho">
+        <h2 id="t-tendencia">Tendência sem novos concursos</h2>
+        <p id="tendencia-desc"></p>
+      </div>
+
+      <figure class="painel">
+        <figcaption>
+          <h3>Projeção do total de ATIs</h3>
+          <p id="proj-sub"></p>
+        </figcaption>
+        <div class="grafico grafico-alto" id="g-projecao"></div>
+        <p class="nota" id="proj-nota"></p>
+      </figure>
+
+      <div class="grade">
+        <div class="painel">
+          <h3>Quando as saídas anulam as entradas</h3>
+          <p class="painel-sub">Ano em que o total voltaria ao nível de antes de cada entrada de turma, se ninguém mais entrar.</p>
+          <div class="tabela-rolagem"><table class="tabela-fixa" id="t-retorno"></table></div>
+        </div>
+        <div class="painel">
+          <h3>O que aconteceu entre um concurso e outro</h3>
+          <p class="painel-sub">Perda líquida de ATIs nos meses sem entrada, comparada com o tamanho da turma que tinha acabado de entrar.</p>
+          <div class="tabela-rolagem"><table class="tabela-fixa" id="t-intervalos"></table></div>
+        </div>
+      </div>
+
+      <details class="metodo">
+        <summary>Como a projeção é feita e o que ela não considera</summary>
+        <ul>
+          <li>Um mês com alta de <span id="m-limiar">10</span> ou mais ATIs é tratado como mês de entrada de turma. Todos os outros meses servem para medir a <strong>taxa de saída líquida</strong>: quantos ATIs a carreira perde por mês, em proporção ao total do mês anterior.</li>
+          <li>A projeção aplica essa taxa ao total mais recente, mês a mês, sem novas entradas. Como a taxa é proporcional, a perda em números absolutos diminui conforme o total cai.</li>
+          <li>Os três cenários usam a taxa de períodos diferentes: os últimos 5 anos, toda a série e a pior janela de 24 meses já registrada.</li>
+          <li>O SIAPE só permite ver o saldo de cada mês, não quem entrou e quem saiu. Nos meses de entrada de turma, as saídas ficam escondidas no saldo, então a taxa pode estar um pouco subestimada.</li>
+          <li>Conta como saída tudo o que tira o servidor do cargo: exoneração (inclusive posse em outro concurso), aposentadoria, falecimento. A projeção não sabe o motivo.</li>
+          <li>Não considera crescimento da demanda por TI, criação de vagas, nem mudanças de remuneração ou de regras da carreira que possam mudar o ritmo de saída.</li>
+        </ul>
+      </details>
     </section>
 
     <section class="secao" id="s-onde" data-secao="onde" aria-labelledby="t-onde">

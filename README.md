@@ -81,6 +81,26 @@ mão, `data/orgaos_coordenadas.csv` (separador `;`):
   busque o prédio em [openstreetmap.org](https://www.openstreetmap.org), clique
   com o botão direito → "Mostrar endereço" e copie latitude e longitude.
 
+### Tendência sem novos concursos
+
+A seção "Tendência" é calculada no navegador, só com `data/index.json`, e se
+atualiza sozinha a cada mês processado:
+
+- Um mês com alta de 10 ou mais ATIs é tratado como **entrada de turma**. Meses
+  de entrada separados por até 2 meses formam uma turma só.
+- Nos outros meses, mede-se a **taxa de saída líquida**: perda somada ÷ total do
+  mês anterior somado. Há três cenários: últimos 5 anos, toda a série e a pior
+  janela de 24 meses.
+- A projeção aplica cada taxa ao total mais recente por 15 anos, sem novas
+  entradas, e calcula em que ano o total voltaria ao nível de antes das duas
+  últimas turmas.
+- A tabela "entre um concurso e outro" compara a perda líquida de cada intervalo
+  sem entradas com o tamanho da turma anterior.
+- Limitações: o SIAPE agregado só mostra o saldo, não quem entrou ou saiu; nos
+  meses de entrada as saídas ficam escondidas. Saída inclui exoneração,
+  aposentadoria e falecimento. A projeção não considera demanda, novas vagas nem
+  mudanças na carreira.
+
 ## Rodar localmente
 
 ```bash

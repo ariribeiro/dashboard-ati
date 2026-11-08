@@ -462,3 +462,20 @@ code { font-size: 0.8125rem; overflow-wrap: anywhere; }
   .legenda-bolhas { display: none; }
   .secao-cabecalho p { margin-left: 0; }
 }
+
+/* ---------------------------------------------------------------- tendência */
+
+.grafico-alto { height: 380px; }
+.painel-sub { margin: 2px 0 0; color: var(--texto-2); font-size: 0.8125rem; }
+.tabela-rolagem { overflow-x: auto; }
+.tabela-fixa { font-size: 0.875rem; margin-top: 10px; }
+.tabela-fixa th { color: var(--texto-3); font-weight: 600; font-size: 0.75rem; vertical-align: bottom; }
+.tabela-fixa th small { font-weight: 400; }
+.tabela-fixa td small, .tabela-fixa th small { display: block; color: var(--texto-3); font-size: 0.75rem; }
+.tabela-fixa .cenario { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; vertical-align: -1px; }
+.metodo { margin-top: 14px; padding: 12px 18px; background: var(--superficie); border: 1px solid var(--borda); border-radius: 14px; }
+.metodo ul { margin: 8px 0 0; padding-left: 18px; }
+.metodo li { margin-bottom: 4px; }
+@media (max-width: 760px) {
+  .grafico-alto { height: 320px; }
+}
