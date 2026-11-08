@@ -1,0 +1,490 @@
+{
+  "referencia": "2024-03",
+  "gerado_em": "2026-11-08T18:18:59+00:00",
+  "fonte": {
+    "nome": "Portal da Transparência — Servidores SIAPE",
+    "url": "https://portaldatransparencia.gov.br/download-de-dados/servidores",
+    "arquivo": "https://portaldatransparencia.gov.br/download-de-dados/servidores/202403_Servidores_SIAPE"
+  },
+  "filtro_cargo": "^ANALISTA TECN(ICO)? (EM|DE) POLITICAS SOCIAIS$",
+  "total": 744,
+  "por_situacao": [
+    {
+      "nome": "ATIVO PERMANENTE",
+      "qtd": 504
+    },
+    {
+      "nome": "ATIVO EM OUTRO ORGAO",
+      "qtd": 240
+    }
+  ],
+  "por_orgao_exercicio": [
+    {
+      "nome": "Ministério da Saúde",
+      "qtd": 253
+    },
+    {
+      "nome": "MIN DESENV ASSIS SOCI FAMIL COMBATE FOME",
+      "qtd": 123
+    },
+    {
+      "nome": "MIN GESTAO E INOV EM SERV PUBLICOS",
+      "qtd": 39
+    },
+    {
+      "nome": "MIN DOS DIR HUM E DA CIDADANIA",
+      "qtd": 36
+    },
+    {
+      "nome": "Defensoria Pública da União",
+      "qtd": 32
+    },
+    {
+      "nome": "MIN DO DESENV AGR E AGRIC FAMILIAR",
+      "qtd": 30
+    },
+    {
+      "nome": "Função Escola Nacional de Administração Pública",
+      "qtd": 27
+    },
+    {
+      "nome": "Ministério da Educação",
+      "qtd": 22
+    },
+    {
+      "nome": "Presidência da República",
+      "qtd": 20
+    },
+    {
+      "nome": "Controladoria-Geral da União",
+      "qtd": 18
+    },
+    {
+      "nome": "MINISTERIO DA PREVIDENCIA SOCIAL",
+      "qtd": 16
+    },
+    {
+      "nome": "MINISTERIO DAS CIDADES",
+      "qtd": 15
+    },
+    {
+      "nome": "Ministério da Justiça e Segurança Pública",
+      "qtd": 15
+    },
+    {
+      "nome": "MINISTERIO DO TRABALHO E EMPREGO",
+      "qtd": 14
+    },
+    {
+      "nome": "MINISTERIO DA CULTURA",
+      "qtd": 13
+    },
+    {
+      "nome": "MINISTERIO DA AGRICULTURA E PECUARIA",
+      "qtd": 12
+    },
+    {
+      "nome": "MIN DESENVOLV IND COMERCIO E SERVICOS",
+      "qtd": 8
+    },
+    {
+      "nome": "MINISTERIO DO ESPORTE",
+      "qtd": 6
+    },
+    {
+      "nome": "MINISTERIO DA IGUALDADE RACIAL",
+      "qtd": 5
+    },
+    {
+      "nome": "Fundação Oswaldo Cruz",
+      "qtd": 4
+    },
+    {
+      "nome": "MINISTERIO DO PLANEJAMENTO E ORCAMENTO",
+      "qtd": 4
+    },
+    {
+      "nome": "Conselho Administrativo de Defesa Econômica",
+      "qtd": 4
+    },
+    {
+      "nome": "MINISTERIO DAS MULHERES",
+      "qtd": 3
+    },
+    {
+      "nome": "ADVOCACIA-GERAL DA UNIAO",
+      "qtd": 2
+    },
+    {
+      "nome": "Instituto do Patrimônio Histórico e Artístico Nacional",
+      "qtd": 2
+    },
+    {
+      "nome": "Tribunal Regional Eleitoral - DF",
+      "qtd": 2
+    },
+    {
+      "nome": "Fundação Nacional do Índio",
+      "qtd": 2
+    },
+    {
+      "nome": "MINISTERIO DA FAZENDA",
+      "qtd": 2
+    },
+    {
+      "nome": "Poder Executivo Federal",
+      "qtd": 2
+    },
+    {
+      "nome": "Câmara dos Deputados",
+      "qtd": 2
+    },
+    {
+      "nome": "Universidade Federal da Bahia",
+      "qtd": 1
+    },
+    {
+      "nome": "CONSELHO NACIONAL DE JUSTICA",
+      "qtd": 1
+    },
+    {
+      "nome": "Tribunal Superior do Trabalho",
+      "qtd": 1
+    },
+    {
+      "nome": "Empresa Brasileira de Correios e Telégrafos",
+      "qtd": 1
+    },
+    {
+      "nome": "MINISTERIO DAS COMUNICACOES",
+      "qtd": 1
+    },
+    {
+      "nome": "Tribunal Regional Eleitoral - PE",
+      "qtd": 1
+    },
+    {
+      "nome": "Agência Nacional de Águas",
+      "qtd": 1
+    },
+    {
+      "nome": "MINISTERIO DOS POVOS INDIGENAS",
+      "qtd": 1
+    },
+    {
+      "nome": "Instituto Nacional de Colonização e Reforma Agrária",
+      "qtd": 1
+    },
+    {
+      "nome": "MINISTERIO DO MEIO AMBIENTE",
+      "qtd": 1
+    },
+    {
+      "nome": "Universidade Federal Fluminense - RJ",
+      "qtd": 1
+    }
+  ],
+  "por_orgao_lotacao": [
+    {
+      "nome": "Ministério da Saúde",
+      "qtd": 368
+    },
+    {
+      "nome": "MIN DESENV ASSIS SOCI FAMIL COMBATE FOME",
+      "qtd": 178
+    },
+    {
+      "nome": "Ministério da Justiça e Segurança Pública",
+      "qtd": 31
+    },
+    {
+      "nome": "Ministério da Educação",
+      "qtd": 29
+    },
+    {
+      "nome": "MINISTERIO DA AGRICULTURA E PECUARIA",
+      "qtd": 26
+    },
+    {
+      "nome": "MINISTERIO DO TRABALHO E EMPREGO",
+      "qtd": 20
+    },
+    {
+      "nome": "MIN DOS DIR HUM E DA CIDADANIA",
+      "qtd": 19
+    },
+    {
+      "nome": "MINISTERIO DA PREVIDENCIA SOCIAL",
+      "qtd": 17
+    },
+    {
+      "nome": "MINISTERIO DAS CIDADES",
+      "qtd": 13
+    },
+    {
+      "nome": "MIN DO DESENV AGR E AGRIC FAMILIAR",
+      "qtd": 12
+    },
+    {
+      "nome": "MINISTERIO DAS MULHERES",
+      "qtd": 11
+    },
+    {
+      "nome": "MINISTERIO DA CULTURA",
+      "qtd": 7
+    },
+    {
+      "nome": "MIN GESTAO E INOV EM SERV PUBLICOS",
+      "qtd": 6
+    },
+    {
+      "nome": "MINISTERIO DA IGUALDADE RACIAL",
+      "qtd": 4
+    },
+    {
+      "nome": "Poder Executivo Federal",
+      "qtd": 2
+    },
+    {
+      "nome": "MINISTERIO DA FAZENDA",
+      "qtd": 1
+    }
+  ],
+  "por_uf": [
+    {
+      "nome": "DF",
+      "qtd": 374
+    },
+    {
+      "nome": "Não informado",
+      "qtd": 273
+    },
+    {
+      "nome": "RJ",
+      "qtd": 16
+    },
+    {
+      "nome": "MG",
+      "qtd": 9
+    },
+    {
+      "nome": "SC",
+      "qtd": 7
+    },
+    {
+      "nome": "CE",
+      "qtd": 6
+    },
+    {
+      "nome": "BA",
+      "qtd": 6
+    },
+    {
+      "nome": "PR",
+      "qtd": 5
+    },
+    {
+      "nome": "RS",
+      "qtd": 5
+    },
+    {
+      "nome": "PE",
+      "qtd": 5
+    },
+    {
+      "nome": "GO",
+      "qtd": 5
+    },
+    {
+      "nome": "SP",
+      "qtd": 5
+    },
+    {
+      "nome": "PB",
+      "qtd": 4
+    },
+    {
+      "nome": "PA",
+      "qtd": 3
+    },
+    {
+      "nome": "AM",
+      "qtd": 3
+    },
+    {
+      "nome": "TO",
+      "qtd": 3
+    },
+    {
+      "nome": "RN",
+      "qtd": 2
+    },
+    {
+      "nome": "ES",
+      "qtd": 2
+    },
+    {
+      "nome": "MT",
+      "qtd": 2
+    },
+    {
+      "nome": "AP",
+      "qtd": 2
+    },
+    {
+      "nome": "MA",
+      "qtd": 1
+    },
+    {
+      "nome": "RR",
+      "qtd": 1
+    },
+    {
+      "nome": "AC",
+      "qtd": 1
+    },
+    {
+      "nome": "AL",
+      "qtd": 1
+    },
+    {
+      "nome": "SE",
+      "qtd": 1
+    },
+    {
+      "nome": "PI",
+      "qtd": 1
+    },
+    {
+      "nome": "RO",
+      "qtd": 1
+    }
+  ],
+  "por_classe_padrao": [
+    {
+      "classe": "A",
+      "padrao": "I",
+      "qtd": 2
+    },
+    {
+      "classe": "A",
+      "padrao": "IV",
+      "qtd": 4
+    },
+    {
+      "classe": "A",
+      "padrao": "V",
+      "qtd": 11
+    },
+    {
+      "classe": "B",
+      "padrao": "I",
+      "qtd": 11
+    },
+    {
+      "classe": "B",
+      "padrao": "II",
+      "qtd": 33
+    },
+    {
+      "classe": "B",
+      "padrao": "III",
+      "qtd": 22
+    },
+    {
+      "classe": "B",
+      "padrao": "IV",
+      "qtd": 10
+    },
+    {
+      "classe": "B",
+      "padrao": "V",
+      "qtd": 162
+    },
+    {
+      "classe": "B",
+      "padrao": "VI",
+      "qtd": 489
+    }
+  ],
+  "funcao": {
+    "com_funcao": 391,
+    "por_sigla": [
+      {
+        "nome": "FEX",
+        "qtd": 362
+      },
+      {
+        "nome": "CCX",
+        "qtd": 27
+      },
+      {
+        "nome": "CCT",
+        "qtd": 1
+      },
+      {
+        "nome": "RGA",
+        "qtd": 1
+      }
+    ]
+  },
+  "remuneracao_basica_bruta": {
+    "n": 715,
+    "media": 16030.65,
+    "mediana": 16055.26,
+    "p10": 13134.29,
+    "p90": 20391.26,
+    "histograma": [
+      {
+        "min": 0,
+        "max": 10000,
+        "qtd": 8
+      },
+      {
+        "min": 10000,
+        "max": 12500,
+        "qtd": 43
+      },
+      {
+        "min": 12500,
+        "max": 15000,
+        "qtd": 247
+      },
+      {
+        "min": 15000,
+        "max": 17500,
+        "qtd": 254
+      },
+      {
+        "min": 17500,
+        "max": 20000,
+        "qtd": 68
+      },
+      {
+        "min": 20000,
+        "max": 22500,
+        "qtd": 77
+      },
+      {
+        "min": 22500,
+        "max": 25000,
+        "qtd": 18
+      },
+      {
+        "min": 25000,
+        "max": 30000,
+        "qtd": 0
+      },
+      {
+        "min": 30000,
+        "max": 35000,
+        "qtd": 0
+      },
+      {
+        "min": 35000,
+        "max": null,
+        "qtd": 0
+      }
+    ]
+  }
+}
