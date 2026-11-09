@@ -1,0 +1,294 @@
+{
+  "referencia": "2024-04",
+  "gerado_em": "2026-11-09T00:13:01+00:00",
+  "fonte": {
+    "nome": "Portal da Transparência — Servidores SIAPE",
+    "url": "https://portaldatransparencia.gov.br/download-de-dados/servidores",
+    "arquivo": "https://portaldatransparencia.gov.br/download-de-dados/servidores/202404_Servidores_SIAPE"
+  },
+  "filtro_cargo": "^ANALISTA (DE )?COM(ERCIO)? EXT(ERIOR)?$",
+  "total": 385,
+  "por_situacao": [
+    {
+      "nome": "ATIVO PERMANENTE",
+      "qtd": 312
+    },
+    {
+      "nome": "ATIVO EM OUTRO ORGAO",
+      "qtd": 73
+    }
+  ],
+  "por_orgao_exercicio": [
+    {
+      "nome": "MIN DESENVOLV IND COMERCIO E SERVICOS",
+      "qtd": 276
+    },
+    {
+      "nome": "MINISTERIO DA AGRICULTURA E PECUARIA",
+      "qtd": 17
+    },
+    {
+      "nome": "MINISTERIO DA FAZENDA",
+      "qtd": 15
+    },
+    {
+      "nome": "MINISTERIO DO PLANEJAMENTO E ORCAMENTO",
+      "qtd": 15
+    },
+    {
+      "nome": "MIN EMPREEND MICROEMP EMP PEQUENO PORTE",
+      "qtd": 9
+    },
+    {
+      "nome": "MIN GESTAO E INOV EM SERV PUBLICOS",
+      "qtd": 9
+    },
+    {
+      "nome": "Presidência da República",
+      "qtd": 6
+    },
+    {
+      "nome": "Ministério da Economia",
+      "qtd": 5
+    },
+    {
+      "nome": "Conselho Administrativo de Defesa Econômica",
+      "qtd": 4
+    },
+    {
+      "nome": "MINISTERIO DA DEFESA",
+      "qtd": 4
+    },
+    {
+      "nome": "Estados / Municípios / Empresas",
+      "qtd": 4
+    },
+    {
+      "nome": "MINISTERIO DA PESCA E AQUICULTURA",
+      "qtd": 3
+    },
+    {
+      "nome": "Ministério de Minas e Energia",
+      "qtd": 3
+    },
+    {
+      "nome": "Fundação de Previdência Complementar do Servidor Público Federal",
+      "qtd": 2
+    },
+    {
+      "nome": "MIN DO DESENV AGR E AGRIC FAMILIAR",
+      "qtd": 2
+    },
+    {
+      "nome": "Câmara dos Deputados",
+      "qtd": 2
+    },
+    {
+      "nome": "Controladoria-Geral da União",
+      "qtd": 2
+    },
+    {
+      "nome": "Função Escola Nacional de Administração Pública",
+      "qtd": 1
+    },
+    {
+      "nome": "Governo do Estado do Rio Grande do Sul",
+      "qtd": 1
+    },
+    {
+      "nome": "ADVOCACIA-GERAL DA UNIAO",
+      "qtd": 1
+    },
+    {
+      "nome": "MINISTERIO DA CULTURA",
+      "qtd": 1
+    },
+    {
+      "nome": "MINISTERIO DO MEIO AMBIENTE",
+      "qtd": 1
+    },
+    {
+      "nome": "Estados / Municípios / Administração Direta Autárquica e Fundacional",
+      "qtd": 1
+    },
+    {
+      "nome": "MINISTERIO DO ESPORTE",
+      "qtd": 1
+    }
+  ],
+  "por_orgao_lotacao": [
+    {
+      "nome": "MIN DESENVOLV IND COMERCIO E SERVICOS",
+      "qtd": 351
+    },
+    {
+      "nome": "MINISTERIO DA AGRICULTURA E PECUARIA",
+      "qtd": 16
+    },
+    {
+      "nome": "MINISTERIO DA FAZENDA",
+      "qtd": 8
+    },
+    {
+      "nome": "Ministério da Economia",
+      "qtd": 5
+    },
+    {
+      "nome": "MINISTERIO DA PESCA E AQUICULTURA",
+      "qtd": 3
+    },
+    {
+      "nome": "MIN DO DESENV AGR E AGRIC FAMILIAR",
+      "qtd": 2
+    }
+  ],
+  "por_uf": [
+    {
+      "nome": "DF",
+      "qtd": 273
+    },
+    {
+      "nome": "Não informado",
+      "qtd": 101
+    },
+    {
+      "nome": "RJ",
+      "qtd": 4
+    },
+    {
+      "nome": "MG",
+      "qtd": 4
+    },
+    {
+      "nome": "RS",
+      "qtd": 2
+    },
+    {
+      "nome": "PR",
+      "qtd": 1
+    }
+  ],
+  "por_classe_padrao": [
+    {
+      "classe": "B",
+      "padrao": "I",
+      "qtd": 1
+    },
+    {
+      "classe": "B",
+      "padrao": "III",
+      "qtd": 4
+    },
+    {
+      "classe": "C",
+      "padrao": "I",
+      "qtd": 21
+    },
+    {
+      "classe": "C",
+      "padrao": "II",
+      "qtd": 45
+    },
+    {
+      "classe": "C",
+      "padrao": "III",
+      "qtd": 60
+    },
+    {
+      "classe": "S",
+      "padrao": "I",
+      "qtd": 47
+    },
+    {
+      "classe": "S",
+      "padrao": "II",
+      "qtd": 32
+    },
+    {
+      "classe": "S",
+      "padrao": "III",
+      "qtd": 1
+    },
+    {
+      "classe": "S",
+      "padrao": "IV",
+      "qtd": 174
+    }
+  ],
+  "funcao": {
+    "com_funcao": 221,
+    "por_sigla": [
+      {
+        "nome": "FEX",
+        "qtd": 207
+      },
+      {
+        "nome": "CCX",
+        "qtd": 13
+      },
+      {
+        "nome": "FGR",
+        "qtd": 1
+      }
+    ]
+  },
+  "remuneracao_basica_bruta": {
+    "n": 374,
+    "media": 31296.0,
+    "mediana": 30133.82,
+    "p10": 26911.05,
+    "p90": 36617.08,
+    "histograma": [
+      {
+        "min": 0,
+        "max": 20000,
+        "qtd": 0
+      },
+      {
+        "min": 20000,
+        "max": 25000,
+        "qtd": 0
+      },
+      {
+        "min": 25000,
+        "max": 27500,
+        "qtd": 54
+      },
+      {
+        "min": 27500,
+        "max": 30000,
+        "qtd": 129
+      },
+      {
+        "min": 30000,
+        "max": 32500,
+        "qtd": 72
+      },
+      {
+        "min": 32500,
+        "max": 35000,
+        "qtd": 56
+      },
+      {
+        "min": 35000,
+        "max": 37500,
+        "qtd": 48
+      },
+      {
+        "min": 37500,
+        "max": 40000,
+        "qtd": 14
+      },
+      {
+        "min": 40000,
+        "max": 45000,
+        "qtd": 1
+      },
+      {
+        "min": 45000,
+        "max": null,
+        "qtd": 0
+      }
+    ]
+  }
+}
