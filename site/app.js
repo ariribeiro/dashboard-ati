@@ -7,10 +7,11 @@ let P = "ATIs"; // plural da sigla, usado nos textos
 let CFG = {}; // entrada da carreira em data/carreiras.json
 // Rótulo de exibição da classe (no SIAPE, "S" é a classe Especial em algumas carreiras).
 const rotuloClasse = (c) => CFG.classes?.[c] ?? c;
-const FAVICON_NEUTRO = "data:image/svg+xml," + encodeURIComponent(
-  '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="#0D2B5C"/>' +
+// Favicon das carreiras sem marca própria: barras sobre a tinta, a mais alta na cor da carreira.
+const faviconNeutro = (cor) => "data:image/svg+xml," + encodeURIComponent(
+  '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="#17393B"/>' +
   '<rect x="14" y="34" width="8" height="16" rx="2" fill="#fff"/><rect x="28" y="24" width="8" height="26" rx="2" fill="#fff"/>' +
-  '<rect x="42" y="14" width="8" height="36" rx="2" fill="#F4C400"/></svg>');
+  `<rect x="42" y="14" width="8" height="36" rx="2" fill="${cor}"/></svg>`);
 const TOP_ORGAOS = 15;
 
 const fmtInt = new Intl.NumberFormat("pt-BR");
@@ -897,7 +898,11 @@ function aplicarCarreira(carreiras) {
   for (const el of document.querySelectorAll("[data-sigla]")) el.textContent = c.sigla;
   for (const el of document.querySelectorAll("[data-plural]")) el.textContent = c.plural;
   for (const el of document.querySelectorAll("[data-nome-plural]")) el.textContent = c.nome_plural;
-  if (c.marca !== "ati") document.getElementById("favicon").href = FAVICON_NEUTRO;
+  if (c.cores) {
+    const raiz = document.documentElement.style;
+    for (const [nome, cor] of Object.entries(c.cores)) raiz.setProperty(`--cor-${nome}`, cor);
+  }
+  if (c.marca !== "ati") document.getElementById("favicon").href = faviconNeutro(c.cores?.clara ?? "#F4C400");
 
   const sel = document.getElementById("carreira");
   for (const [slug, cfg] of Object.entries(carreiras)) sel.add(new Option(cfg.sigla, slug));

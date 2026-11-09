@@ -43,7 +43,7 @@ ARQ_CARREIRAS = DIR_DADOS / "carreiras.json"
 
 URL_DOWNLOAD = "https://portaldatransparencia.gov.br/download-de-dados/servidores/{mes}_Servidores_SIAPE"
 URL_PAGINA = "https://portaldatransparencia.gov.br/download-de-dados/servidores"
-USER_AGENT = "Mozilla/5.0 (dashboard-carreiras; +https://github.com/ariribeiro/dashboard-ati)"
+USER_AGENT = "Mozilla/5.0 (dashboard-carreiras; +https://github.com/ariribeiro/dashboard-carreiras)"
 
 COLS_CADASTRO = [
     "Id_SERVIDOR_PORTAL", "DESCRICAO_CARGO", "CLASSE_CARGO", "PADRAO_CARGO",

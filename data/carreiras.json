@@ -9,6 +9,11 @@
     "ingresso": {
       "classe": "A",
       "padrao": "I"
+    },
+    "cores": {
+      "destaque": "#4C74EF",
+      "clara": "#F4C400",
+      "forte": "#0D2B5C"
     }
   },
   "atps": {
@@ -21,6 +26,11 @@
     "ingresso": {
       "classe": "A",
       "padrao": "I"
+    },
+    "cores": {
+      "destaque": "#DC3525",
+      "clara": "#F7867B",
+      "forte": "#C02A1C"
     }
   },
   "eppgg": {
@@ -45,7 +55,12 @@
       37500,
       40000,
       45000
-    ]
+    ],
+    "cores": {
+      "destaque": "#229136",
+      "clara": "#54C36C",
+      "forte": "#1B7A2E"
+    }
   },
   "ace": {
     "sigla": "ACE",
@@ -69,7 +84,12 @@
       37500,
       40000,
       45000
-    ]
+    ],
+    "cores": {
+      "destaque": "#F4DA27",
+      "clara": "#F4DA27",
+      "forte": "#7A6800"
+    }
   },
   "aie": {
     "sigla": "AIE",
@@ -93,6 +113,11 @@
       32500,
       35000,
       40000
-    ]
+    ],
+    "cores": {
+      "destaque": "#EFA22A",
+      "clara": "#F5A83A",
+      "forte": "#9A5600"
+    }
   }
 }

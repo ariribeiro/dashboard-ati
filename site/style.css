@@ -186,6 +186,32 @@ body {
 .faixa-marca span:nth-child(2) { background: var(--marca-amarelo); }
 .faixa-marca span:nth-child(3) { background: #2563B0; }
 
+/* Cores de cada carreira (data/carreiras.json → "cores", aplicadas pelo app.js):
+   destaque = cor da pétala da carreira (faixa, brilho do cabeçalho, cartões);
+   clara = acento sobre fundo escuro (cabeçalho e modo escuro);
+   forte = acento sobre fundo claro. Carreiras sem marca própria usam o
+   cabeçalho em tinta verde-petróleo com o brilho da sua cor. */
+:root {
+  --tinta: #17393B;
+  --cor-destaque: #4C74EF;
+  --cor-clara: #F4C400;
+  --cor-forte: #0D2B5C;
+}
+:root[data-marca="neutra"] {
+  --marca-amarelo: var(--cor-clara);
+  --marca-texto: var(--cor-forte);
+  --topo-fundo:
+    radial-gradient(ellipse 60% 120% at 100% 0%, color-mix(in srgb, var(--cor-destaque) 42%, transparent), transparent 70%),
+    linear-gradient(135deg, var(--tinta) 0%, #1F4A4C 100%);
+}
+:root[data-theme="dark"][data-marca="neutra"] { --marca-texto: var(--cor-clara); }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"])[data-marca="neutra"] { --marca-texto: var(--cor-clara); }
+}
+[data-marca="neutra"] .faixa-marca span { background: var(--cor-destaque); }
+[data-marca="neutra"] .faixa-marca span:nth-child(2) { background: var(--cor-clara); }
+.faixa-marca.faixa-carreiras span:nth-child(n) { background: var(--cor); }
+
 .controles { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin-left: auto; }
 .selo {
   font-size: 0.8125rem;
@@ -492,7 +518,7 @@ code { font-size: 0.8125rem; overflow-wrap: anywhere; }
   padding: 22px;
   background: var(--superficie);
   border: 1px solid var(--borda);
-  border-top: 4px solid var(--geral);
+  border-top: 4px solid var(--cor-destaque);
   border-radius: 14px;
   box-shadow: var(--sombra);
   color: var(--texto);
@@ -501,7 +527,9 @@ code { font-size: 0.8125rem; overflow-wrap: anywhere; }
 }
 .cartao-carreira:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(11, 11, 11, 0.08); }
 .cartao-carreira:focus-visible { outline: 2px solid var(--carreira); outline-offset: 2px; }
-.cartao-sigla { font-family: "Montserrat", system-ui, sans-serif; font-weight: 800; font-size: 2.25rem; line-height: 1; color: var(--marca-texto); }
+.cartao-sigla { font-family: "Montserrat", system-ui, sans-serif; font-weight: 800; font-size: 2.25rem; line-height: 1; color: var(--cor-forte); }
+:root[data-theme="dark"] .cartao-sigla { color: var(--cor-clara); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .cartao-sigla { color: var(--cor-clara); } }
 .cartao-nome { font-weight: 600; }
 .cartao-numeros { color: var(--texto-2); font-size: 0.875rem; }
 .cartao-acao { margin-top: 8px; color: var(--carreira); font-weight: 600; font-size: 0.875rem; }

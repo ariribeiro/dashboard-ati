@@ -8,8 +8,8 @@
   <meta property="og:type" content="website">
   <meta property="og:title" content="Painel de carreiras do Executivo Federal">
   <meta property="og:description" content="Quantos são, onde trabalham, carreira e remuneração. Dados do Portal da Transparência, atualizados todo mês.">
-  <meta property="og:url" content="https://ariribeiro.github.io/dashboard-ati/painel.html">
-  <meta property="og:image" content="https://ariribeiro.github.io/dashboard-ati/og.png">
+  <meta property="og:url" content="https://ariribeiro.github.io/dashboard-carreiras/painel.html">
+  <meta property="og:image" content="https://ariribeiro.github.io/dashboard-carreiras/og.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
@@ -28,6 +28,15 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.3/MarkerCluster.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.3/leaflet.markercluster.js"></script>
+  <!-- Estatísticas de acesso anônimas, sem cookies (GoatCounter). Visitas que chegam por um
+       link curto (/ace/, /ati/…) já foram contadas lá, com a origem original. -->
+  <script>
+    window.goatcounter = { no_onload: (() => {
+      try { const r = new URL(document.referrer); return r.origin === location.origin && /^\/[\w-]+\/[a-z]+\/$/.test(r.pathname); }
+      catch (e) { return false; }
+    })() };
+  </script>
+  <script data-goatcounter="https://ariribeiro.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 </head>
 <body>
   <div class="barra" id="barra" inert>
@@ -232,7 +241,7 @@
       Mapa: © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>.
     </p>
     <p>
-      Cargo filtrado: <code id="filtro"></code>. Somente dados agregados; nenhum dado individual é publicado.
+      Cargo filtrado: <code id="filtro"></code>. Somente dados agregados; nenhum dado individual é publicado. Estatísticas de acesso anônimas, sem cookies.
     </p>
     <p class="autoria">
       Desenvolvido por <strong>Ari Ribeiro</strong>, Analista em Tecnologia da Informação ·
