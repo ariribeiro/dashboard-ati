@@ -1,6 +1,78 @@
 {
-  "atualizado_em": "2026-11-09T01:04:37+00:00",
+  "atualizado_em": "2026-11-09T01:09:09+00:00",
   "meses": [
+    {
+      "mes": "2016-01",
+      "arquivo": "201601.json",
+      "total": 425,
+      "mediana": 18183.07
+    },
+    {
+      "mes": "2016-02",
+      "arquivo": "201602.json",
+      "total": 423,
+      "mediana": 18183.07
+    },
+    {
+      "mes": "2016-03",
+      "arquivo": "201603.json",
+      "total": 423,
+      "mediana": 18507.33
+    },
+    {
+      "mes": "2016-04",
+      "arquivo": "201604.json",
+      "total": 423,
+      "mediana": 18546.73
+    },
+    {
+      "mes": "2016-05",
+      "arquivo": "201605.json",
+      "total": 423,
+      "mediana": 18917.67
+    },
+    {
+      "mes": "2016-06",
+      "arquivo": "201606.json",
+      "total": 423,
+      "mediana": 18507.33
+    },
+    {
+      "mes": "2016-07",
+      "arquivo": "201607.json",
+      "total": 423,
+      "mediana": 18546.73
+    },
+    {
+      "mes": "2016-08",
+      "arquivo": "201608.json",
+      "total": 423,
+      "mediana": 19566.8
+    },
+    {
+      "mes": "2016-09",
+      "arquivo": "201609.json",
+      "total": 423,
+      "mediana": 20349.44
+    },
+    {
+      "mes": "2016-10",
+      "arquivo": "201610.json",
+      "total": 423,
+      "mediana": 20349.44
+    },
+    {
+      "mes": "2016-11",
+      "arquivo": "201611.json",
+      "total": 423,
+      "mediana": 20349.44
+    },
+    {
+      "mes": "2016-12",
+      "arquivo": "201612.json",
+      "total": 422,
+      "mediana": 20357.3
+    },
     {
       "mes": "2017-01",
       "arquivo": "201701.json",

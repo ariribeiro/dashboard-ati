@@ -1,0 +1,262 @@
+{
+  "referencia": "2016-01",
+  "gerado_em": "2026-11-09T01:06:29+00:00",
+  "fonte": {
+    "nome": "Portal da Transparência — Servidores SIAPE",
+    "url": "https://portaldatransparencia.gov.br/download-de-dados/servidores",
+    "arquivo": "https://portaldatransparencia.gov.br/download-de-dados/servidores/201601_Servidores_SIAPE"
+  },
+  "filtro_cargo": "^ANALISTA (DE )?COM(ERCIO)? EXT(ERIOR)?$",
+  "total": 425,
+  "por_situacao": [
+    {
+      "nome": "ATIVO PERMANENTE",
+      "qtd": 402
+    },
+    {
+      "nome": "ATIVO EM OUTRO ORGAO",
+      "qtd": 23
+    }
+  ],
+  "por_orgao_exercicio": [
+    {
+      "nome": "Ministério da Indústria, Comércio Exterior e Serviços",
+      "qtd": 346
+    },
+    {
+      "nome": "Ministério da Agricultura, Pecuária e Abastecimento",
+      "qtd": 20
+    },
+    {
+      "nome": "Presidência da República",
+      "qtd": 17
+    },
+    {
+      "nome": "Ministério da Economia",
+      "qtd": 15
+    },
+    {
+      "nome": "Ministério do Planejamento, Desenvolvimento e Gestão",
+      "qtd": 8
+    },
+    {
+      "nome": "Ministério do Desenvolvimento Agrário",
+      "qtd": 4
+    },
+    {
+      "nome": "Governo do Distrito Federal",
+      "qtd": 3
+    },
+    {
+      "nome": "Ministério da Pesca e Aquicultura",
+      "qtd": 3
+    },
+    {
+      "nome": "Ministério do Meio Ambiente",
+      "qtd": 2
+    },
+    {
+      "nome": "Ministério da Ciência, Tecnologia, Inovações e Comunicações",
+      "qtd": 2
+    },
+    {
+      "nome": "Conselho Administrativo de Defesa Econômica",
+      "qtd": 1
+    },
+    {
+      "nome": "Instituto Nacional da Propriedade Industrial",
+      "qtd": 1
+    },
+    {
+      "nome": "Advocacia-Geral da União",
+      "qtd": 1
+    },
+    {
+      "nome": "Instituto Nacional de Metrologia, Qualidade e Tecnologia",
+      "qtd": 1
+    },
+    {
+      "nome": "Controladoria-Geral da União",
+      "qtd": 1
+    }
+  ],
+  "por_orgao_lotacao": [
+    {
+      "nome": "Ministério da Indústria, Comércio Exterior e Serviços",
+      "qtd": 370
+    },
+    {
+      "nome": "Ministério da Agricultura, Pecuária e Abastecimento",
+      "qtd": 18
+    },
+    {
+      "nome": "Ministério da Economia",
+      "qtd": 15
+    },
+    {
+      "nome": "Presidência da República",
+      "qtd": 12
+    },
+    {
+      "nome": "Ministério do Planejamento, Desenvolvimento e Gestão",
+      "qtd": 6
+    },
+    {
+      "nome": "Ministério do Desenvolvimento Agrário",
+      "qtd": 4
+    }
+  ],
+  "por_uf": [
+    {
+      "nome": "Não informado",
+      "qtd": 425
+    }
+  ],
+  "por_classe_padrao": [
+    {
+      "classe": "A",
+      "padrao": "I",
+      "qtd": 80
+    },
+    {
+      "classe": "A",
+      "padrao": "II",
+      "qtd": 97
+    },
+    {
+      "classe": "A",
+      "padrao": "III",
+      "qtd": 40
+    },
+    {
+      "classe": "B",
+      "padrao": "I",
+      "qtd": 2
+    },
+    {
+      "classe": "B",
+      "padrao": "II",
+      "qtd": 1
+    },
+    {
+      "classe": "B",
+      "padrao": "III",
+      "qtd": 25
+    },
+    {
+      "classe": "C",
+      "padrao": "I",
+      "qtd": 3
+    },
+    {
+      "classe": "C",
+      "padrao": "II",
+      "qtd": 2
+    },
+    {
+      "classe": "C",
+      "padrao": "III",
+      "qtd": 5
+    },
+    {
+      "classe": "S",
+      "padrao": "I",
+      "qtd": 30
+    },
+    {
+      "classe": "S",
+      "padrao": "II",
+      "qtd": 30
+    },
+    {
+      "classe": "S",
+      "padrao": "III",
+      "qtd": 34
+    },
+    {
+      "classe": "S",
+      "padrao": "IV",
+      "qtd": 76
+    }
+  ],
+  "funcao": {
+    "com_funcao": 130,
+    "por_sigla": [
+      {
+        "nome": "DAS",
+        "qtd": 124
+      },
+      {
+        "nome": "FGR",
+        "qtd": 4
+      },
+      {
+        "nome": "GT",
+        "qtd": 1
+      },
+      {
+        "nome": "RGA",
+        "qtd": 1
+      }
+    ]
+  },
+  "remuneracao_basica_bruta": {
+    "n": 416,
+    "media": 19288.74,
+    "mediana": 18183.07,
+    "p10": 15003.7,
+    "p90": 25200.68,
+    "histograma": [
+      {
+        "min": 0,
+        "max": 20000,
+        "qtd": 226
+      },
+      {
+        "min": 20000,
+        "max": 25000,
+        "qtd": 145
+      },
+      {
+        "min": 25000,
+        "max": 27500,
+        "qtd": 35
+      },
+      {
+        "min": 27500,
+        "max": 30000,
+        "qtd": 10
+      },
+      {
+        "min": 30000,
+        "max": 32500,
+        "qtd": 0
+      },
+      {
+        "min": 32500,
+        "max": 35000,
+        "qtd": 0
+      },
+      {
+        "min": 35000,
+        "max": 37500,
+        "qtd": 0
+      },
+      {
+        "min": 37500,
+        "max": 40000,
+        "qtd": 0
+      },
+      {
+        "min": 40000,
+        "max": 45000,
+        "qtd": 0
+      },
+      {
+        "min": 45000,
+        "max": null,
+        "qtd": 0
+      }
+    ]
+  }
+}

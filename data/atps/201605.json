@@ -1,0 +1,271 @@
+{
+  "referencia": "2016-05",
+  "gerado_em": "2026-11-09T01:07:26+00:00",
+  "fonte": {
+    "nome": "Portal da Transparência — Servidores SIAPE",
+    "url": "https://portaldatransparencia.gov.br/download-de-dados/servidores",
+    "arquivo": "https://portaldatransparencia.gov.br/download-de-dados/servidores/201605_Servidores_SIAPE"
+  },
+  "filtro_cargo": "^ANALISTA TECN(ICO)? (EM|DE) POLITICAS SOCIAIS$",
+  "total": 772,
+  "por_situacao": [
+    {
+      "nome": "ATIVO PERMANENTE",
+      "qtd": 722
+    },
+    {
+      "nome": "ATIVO EM OUTRO ORGAO",
+      "qtd": 50
+    }
+  ],
+  "por_orgao_exercicio": [
+    {
+      "nome": "Ministério da Saúde",
+      "qtd": 336
+    },
+    {
+      "nome": "Ministério do Desenvolvimento Social",
+      "qtd": 189
+    },
+    {
+      "nome": "Ministério da Justiça e Segurança Pública",
+      "qtd": 45
+    },
+    {
+      "nome": "Presidência da República",
+      "qtd": 37
+    },
+    {
+      "nome": "Ministério do Desenvolvimento Agrário",
+      "qtd": 36
+    },
+    {
+      "nome": "Ministério da Educação",
+      "qtd": 31
+    },
+    {
+      "nome": "Ministério do Trabalho e Emprego",
+      "qtd": 29
+    },
+    {
+      "nome": "Ministério da Previdência Social",
+      "qtd": 21
+    },
+    {
+      "nome": "Ministério das Cidades",
+      "qtd": 12
+    },
+    {
+      "nome": "Ministério da Cultura",
+      "qtd": 8
+    },
+    {
+      "nome": "Controladoria-Geral da União",
+      "qtd": 7
+    },
+    {
+      "nome": "Ministério do Planejamento, Desenvolvimento e Gestão",
+      "qtd": 3
+    },
+    {
+      "nome": "Fundação Nacional do Índio",
+      "qtd": 3
+    },
+    {
+      "nome": "Governo do Distrito Federal",
+      "qtd": 2
+    },
+    {
+      "nome": "Instituto Nacional de Colonização e Reforma Agrária",
+      "qtd": 2
+    },
+    {
+      "nome": "Vice Presidência da República",
+      "qtd": 1
+    },
+    {
+      "nome": "Ministério da Economia",
+      "qtd": 1
+    },
+    {
+      "nome": "Autoridade Pública Olímpica",
+      "qtd": 1
+    },
+    {
+      "nome": "Ministério da Ciência, Tecnologia, Inovações e Comunicações",
+      "qtd": 1
+    },
+    {
+      "nome": "Função Escola Nacional de Administração Pública",
+      "qtd": 1
+    },
+    {
+      "nome": "Caixa Econômica Federal",
+      "qtd": 1
+    },
+    {
+      "nome": "Instituto do Patrimônio Histórico e Artístico Nacional",
+      "qtd": 1
+    },
+    {
+      "nome": "Empresa Brasileira de Serviços Hospitalares",
+      "qtd": 1
+    },
+    {
+      "nome": "Prefeitura Municipal",
+      "qtd": 1
+    },
+    {
+      "nome": "Defensoria Pública da União",
+      "qtd": 1
+    },
+    {
+      "nome": "Câmara dos Deputados",
+      "qtd": 1
+    }
+  ],
+  "por_orgao_lotacao": [
+    {
+      "nome": "Ministério da Saúde",
+      "qtd": 366
+    },
+    {
+      "nome": "Ministério do Desenvolvimento Social",
+      "qtd": 191
+    },
+    {
+      "nome": "Ministério da Justiça e Segurança Pública",
+      "qtd": 47
+    },
+    {
+      "nome": "Ministério do Desenvolvimento Agrário",
+      "qtd": 40
+    },
+    {
+      "nome": "Ministério da Educação",
+      "qtd": 32
+    },
+    {
+      "nome": "Ministério do Trabalho e Emprego",
+      "qtd": 29
+    },
+    {
+      "nome": "Presidência da República",
+      "qtd": 26
+    },
+    {
+      "nome": "Ministério da Previdência Social",
+      "qtd": 21
+    },
+    {
+      "nome": "Ministério das Cidades",
+      "qtd": 13
+    },
+    {
+      "nome": "Ministério da Cultura",
+      "qtd": 7
+    }
+  ],
+  "por_uf": [
+    {
+      "nome": "Não informado",
+      "qtd": 772
+    }
+  ],
+  "por_classe_padrao": [
+    {
+      "classe": "A",
+      "padrao": "I",
+      "qtd": 31
+    },
+    {
+      "classe": "A",
+      "padrao": "II",
+      "qtd": 741
+    }
+  ],
+  "funcao": {
+    "com_funcao": 227,
+    "por_sigla": [
+      {
+        "nome": "DAS",
+        "qtd": 175
+      },
+      {
+        "nome": "FGR",
+        "qtd": 38
+      },
+      {
+        "nome": "RGA",
+        "qtd": 12
+      },
+      {
+        "nome": "GF",
+        "qtd": 1
+      },
+      {
+        "nome": "FGE",
+        "qtd": 1
+      }
+    ]
+  },
+  "remuneracao_basica_bruta": {
+    "n": 766,
+    "media": 7470.0,
+    "mediana": 6717.12,
+    "p10": 6717.12,
+    "p90": 9530.39,
+    "histograma": [
+      {
+        "min": 0,
+        "max": 10000,
+        "qtd": 721
+      },
+      {
+        "min": 10000,
+        "max": 12500,
+        "qtd": 37
+      },
+      {
+        "min": 12500,
+        "max": 15000,
+        "qtd": 6
+      },
+      {
+        "min": 15000,
+        "max": 17500,
+        "qtd": 2
+      },
+      {
+        "min": 17500,
+        "max": 20000,
+        "qtd": 0
+      },
+      {
+        "min": 20000,
+        "max": 22500,
+        "qtd": 0
+      },
+      {
+        "min": 22500,
+        "max": 25000,
+        "qtd": 0
+      },
+      {
+        "min": 25000,
+        "max": 30000,
+        "qtd": 0
+      },
+      {
+        "min": 30000,
+        "max": 35000,
+        "qtd": 0
+      },
+      {
+        "min": 35000,
+        "max": null,
+        "qtd": 0
+      }
+    ]
+  }
+}
