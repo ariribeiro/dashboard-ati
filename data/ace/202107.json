@@ -1,0 +1,239 @@
+{
+  "referencia": "2021-07",
+  "gerado_em": "2026-11-09T00:43:07+00:00",
+  "fonte": {
+    "nome": "Portal da Transparência — Servidores SIAPE",
+    "url": "https://portaldatransparencia.gov.br/download-de-dados/servidores",
+    "arquivo": "https://portaldatransparencia.gov.br/download-de-dados/servidores/202107_Servidores_SIAPE"
+  },
+  "filtro_cargo": "^ANALISTA (DE )?COM(ERCIO)? EXT(ERIOR)?$",
+  "total": 397,
+  "por_situacao": [
+    {
+      "nome": "ATIVO PERMANENTE",
+      "qtd": 355
+    },
+    {
+      "nome": "ATIVO EM OUTRO ORGAO",
+      "qtd": 42
+    }
+  ],
+  "por_orgao_exercicio": [
+    {
+      "nome": "Ministério da Economia",
+      "qtd": 331
+    },
+    {
+      "nome": "Ministério da Agricultura, Pecuária e Abastecimento",
+      "qtd": 26
+    },
+    {
+      "nome": "Presidência da República",
+      "qtd": 11
+    },
+    {
+      "nome": "Conselho Administrativo de Defesa Econômica",
+      "qtd": 8
+    },
+    {
+      "nome": "Fundação de Previdência Complementar do Servidor Público Federal",
+      "qtd": 2
+    },
+    {
+      "nome": "Estados / Municípios / Empresas",
+      "qtd": 2
+    },
+    {
+      "nome": "Ministério da Defesa",
+      "qtd": 2
+    },
+    {
+      "nome": "Defensoria Pública da União",
+      "qtd": 2
+    },
+    {
+      "nome": "Governo do Distrito Federal",
+      "qtd": 2
+    },
+    {
+      "nome": "Câmara dos Deputados",
+      "qtd": 2
+    },
+    {
+      "nome": "Controladoria-Geral da União",
+      "qtd": 2
+    },
+    {
+      "nome": "Ministério da Justiça e Segurança Pública",
+      "qtd": 1
+    },
+    {
+      "nome": "Ministério do Desenvolvimento Social",
+      "qtd": 1
+    },
+    {
+      "nome": "Ministério da Educação",
+      "qtd": 1
+    },
+    {
+      "nome": "Advocacia-Geral da União",
+      "qtd": 1
+    },
+    {
+      "nome": "Ministério do Meio Ambiente",
+      "qtd": 1
+    },
+    {
+      "nome": "Governo do Estado de São Paulo",
+      "qtd": 1
+    },
+    {
+      "nome": "Ministério da Ciência, Tecnologia, Inovações e Comunicações",
+      "qtd": 1
+    }
+  ],
+  "por_orgao_lotacao": [
+    {
+      "nome": "Ministério da Economia",
+      "qtd": 374
+    },
+    {
+      "nome": "Ministério da Agricultura, Pecuária e Abastecimento",
+      "qtd": 23
+    }
+  ],
+  "por_uf": [
+    {
+      "nome": "Não informado",
+      "qtd": 397
+    }
+  ],
+  "por_classe_padrao": [
+    {
+      "classe": "B",
+      "padrao": "I",
+      "qtd": 1
+    },
+    {
+      "classe": "B",
+      "padrao": "II",
+      "qtd": 51
+    },
+    {
+      "classe": "B",
+      "padrao": "III",
+      "qtd": 56
+    },
+    {
+      "classe": "C",
+      "padrao": "I",
+      "qtd": 65
+    },
+    {
+      "classe": "C",
+      "padrao": "II",
+      "qtd": 40
+    },
+    {
+      "classe": "C",
+      "padrao": "III",
+      "qtd": 3
+    },
+    {
+      "classe": "S",
+      "padrao": "I",
+      "qtd": 1
+    },
+    {
+      "classe": "S",
+      "padrao": "II",
+      "qtd": 15
+    },
+    {
+      "classe": "S",
+      "padrao": "III",
+      "qtd": 10
+    },
+    {
+      "classe": "S",
+      "padrao": "IV",
+      "qtd": 155
+    }
+  ],
+  "funcao": {
+    "com_funcao": 144,
+    "por_sigla": [
+      {
+        "nome": "DAS",
+        "qtd": 84
+      },
+      {
+        "nome": "FPE",
+        "qtd": 58
+      },
+      {
+        "nome": "FGR",
+        "qtd": 2
+      }
+    ]
+  },
+  "remuneracao_basica_bruta": {
+    "n": 384,
+    "media": 26788.17,
+    "mediana": 27369.67,
+    "p10": 23265.03,
+    "p90": 30656.43,
+    "histograma": [
+      {
+        "min": 0,
+        "max": 20000,
+        "qtd": 0
+      },
+      {
+        "min": 20000,
+        "max": 25000,
+        "qtd": 124
+      },
+      {
+        "min": 25000,
+        "max": 27500,
+        "qtd": 165
+      },
+      {
+        "min": 27500,
+        "max": 30000,
+        "qtd": 45
+      },
+      {
+        "min": 30000,
+        "max": 32500,
+        "qtd": 30
+      },
+      {
+        "min": 32500,
+        "max": 35000,
+        "qtd": 11
+      },
+      {
+        "min": 35000,
+        "max": 37500,
+        "qtd": 8
+      },
+      {
+        "min": 37500,
+        "max": 40000,
+        "qtd": 1
+      },
+      {
+        "min": 40000,
+        "max": 45000,
+        "qtd": 0
+      },
+      {
+        "min": 45000,
+        "max": null,
+        "qtd": 0
+      }
+    ]
+  }
+}
