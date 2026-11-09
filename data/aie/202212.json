@@ -1,0 +1,349 @@
+{
+  "referencia": "2022-12",
+  "gerado_em": "2026-11-09T00:39:41+00:00",
+  "fonte": {
+    "nome": "Portal da Transparência — Servidores SIAPE",
+    "url": "https://portaldatransparencia.gov.br/download-de-dados/servidores",
+    "arquivo": "https://portaldatransparencia.gov.br/download-de-dados/servidores/202212_Servidores_SIAPE"
+  },
+  "filtro_cargo": "^ANALISTA (DE )?INFRA-?ESTRUT(URA)?$",
+  "total": 696,
+  "por_situacao": [
+    {
+      "nome": "ATIVO PERMANENTE",
+      "qtd": 541
+    },
+    {
+      "nome": "ATIVO EM OUTRO ORGAO",
+      "qtd": 155
+    }
+  ],
+  "por_orgao_exercicio": [
+    {
+      "nome": "Ministério do Desenvolvimento Regional",
+      "qtd": 178
+    },
+    {
+      "nome": "Ministério da Infraestrutura",
+      "qtd": 127
+    },
+    {
+      "nome": "Ministério da Economia",
+      "qtd": 90
+    },
+    {
+      "nome": "Ministério de Minas e Energia",
+      "qtd": 67
+    },
+    {
+      "nome": "Departamento Nacional de Infraestrutura de Transportes",
+      "qtd": 49
+    },
+    {
+      "nome": "Fundação Nacional de Saúde",
+      "qtd": 36
+    },
+    {
+      "nome": "Agência Nacional de Transportes Terrestres",
+      "qtd": 25
+    },
+    {
+      "nome": "Presidência da República",
+      "qtd": 23
+    },
+    {
+      "nome": "MINISTERIO DAS COMUNICACOES",
+      "qtd": 16
+    },
+    {
+      "nome": "Ministério da Ciência, Tecnologia, Inovações e Comunicações",
+      "qtd": 9
+    },
+    {
+      "nome": "Instituto Brasileiro do Meio Ambiente e Recursos Naturais Renováveis",
+      "qtd": 8
+    },
+    {
+      "nome": "Agência Nacional do Petróleo, Gás Natural e Biocombustíveis",
+      "qtd": 8
+    },
+    {
+      "nome": "Departamento Nacional de Obras Contra as Secas",
+      "qtd": 7
+    },
+    {
+      "nome": "VALEC Engenharia, Construções e Ferrovias S.A.",
+      "qtd": 6
+    },
+    {
+      "nome": "Ministério do Turismo",
+      "qtd": 6
+    },
+    {
+      "nome": "Ministério da Agricultura, Pecuária e Abastecimento",
+      "qtd": 5
+    },
+    {
+      "nome": "Controladoria-Geral da União",
+      "qtd": 5
+    },
+    {
+      "nome": "Instituto do Patrimônio Histórico e Artístico Nacional",
+      "qtd": 5
+    },
+    {
+      "nome": "Agência Nacional de Águas",
+      "qtd": 3
+    },
+    {
+      "nome": "Ministério do Desenvolvimento Social",
+      "qtd": 2
+    },
+    {
+      "nome": "Agência Nacional de Aviação Civil",
+      "qtd": 2
+    },
+    {
+      "nome": "Ministério da Defesa",
+      "qtd": 2
+    },
+    {
+      "nome": "Agência Nacional de Transportes Aquaviários",
+      "qtd": 1
+    },
+    {
+      "nome": "Ministério Público do Distrito Federal e Territórios",
+      "qtd": 1
+    },
+    {
+      "nome": "Fundo Nacional de Desenvolvimento da Educação",
+      "qtd": 1
+    },
+    {
+      "nome": "Estados / Municípios / Empresas",
+      "qtd": 1
+    },
+    {
+      "nome": "Agência Nacional de Energia Elétrica",
+      "qtd": 1
+    },
+    {
+      "nome": "Câmara dos Deputados",
+      "qtd": 1
+    },
+    {
+      "nome": "Ministério da Justiça e Segurança Pública",
+      "qtd": 1
+    },
+    {
+      "nome": "MINISTERIO DO TRABALHO E PREVIDENCIA",
+      "qtd": 1
+    },
+    {
+      "nome": "Governo do Distrito Federal",
+      "qtd": 1
+    },
+    {
+      "nome": "Superintendência do Desenvolvimento do Centro-Oeste",
+      "qtd": 1
+    },
+    {
+      "nome": "Empresa de Processamento de Dados da Previdência Social",
+      "qtd": 1
+    },
+    {
+      "nome": "Empresa Brasileira de Serviços Hospitalares",
+      "qtd": 1
+    },
+    {
+      "nome": "Ministério do Meio Ambiente",
+      "qtd": 1
+    },
+    {
+      "nome": "Advocacia-Geral da União",
+      "qtd": 1
+    },
+    {
+      "nome": "Agência Nacional de Telecomunicações",
+      "qtd": 1
+    },
+    {
+      "nome": "Caixa Econômica Federal",
+      "qtd": 1
+    },
+    {
+      "nome": "Universidade Federal de São Carlos - SP",
+      "qtd": 1
+    }
+  ],
+  "por_orgao_lotacao": [
+    {
+      "nome": "Ministério da Economia",
+      "qtd": 696
+    }
+  ],
+  "por_uf": [
+    {
+      "nome": "Não informado",
+      "qtd": 696
+    }
+  ],
+  "por_classe_padrao": [
+    {
+      "classe": "A",
+      "padrao": "II",
+      "qtd": 1
+    },
+    {
+      "classe": "A",
+      "padrao": "IV",
+      "qtd": 6
+    },
+    {
+      "classe": "A",
+      "padrao": "V",
+      "qtd": 40
+    },
+    {
+      "classe": "B",
+      "padrao": "I",
+      "qtd": 45
+    },
+    {
+      "classe": "B",
+      "padrao": "II",
+      "qtd": 129
+    },
+    {
+      "classe": "B",
+      "padrao": "III",
+      "qtd": 26
+    },
+    {
+      "classe": "B",
+      "padrao": "IV",
+      "qtd": 177
+    },
+    {
+      "classe": "B",
+      "padrao": "V",
+      "qtd": 272
+    }
+  ],
+  "funcao": {
+    "com_funcao": 442,
+    "por_sigla": [
+      {
+        "nome": "FEX",
+        "qtd": 182
+      },
+      {
+        "nome": "FPE",
+        "qtd": 144
+      },
+      {
+        "nome": "DAS",
+        "qtd": 44
+      },
+      {
+        "nome": "CCX",
+        "qtd": 31
+      },
+      {
+        "nome": "CCT",
+        "qtd": 10
+      },
+      {
+        "nome": "CGE",
+        "qtd": 10
+      },
+      {
+        "nome": "FGR",
+        "qtd": 9
+      },
+      {
+        "nome": "CTE",
+        "qtd": 4
+      },
+      {
+        "nome": "RGA",
+        "qtd": 2
+      },
+      {
+        "nome": "CCD",
+        "qtd": 2
+      },
+      {
+        "nome": "GF",
+        "qtd": 2
+      },
+      {
+        "nome": "FCE",
+        "qtd": 1
+      },
+      {
+        "nome": "NES",
+        "qtd": 1
+      }
+    ]
+  },
+  "remuneracao_basica_bruta": {
+    "n": 684,
+    "media": 19148.05,
+    "mediana": 18473.41,
+    "p10": 15386.67,
+    "p90": 24259.2,
+    "histograma": [
+      {
+        "min": 0,
+        "max": 17500,
+        "qtd": 272
+      },
+      {
+        "min": 17500,
+        "max": 20000,
+        "qtd": 184
+      },
+      {
+        "min": 20000,
+        "max": 22500,
+        "qtd": 94
+      },
+      {
+        "min": 22500,
+        "max": 25000,
+        "qtd": 101
+      },
+      {
+        "min": 25000,
+        "max": 27500,
+        "qtd": 26
+      },
+      {
+        "min": 27500,
+        "max": 30000,
+        "qtd": 5
+      },
+      {
+        "min": 30000,
+        "max": 32500,
+        "qtd": 0
+      },
+      {
+        "min": 32500,
+        "max": 35000,
+        "qtd": 0
+      },
+      {
+        "min": 35000,
+        "max": 40000,
+        "qtd": 2
+      },
+      {
+        "min": 40000,
+        "max": null,
+        "qtd": 0
+      }
+    ]
+  }
+}

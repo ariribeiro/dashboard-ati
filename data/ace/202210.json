@@ -1,0 +1,245 @@
+{
+  "referencia": "2022-10",
+  "gerado_em": "2026-11-09T00:39:21+00:00",
+  "fonte": {
+    "nome": "Portal da Transparência — Servidores SIAPE",
+    "url": "https://portaldatransparencia.gov.br/download-de-dados/servidores",
+    "arquivo": "https://portaldatransparencia.gov.br/download-de-dados/servidores/202210_Servidores_SIAPE"
+  },
+  "filtro_cargo": "^ANALISTA (DE )?COM(ERCIO)? EXT(ERIOR)?$",
+  "total": 393,
+  "por_situacao": [
+    {
+      "nome": "ATIVO PERMANENTE",
+      "qtd": 349
+    },
+    {
+      "nome": "ATIVO EM OUTRO ORGAO",
+      "qtd": 44
+    }
+  ],
+  "por_orgao_exercicio": [
+    {
+      "nome": "Ministério da Economia",
+      "qtd": 324
+    },
+    {
+      "nome": "Ministério da Agricultura, Pecuária e Abastecimento",
+      "qtd": 28
+    },
+    {
+      "nome": "Presidência da República",
+      "qtd": 11
+    },
+    {
+      "nome": "Conselho Administrativo de Defesa Econômica",
+      "qtd": 5
+    },
+    {
+      "nome": "Ministério da Defesa",
+      "qtd": 4
+    },
+    {
+      "nome": "Estados / Municípios / Empresas",
+      "qtd": 3
+    },
+    {
+      "nome": "Agência Nacional de Transportes Aquaviários",
+      "qtd": 2
+    },
+    {
+      "nome": "MINISTERIO DO TRABALHO E PREVIDENCIA",
+      "qtd": 2
+    },
+    {
+      "nome": "Fundação de Previdência Complementar do Servidor Público Federal",
+      "qtd": 2
+    },
+    {
+      "nome": "Defensoria Pública da União",
+      "qtd": 2
+    },
+    {
+      "nome": "Câmara dos Deputados",
+      "qtd": 2
+    },
+    {
+      "nome": "Controladoria-Geral da União",
+      "qtd": 2
+    },
+    {
+      "nome": "Ministério do Desenvolvimento Social",
+      "qtd": 1
+    },
+    {
+      "nome": "Ministério da Educação",
+      "qtd": 1
+    },
+    {
+      "nome": "Advocacia-Geral da União",
+      "qtd": 1
+    },
+    {
+      "nome": "Ministério do Meio Ambiente",
+      "qtd": 1
+    },
+    {
+      "nome": "Estados / Municípios / Administração Direta Autárquica e Fundacional",
+      "qtd": 1
+    },
+    {
+      "nome": "MINISTERIO DAS COMUNICACOES",
+      "qtd": 1
+    }
+  ],
+  "por_orgao_lotacao": [
+    {
+      "nome": "Ministério da Economia",
+      "qtd": 371
+    },
+    {
+      "nome": "Ministério da Agricultura, Pecuária e Abastecimento",
+      "qtd": 22
+    }
+  ],
+  "por_uf": [
+    {
+      "nome": "Não informado",
+      "qtd": 393
+    }
+  ],
+  "por_classe_padrao": [
+    {
+      "classe": "B",
+      "padrao": "I",
+      "qtd": 1
+    },
+    {
+      "classe": "B",
+      "padrao": "III",
+      "qtd": 28
+    },
+    {
+      "classe": "C",
+      "padrao": "I",
+      "qtd": 56
+    },
+    {
+      "classe": "C",
+      "padrao": "II",
+      "qtd": 59
+    },
+    {
+      "classe": "C",
+      "padrao": "III",
+      "qtd": 46
+    },
+    {
+      "classe": "S",
+      "padrao": "I",
+      "qtd": 24
+    },
+    {
+      "classe": "S",
+      "padrao": "III",
+      "qtd": 5
+    },
+    {
+      "classe": "S",
+      "padrao": "IV",
+      "qtd": 174
+    }
+  ],
+  "funcao": {
+    "com_funcao": 166,
+    "por_sigla": [
+      {
+        "nome": "FPE",
+        "qtd": 100
+      },
+      {
+        "nome": "DAS",
+        "qtd": 45
+      },
+      {
+        "nome": "FEX",
+        "qtd": 14
+      },
+      {
+        "nome": "CCX",
+        "qtd": 4
+      },
+      {
+        "nome": "FGR",
+        "qtd": 1
+      },
+      {
+        "nome": "CGE",
+        "qtd": 1
+      },
+      {
+        "nome": "CCT",
+        "qtd": 1
+      }
+    ]
+  },
+  "remuneracao_basica_bruta": {
+    "n": 380,
+    "media": 27645.25,
+    "mediana": 27369.67,
+    "p10": 23730.33,
+    "p90": 31900.59,
+    "histograma": [
+      {
+        "min": 0,
+        "max": 20000,
+        "qtd": 0
+      },
+      {
+        "min": 20000,
+        "max": 25000,
+        "qtd": 97
+      },
+      {
+        "min": 25000,
+        "max": 27500,
+        "qtd": 149
+      },
+      {
+        "min": 27500,
+        "max": 30000,
+        "qtd": 45
+      },
+      {
+        "min": 30000,
+        "max": 32500,
+        "qtd": 60
+      },
+      {
+        "min": 32500,
+        "max": 35000,
+        "qtd": 18
+      },
+      {
+        "min": 35000,
+        "max": 37500,
+        "qtd": 11
+      },
+      {
+        "min": 37500,
+        "max": 40000,
+        "qtd": 0
+      },
+      {
+        "min": 40000,
+        "max": 45000,
+        "qtd": 0
+      },
+      {
+        "min": 45000,
+        "max": null,
+        "qtd": 0
+      }
+    ]
+  }
+}
