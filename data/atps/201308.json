@@ -1,0 +1,202 @@
+{
+  "referencia": "2013-08",
+  "gerado_em": "2026-11-09T01:23:13+00:00",
+  "fonte": {
+    "nome": "Portal da Transparência — Servidores SIAPE",
+    "url": "https://portaldatransparencia.gov.br/download-de-dados/servidores",
+    "arquivo": "https://portaldatransparencia.gov.br/download-de-dados/servidores/201308_Servidores_SIAPE"
+  },
+  "filtro_cargo": "^ANALISTA TECN(ICO)? (EM|DE) POLITICAS SOCIAIS$",
+  "total": 765,
+  "por_situacao": [
+    {
+      "nome": "ATIVO PERMANENTE",
+      "qtd": 757
+    },
+    {
+      "nome": "ATIVO EM OUTRO ORGAO",
+      "qtd": 8
+    }
+  ],
+  "por_orgao_exercicio": [
+    {
+      "nome": "Ministério da Saúde",
+      "qtd": 425
+    },
+    {
+      "nome": "Ministério do Desenvolvimento Social",
+      "qtd": 173
+    },
+    {
+      "nome": "Ministério da Justiça e Segurança Pública",
+      "qtd": 53
+    },
+    {
+      "nome": "Ministério da Educação",
+      "qtd": 26
+    },
+    {
+      "nome": "Ministério do Desenvolvimento Agrário",
+      "qtd": 23
+    },
+    {
+      "nome": "Ministério do Trabalho e Emprego",
+      "qtd": 21
+    },
+    {
+      "nome": "Presidência da República",
+      "qtd": 19
+    },
+    {
+      "nome": "Ministério da Previdência Social",
+      "qtd": 14
+    },
+    {
+      "nome": "Ministério das Cidades",
+      "qtd": 10
+    },
+    {
+      "nome": "Ministério da Economia",
+      "qtd": 1
+    }
+  ],
+  "por_orgao_lotacao": [
+    {
+      "nome": "Ministério da Saúde",
+      "qtd": 429
+    },
+    {
+      "nome": "Ministério do Desenvolvimento Social",
+      "qtd": 174
+    },
+    {
+      "nome": "Ministério da Justiça e Segurança Pública",
+      "qtd": 52
+    },
+    {
+      "nome": "Ministério da Educação",
+      "qtd": 26
+    },
+    {
+      "nome": "Ministério do Desenvolvimento Agrário",
+      "qtd": 24
+    },
+    {
+      "nome": "Ministério do Trabalho e Emprego",
+      "qtd": 21
+    },
+    {
+      "nome": "Presidência da República",
+      "qtd": 15
+    },
+    {
+      "nome": "Ministério da Previdência Social",
+      "qtd": 14
+    },
+    {
+      "nome": "Ministério das Cidades",
+      "qtd": 10
+    }
+  ],
+  "por_uf": [
+    {
+      "nome": "Não informado",
+      "qtd": 765
+    }
+  ],
+  "por_classe_padrao": [
+    {
+      "classe": "A",
+      "padrao": "I",
+      "qtd": 765
+    }
+  ],
+  "funcao": {
+    "com_funcao": 42,
+    "por_sigla": [
+      {
+        "nome": "DAS",
+        "qtd": 33
+      },
+      {
+        "nome": "FCT",
+        "qtd": 4
+      },
+      {
+        "nome": "FGR",
+        "qtd": 2
+      },
+      {
+        "nome": "NES",
+        "qtd": 1
+      },
+      {
+        "nome": "CCT",
+        "qtd": 1
+      },
+      {
+        "nome": "RGA",
+        "qtd": 1
+      }
+    ]
+  },
+  "remuneracao_basica_bruta": {
+    "n": 765,
+    "media": 5031.18,
+    "mediana": 5210.87,
+    "p10": 3300.21,
+    "p90": 5210.87,
+    "histograma": [
+      {
+        "min": 0,
+        "max": 10000,
+        "qtd": 758
+      },
+      {
+        "min": 10000,
+        "max": 12500,
+        "qtd": 6
+      },
+      {
+        "min": 12500,
+        "max": 15000,
+        "qtd": 1
+      },
+      {
+        "min": 15000,
+        "max": 17500,
+        "qtd": 0
+      },
+      {
+        "min": 17500,
+        "max": 20000,
+        "qtd": 0
+      },
+      {
+        "min": 20000,
+        "max": 22500,
+        "qtd": 0
+      },
+      {
+        "min": 22500,
+        "max": 25000,
+        "qtd": 0
+      },
+      {
+        "min": 25000,
+        "max": 30000,
+        "qtd": 0
+      },
+      {
+        "min": 30000,
+        "max": 35000,
+        "qtd": 0
+      },
+      {
+        "min": 35000,
+        "max": null,
+        "qtd": 0
+      }
+    ]
+  }
+}

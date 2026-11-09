@@ -1,0 +1,214 @@
+{
+  "referencia": "2013-12",
+  "gerado_em": "2026-11-09T01:24:11+00:00",
+  "fonte": {
+    "nome": "Portal da Transparência — Servidores SIAPE",
+    "url": "https://portaldatransparencia.gov.br/download-de-dados/servidores",
+    "arquivo": "https://portaldatransparencia.gov.br/download-de-dados/servidores/201312_Servidores_SIAPE"
+  },
+  "filtro_cargo": "^ANALISTA TECN(ICO)? (EM|DE) POLITICAS SOCIAIS$",
+  "total": 761,
+  "por_situacao": [
+    {
+      "nome": "ATIVO PERMANENTE",
+      "qtd": 749
+    },
+    {
+      "nome": "ATIVO EM OUTRO ORGAO",
+      "qtd": 12
+    }
+  ],
+  "por_orgao_exercicio": [
+    {
+      "nome": "Ministério da Saúde",
+      "qtd": 423
+    },
+    {
+      "nome": "Ministério do Desenvolvimento Social",
+      "qtd": 168
+    },
+    {
+      "nome": "Ministério da Justiça e Segurança Pública",
+      "qtd": 48
+    },
+    {
+      "nome": "Ministério da Educação",
+      "qtd": 26
+    },
+    {
+      "nome": "Ministério do Desenvolvimento Agrário",
+      "qtd": 26
+    },
+    {
+      "nome": "Ministério do Trabalho e Emprego",
+      "qtd": 21
+    },
+    {
+      "nome": "Presidência da República",
+      "qtd": 19
+    },
+    {
+      "nome": "Ministério da Previdência Social",
+      "qtd": 12
+    },
+    {
+      "nome": "Ministério das Cidades",
+      "qtd": 10
+    },
+    {
+      "nome": "Fundação Nacional do Índio",
+      "qtd": 4
+    },
+    {
+      "nome": "Função Escola Nacional de Administração Pública",
+      "qtd": 1
+    },
+    {
+      "nome": "Ministério do Planejamento, Desenvolvimento e Gestão",
+      "qtd": 1
+    },
+    {
+      "nome": "Ministério da Economia",
+      "qtd": 1
+    },
+    {
+      "nome": "Ministério da Cultura",
+      "qtd": 1
+    }
+  ],
+  "por_orgao_lotacao": [
+    {
+      "nome": "Ministério da Saúde",
+      "qtd": 428
+    },
+    {
+      "nome": "Ministério do Desenvolvimento Social",
+      "qtd": 172
+    },
+    {
+      "nome": "Ministério da Justiça e Segurança Pública",
+      "qtd": 51
+    },
+    {
+      "nome": "Ministério da Educação",
+      "qtd": 26
+    },
+    {
+      "nome": "Ministério do Desenvolvimento Agrário",
+      "qtd": 26
+    },
+    {
+      "nome": "Ministério do Trabalho e Emprego",
+      "qtd": 20
+    },
+    {
+      "nome": "Presidência da República",
+      "qtd": 16
+    },
+    {
+      "nome": "Ministério da Previdência Social",
+      "qtd": 12
+    },
+    {
+      "nome": "Ministério das Cidades",
+      "qtd": 10
+    }
+  ],
+  "por_uf": [
+    {
+      "nome": "Não informado",
+      "qtd": 761
+    }
+  ],
+  "por_classe_padrao": [
+    {
+      "classe": "A",
+      "padrao": "I",
+      "qtd": 761
+    }
+  ],
+  "funcao": {
+    "com_funcao": 65,
+    "por_sigla": [
+      {
+        "nome": "DAS",
+        "qtd": 50
+      },
+      {
+        "nome": "FGR",
+        "qtd": 7
+      },
+      {
+        "nome": "FCT",
+        "qtd": 4
+      },
+      {
+        "nome": "RGA",
+        "qtd": 3
+      },
+      {
+        "nome": "NES",
+        "qtd": 1
+      }
+    ]
+  },
+  "remuneracao_basica_bruta": {
+    "n": 756,
+    "media": 5444.06,
+    "mediana": 5210.87,
+    "p10": 5210.87,
+    "p90": 5210.87,
+    "histograma": [
+      {
+        "min": 0,
+        "max": 10000,
+        "qtd": 749
+      },
+      {
+        "min": 10000,
+        "max": 12500,
+        "qtd": 6
+      },
+      {
+        "min": 12500,
+        "max": 15000,
+        "qtd": 0
+      },
+      {
+        "min": 15000,
+        "max": 17500,
+        "qtd": 1
+      },
+      {
+        "min": 17500,
+        "max": 20000,
+        "qtd": 0
+      },
+      {
+        "min": 20000,
+        "max": 22500,
+        "qtd": 0
+      },
+      {
+        "min": 22500,
+        "max": 25000,
+        "qtd": 0
+      },
+      {
+        "min": 25000,
+        "max": 30000,
+        "qtd": 0
+      },
+      {
+        "min": 30000,
+        "max": 35000,
+        "qtd": 0
+      },
+      {
+        "min": 35000,
+        "max": null,
+        "qtd": 0
+      }
+    ]
+  }
+}

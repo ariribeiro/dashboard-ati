@@ -1,0 +1,232 @@
+{
+  "referencia": "2013-09",
+  "gerado_em": "2026-11-09T01:23:27+00:00",
+  "fonte": {
+    "nome": "Portal da Transparência — Servidores SIAPE",
+    "url": "https://portaldatransparencia.gov.br/download-de-dados/servidores",
+    "arquivo": "https://portaldatransparencia.gov.br/download-de-dados/servidores/201309_Servidores_SIAPE"
+  },
+  "filtro_cargo": "^ANALISTA (DE )?COM(ERCIO)? EXT(ERIOR)?$",
+  "total": 362,
+  "por_situacao": [
+    {
+      "nome": "ATIVO PERMANENTE",
+      "qtd": 346
+    },
+    {
+      "nome": "ATIVO EM OUTRO ORGAO",
+      "qtd": 16
+    }
+  ],
+  "por_orgao_exercicio": [
+    {
+      "nome": "Ministério da Indústria, Comércio Exterior e Serviços",
+      "qtd": 323
+    },
+    {
+      "nome": "Ministério da Agricultura, Pecuária e Abastecimento",
+      "qtd": 12
+    },
+    {
+      "nome": "Ministério da Economia",
+      "qtd": 8
+    },
+    {
+      "nome": "Presidência da República",
+      "qtd": 5
+    },
+    {
+      "nome": "Ministério do Planejamento, Desenvolvimento e Gestão",
+      "qtd": 4
+    },
+    {
+      "nome": "Ministério da Pesca e Aquicultura",
+      "qtd": 3
+    },
+    {
+      "nome": "Estados / Municípios / Empresas",
+      "qtd": 1
+    },
+    {
+      "nome": "Conselho Administrativo de Defesa Econômica",
+      "qtd": 1
+    },
+    {
+      "nome": "Instituto Nacional da Propriedade Industrial",
+      "qtd": 1
+    },
+    {
+      "nome": "Comando da Aeronáutica",
+      "qtd": 1
+    },
+    {
+      "nome": "Advocacia-Geral da União",
+      "qtd": 1
+    },
+    {
+      "nome": "Ministério do Meio Ambiente",
+      "qtd": 1
+    },
+    {
+      "nome": "Instituto Nacional de Metrologia, Qualidade e Tecnologia",
+      "qtd": 1
+    }
+  ],
+  "por_orgao_lotacao": [
+    {
+      "nome": "Ministério da Indústria, Comércio Exterior e Serviços",
+      "qtd": 339
+    },
+    {
+      "nome": "Ministério da Agricultura, Pecuária e Abastecimento",
+      "qtd": 14
+    },
+    {
+      "nome": "Ministério da Economia",
+      "qtd": 6
+    },
+    {
+      "nome": "Ministério do Planejamento, Desenvolvimento e Gestão",
+      "qtd": 3
+    }
+  ],
+  "por_uf": [
+    {
+      "nome": "Não informado",
+      "qtd": 362
+    }
+  ],
+  "por_classe_padrao": [
+    {
+      "classe": "A",
+      "padrao": "I",
+      "qtd": 144
+    },
+    {
+      "classe": "B",
+      "padrao": "I",
+      "qtd": 27
+    },
+    {
+      "classe": "B",
+      "padrao": "II",
+      "qtd": 5
+    },
+    {
+      "classe": "B",
+      "padrao": "III",
+      "qtd": 2
+    },
+    {
+      "classe": "C",
+      "padrao": "I",
+      "qtd": 9
+    },
+    {
+      "classe": "C",
+      "padrao": "II",
+      "qtd": 33
+    },
+    {
+      "classe": "C",
+      "padrao": "III",
+      "qtd": 24
+    },
+    {
+      "classe": "S",
+      "padrao": "I",
+      "qtd": 38
+    },
+    {
+      "classe": "S",
+      "padrao": "II",
+      "qtd": 14
+    },
+    {
+      "classe": "S",
+      "padrao": "III",
+      "qtd": 11
+    },
+    {
+      "classe": "S",
+      "padrao": "IV",
+      "qtd": 55
+    }
+  ],
+  "funcao": {
+    "com_funcao": 94,
+    "por_sigla": [
+      {
+        "nome": "DAS",
+        "qtd": 90
+      },
+      {
+        "nome": "FGR",
+        "qtd": 3
+      },
+      {
+        "nome": "GT",
+        "qtd": 1
+      }
+    ]
+  },
+  "remuneracao_basica_bruta": {
+    "n": 358,
+    "media": 16971.88,
+    "mediana": 17158.9,
+    "p10": 13608.81,
+    "p90": 21791.57,
+    "histograma": [
+      {
+        "min": 0,
+        "max": 20000,
+        "qtd": 296
+      },
+      {
+        "min": 20000,
+        "max": 25000,
+        "qtd": 61
+      },
+      {
+        "min": 25000,
+        "max": 27500,
+        "qtd": 1
+      },
+      {
+        "min": 27500,
+        "max": 30000,
+        "qtd": 0
+      },
+      {
+        "min": 30000,
+        "max": 32500,
+        "qtd": 0
+      },
+      {
+        "min": 32500,
+        "max": 35000,
+        "qtd": 0
+      },
+      {
+        "min": 35000,
+        "max": 37500,
+        "qtd": 0
+      },
+      {
+        "min": 37500,
+        "max": 40000,
+        "qtd": 0
+      },
+      {
+        "min": 40000,
+        "max": 45000,
+        "qtd": 0
+      },
+      {
+        "min": 45000,
+        "max": null,
+        "qtd": 0
+      }
+    ]
+  }
+}

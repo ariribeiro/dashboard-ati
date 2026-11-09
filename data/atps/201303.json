@@ -1,0 +1,158 @@
+{
+  "referencia": "2013-03",
+  "gerado_em": "2026-11-09T01:22:00+00:00",
+  "fonte": {
+    "nome": "Portal da Transparência — Servidores SIAPE",
+    "url": "https://portaldatransparencia.gov.br/download-de-dados/servidores",
+    "arquivo": "https://portaldatransparencia.gov.br/download-de-dados/servidores/201303_Servidores_SIAPE"
+  },
+  "filtro_cargo": "^ANALISTA TECN(ICO)? (EM|DE) POLITICAS SOCIAIS$",
+  "total": 801,
+  "por_situacao": [
+    {
+      "nome": "Não informado",
+      "qtd": 801
+    }
+  ],
+  "por_orgao_exercicio": [
+    {
+      "nome": "Não informado",
+      "qtd": 801
+    }
+  ],
+  "por_orgao_lotacao": [
+    {
+      "nome": "Não informado",
+      "qtd": 801
+    }
+  ],
+  "por_uf": [
+    {
+      "nome": "Não informado",
+      "qtd": 801
+    }
+  ],
+  "por_classe_padrao": [
+    {
+      "classe": "?",
+      "padrao": "?",
+      "qtd": 801
+    }
+  ],
+  "funcao": {
+    "com_funcao": 801,
+    "por_sigla": [
+      {
+        "nome": "DAS",
+        "qtd": 722
+      },
+      {
+        "nome": "FGR",
+        "qtd": 18
+      },
+      {
+        "nome": "CGE",
+        "qtd": 14
+      },
+      {
+        "nome": "CCT",
+        "qtd": 14
+      },
+      {
+        "nome": "CA",
+        "qtd": 9
+      },
+      {
+        "nome": "RGA",
+        "qtd": 6
+      },
+      {
+        "nome": "GF",
+        "qtd": 5
+      },
+      {
+        "nome": "NES",
+        "qtd": 4
+      },
+      {
+        "nome": "CTE",
+        "qtd": 3
+      },
+      {
+        "nome": "CCD",
+        "qtd": 2
+      },
+      {
+        "nome": "FG",
+        "qtd": 2
+      },
+      {
+        "nome": "FND",
+        "qtd": 1
+      },
+      {
+        "nome": "FCT",
+        "qtd": 1
+      }
+    ]
+  },
+  "remuneracao_basica_bruta": {
+    "n": 799,
+    "media": 19322.45,
+    "mediana": 20050.3,
+    "p10": 11618.45,
+    "p90": 23825.7,
+    "histograma": [
+      {
+        "min": 0,
+        "max": 10000,
+        "qtd": 11
+      },
+      {
+        "min": 10000,
+        "max": 12500,
+        "qtd": 97
+      },
+      {
+        "min": 12500,
+        "max": 15000,
+        "qtd": 42
+      },
+      {
+        "min": 15000,
+        "max": 17500,
+        "qtd": 48
+      },
+      {
+        "min": 17500,
+        "max": 20000,
+        "qtd": 193
+      },
+      {
+        "min": 20000,
+        "max": 22500,
+        "qtd": 219
+      },
+      {
+        "min": 22500,
+        "max": 25000,
+        "qtd": 147
+      },
+      {
+        "min": 25000,
+        "max": 30000,
+        "qtd": 42
+      },
+      {
+        "min": 30000,
+        "max": 35000,
+        "qtd": 0
+      },
+      {
+        "min": 35000,
+        "max": null,
+        "qtd": 0
+      }
+    ]
+  }
+}

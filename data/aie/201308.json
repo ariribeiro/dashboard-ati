@@ -1,0 +1,252 @@
+{
+  "referencia": "2013-08",
+  "gerado_em": "2026-11-09T01:23:13+00:00",
+  "fonte": {
+    "nome": "Portal da Transparência — Servidores SIAPE",
+    "url": "https://portaldatransparencia.gov.br/download-de-dados/servidores",
+    "arquivo": "https://portaldatransparencia.gov.br/download-de-dados/servidores/201308_Servidores_SIAPE"
+  },
+  "filtro_cargo": "^ANALISTA (DE )?INFRA-?ESTRUT(URA)?$",
+  "total": 774,
+  "por_situacao": [
+    {
+      "nome": "ATIVO PERMANENTE",
+      "qtd": 750
+    },
+    {
+      "nome": "ATIVO EM OUTRO ORGAO",
+      "qtd": 24
+    }
+  ],
+  "por_orgao_exercicio": [
+    {
+      "nome": "Ministério das Cidades",
+      "qtd": 156
+    },
+    {
+      "nome": "Ministério do Desenvolvimento Regional",
+      "qtd": 108
+    },
+    {
+      "nome": "Ministério de Minas e Energia",
+      "qtd": 94
+    },
+    {
+      "nome": "Ministério do Planejamento, Desenvolvimento e Gestão",
+      "qtd": 93
+    },
+    {
+      "nome": "Ministério da Infraestrutura",
+      "qtd": 91
+    },
+    {
+      "nome": "Presidência da República",
+      "qtd": 56
+    },
+    {
+      "nome": "Departamento Nacional de Infraestrutura de Transportes",
+      "qtd": 52
+    },
+    {
+      "nome": "Fundação Nacional de Saúde",
+      "qtd": 32
+    },
+    {
+      "nome": "Ministério das Comunicações",
+      "qtd": 25
+    },
+    {
+      "nome": "Ministério do Meio Ambiente",
+      "qtd": 14
+    },
+    {
+      "nome": "Ministério da Cultura",
+      "qtd": 7
+    },
+    {
+      "nome": "Departamento Nacional de Obras Contra as Secas",
+      "qtd": 7
+    },
+    {
+      "nome": "Ministério do Esporte",
+      "qtd": 6
+    },
+    {
+      "nome": "VALEC Engenharia, Construções e Ferrovias S.A.",
+      "qtd": 5
+    },
+    {
+      "nome": "Ministério da Saúde",
+      "qtd": 5
+    },
+    {
+      "nome": "Empresa de Planejamento e Logística S.A.",
+      "qtd": 4
+    },
+    {
+      "nome": "Fundo Nacional de Desenvolvimento da Educação",
+      "qtd": 4
+    },
+    {
+      "nome": "Agência Nacional de Transportes Terrestres",
+      "qtd": 3
+    },
+    {
+      "nome": "Agência Nacional de Energia Elétrica",
+      "qtd": 2
+    },
+    {
+      "nome": "Estados / Municípios / Empresas",
+      "qtd": 2
+    },
+    {
+      "nome": "Instituto do Patrimônio Histórico e Artístico Nacional",
+      "qtd": 2
+    },
+    {
+      "nome": "Autoridade Pública Olímpica",
+      "qtd": 2
+    },
+    {
+      "nome": "Governo do Distrito Federal",
+      "qtd": 1
+    },
+    {
+      "nome": "Ministério da Defesa",
+      "qtd": 1
+    },
+    {
+      "nome": "Agência Nacional de Aviação Civil",
+      "qtd": 1
+    },
+    {
+      "nome": "Fundação Nacional do Índio",
+      "qtd": 1
+    }
+  ],
+  "por_orgao_lotacao": [
+    {
+      "nome": "Ministério do Planejamento, Desenvolvimento e Gestão",
+      "qtd": 774
+    }
+  ],
+  "por_uf": [
+    {
+      "nome": "Não informado",
+      "qtd": 774
+    }
+  ],
+  "por_classe_padrao": [
+    {
+      "classe": "A",
+      "padrao": "I",
+      "qtd": 182
+    },
+    {
+      "classe": "A",
+      "padrao": "II",
+      "qtd": 303
+    },
+    {
+      "classe": "A",
+      "padrao": "III",
+      "qtd": 289
+    }
+  ],
+  "funcao": {
+    "com_funcao": 180,
+    "por_sigla": [
+      {
+        "nome": "DAS",
+        "qtd": 153
+      },
+      {
+        "nome": "FGR",
+        "qtd": 11
+      },
+      {
+        "nome": "GF",
+        "qtd": 5
+      },
+      {
+        "nome": "CTE",
+        "qtd": 4
+      },
+      {
+        "nome": "CCT",
+        "qtd": 3
+      },
+      {
+        "nome": "CA",
+        "qtd": 2
+      },
+      {
+        "nome": "FND",
+        "qtd": 1
+      },
+      {
+        "nome": "FCT",
+        "qtd": 1
+      }
+    ]
+  },
+  "remuneracao_basica_bruta": {
+    "n": 764,
+    "media": 10018.8,
+    "mediana": 9537.0,
+    "p10": 8455.35,
+    "p90": 12299.28,
+    "histograma": [
+      {
+        "min": 0,
+        "max": 17500,
+        "qtd": 762
+      },
+      {
+        "min": 17500,
+        "max": 20000,
+        "qtd": 1
+      },
+      {
+        "min": 20000,
+        "max": 22500,
+        "qtd": 0
+      },
+      {
+        "min": 22500,
+        "max": 25000,
+        "qtd": 1
+      },
+      {
+        "min": 25000,
+        "max": 27500,
+        "qtd": 0
+      },
+      {
+        "min": 27500,
+        "max": 30000,
+        "qtd": 0
+      },
+      {
+        "min": 30000,
+        "max": 32500,
+        "qtd": 0
+      },
+      {
+        "min": 32500,
+        "max": 35000,
+        "qtd": 0
+      },
+      {
+        "min": 35000,
+        "max": 40000,
+        "qtd": 0
+      },
+      {
+        "min": 40000,
+        "max": null,
+        "qtd": 0
+      }
+    ]
+  }
+}
