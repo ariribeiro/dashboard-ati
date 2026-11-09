@@ -1,0 +1,274 @@
+{
+  "referencia": "2015-02",
+  "gerado_em": "2026-11-09T01:10:59+00:00",
+  "fonte": {
+    "nome": "Portal da Transparência — Servidores SIAPE",
+    "url": "https://portaldatransparencia.gov.br/download-de-dados/servidores",
+    "arquivo": "https://portaldatransparencia.gov.br/download-de-dados/servidores/201502_Servidores_SIAPE"
+  },
+  "filtro_cargo": "^ANALISTA (DE )?INFRA-?ESTRUT(URA)?$",
+  "total": 757,
+  "por_situacao": [
+    {
+      "nome": "ATIVO PERMANENTE",
+      "qtd": 728
+    },
+    {
+      "nome": "ATIVO EM OUTRO ORGAO",
+      "qtd": 29
+    }
+  ],
+  "por_orgao_exercicio": [
+    {
+      "nome": "Ministério das Cidades",
+      "qtd": 152
+    },
+    {
+      "nome": "Ministério do Desenvolvimento Regional",
+      "qtd": 102
+    },
+    {
+      "nome": "Ministério do Planejamento, Desenvolvimento e Gestão",
+      "qtd": 94
+    },
+    {
+      "nome": "Ministério da Infraestrutura",
+      "qtd": 81
+    },
+    {
+      "nome": "Ministério de Minas e Energia",
+      "qtd": 77
+    },
+    {
+      "nome": "Presidência da República",
+      "qtd": 65
+    },
+    {
+      "nome": "Departamento Nacional de Infraestrutura de Transportes",
+      "qtd": 42
+    },
+    {
+      "nome": "Fundação Nacional de Saúde",
+      "qtd": 33
+    },
+    {
+      "nome": "Ministério das Comunicações",
+      "qtd": 32
+    },
+    {
+      "nome": "Ministério do Meio Ambiente",
+      "qtd": 12
+    },
+    {
+      "nome": "Departamento Nacional de Obras Contra as Secas",
+      "qtd": 9
+    },
+    {
+      "nome": "Agência Nacional de Transportes Terrestres",
+      "qtd": 8
+    },
+    {
+      "nome": "Ministério do Esporte",
+      "qtd": 7
+    },
+    {
+      "nome": "Empresa de Planejamento e Logística S.A.",
+      "qtd": 7
+    },
+    {
+      "nome": "Ministério da Saúde",
+      "qtd": 5
+    },
+    {
+      "nome": "VALEC Engenharia, Construções e Ferrovias S.A.",
+      "qtd": 4
+    },
+    {
+      "nome": "Ministério da Cultura",
+      "qtd": 4
+    },
+    {
+      "nome": "Instituto do Patrimônio Histórico e Artístico Nacional",
+      "qtd": 4
+    },
+    {
+      "nome": "Fundação Nacional do Índio",
+      "qtd": 4
+    },
+    {
+      "nome": "Fundo Nacional de Desenvolvimento da Educação",
+      "qtd": 3
+    },
+    {
+      "nome": "Instituto Brasileiro do Meio Ambiente e Recursos Naturais Renováveis",
+      "qtd": 3
+    },
+    {
+      "nome": "Agência Nacional de Energia Elétrica",
+      "qtd": 2
+    },
+    {
+      "nome": "Estados / Municípios / Empresas",
+      "qtd": 1
+    },
+    {
+      "nome": "Agência Nacional de Águas",
+      "qtd": 1
+    },
+    {
+      "nome": "Ministério da Defesa",
+      "qtd": 1
+    },
+    {
+      "nome": "Agência Nacional de Aviação Civil",
+      "qtd": 1
+    },
+    {
+      "nome": "Autoridade Pública Olímpica",
+      "qtd": 1
+    },
+    {
+      "nome": "Universidade Federal de São Carlos - SP",
+      "qtd": 1
+    },
+    {
+      "nome": "Companhia Docas do Estado de São Paulo",
+      "qtd": 1
+    }
+  ],
+  "por_orgao_lotacao": [
+    {
+      "nome": "Ministério do Planejamento, Desenvolvimento e Gestão",
+      "qtd": 757
+    }
+  ],
+  "por_uf": [
+    {
+      "nome": "Não informado",
+      "qtd": 757
+    }
+  ],
+  "por_classe_padrao": [
+    {
+      "classe": "A",
+      "padrao": "I",
+      "qtd": 72
+    },
+    {
+      "classe": "A",
+      "padrao": "II",
+      "qtd": 150
+    },
+    {
+      "classe": "A",
+      "padrao": "III",
+      "qtd": 49
+    },
+    {
+      "classe": "A",
+      "padrao": "IV",
+      "qtd": 187
+    },
+    {
+      "classe": "A",
+      "padrao": "V",
+      "qtd": 299
+    }
+  ],
+  "funcao": {
+    "com_funcao": 270,
+    "por_sigla": [
+      {
+        "nome": "DAS",
+        "qtd": 227
+      },
+      {
+        "nome": "FGR",
+        "qtd": 21
+      },
+      {
+        "nome": "CTE",
+        "qtd": 6
+      },
+      {
+        "nome": "CCT",
+        "qtd": 5
+      },
+      {
+        "nome": "GF",
+        "qtd": 4
+      },
+      {
+        "nome": "FCT",
+        "qtd": 4
+      },
+      {
+        "nome": "CA",
+        "qtd": 2
+      },
+      {
+        "nome": "FND",
+        "qtd": 1
+      }
+    ]
+  },
+  "remuneracao_basica_bruta": {
+    "n": 742,
+    "media": 12203.05,
+    "mediana": 11619.06,
+    "p10": 10499.58,
+    "p90": 15323.13,
+    "histograma": [
+      {
+        "min": 0,
+        "max": 17500,
+        "qtd": 720
+      },
+      {
+        "min": 17500,
+        "max": 20000,
+        "qtd": 21
+      },
+      {
+        "min": 20000,
+        "max": 22500,
+        "qtd": 0
+      },
+      {
+        "min": 22500,
+        "max": 25000,
+        "qtd": 0
+      },
+      {
+        "min": 25000,
+        "max": 27500,
+        "qtd": 0
+      },
+      {
+        "min": 27500,
+        "max": 30000,
+        "qtd": 1
+      },
+      {
+        "min": 30000,
+        "max": 32500,
+        "qtd": 0
+      },
+      {
+        "min": 32500,
+        "max": 35000,
+        "qtd": 0
+      },
+      {
+        "min": 35000,
+        "max": 40000,
+        "qtd": 0
+      },
+      {
+        "min": 40000,
+        "max": null,
+        "qtd": 0
+      }
+    ]
+  }
+}
