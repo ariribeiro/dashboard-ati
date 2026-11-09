@@ -1,0 +1,234 @@
+{
+  "referencia": "2014-09",
+  "gerado_em": "2026-11-09T01:16:21+00:00",
+  "fonte": {
+    "nome": "Portal da Transparência — Servidores SIAPE",
+    "url": "https://portaldatransparencia.gov.br/download-de-dados/servidores",
+    "arquivo": "https://portaldatransparencia.gov.br/download-de-dados/servidores/201409_Servidores_SIAPE"
+  },
+  "filtro_cargo": "^ANALISTA TECN(ICO)? (EM|DE) POLITICAS SOCIAIS$",
+  "total": 819,
+  "por_situacao": [
+    {
+      "nome": "ATIVO PERMANENTE",
+      "qtd": 801
+    },
+    {
+      "nome": "ATIVO EM OUTRO ORGAO",
+      "qtd": 18
+    }
+  ],
+  "por_orgao_exercicio": [
+    {
+      "nome": "Ministério da Saúde",
+      "qtd": 401
+    },
+    {
+      "nome": "Ministério do Desenvolvimento Social",
+      "qtd": 197
+    },
+    {
+      "nome": "Ministério da Justiça e Segurança Pública",
+      "qtd": 57
+    },
+    {
+      "nome": "Ministério do Desenvolvimento Agrário",
+      "qtd": 39
+    },
+    {
+      "nome": "Ministério da Educação",
+      "qtd": 32
+    },
+    {
+      "nome": "Ministério do Trabalho e Emprego",
+      "qtd": 29
+    },
+    {
+      "nome": "Presidência da República",
+      "qtd": 23
+    },
+    {
+      "nome": "Ministério da Previdência Social",
+      "qtd": 21
+    },
+    {
+      "nome": "Ministério das Cidades",
+      "qtd": 10
+    },
+    {
+      "nome": "Fundação Nacional do Índio",
+      "qtd": 3
+    },
+    {
+      "nome": "Ministério da Cultura",
+      "qtd": 3
+    },
+    {
+      "nome": "Função Escola Nacional de Administração Pública",
+      "qtd": 1
+    },
+    {
+      "nome": "Ministério da Economia",
+      "qtd": 1
+    },
+    {
+      "nome": "Agência Nacional de Saúde Suplementar",
+      "qtd": 1
+    },
+    {
+      "nome": "Instituto do Patrimônio Histórico e Artístico Nacional",
+      "qtd": 1
+    }
+  ],
+  "por_orgao_lotacao": [
+    {
+      "nome": "Ministério da Saúde",
+      "qtd": 412
+    },
+    {
+      "nome": "Ministério do Desenvolvimento Social",
+      "qtd": 201
+    },
+    {
+      "nome": "Ministério da Justiça e Segurança Pública",
+      "qtd": 59
+    },
+    {
+      "nome": "Ministério do Desenvolvimento Agrário",
+      "qtd": 39
+    },
+    {
+      "nome": "Ministério da Educação",
+      "qtd": 32
+    },
+    {
+      "nome": "Ministério do Trabalho e Emprego",
+      "qtd": 28
+    },
+    {
+      "nome": "Ministério da Previdência Social",
+      "qtd": 21
+    },
+    {
+      "nome": "Presidência da República",
+      "qtd": 15
+    },
+    {
+      "nome": "Ministério das Cidades",
+      "qtd": 10
+    },
+    {
+      "nome": "Ministério da Cultura",
+      "qtd": 2
+    }
+  ],
+  "por_uf": [
+    {
+      "nome": "Não informado",
+      "qtd": 819
+    }
+  ],
+  "por_classe_padrao": [
+    {
+      "classe": "A",
+      "padrao": "I",
+      "qtd": 819
+    }
+  ],
+  "funcao": {
+    "com_funcao": 151,
+    "por_sigla": [
+      {
+        "nome": "DAS",
+        "qtd": 107
+      },
+      {
+        "nome": "FGR",
+        "qtd": 23
+      },
+      {
+        "nome": "FCT",
+        "qtd": 10
+      },
+      {
+        "nome": "RGA",
+        "qtd": 7
+      },
+      {
+        "nome": "NES",
+        "qtd": 1
+      },
+      {
+        "nome": "CGE",
+        "qtd": 1
+      },
+      {
+        "nome": "FGE",
+        "qtd": 1
+      },
+      {
+        "nome": "FG",
+        "qtd": 1
+      }
+    ]
+  },
+  "remuneracao_basica_bruta": {
+    "n": 815,
+    "media": 5865.27,
+    "mediana": 5471.62,
+    "p10": 5471.62,
+    "p90": 7784.98,
+    "histograma": [
+      {
+        "min": 0,
+        "max": 10000,
+        "qtd": 779
+      },
+      {
+        "min": 10000,
+        "max": 12500,
+        "qtd": 34
+      },
+      {
+        "min": 12500,
+        "max": 15000,
+        "qtd": 2
+      },
+      {
+        "min": 15000,
+        "max": 17500,
+        "qtd": 0
+      },
+      {
+        "min": 17500,
+        "max": 20000,
+        "qtd": 0
+      },
+      {
+        "min": 20000,
+        "max": 22500,
+        "qtd": 0
+      },
+      {
+        "min": 22500,
+        "max": 25000,
+        "qtd": 0
+      },
+      {
+        "min": 25000,
+        "max": 30000,
+        "qtd": 0
+      },
+      {
+        "min": 30000,
+        "max": 35000,
+        "qtd": 0
+      },
+      {
+        "min": 35000,
+        "max": null,
+        "qtd": 0
+      }
+    ]
+  }
+}
