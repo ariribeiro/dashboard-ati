@@ -1,0 +1,286 @@
+{
+  "referencia": "2019-06",
+  "gerado_em": "2026-11-09T00:59:27+00:00",
+  "fonte": {
+    "nome": "Portal da Transparência — Servidores SIAPE",
+    "url": "https://portaldatransparencia.gov.br/download-de-dados/servidores",
+    "arquivo": "https://portaldatransparencia.gov.br/download-de-dados/servidores/201906_Servidores_SIAPE"
+  },
+  "filtro_cargo": "^ANALISTA TECN(ICO)? (EM|DE) POLITICAS SOCIAIS$",
+  "total": 764,
+  "por_situacao": [
+    {
+      "nome": "ATIVO PERMANENTE",
+      "qtd": 682
+    },
+    {
+      "nome": "ATIVO EM OUTRO ORGAO",
+      "qtd": 82
+    }
+  ],
+  "por_orgao_exercicio": [
+    {
+      "nome": "Ministério da Saúde",
+      "qtd": 338
+    },
+    {
+      "nome": "Ministério do Desenvolvimento Social",
+      "qtd": 170
+    },
+    {
+      "nome": "Ministério da Economia",
+      "qtd": 47
+    },
+    {
+      "nome": "Ministério da Mulher, Família e Direitos Humanos",
+      "qtd": 47
+    },
+    {
+      "nome": "Ministério da Agricultura, Pecuária e Abastecimento",
+      "qtd": 35
+    },
+    {
+      "nome": "Ministério da Educação",
+      "qtd": 28
+    },
+    {
+      "nome": "Ministério da Justiça e Segurança Pública",
+      "qtd": 26
+    },
+    {
+      "nome": "Controladoria-Geral da União",
+      "qtd": 12
+    },
+    {
+      "nome": "Ministério do Desenvolvimento Regional",
+      "qtd": 11
+    },
+    {
+      "nome": "Defensoria Pública da União",
+      "qtd": 10
+    },
+    {
+      "nome": "Presidência da República",
+      "qtd": 7
+    },
+    {
+      "nome": "Função Escola Nacional de Administração Pública",
+      "qtd": 7
+    },
+    {
+      "nome": "Fundação Oswaldo Cruz",
+      "qtd": 5
+    },
+    {
+      "nome": "Fundação Nacional do Índio",
+      "qtd": 4
+    },
+    {
+      "nome": "Instituto Nacional de Colonização e Reforma Agrária",
+      "qtd": 3
+    },
+    {
+      "nome": "Estados / Municípios / Empresas",
+      "qtd": 3
+    },
+    {
+      "nome": "Ministério Público Federal",
+      "qtd": 1
+    },
+    {
+      "nome": "Universidade Federal da Bahia",
+      "qtd": 1
+    },
+    {
+      "nome": "Governo do Distrito Federal",
+      "qtd": 1
+    },
+    {
+      "nome": "Instituto do Patrimônio Histórico e Artístico Nacional",
+      "qtd": 1
+    },
+    {
+      "nome": "Tribunal Regional Eleitoral - GO",
+      "qtd": 1
+    },
+    {
+      "nome": "Empresa Brasileira de Serviços Hospitalares",
+      "qtd": 1
+    },
+    {
+      "nome": "Advocacia-Geral da União",
+      "qtd": 1
+    },
+    {
+      "nome": "Câmara dos Deputados",
+      "qtd": 1
+    },
+    {
+      "nome": "Prefeitura Municipal",
+      "qtd": 1
+    },
+    {
+      "nome": "Instituto Chico Mendes de Conservação da Biodiversidade",
+      "qtd": 1
+    },
+    {
+      "nome": "Governo do Estado Espírito Santo",
+      "qtd": 1
+    }
+  ],
+  "por_orgao_lotacao": [
+    {
+      "nome": "Ministério da Saúde",
+      "qtd": 379
+    },
+    {
+      "nome": "Ministério do Desenvolvimento Social",
+      "qtd": 192
+    },
+    {
+      "nome": "Ministério da Economia",
+      "qtd": 42
+    },
+    {
+      "nome": "Ministério da Agricultura, Pecuária e Abastecimento",
+      "qtd": 38
+    },
+    {
+      "nome": "Ministério da Mulher, Família e Direitos Humanos",
+      "qtd": 38
+    },
+    {
+      "nome": "Ministério da Justiça e Segurança Pública",
+      "qtd": 32
+    },
+    {
+      "nome": "Ministério da Educação",
+      "qtd": 30
+    },
+    {
+      "nome": "Ministério do Desenvolvimento Regional",
+      "qtd": 13
+    }
+  ],
+  "por_uf": [
+    {
+      "nome": "Não informado",
+      "qtd": 764
+    }
+  ],
+  "por_classe_padrao": [
+    {
+      "classe": "A",
+      "padrao": "I",
+      "qtd": 37
+    },
+    {
+      "classe": "A",
+      "padrao": "II",
+      "qtd": 3
+    },
+    {
+      "classe": "A",
+      "padrao": "III",
+      "qtd": 41
+    },
+    {
+      "classe": "A",
+      "padrao": "IV",
+      "qtd": 676
+    },
+    {
+      "classe": "A",
+      "padrao": "V",
+      "qtd": 7
+    }
+  ],
+  "funcao": {
+    "com_funcao": 295,
+    "por_sigla": [
+      {
+        "nome": "FPE",
+        "qtd": 137
+      },
+      {
+        "nome": "DAS",
+        "qtd": 89
+      },
+      {
+        "nome": "FGR",
+        "qtd": 47
+      },
+      {
+        "nome": "RGA",
+        "qtd": 18
+      },
+      {
+        "nome": "FCT",
+        "qtd": 3
+      },
+      {
+        "nome": "GF",
+        "qtd": 1
+      }
+    ]
+  },
+  "remuneracao_basica_bruta": {
+    "n": 716,
+    "media": 10648.15,
+    "mediana": 9594.4,
+    "p10": 8971.35,
+    "p90": 13103.4,
+    "histograma": [
+      {
+        "min": 0,
+        "max": 10000,
+        "qtd": 424
+      },
+      {
+        "min": 10000,
+        "max": 12500,
+        "qtd": 116
+      },
+      {
+        "min": 12500,
+        "max": 15000,
+        "qtd": 122
+      },
+      {
+        "min": 15000,
+        "max": 17500,
+        "qtd": 47
+      },
+      {
+        "min": 17500,
+        "max": 20000,
+        "qtd": 7
+      },
+      {
+        "min": 20000,
+        "max": 22500,
+        "qtd": 0
+      },
+      {
+        "min": 22500,
+        "max": 25000,
+        "qtd": 0
+      },
+      {
+        "min": 25000,
+        "max": 30000,
+        "qtd": 0
+      },
+      {
+        "min": 30000,
+        "max": 35000,
+        "qtd": 0
+      },
+      {
+        "min": 35000,
+        "max": null,
+        "qtd": 0
+      }
+    ]
+  }
+}

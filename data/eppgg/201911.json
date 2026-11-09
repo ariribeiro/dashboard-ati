@@ -1,0 +1,509 @@
+{
+  "referencia": "2019-11",
+  "gerado_em": "2026-11-09T01:00:44+00:00",
+  "fonte": {
+    "nome": "Portal da Transparência — Servidores SIAPE",
+    "url": "https://portaldatransparencia.gov.br/download-de-dados/servidores",
+    "arquivo": "https://portaldatransparencia.gov.br/download-de-dados/servidores/201911_Servidores_SIAPE"
+  },
+  "filtro_cargo": "^ESP(ECIALISTA)? (EM )?POL(ITICAS)? PUBL(ICAS)? (E )?GEST(AO)? GOVERN(AMENTAL)?$",
+  "total": 956,
+  "por_situacao": [
+    {
+      "nome": "ATIVO PERMANENTE",
+      "qtd": 819
+    },
+    {
+      "nome": "ATIVO EM OUTRO ORGAO",
+      "qtd": 137
+    }
+  ],
+  "por_orgao_exercicio": [
+    {
+      "nome": "Ministério da Economia",
+      "qtd": 277
+    },
+    {
+      "nome": "Conselho Administrativo de Defesa Econômica",
+      "qtd": 69
+    },
+    {
+      "nome": "Ministério do Desenvolvimento Social",
+      "qtd": 61
+    },
+    {
+      "nome": "Presidência da República",
+      "qtd": 51
+    },
+    {
+      "nome": "Ministério da Justiça e Segurança Pública",
+      "qtd": 47
+    },
+    {
+      "nome": "Função Escola Nacional de Administração Pública",
+      "qtd": 41
+    },
+    {
+      "nome": "Instituto de Pesquisa Econômica Aplicada",
+      "qtd": 36
+    },
+    {
+      "nome": "Ministério da Agricultura, Pecuária e Abastecimento",
+      "qtd": 29
+    },
+    {
+      "nome": "Ministério da Educação",
+      "qtd": 28
+    },
+    {
+      "nome": "Ministério do Desenvolvimento Regional",
+      "qtd": 24
+    },
+    {
+      "nome": "Ministério da Ciência, Tecnologia, Inovações e Comunicações",
+      "qtd": 23
+    },
+    {
+      "nome": "Ministério de Minas e Energia",
+      "qtd": 20
+    },
+    {
+      "nome": "Ministério da Saúde",
+      "qtd": 16
+    },
+    {
+      "nome": "Ministério da Mulher, Família e Direitos Humanos",
+      "qtd": 16
+    },
+    {
+      "nome": "Ministério da Infraestrutura",
+      "qtd": 16
+    },
+    {
+      "nome": "Ministério do Meio Ambiente",
+      "qtd": 14
+    },
+    {
+      "nome": "Agência Nacional de Saúde Suplementar",
+      "qtd": 13
+    },
+    {
+      "nome": "Ministério da Defesa",
+      "qtd": 12
+    },
+    {
+      "nome": "Instituto do Patrimônio Histórico e Artístico Nacional",
+      "qtd": 12
+    },
+    {
+      "nome": "Fundação Oswaldo Cruz",
+      "qtd": 10
+    },
+    {
+      "nome": "Advocacia-Geral da União",
+      "qtd": 10
+    },
+    {
+      "nome": "Instituto Chico Mendes de Conservação da Biodiversidade",
+      "qtd": 10
+    },
+    {
+      "nome": "Câmara dos Deputados",
+      "qtd": 9
+    },
+    {
+      "nome": "Agência Nacional do Cinema",
+      "qtd": 9
+    },
+    {
+      "nome": "Estados / Municípios / Empresas",
+      "qtd": 9
+    },
+    {
+      "nome": "Agência Nacional do Petróleo, Gás Natural e Biocombustíveis",
+      "qtd": 7
+    },
+    {
+      "nome": "Agência Nacional de Águas",
+      "qtd": 6
+    },
+    {
+      "nome": "Defensoria Pública da União",
+      "qtd": 6
+    },
+    {
+      "nome": "Instituto Brasileiro de Museus",
+      "qtd": 6
+    },
+    {
+      "nome": "Instituto Nacional da Propriedade Industrial",
+      "qtd": 4
+    },
+    {
+      "nome": "Controladoria-Geral da União",
+      "qtd": 4
+    },
+    {
+      "nome": "Instituto Nacional do Seguro Social",
+      "qtd": 4
+    },
+    {
+      "nome": "Senado Federal",
+      "qtd": 4
+    },
+    {
+      "nome": "Fundação Casa de Rui Barbosa",
+      "qtd": 3
+    },
+    {
+      "nome": "Agência Nacional de Aviação Civil",
+      "qtd": 3
+    },
+    {
+      "nome": "Instituto Nacional de Estudos e Pesquisas Educacionais",
+      "qtd": 3
+    },
+    {
+      "nome": "Governo do Distrito Federal",
+      "qtd": 3
+    },
+    {
+      "nome": "Fundação Jorge Duprat Figueiredo, de Segurança e Medicina do Trabalho",
+      "qtd": 3
+    },
+    {
+      "nome": "Agência Nacional de Energia Elétrica",
+      "qtd": 2
+    },
+    {
+      "nome": "Universidade Federal de Minas Gerais",
+      "qtd": 2
+    },
+    {
+      "nome": "Instituto Nacional de Colonização e Reforma Agrária",
+      "qtd": 2
+    },
+    {
+      "nome": "Agência Nacional de Transportes Terrestres",
+      "qtd": 2
+    },
+    {
+      "nome": "Fundação Coordenação de Aperfeiçoamento de Pessoal de Nível Superior",
+      "qtd": 2
+    },
+    {
+      "nome": "Instituto Nacional de Educação de Surdos",
+      "qtd": 1
+    },
+    {
+      "nome": "Fundação Nacional do Índio",
+      "qtd": 1
+    },
+    {
+      "nome": "Fundação de Previdência Complementar do Servidor Público Federal",
+      "qtd": 1
+    },
+    {
+      "nome": "Agência Espacial Brasileira",
+      "qtd": 1
+    },
+    {
+      "nome": "Fundação Cultural Palmares",
+      "qtd": 1
+    },
+    {
+      "nome": "Fundação Instituto Brasileiro de Geografia e Estatística",
+      "qtd": 1
+    },
+    {
+      "nome": "Instituto Benjamin Constant",
+      "qtd": 1
+    },
+    {
+      "nome": "Fundação Biblioteca Nacional",
+      "qtd": 1
+    },
+    {
+      "nome": "Universidade Federal de São Paulo",
+      "qtd": 1
+    },
+    {
+      "nome": "Comando do Exército",
+      "qtd": 1
+    },
+    {
+      "nome": "Conselho Nacional de Desenvolvimento Científico e Tecnológico",
+      "qtd": 1
+    },
+    {
+      "nome": "Instituto de Pesquisas Jardim Botânico do Rio de Janeiro",
+      "qtd": 1
+    },
+    {
+      "nome": "Instituto Brasileiro do Meio Ambiente e Recursos Naturais Renováveis",
+      "qtd": 1
+    },
+    {
+      "nome": "Ministério Público Federal",
+      "qtd": 1
+    },
+    {
+      "nome": "Tribunal Regional Federal da 1ª Região - DF",
+      "qtd": 1
+    },
+    {
+      "nome": "Governo do Estado da Bahia",
+      "qtd": 1
+    },
+    {
+      "nome": "Governo do Estado de Pernambuco",
+      "qtd": 1
+    },
+    {
+      "nome": "Fundação Universidade de Brasília",
+      "qtd": 1
+    },
+    {
+      "nome": "Superintendência Nacional de Previdência Complementar",
+      "qtd": 1
+    },
+    {
+      "nome": "Superintendência do Desenvolvimento do Nordeste",
+      "qtd": 1
+    },
+    {
+      "nome": "Comando da Marinha",
+      "qtd": 1
+    },
+    {
+      "nome": "Fundação Joaquim Nabuco",
+      "qtd": 1
+    },
+    {
+      "nome": "Empresa de Planejamento e Logística S.A.",
+      "qtd": 1
+    },
+    {
+      "nome": "Estados / Municípios / Administração Direta Autárquica e Fundacional",
+      "qtd": 1
+    },
+    {
+      "nome": "Empresa Brasileira de Serviços Hospitalares",
+      "qtd": 1
+    },
+    {
+      "nome": "Fundação Alexandre Gusmão",
+      "qtd": 1
+    },
+    {
+      "nome": "Prefeitura Municipal",
+      "qtd": 1
+    },
+    {
+      "nome": "Governo do Estado de Minas Gerais",
+      "qtd": 1
+    }
+  ],
+  "por_orgao_lotacao": [
+    {
+      "nome": "Ministério da Economia",
+      "qtd": 956
+    }
+  ],
+  "por_uf": [
+    {
+      "nome": "Não informado",
+      "qtd": 956
+    }
+  ],
+  "por_classe_padrao": [
+    {
+      "classe": "A",
+      "padrao": "II",
+      "qtd": 1
+    },
+    {
+      "classe": "A",
+      "padrao": "III",
+      "qtd": 7
+    },
+    {
+      "classe": "B",
+      "padrao": "I",
+      "qtd": 3
+    },
+    {
+      "classe": "B",
+      "padrao": "II",
+      "qtd": 5
+    },
+    {
+      "classe": "B",
+      "padrao": "III",
+      "qtd": 19
+    },
+    {
+      "classe": "C",
+      "padrao": "I",
+      "qtd": 18
+    },
+    {
+      "classe": "C",
+      "padrao": "II",
+      "qtd": 87
+    },
+    {
+      "classe": "C",
+      "padrao": "III",
+      "qtd": 88
+    },
+    {
+      "classe": "S",
+      "padrao": "I",
+      "qtd": 27
+    },
+    {
+      "classe": "S",
+      "padrao": "II",
+      "qtd": 84
+    },
+    {
+      "classe": "S",
+      "padrao": "III",
+      "qtd": 16
+    },
+    {
+      "classe": "S",
+      "padrao": "IV",
+      "qtd": 601
+    }
+  ],
+  "funcao": {
+    "com_funcao": 396,
+    "por_sigla": [
+      {
+        "nome": "DAS",
+        "qtd": 223
+      },
+      {
+        "nome": "FPE",
+        "qtd": 133
+      },
+      {
+        "nome": "CCT",
+        "qtd": 13
+      },
+      {
+        "nome": "CGE",
+        "qtd": 9
+      },
+      {
+        "nome": "FGR",
+        "qtd": 4
+      },
+      {
+        "nome": "RGA",
+        "qtd": 3
+      },
+      {
+        "nome": "GTS",
+        "qtd": 2
+      },
+      {
+        "nome": "CA",
+        "qtd": 1
+      },
+      {
+        "nome": "FG",
+        "qtd": 1
+      },
+      {
+        "nome": "GR",
+        "qtd": 1
+      },
+      {
+        "nome": "CD",
+        "qtd": 1
+      },
+      {
+        "nome": "CCD",
+        "qtd": 1
+      },
+      {
+        "nome": "NES",
+        "qtd": 1
+      },
+      {
+        "nome": "GT",
+        "qtd": 1
+      },
+      {
+        "nome": "CTE",
+        "qtd": 1
+      },
+      {
+        "nome": "GF",
+        "qtd": 1
+      }
+    ]
+  },
+  "remuneracao_basica_bruta": {
+    "n": 905,
+    "media": 28591.89,
+    "mediana": 27369.67,
+    "p10": 24689.04,
+    "p90": 33593.66,
+    "histograma": [
+      {
+        "min": 0,
+        "max": 20000,
+        "qtd": 9
+      },
+      {
+        "min": 20000,
+        "max": 25000,
+        "qtd": 121
+      },
+      {
+        "min": 25000,
+        "max": 27500,
+        "qtd": 412
+      },
+      {
+        "min": 27500,
+        "max": 30000,
+        "qtd": 83
+      },
+      {
+        "min": 30000,
+        "max": 32500,
+        "qtd": 113
+      },
+      {
+        "min": 32500,
+        "max": 35000,
+        "qtd": 105
+      },
+      {
+        "min": 35000,
+        "max": 37500,
+        "qtd": 45
+      },
+      {
+        "min": 37500,
+        "max": 40000,
+        "qtd": 15
+      },
+      {
+        "min": 40000,
+        "max": 45000,
+        "qtd": 1
+      },
+      {
+        "min": 45000,
+        "max": null,
+        "qtd": 1
+      }
+    ]
+  }
+}

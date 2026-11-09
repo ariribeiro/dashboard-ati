@@ -1,0 +1,224 @@
+{
+  "referencia": "2019-03",
+  "gerado_em": "2026-11-09T00:58:39+00:00",
+  "fonte": {
+    "nome": "Portal da Transparência — Servidores SIAPE",
+    "url": "https://portaldatransparencia.gov.br/download-de-dados/servidores",
+    "arquivo": "https://portaldatransparencia.gov.br/download-de-dados/servidores/201903_Servidores_SIAPE"
+  },
+  "filtro_cargo": "^ANALISTA (DE )?COM(ERCIO)? EXT(ERIOR)?$",
+  "total": 408,
+  "por_situacao": [
+    {
+      "nome": "ATIVO PERMANENTE",
+      "qtd": 380
+    },
+    {
+      "nome": "ATIVO EM OUTRO ORGAO",
+      "qtd": 28
+    }
+  ],
+  "por_orgao_exercicio": [
+    {
+      "nome": "Ministério da Economia",
+      "qtd": 356
+    },
+    {
+      "nome": "Ministério da Agricultura, Pecuária e Abastecimento",
+      "qtd": 25
+    },
+    {
+      "nome": "Presidência da República",
+      "qtd": 8
+    },
+    {
+      "nome": "Defensoria Pública da União",
+      "qtd": 3
+    },
+    {
+      "nome": "Ministério da Defesa",
+      "qtd": 3
+    },
+    {
+      "nome": "Ministério do Meio Ambiente",
+      "qtd": 3
+    },
+    {
+      "nome": "Fundação de Previdência Complementar do Servidor Público Federal",
+      "qtd": 2
+    },
+    {
+      "nome": "Instituto Nacional de Metrologia, Qualidade e Tecnologia",
+      "qtd": 2
+    },
+    {
+      "nome": "Governo do Distrito Federal",
+      "qtd": 2
+    },
+    {
+      "nome": "Conselho Administrativo de Defesa Econômica",
+      "qtd": 2
+    },
+    {
+      "nome": "Advocacia-Geral da União",
+      "qtd": 1
+    },
+    {
+      "nome": "Controladoria-Geral da União",
+      "qtd": 1
+    }
+  ],
+  "por_orgao_lotacao": [
+    {
+      "nome": "Ministério da Economia",
+      "qtd": 385
+    },
+    {
+      "nome": "Ministério da Agricultura, Pecuária e Abastecimento",
+      "qtd": 23
+    }
+  ],
+  "por_uf": [
+    {
+      "nome": "Não informado",
+      "qtd": 408
+    }
+  ],
+  "por_classe_padrao": [
+    {
+      "classe": "A",
+      "padrao": "III",
+      "qtd": 42
+    },
+    {
+      "classe": "B",
+      "padrao": "I",
+      "qtd": 45
+    },
+    {
+      "classe": "B",
+      "padrao": "II",
+      "qtd": 81
+    },
+    {
+      "classe": "B",
+      "padrao": "III",
+      "qtd": 46
+    },
+    {
+      "classe": "C",
+      "padrao": "I",
+      "qtd": 3
+    },
+    {
+      "classe": "C",
+      "padrao": "II",
+      "qtd": 2
+    },
+    {
+      "classe": "C",
+      "padrao": "III",
+      "qtd": 14
+    },
+    {
+      "classe": "S",
+      "padrao": "I",
+      "qtd": 11
+    },
+    {
+      "classe": "S",
+      "padrao": "II",
+      "qtd": 1
+    },
+    {
+      "classe": "S",
+      "padrao": "III",
+      "qtd": 4
+    },
+    {
+      "classe": "S",
+      "padrao": "IV",
+      "qtd": 159
+    }
+  ],
+  "funcao": {
+    "com_funcao": 141,
+    "por_sigla": [
+      {
+        "nome": "DAS",
+        "qtd": 84
+      },
+      {
+        "nome": "FPE",
+        "qtd": 54
+      },
+      {
+        "nome": "FGR",
+        "qtd": 2
+      },
+      {
+        "nome": "GT",
+        "qtd": 1
+      }
+    ]
+  },
+  "remuneracao_basica_bruta": {
+    "n": 396,
+    "media": 26064.59,
+    "mediana": 26676.36,
+    "p10": 21931.59,
+    "p90": 30781.0,
+    "histograma": [
+      {
+        "min": 0,
+        "max": 20000,
+        "qtd": 0
+      },
+      {
+        "min": 20000,
+        "max": 25000,
+        "qtd": 168
+      },
+      {
+        "min": 25000,
+        "max": 27500,
+        "qtd": 138
+      },
+      {
+        "min": 27500,
+        "max": 30000,
+        "qtd": 45
+      },
+      {
+        "min": 30000,
+        "max": 32500,
+        "qtd": 15
+      },
+      {
+        "min": 32500,
+        "max": 35000,
+        "qtd": 24
+      },
+      {
+        "min": 35000,
+        "max": 37500,
+        "qtd": 6
+      },
+      {
+        "min": 37500,
+        "max": 40000,
+        "qtd": 0
+      },
+      {
+        "min": 40000,
+        "max": 45000,
+        "qtd": 0
+      },
+      {
+        "min": 45000,
+        "max": null,
+        "qtd": 0
+      }
+    ]
+  }
+}

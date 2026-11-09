@@ -1,0 +1,314 @@
+{
+  "referencia": "2019-02",
+  "gerado_em": "2026-11-09T00:58:24+00:00",
+  "fonte": {
+    "nome": "Portal da Transparência — Servidores SIAPE",
+    "url": "https://portaldatransparencia.gov.br/download-de-dados/servidores",
+    "arquivo": "https://portaldatransparencia.gov.br/download-de-dados/servidores/201902_Servidores_SIAPE"
+  },
+  "filtro_cargo": "^ANALISTA TECN(ICO)? (EM|DE) POLITICAS SOCIAIS$",
+  "total": 762,
+  "por_situacao": [
+    {
+      "nome": "ATIVO PERMANENTE",
+      "qtd": 682
+    },
+    {
+      "nome": "ATIVO EM OUTRO ORGAO",
+      "qtd": 80
+    }
+  ],
+  "por_orgao_exercicio": [
+    {
+      "nome": "Ministério da Saúde",
+      "qtd": 340
+    },
+    {
+      "nome": "Ministério do Desenvolvimento Social",
+      "qtd": 163
+    },
+    {
+      "nome": "Ministério da Mulher, Família e Direitos Humanos",
+      "qtd": 51
+    },
+    {
+      "nome": "Ministério da Economia",
+      "qtd": 45
+    },
+    {
+      "nome": "Ministério da Agricultura, Pecuária e Abastecimento",
+      "qtd": 35
+    },
+    {
+      "nome": "Ministério da Educação",
+      "qtd": 27
+    },
+    {
+      "nome": "Ministério da Justiça e Segurança Pública",
+      "qtd": 26
+    },
+    {
+      "nome": "Controladoria-Geral da União",
+      "qtd": 11
+    },
+    {
+      "nome": "Ministério do Desenvolvimento Regional",
+      "qtd": 10
+    },
+    {
+      "nome": "Defensoria Pública da União",
+      "qtd": 10
+    },
+    {
+      "nome": "Presidência da República",
+      "qtd": 8
+    },
+    {
+      "nome": "Função Escola Nacional de Administração Pública",
+      "qtd": 6
+    },
+    {
+      "nome": "Fundação Nacional do Índio",
+      "qtd": 4
+    },
+    {
+      "nome": "Fundação Oswaldo Cruz",
+      "qtd": 4
+    },
+    {
+      "nome": "Ministério do Trabalho e Emprego",
+      "qtd": 3
+    },
+    {
+      "nome": "Instituto Nacional de Colonização e Reforma Agrária",
+      "qtd": 3
+    },
+    {
+      "nome": "Ministério das Cidades",
+      "qtd": 2
+    },
+    {
+      "nome": "Estados / Municípios / Empresas",
+      "qtd": 2
+    },
+    {
+      "nome": "Fundação de Previdência Complementar do Servidor Público Federal",
+      "qtd": 1
+    },
+    {
+      "nome": "Ministério Público Federal",
+      "qtd": 1
+    },
+    {
+      "nome": "Universidade Federal da Bahia",
+      "qtd": 1
+    },
+    {
+      "nome": "Instituto do Patrimônio Histórico e Artístico Nacional",
+      "qtd": 1
+    },
+    {
+      "nome": "Tribunal Regional Eleitoral - GO",
+      "qtd": 1
+    },
+    {
+      "nome": "Empresa Brasileira de Serviços Hospitalares",
+      "qtd": 1
+    },
+    {
+      "nome": "Ministério da Cultura",
+      "qtd": 1
+    },
+    {
+      "nome": "Advocacia-Geral da União",
+      "qtd": 1
+    },
+    {
+      "nome": "Ministério do Planejamento, Desenvolvimento e Gestão",
+      "qtd": 1
+    },
+    {
+      "nome": "Câmara dos Deputados",
+      "qtd": 1
+    },
+    {
+      "nome": "Prefeitura Municipal",
+      "qtd": 1
+    },
+    {
+      "nome": "Instituto Chico Mendes de Conservação da Biodiversidade",
+      "qtd": 1
+    }
+  ],
+  "por_orgao_lotacao": [
+    {
+      "nome": "Ministério da Saúde",
+      "qtd": 378
+    },
+    {
+      "nome": "Ministério do Desenvolvimento Social",
+      "qtd": 188
+    },
+    {
+      "nome": "Ministério da Economia",
+      "qtd": 40
+    },
+    {
+      "nome": "Ministério da Mulher, Família e Direitos Humanos",
+      "qtd": 38
+    },
+    {
+      "nome": "Ministério da Agricultura, Pecuária e Abastecimento",
+      "qtd": 37
+    },
+    {
+      "nome": "Ministério da Justiça e Segurança Pública",
+      "qtd": 33
+    },
+    {
+      "nome": "Ministério da Educação",
+      "qtd": 30
+    },
+    {
+      "nome": "Ministério do Desenvolvimento Regional",
+      "qtd": 11
+    },
+    {
+      "nome": "Ministério do Trabalho e Emprego",
+      "qtd": 3
+    },
+    {
+      "nome": "Ministério das Cidades",
+      "qtd": 2
+    },
+    {
+      "nome": "Ministério da Cultura",
+      "qtd": 1
+    },
+    {
+      "nome": "Presidência da República",
+      "qtd": 1
+    }
+  ],
+  "por_uf": [
+    {
+      "nome": "Não informado",
+      "qtd": 762
+    }
+  ],
+  "por_classe_padrao": [
+    {
+      "classe": "A",
+      "padrao": "I",
+      "qtd": 35
+    },
+    {
+      "classe": "A",
+      "padrao": "II",
+      "qtd": 3
+    },
+    {
+      "classe": "A",
+      "padrao": "III",
+      "qtd": 114
+    },
+    {
+      "classe": "A",
+      "padrao": "IV",
+      "qtd": 608
+    },
+    {
+      "classe": "A",
+      "padrao": "V",
+      "qtd": 2
+    }
+  ],
+  "funcao": {
+    "com_funcao": 308,
+    "por_sigla": [
+      {
+        "nome": "FPE",
+        "qtd": 126
+      },
+      {
+        "nome": "DAS",
+        "qtd": 108
+      },
+      {
+        "nome": "FGR",
+        "qtd": 51
+      },
+      {
+        "nome": "RGA",
+        "qtd": 21
+      },
+      {
+        "nome": "FCT",
+        "qtd": 1
+      },
+      {
+        "nome": "GF",
+        "qtd": 1
+      }
+    ]
+  },
+  "remuneracao_basica_bruta": {
+    "n": 719,
+    "media": 10550.09,
+    "mediana": 9594.4,
+    "p10": 9091.96,
+    "p90": 13103.4,
+    "histograma": [
+      {
+        "min": 0,
+        "max": 10000,
+        "qtd": 430
+      },
+      {
+        "min": 10000,
+        "max": 12500,
+        "qtd": 126
+      },
+      {
+        "min": 12500,
+        "max": 15000,
+        "qtd": 114
+      },
+      {
+        "min": 15000,
+        "max": 17500,
+        "qtd": 45
+      },
+      {
+        "min": 17500,
+        "max": 20000,
+        "qtd": 4
+      },
+      {
+        "min": 20000,
+        "max": 22500,
+        "qtd": 0
+      },
+      {
+        "min": 22500,
+        "max": 25000,
+        "qtd": 0
+      },
+      {
+        "min": 25000,
+        "max": 30000,
+        "qtd": 0
+      },
+      {
+        "min": 30000,
+        "max": 35000,
+        "qtd": 0
+      },
+      {
+        "min": 35000,
+        "max": null,
+        "qtd": 0
+      }
+    ]
+  }
+}
