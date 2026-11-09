@@ -1,0 +1,255 @@
+{
+  "referencia": "2020-01",
+  "gerado_em": "2026-11-09T00:45:56+00:00",
+  "fonte": {
+    "nome": "Portal da Transparência — Servidores SIAPE",
+    "url": "https://portaldatransparencia.gov.br/download-de-dados/servidores",
+    "arquivo": "https://portaldatransparencia.gov.br/download-de-dados/servidores/202001_Servidores_SIAPE"
+  },
+  "filtro_cargo": "^ANALISTA (DE )?COM(ERCIO)? EXT(ERIOR)?$",
+  "total": 403,
+  "por_situacao": [
+    {
+      "nome": "ATIVO PERMANENTE",
+      "qtd": 363
+    },
+    {
+      "nome": "ATIVO EM OUTRO ORGAO",
+      "qtd": 40
+    }
+  ],
+  "por_orgao_exercicio": [
+    {
+      "nome": "Ministério da Economia",
+      "qtd": 342
+    },
+    {
+      "nome": "Ministério da Agricultura, Pecuária e Abastecimento",
+      "qtd": 23
+    },
+    {
+      "nome": "Presidência da República",
+      "qtd": 6
+    },
+    {
+      "nome": "Conselho Administrativo de Defesa Econômica",
+      "qtd": 6
+    },
+    {
+      "nome": "Governo do Distrito Federal",
+      "qtd": 3
+    },
+    {
+      "nome": "Defensoria Pública da União",
+      "qtd": 3
+    },
+    {
+      "nome": "Ministério da Justiça e Segurança Pública",
+      "qtd": 2
+    },
+    {
+      "nome": "Instituto Nacional de Estudos e Pesquisas Educacionais",
+      "qtd": 2
+    },
+    {
+      "nome": "Governo do Estado de São Paulo",
+      "qtd": 2
+    },
+    {
+      "nome": "Fundação de Previdência Complementar do Servidor Público Federal",
+      "qtd": 2
+    },
+    {
+      "nome": "Ministério da Educação",
+      "qtd": 2
+    },
+    {
+      "nome": "Ministério da Defesa",
+      "qtd": 2
+    },
+    {
+      "nome": "Ministério do Desenvolvimento Regional",
+      "qtd": 1
+    },
+    {
+      "nome": "Instituto Nacional de Metrologia, Qualidade e Tecnologia",
+      "qtd": 1
+    },
+    {
+      "nome": "Advocacia-Geral da União",
+      "qtd": 1
+    },
+    {
+      "nome": "Ministério do Meio Ambiente",
+      "qtd": 1
+    },
+    {
+      "nome": "Câmara dos Deputados",
+      "qtd": 1
+    },
+    {
+      "nome": "Ministério da Saúde",
+      "qtd": 1
+    },
+    {
+      "nome": "Estados / Municípios / Empresas",
+      "qtd": 1
+    },
+    {
+      "nome": "Controladoria-Geral da União",
+      "qtd": 1
+    }
+  ],
+  "por_orgao_lotacao": [
+    {
+      "nome": "Ministério da Economia",
+      "qtd": 382
+    },
+    {
+      "nome": "Ministério da Agricultura, Pecuária e Abastecimento",
+      "qtd": 21
+    }
+  ],
+  "por_uf": [
+    {
+      "nome": "Não informado",
+      "qtd": 403
+    }
+  ],
+  "por_classe_padrao": [
+    {
+      "classe": "B",
+      "padrao": "I",
+      "qtd": 67
+    },
+    {
+      "classe": "B",
+      "padrao": "II",
+      "qtd": 69
+    },
+    {
+      "classe": "B",
+      "padrao": "III",
+      "qtd": 49
+    },
+    {
+      "classe": "C",
+      "padrao": "I",
+      "qtd": 30
+    },
+    {
+      "classe": "C",
+      "padrao": "II",
+      "qtd": 2
+    },
+    {
+      "classe": "C",
+      "padrao": "III",
+      "qtd": 3
+    },
+    {
+      "classe": "S",
+      "padrao": "I",
+      "qtd": 21
+    },
+    {
+      "classe": "S",
+      "padrao": "II",
+      "qtd": 2
+    },
+    {
+      "classe": "S",
+      "padrao": "III",
+      "qtd": 2
+    },
+    {
+      "classe": "S",
+      "padrao": "IV",
+      "qtd": 158
+    }
+  ],
+  "funcao": {
+    "com_funcao": 150,
+    "por_sigla": [
+      {
+        "nome": "DAS",
+        "qtd": 88
+      },
+      {
+        "nome": "FPE",
+        "qtd": 58
+      },
+      {
+        "nome": "FGR",
+        "qtd": 2
+      },
+      {
+        "nome": "GT",
+        "qtd": 1
+      },
+      {
+        "nome": "RGA",
+        "qtd": 1
+      }
+    ]
+  },
+  "remuneracao_basica_bruta": {
+    "n": 389,
+    "media": 26316.87,
+    "mediana": 27369.67,
+    "p10": 21931.59,
+    "p90": 30781.0,
+    "histograma": [
+      {
+        "min": 0,
+        "max": 20000,
+        "qtd": 4
+      },
+      {
+        "min": 20000,
+        "max": 25000,
+        "qtd": 136
+      },
+      {
+        "min": 25000,
+        "max": 27500,
+        "qtd": 153
+      },
+      {
+        "min": 27500,
+        "max": 30000,
+        "qtd": 51
+      },
+      {
+        "min": 30000,
+        "max": 32500,
+        "qtd": 15
+      },
+      {
+        "min": 32500,
+        "max": 35000,
+        "qtd": 24
+      },
+      {
+        "min": 35000,
+        "max": 37500,
+        "qtd": 5
+      },
+      {
+        "min": 37500,
+        "max": 40000,
+        "qtd": 1
+      },
+      {
+        "min": 40000,
+        "max": 45000,
+        "qtd": 0
+      },
+      {
+        "min": 45000,
+        "max": null,
+        "qtd": 0
+      }
+    ]
+  }
+}
