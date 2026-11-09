@@ -112,6 +112,7 @@ flowchart LR
 | `ingresso` | Classe e padrão de entrada (`{"classe": "A", "padrao": "I"}`), ou `null` se não confirmado. Sem ele, o painel omite o destaque "no início da carreira" |
 | `classes` | Opcional. Rótulo de exibição por código do SIAPE (ex.: `{"S": "Especial"}`) |
 | `faixas` | Opcional. Limites (R$) do histograma, para carreiras em outro patamar salarial |
+| `inicio` | Opcional. Primeiro mês (`AAAA-MM`) em que a carreira aparece no SIAPE; meses anteriores são ignorados em vez de falhar como "vazio" |
 | `cores` | `destaque` (cor da carreira: faixa, brilho do cabeçalho, cartão da página inicial), `clara` (acento sobre fundo escuro e no modo escuro) e `forte` (acento sobre fundo claro, contraste ≥ 4,5:1). A ATI mantém a identidade oficial no painel |
 
 </details>
@@ -129,7 +130,7 @@ Conferido no arquivo de ago/2026:
   - **ATI**: deixa de fora cargos parecidos que não são da carreira, como
     `ANALISTA DE TEC DA INFORMACAO` (PCCTAE), `ANALISTA DE TECNOL DA INFORMACAO - 40H`
     (EBSERH) e `ANALISTA - ANALISTA DE TECNOL DA INFORM` (Conab).
-  - **ATPS**: lotação centralizada no MGI, classes A–C e padrões I–VI, como a ATI.
+  - **ATPS**: aparece no SIAPE a partir de jul/2013, com a primeira turma (toda em A-I); por isso `inicio` é `2013-07`. A lotação só ficou centralizada no MGI em 2024. Classes A–C e padrões I–VI, como a ATI.
   - **EPPGG**: classes B, C e S. Pela remuneração, a ordem é B → C → S, e S é
     exibida como "Especial". Não há classe A nos dados e o ingresso não está
     configurado. Faixas próprias no histograma.

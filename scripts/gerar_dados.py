@@ -206,8 +206,10 @@ def ler_cadastro(zf: zipfile.ZipFile, mes: str, padroes: dict[str, re.Pattern]) 
     funcao = extras[~vazio(extras["SIGLA_FUNCAO"])].drop_duplicates(COL_ID).set_index(COL_ID)["SIGLA_FUNCAO"]
     uf_extra = extras[~vazio(extras["UF_EXERCICIO"])].drop_duplicates(COL_ID).set_index(COL_ID)["UF_EXERCICIO"]
     for df in tabelas.values():
-        df["FUNCAO"] = funcao
-        df["UF"] = df["UF_EXERCICIO"].mask(vazio(df["UF_EXERCICIO"])).fillna(uf_extra).fillna("Não informado")
+        # reindex: atribuir uma Series a um DataFrame vazio faz o pandas adotar o índice dela,
+        # e uma carreira sem ninguém no mês "herdaria" os servidores com função das outras.
+        df["FUNCAO"] = funcao.reindex(df.index)
+        df["UF"] = df["UF_EXERCICIO"].mask(vazio(df["UF_EXERCICIO"])).fillna(uf_extra.reindex(df.index)).fillna("Não informado")
     return tabelas
 
 
@@ -360,7 +362,10 @@ def processar(s: requests.Session, mes: str, carreiras: dict[str, dict], manter_
 
 def processar_mes(s: requests.Session, mes: str, carreiras: dict[str, dict], force: bool, manter_zip: bool) -> str:
     """Processa um mês e devolve o resultado: salvo, existente, indisponivel ou vazio."""
-    pendentes = {c: cfg for c, cfg in carreiras.items() if force or not arquivo_mes(c, mes).exists()}
+    # "inicio" (carreiras.json): primeiro mês em que a carreira aparece no SIAPE. Antes dele o mês
+    # sairia vazio e faria a execução falhar (e baixar o mês de novo) a cada "ano inteiro".
+    ativas = {c: cfg for c, cfg in carreiras.items() if mes >= cfg.get("inicio", "0000-00").replace("-", "")}
+    pendentes = {c: cfg for c, cfg in ativas.items() if force or not arquivo_mes(c, mes).exists()}
     if not pendentes:
         print(f"{mes} já processado; use --force para refazer.")
         return "existente"

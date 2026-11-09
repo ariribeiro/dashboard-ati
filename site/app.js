@@ -7,6 +7,8 @@ let P = "ATIs"; // plural da sigla, usado nos textos
 let CFG = {}; // entrada da carreira em data/carreiras.json
 // Rótulo de exibição da classe (no SIAPE, "S" é a classe Especial em algumas carreiras).
 const rotuloClasse = (c) => CFG.classes?.[c] ?? c;
+// Sigla no singular ou no plural conforme a quantidade ("1 AIE", "2 AIEs").
+const siglaQtd = (n) => (Math.abs(n) === 1 ? CFG.sigla : P);
 // Favicon das carreiras sem marca própria: barras sobre a tinta, a mais alta na cor da carreira.
 const faviconNeutro = (cor) => "data:image/svg+xml," + encodeURIComponent(
   '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="#17393B"/>' +
@@ -121,7 +123,7 @@ function barrasHorizontais(id, itens, corVar, rotulo = P) {
   graficos[id]?.resize();
   grafico(id, {
     tooltip: { ...temaBase().tooltip, trigger: "item",
-      formatter: (p) => `${ordenados[p.dataIndex].completo ?? p.name}<br><b>${fmtInt.format(p.value)}</b> ${rotulo}` },
+      formatter: (p) => `${ordenados[p.dataIndex].completo ?? p.name}<br><b>${fmtInt.format(p.value)}</b> ${rotulo === P ? siglaQtd(p.value) : rotulo}` },
     xAxis: eixoValor(),
     yAxis: eixoCategoria(ordenados.map((d) => d.nome), {
       axisLabel: { color: cor("--texto-2"), width: larguraRotulo, overflow: "truncate" },
@@ -266,7 +268,7 @@ function histogramaFaixas(id, rem) {
     return faixas.length;
   };
   grafico(id, {
-    tooltip: { ...temaBase().tooltip, trigger: "item", formatter: (p) => `${nomes[p.dataIndex]}<br><b>${fmtInt.format(p.value)}</b> ${P}` },
+    tooltip: { ...temaBase().tooltip, trigger: "item", formatter: (p) => `${nomes[p.dataIndex]}<br><b>${fmtInt.format(p.value)}</b> ${siglaQtd(p.value)}` },
     xAxis: [
       eixoCategoria(curtos, { name: "R$ mil", nameLocation: "middle", nameTextStyle: { color: cor("--texto-3") },
         nameGap: estreito() ? 52 : 28,
@@ -324,7 +326,7 @@ function mapaClassePadrao(id, itens) {
   }));
   grafico(id, {
     tooltip: { ...temaBase().tooltip, trigger: "item",
-      formatter: (p) => `Classe ${rotuloClasse(classes[p.value[1]])}, padrão ${padroes[p.value[0]]}<br><b>${fmtInt.format(p.value[2])}</b> ${P}` },
+      formatter: (p) => `Classe ${rotuloClasse(classes[p.value[1]])}, padrão ${padroes[p.value[0]]}<br><b>${fmtInt.format(p.value[2])}</b> ${siglaQtd(p.value[2])}` },
     grid: { ...temaBase().grid, right: 8, bottom: 24 },
     xAxis: eixoCategoria(padroes, { name: "Padrão", nameLocation: "middle", nameGap: 28, nameTextStyle: { color: cor("--texto-3") } }),
     yAxis: [
@@ -416,7 +418,7 @@ function criarMapa() {
       L.DomEvent.disableClickPropagation(div);
       div.addEventListener("click", (e) => {
         const vista = e.target.dataset.vista;
-        if (vista && limites[vista]) mapa.fitBounds(limites[vista], { padding: [24, 24] });
+        if (vista && limites[vista]?.isValid()) mapa.fitBounds(limites[vista], { padding: [24, 24] });
       });
       return div;
     },
@@ -462,7 +464,7 @@ function mapaOrgaos(orgaos) {
     l.orgaos.push({ ...orgao(o.nome), qtd: o.qtd });
   }
 
-  const max = Math.max(...[...locais.values()].map((l) => l.qtd));
+  const max = Math.max(1, ...[...locais.values()].map((l) => l.qtd));
   camadaBolhas?.remove();
   camadaBolhas = L.markerClusterGroup({
     showCoverageOnHover: false,
@@ -488,7 +490,7 @@ function mapaOrgaos(orgaos) {
   const pontos = [...locais.values()].map((l) => [l.lat, l.lon]);
   limites.brasil = L.latLngBounds(pontos);
   limites.brasilia = L.latLngBounds(pontos.filter((p) => DF.contains(p)));
-  if (!mapa._vistaInicial) {
+  if (!mapa._vistaInicial && limites.brasil.isValid()) {
     mapa.fitBounds(limites.brasilia.isValid() ? limites.brasilia : limites.brasil, { padding: [24, 24] });
     mapa._vistaInicial = true;
   }
@@ -546,9 +548,9 @@ function destaques(d, ant) {
     const dif = d.total - ant.total;
     if (dif > 0) {
       const recorde = dif === maiorAltaMensal() ? ", a maior alta mensal da série" : "";
-      itens.push(["geral", `<strong>${fmtInt.format(dif)} ${P} a mais</strong> que em ${refAnt}${recorde}.`]);
+      itens.push(["geral", `<strong>${fmtInt.format(dif)} ${siglaQtd(dif)} a mais</strong> que em ${refAnt}${recorde}.`]);
     } else if (dif < 0) {
-      itens.push(["geral", `<strong>${fmtInt.format(-dif)} ${P} a menos</strong> que em ${refAnt}.`]);
+      itens.push(["geral", `<strong>${fmtInt.format(-dif)} ${siglaQtd(dif)} a menos</strong> que em ${refAnt}.`]);
     } else {
       itens.push(["geral", `Total estável em relação a ${refAnt}: <strong>${fmtInt.format(d.total)} ${P}</strong>.`]);
     }
@@ -558,7 +560,7 @@ function destaques(d, ant) {
   const aiAnt = ant ? inicioCarreira(ant) : null;
   if (ai !== null) {
     const { classe, padrao } = CFG.ingresso;
-    itens.push(["carreira", `<strong>${fmtInt.format(ai)} ${P} (${fmtPct.format(ai / d.total)})</strong> estão no início da carreira, classe ${rotuloClasse(classe)}, padrão ${padrao}` +
+    itens.push(["carreira", `<strong>${fmtInt.format(ai)} ${siglaQtd(ai)} (${fmtPct.format(ai / d.total)})</strong> ${ai === 1 ? "está" : "estão"} no início da carreira, classe ${rotuloClasse(classe)}, padrão ${padrao}` +
       (aiAnt !== null && aiAnt !== ai ? ` (eram ${fmtInt.format(aiAnt)} em ${refAnt}).` : ".")]);
   }
 
@@ -827,9 +829,13 @@ function renderizar() {
   // Onde trabalham
   const lot = d.por_orgao_lotacao[0];
   const orgLot = lot && orgao(lot.nome);
-  document.getElementById("onde-desc").textContent = lot
-    ? `A carreira é centralizada: ${fmtInt.format(lot.qtd)} dos ${fmtInt.format(d.total)} ${P} estão lotados ${orgLot.sigla ? `no ${orgLot.sigla}` : `em ${orgLot.curto}`} e têm exercício em ${fmtInt.format(d.por_orgao_exercicio.length)} órgãos.`
-    : "";
+  // "Centralizada" só quando quase todos estão lotados no mesmo órgão (a ATPS, por exemplo, não era até 2024).
+  const ondeLot = lot && (orgLot.sigla ? `no ${orgLot.sigla}` : `em ${orgLot.curto}`);
+  const nExercicio = `${fmtInt.format(d.por_orgao_exercicio.length)} ${d.por_orgao_exercicio.length === 1 ? "órgão" : "órgãos"}`;
+  document.getElementById("onde-desc").textContent = !lot ? ""
+    : lot.qtd / d.total >= 0.9
+      ? `A carreira é centralizada: ${fmtInt.format(lot.qtd)} dos ${fmtInt.format(d.total)} ${P} estão lotados ${ondeLot} e têm exercício em ${nExercicio}.`
+      : `Os ${fmtInt.format(d.total)} ${P} estão lotados em ${fmtInt.format(d.por_orgao_lotacao.length)} órgãos (${fmtPct.format(lot.qtd / d.total)} ${ondeLot}) e têm exercício em ${nExercicio}.`;
   mapaOrgaos(d.por_orgao_exercicio);
   barrasHorizontais("g-exercicio", topComOutros(d.por_orgao_exercicio, TOP_ORGAOS).map((o) => {
     const n = coordenadas.has(o.nome) ? orgao(o.nome) : null;
