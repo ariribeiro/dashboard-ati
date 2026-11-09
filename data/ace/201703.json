@@ -1,0 +1,254 @@
+{
+  "referencia": "2017-03",
+  "gerado_em": "2026-11-09T01:02:42+00:00",
+  "fonte": {
+    "nome": "Portal da Transparência — Servidores SIAPE",
+    "url": "https://portaldatransparencia.gov.br/download-de-dados/servidores",
+    "arquivo": "https://portaldatransparencia.gov.br/download-de-dados/servidores/201703_Servidores_SIAPE"
+  },
+  "filtro_cargo": "^ANALISTA (DE )?COM(ERCIO)? EXT(ERIOR)?$",
+  "total": 417,
+  "por_situacao": [
+    {
+      "nome": "ATIVO PERMANENTE",
+      "qtd": 386
+    },
+    {
+      "nome": "ATIVO EM OUTRO ORGAO",
+      "qtd": 31
+    }
+  ],
+  "por_orgao_exercicio": [
+    {
+      "nome": "Ministério da Indústria, Comércio Exterior e Serviços",
+      "qtd": 328
+    },
+    {
+      "nome": "Ministério da Agricultura, Pecuária e Abastecimento",
+      "qtd": 25
+    },
+    {
+      "nome": "Ministério da Economia",
+      "qtd": 17
+    },
+    {
+      "nome": "Presidência da República",
+      "qtd": 15
+    },
+    {
+      "nome": "Ministério do Planejamento, Desenvolvimento e Gestão",
+      "qtd": 11
+    },
+    {
+      "nome": "Ministério das Relações Exteriores",
+      "qtd": 9
+    },
+    {
+      "nome": "Ministério do Desenvolvimento Agrário",
+      "qtd": 4
+    },
+    {
+      "nome": "Governo do Distrito Federal",
+      "qtd": 3
+    },
+    {
+      "nome": "Ministério do Meio Ambiente",
+      "qtd": 2
+    },
+    {
+      "nome": "Conselho Administrativo de Defesa Econômica",
+      "qtd": 1
+    },
+    {
+      "nome": "Advocacia-Geral da União",
+      "qtd": 1
+    },
+    {
+      "nome": "Controladoria-Geral da União",
+      "qtd": 1
+    }
+  ],
+  "por_orgao_lotacao": [
+    {
+      "nome": "Ministério da Indústria, Comércio Exterior e Serviços",
+      "qtd": 360
+    },
+    {
+      "nome": "Ministério da Agricultura, Pecuária e Abastecimento",
+      "qtd": 19
+    },
+    {
+      "nome": "Ministério da Economia",
+      "qtd": 18
+    },
+    {
+      "nome": "Presidência da República",
+      "qtd": 10
+    },
+    {
+      "nome": "Ministério do Planejamento, Desenvolvimento e Gestão",
+      "qtd": 6
+    },
+    {
+      "nome": "Ministério do Desenvolvimento Agrário",
+      "qtd": 4
+    }
+  ],
+  "por_uf": [
+    {
+      "nome": "Não informado",
+      "qtd": 417
+    }
+  ],
+  "por_classe_padrao": [
+    {
+      "classe": "A",
+      "padrao": "I",
+      "qtd": 1
+    },
+    {
+      "classe": "A",
+      "padrao": "II",
+      "qtd": 81
+    },
+    {
+      "classe": "A",
+      "padrao": "III",
+      "qtd": 73
+    },
+    {
+      "classe": "B",
+      "padrao": "I",
+      "qtd": 59
+    },
+    {
+      "classe": "B",
+      "padrao": "II",
+      "qtd": 2
+    },
+    {
+      "classe": "B",
+      "padrao": "III",
+      "qtd": 2
+    },
+    {
+      "classe": "C",
+      "padrao": "I",
+      "qtd": 15
+    },
+    {
+      "classe": "C",
+      "padrao": "II",
+      "qtd": 10
+    },
+    {
+      "classe": "C",
+      "padrao": "III",
+      "qtd": 2
+    },
+    {
+      "classe": "S",
+      "padrao": "I",
+      "qtd": 5
+    },
+    {
+      "classe": "S",
+      "padrao": "II",
+      "qtd": 16
+    },
+    {
+      "classe": "S",
+      "padrao": "III",
+      "qtd": 29
+    },
+    {
+      "classe": "S",
+      "padrao": "IV",
+      "qtd": 122
+    }
+  ],
+  "funcao": {
+    "com_funcao": 132,
+    "por_sigla": [
+      {
+        "nome": "FPE",
+        "qtd": 65
+      },
+      {
+        "nome": "DAS",
+        "qtd": 63
+      },
+      {
+        "nome": "FGR",
+        "qtd": 2
+      },
+      {
+        "nome": "GT",
+        "qtd": 1
+      },
+      {
+        "nome": "RGA",
+        "qtd": 1
+      }
+    ]
+  },
+  "remuneracao_basica_bruta": {
+    "n": 407,
+    "media": 22315.95,
+    "mediana": 21710.94,
+    "p10": 18594.53,
+    "p90": 27259.07,
+    "histograma": [
+      {
+        "min": 0,
+        "max": 20000,
+        "qtd": 164
+      },
+      {
+        "min": 20000,
+        "max": 25000,
+        "qtd": 168
+      },
+      {
+        "min": 25000,
+        "max": 27500,
+        "qtd": 35
+      },
+      {
+        "min": 27500,
+        "max": 30000,
+        "qtd": 30
+      },
+      {
+        "min": 30000,
+        "max": 32500,
+        "qtd": 9
+      },
+      {
+        "min": 32500,
+        "max": 35000,
+        "qtd": 1
+      },
+      {
+        "min": 35000,
+        "max": 37500,
+        "qtd": 0
+      },
+      {
+        "min": 37500,
+        "max": 40000,
+        "qtd": 0
+      },
+      {
+        "min": 40000,
+        "max": 45000,
+        "qtd": 0
+      },
+      {
+        "min": 45000,
+        "max": null,
+        "qtd": 0
+      }
+    ]
+  }
+}
