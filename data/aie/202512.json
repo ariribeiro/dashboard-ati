@@ -1,0 +1,495 @@
+{
+  "referencia": "2025-12",
+  "gerado_em": "2026-11-09T00:10:28+00:00",
+  "fonte": {
+    "nome": "Portal da Transparência — Servidores SIAPE",
+    "url": "https://portaldatransparencia.gov.br/download-de-dados/servidores",
+    "arquivo": "https://portaldatransparencia.gov.br/download-de-dados/servidores/202512_Servidores_SIAPE"
+  },
+  "filtro_cargo": "^ANALISTA (DE )?INFRA-?ESTRUT(URA)?$",
+  "total": 950,
+  "por_situacao": [
+    {
+      "nome": "ATIVO PERMANENTE",
+      "qtd": 748
+    },
+    {
+      "nome": "ATIVO EM OUTRO ORGAO",
+      "qtd": 202
+    }
+  ],
+  "por_orgao_exercicio": [
+    {
+      "nome": "MINISTERIO DAS CIDADES",
+      "qtd": 151
+    },
+    {
+      "nome": "MIN DA INTEG E DO DESENV REGIONAL",
+      "qtd": 128
+    },
+    {
+      "nome": "Ministério de Minas e Energia",
+      "qtd": 118
+    },
+    {
+      "nome": "MIN GESTAO E INOV EM SERV PUBLICOS",
+      "qtd": 94
+    },
+    {
+      "nome": "MINISTERIO DOS TRANSPORTES",
+      "qtd": 74
+    },
+    {
+      "nome": "MINISTERIO DE PORTOS E AEROPORTOS",
+      "qtd": 71
+    },
+    {
+      "nome": "MINISTERIO DAS COMUNICACOES",
+      "qtd": 52
+    },
+    {
+      "nome": "Departamento Nacional de Infraestrutura de Transportes",
+      "qtd": 42
+    },
+    {
+      "nome": "Presidência da República",
+      "qtd": 31
+    },
+    {
+      "nome": "Agência Nacional de Transportes Terrestres",
+      "qtd": 22
+    },
+    {
+      "nome": "Ministério da Saúde",
+      "qtd": 11
+    },
+    {
+      "nome": "MINISTERIO DO MEIO AMBIENTE",
+      "qtd": 10
+    },
+    {
+      "nome": "Agência Nacional de Águas",
+      "qtd": 9
+    },
+    {
+      "nome": "Ministério da Educação",
+      "qtd": 8
+    },
+    {
+      "nome": "Senado Federal",
+      "qtd": 8
+    },
+    {
+      "nome": "MINISTERIO DO PLANEJAMENTO E ORCAMENTO",
+      "qtd": 8
+    },
+    {
+      "nome": "Fundo Nacional de Desenvolvimento da Educação",
+      "qtd": 7
+    },
+    {
+      "nome": "MIN DESENVOLV IND COMERCIO E SERVICOS",
+      "qtd": 7
+    },
+    {
+      "nome": "MINISTERIO DO ESPORTE",
+      "qtd": 7
+    },
+    {
+      "nome": "Ministério do Turismo",
+      "qtd": 7
+    },
+    {
+      "nome": "MINISTERIO DA CULTURA",
+      "qtd": 6
+    },
+    {
+      "nome": "VALEC Engenharia, Construções e Ferrovias S.A.",
+      "qtd": 6
+    },
+    {
+      "nome": "Controladoria-Geral da União",
+      "qtd": 6
+    },
+    {
+      "nome": "Departamento Nacional de Obras Contra as Secas",
+      "qtd": 5
+    },
+    {
+      "nome": "Agência Nacional do Petróleo, Gás Natural e Biocombustíveis",
+      "qtd": 5
+    },
+    {
+      "nome": "Fundação Nacional de Saúde",
+      "qtd": 5
+    },
+    {
+      "nome": "MINISTERIO DA FAZENDA",
+      "qtd": 4
+    },
+    {
+      "nome": "Agência Nacional de Transportes Aquaviários",
+      "qtd": 4
+    },
+    {
+      "nome": "Ministério da Ciência, Tecnologia, Inovações e Comunicações",
+      "qtd": 4
+    },
+    {
+      "nome": "Agência Nacional de Aviação Civil",
+      "qtd": 4
+    },
+    {
+      "nome": "MIN DESENV ASSIS SOCI FAMIL COMBATE FOME",
+      "qtd": 3
+    },
+    {
+      "nome": "Instituto do Patrimônio Histórico e Artístico Nacional",
+      "qtd": 3
+    },
+    {
+      "nome": "Instituto Brasileiro do Meio Ambiente e Recursos Naturais Renováveis",
+      "qtd": 3
+    },
+    {
+      "nome": "Ministério da Justiça e Segurança Pública",
+      "qtd": 2
+    },
+    {
+      "nome": "Agência Nacional de Energia Elétrica",
+      "qtd": 2
+    },
+    {
+      "nome": "MINISTERIO DA DEFESA",
+      "qtd": 2
+    },
+    {
+      "nome": "Estados / Municípios / Empresas",
+      "qtd": 2
+    },
+    {
+      "nome": "Conselho Administrativo de Defesa Econômica",
+      "qtd": 1
+    },
+    {
+      "nome": "MINISTERIO DA AGRICULTURA E PECUARIA",
+      "qtd": 1
+    },
+    {
+      "nome": "Instituto de Pesquisa Econômica Aplicada",
+      "qtd": 1
+    },
+    {
+      "nome": "Ministério Público do Distrito Federal e Territórios",
+      "qtd": 1
+    },
+    {
+      "nome": "Governo do Distrito Federal",
+      "qtd": 1
+    },
+    {
+      "nome": "Câmara dos Deputados",
+      "qtd": 1
+    },
+    {
+      "nome": "Superintendência do Desenvolvimento do Centro-Oeste",
+      "qtd": 1
+    },
+    {
+      "nome": "Empresa de Processamento de Dados da Previdência Social",
+      "qtd": 1
+    },
+    {
+      "nome": "Governo do Estado de São Paulo",
+      "qtd": 1
+    },
+    {
+      "nome": "TELEBRAS - TELECOM. BRASILEIRAS S.A.",
+      "qtd": 1
+    },
+    {
+      "nome": "Empresa Brasileira de Serviços Hospitalares",
+      "qtd": 1
+    },
+    {
+      "nome": "Função Escola Nacional de Administração Pública",
+      "qtd": 1
+    },
+    {
+      "nome": "ADVOCACIA-GERAL DA UNIAO",
+      "qtd": 1
+    },
+    {
+      "nome": "Governo do Estado de Minas Gerais",
+      "qtd": 1
+    },
+    {
+      "nome": "Universidade Federal de São Carlos - SP",
+      "qtd": 1
+    },
+    {
+      "nome": "Instituto Chico Mendes de Conservação da Biodiversidade",
+      "qtd": 1
+    },
+    {
+      "nome": "Companhia Docas do Estado de São Paulo",
+      "qtd": 1
+    },
+    {
+      "nome": "Governo do Estado de Santa Catarina",
+      "qtd": 1
+    },
+    {
+      "nome": "MINISTERIO DAS MULHERES",
+      "qtd": 1
+    }
+  ],
+  "por_orgao_lotacao": [
+    {
+      "nome": "MIN GESTAO E INOV EM SERV PUBLICOS",
+      "qtd": 950
+    }
+  ],
+  "por_uf": [
+    {
+      "nome": "DF",
+      "qtd": 534
+    },
+    {
+      "nome": "Não informado",
+      "qtd": 323
+    },
+    {
+      "nome": "PE",
+      "qtd": 12
+    },
+    {
+      "nome": "CE",
+      "qtd": 11
+    },
+    {
+      "nome": "PR",
+      "qtd": 10
+    },
+    {
+      "nome": "RN",
+      "qtd": 9
+    },
+    {
+      "nome": "BA",
+      "qtd": 8
+    },
+    {
+      "nome": "RJ",
+      "qtd": 7
+    },
+    {
+      "nome": "SC",
+      "qtd": 7
+    },
+    {
+      "nome": "RS",
+      "qtd": 6
+    },
+    {
+      "nome": "MG",
+      "qtd": 5
+    },
+    {
+      "nome": "SP",
+      "qtd": 5
+    },
+    {
+      "nome": "GO",
+      "qtd": 5
+    },
+    {
+      "nome": "PB",
+      "qtd": 3
+    },
+    {
+      "nome": "PI",
+      "qtd": 2
+    },
+    {
+      "nome": "AL",
+      "qtd": 1
+    },
+    {
+      "nome": "TO",
+      "qtd": 1
+    },
+    {
+      "nome": "SE",
+      "qtd": 1
+    }
+  ],
+  "por_classe_padrao": [
+    {
+      "classe": "A",
+      "padrao": "IV",
+      "qtd": 271
+    },
+    {
+      "classe": "A",
+      "padrao": "V",
+      "qtd": 1
+    },
+    {
+      "classe": "B",
+      "padrao": "III",
+      "qtd": 2
+    },
+    {
+      "classe": "B",
+      "padrao": "IV",
+      "qtd": 1
+    },
+    {
+      "classe": "B",
+      "padrao": "V",
+      "qtd": 17
+    },
+    {
+      "classe": "C",
+      "padrao": "I",
+      "qtd": 4
+    },
+    {
+      "classe": "C",
+      "padrao": "II",
+      "qtd": 7
+    },
+    {
+      "classe": "C",
+      "padrao": "III",
+      "qtd": 31
+    },
+    {
+      "classe": "C",
+      "padrao": "IV",
+      "qtd": 23
+    },
+    {
+      "classe": "C",
+      "padrao": "V",
+      "qtd": 137
+    },
+    {
+      "classe": "S",
+      "padrao": "I",
+      "qtd": 8
+    },
+    {
+      "classe": "S",
+      "padrao": "II",
+      "qtd": 11
+    },
+    {
+      "classe": "S",
+      "padrao": "III",
+      "qtd": 204
+    },
+    {
+      "classe": "S",
+      "padrao": "IV",
+      "qtd": 233
+    }
+  ],
+  "funcao": {
+    "com_funcao": 470,
+    "por_sigla": [
+      {
+        "nome": "FEX",
+        "qtd": 406
+      },
+      {
+        "nome": "CCX",
+        "qtd": 37
+      },
+      {
+        "nome": "CCT",
+        "qtd": 12
+      },
+      {
+        "nome": "CGE",
+        "qtd": 6
+      },
+      {
+        "nome": "GF",
+        "qtd": 3
+      },
+      {
+        "nome": "CTE",
+        "qtd": 3
+      },
+      {
+        "nome": "CCD",
+        "qtd": 2
+      },
+      {
+        "nome": "FCE",
+        "qtd": 1
+      }
+    ]
+  },
+  "remuneracao_basica_bruta": {
+    "n": 928,
+    "media": 23757.61,
+    "mediana": 24055.12,
+    "p10": 16848.25,
+    "p90": 31992.56,
+    "histograma": [
+      {
+        "min": 0,
+        "max": 17500,
+        "qtd": 262
+      },
+      {
+        "min": 17500,
+        "max": 20000,
+        "qtd": 11
+      },
+      {
+        "min": 20000,
+        "max": 22500,
+        "qtd": 59
+      },
+      {
+        "min": 22500,
+        "max": 25000,
+        "qtd": 204
+      },
+      {
+        "min": 25000,
+        "max": 27500,
+        "qtd": 173
+      },
+      {
+        "min": 27500,
+        "max": 30000,
+        "qtd": 92
+      },
+      {
+        "min": 30000,
+        "max": 32500,
+        "qtd": 90
+      },
+      {
+        "min": 32500,
+        "max": 35000,
+        "qtd": 30
+      },
+      {
+        "min": 35000,
+        "max": 40000,
+        "qtd": 7
+      },
+      {
+        "min": 40000,
+        "max": null,
+        "qtd": 0
+      }
+    ]
+  }
+}
