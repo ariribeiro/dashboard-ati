@@ -1,0 +1,315 @@
+{
+  "referencia": "2018-08",
+  "gerado_em": "2026-11-09T00:53:44+00:00",
+  "fonte": {
+    "nome": "Portal da Transparência — Servidores SIAPE",
+    "url": "https://portaldatransparencia.gov.br/download-de-dados/servidores",
+    "arquivo": "https://portaldatransparencia.gov.br/download-de-dados/servidores/201808_Servidores_SIAPE"
+  },
+  "filtro_cargo": "^ANALISTA (DE )?INFRA-?ESTRUT(URA)?$",
+  "total": 710,
+  "por_situacao": [
+    {
+      "nome": "ATIVO PERMANENTE",
+      "qtd": 670
+    },
+    {
+      "nome": "ATIVO EM OUTRO ORGAO",
+      "qtd": 40
+    }
+  ],
+  "por_orgao_exercicio": [
+    {
+      "nome": "Ministério da Infraestrutura",
+      "qtd": 124
+    },
+    {
+      "nome": "Ministério das Cidades",
+      "qtd": 107
+    },
+    {
+      "nome": "Ministério do Planejamento, Desenvolvimento e Gestão",
+      "qtd": 106
+    },
+    {
+      "nome": "Ministério do Desenvolvimento Regional",
+      "qtd": 79
+    },
+    {
+      "nome": "Ministério de Minas e Energia",
+      "qtd": 61
+    },
+    {
+      "nome": "Departamento Nacional de Infraestrutura de Transportes",
+      "qtd": 45
+    },
+    {
+      "nome": "Fundação Nacional de Saúde",
+      "qtd": 37
+    },
+    {
+      "nome": "Ministério da Ciência, Tecnologia, Inovações e Comunicações",
+      "qtd": 27
+    },
+    {
+      "nome": "Presidência da República",
+      "qtd": 21
+    },
+    {
+      "nome": "Agência Nacional de Transportes Terrestres",
+      "qtd": 15
+    },
+    {
+      "nome": "Instituto Brasileiro do Meio Ambiente e Recursos Naturais Renováveis",
+      "qtd": 12
+    },
+    {
+      "nome": "Ministério do Meio Ambiente",
+      "qtd": 11
+    },
+    {
+      "nome": "Departamento Nacional de Obras Contra as Secas",
+      "qtd": 9
+    },
+    {
+      "nome": "Instituto do Patrimônio Histórico e Artístico Nacional",
+      "qtd": 6
+    },
+    {
+      "nome": "Ministério do Esporte",
+      "qtd": 5
+    },
+    {
+      "nome": "Ministério da Cultura",
+      "qtd": 5
+    },
+    {
+      "nome": "Ministério da Saúde",
+      "qtd": 4
+    },
+    {
+      "nome": "Agência Nacional de Águas",
+      "qtd": 4
+    },
+    {
+      "nome": "Empresa de Planejamento e Logística S.A.",
+      "qtd": 4
+    },
+    {
+      "nome": "Fundo Nacional de Desenvolvimento da Educação",
+      "qtd": 3
+    },
+    {
+      "nome": "Autoridade de Governança do Legado Olímpico",
+      "qtd": 3
+    },
+    {
+      "nome": "Fundação Nacional do Índio",
+      "qtd": 3
+    },
+    {
+      "nome": "Agência Nacional de Transportes Aquaviários",
+      "qtd": 2
+    },
+    {
+      "nome": "Agência Nacional de Energia Elétrica",
+      "qtd": 2
+    },
+    {
+      "nome": "Ministério da Indústria, Comércio Exterior e Serviços",
+      "qtd": 2
+    },
+    {
+      "nome": "Controladoria-Geral da União",
+      "qtd": 2
+    },
+    {
+      "nome": "Ministério do Turismo",
+      "qtd": 2
+    },
+    {
+      "nome": "VALEC Engenharia, Construções e Ferrovias S.A.",
+      "qtd": 1
+    },
+    {
+      "nome": "Superintendência do Desenvolvimento do Centro-Oeste",
+      "qtd": 1
+    },
+    {
+      "nome": "Ministério da Economia",
+      "qtd": 1
+    },
+    {
+      "nome": "Telebras- Holding",
+      "qtd": 1
+    },
+    {
+      "nome": "Ministério do Desenvolvimento Social",
+      "qtd": 1
+    },
+    {
+      "nome": "Ministério da Defesa",
+      "qtd": 1
+    },
+    {
+      "nome": "Companhia Energética de Brasília",
+      "qtd": 1
+    },
+    {
+      "nome": "Advocacia-Geral da União",
+      "qtd": 1
+    },
+    {
+      "nome": "Universidade Federal de São Carlos - SP",
+      "qtd": 1
+    }
+  ],
+  "por_orgao_lotacao": [
+    {
+      "nome": "Ministério do Planejamento, Desenvolvimento e Gestão",
+      "qtd": 710
+    }
+  ],
+  "por_uf": [
+    {
+      "nome": "Não informado",
+      "qtd": 710
+    }
+  ],
+  "por_classe_padrao": [
+    {
+      "classe": "A",
+      "padrao": "II",
+      "qtd": 1
+    },
+    {
+      "classe": "A",
+      "padrao": "III",
+      "qtd": 50
+    },
+    {
+      "classe": "A",
+      "padrao": "IV",
+      "qtd": 151
+    },
+    {
+      "classe": "A",
+      "padrao": "V",
+      "qtd": 66
+    },
+    {
+      "classe": "B",
+      "padrao": "I",
+      "qtd": 153
+    },
+    {
+      "classe": "B",
+      "padrao": "II",
+      "qtd": 289
+    }
+  ],
+  "funcao": {
+    "com_funcao": 316,
+    "por_sigla": [
+      {
+        "nome": "FPE",
+        "qtd": 160
+      },
+      {
+        "nome": "DAS",
+        "qtd": 112
+      },
+      {
+        "nome": "FGR",
+        "qtd": 24
+      },
+      {
+        "nome": "CCT",
+        "qtd": 6
+      },
+      {
+        "nome": "CTE",
+        "qtd": 4
+      },
+      {
+        "nome": "CGE",
+        "qtd": 3
+      },
+      {
+        "nome": "FT",
+        "qtd": 3
+      },
+      {
+        "nome": "CA",
+        "qtd": 2
+      },
+      {
+        "nome": "RGA",
+        "qtd": 1
+      },
+      {
+        "nome": "FCE",
+        "qtd": 1
+      }
+    ]
+  },
+  "remuneracao_basica_bruta": {
+    "n": 693,
+    "media": 16051.04,
+    "mediana": 15245.1,
+    "p10": 13212.52,
+    "p90": 20868.42,
+    "histograma": [
+      {
+        "min": 0,
+        "max": 17500,
+        "qtd": 523
+      },
+      {
+        "min": 17500,
+        "max": 20000,
+        "qtd": 83
+      },
+      {
+        "min": 20000,
+        "max": 22500,
+        "qtd": 68
+      },
+      {
+        "min": 22500,
+        "max": 25000,
+        "qtd": 17
+      },
+      {
+        "min": 25000,
+        "max": 27500,
+        "qtd": 1
+      },
+      {
+        "min": 27500,
+        "max": 30000,
+        "qtd": 0
+      },
+      {
+        "min": 30000,
+        "max": 32500,
+        "qtd": 0
+      },
+      {
+        "min": 32500,
+        "max": 35000,
+        "qtd": 1
+      },
+      {
+        "min": 35000,
+        "max": 40000,
+        "qtd": 0
+      },
+      {
+        "min": 40000,
+        "max": null,
+        "qtd": 0
+      }
+    ]
+  }
+}
