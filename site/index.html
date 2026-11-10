@@ -42,6 +42,17 @@
       <div class="secao-cabecalho"><h2 id="t-carreiras">Escolha uma carreira</h2></div>
       <div class="cartoes-carreira" id="carreiras"></div>
     </section>
+
+    <section class="secao" id="s-orcamento" data-secao="remuneracao" aria-labelledby="t-orcamento" hidden>
+      <div class="secao-cabecalho">
+        <h2 id="t-orcamento">Impacto orçamentário estimado</h2>
+        <p id="orc-desc">Folha anual de remuneração básica bruta de cada carreira hoje e a estimativa para os próximos anos, com a remuneração média crescendo no ritmo dos últimos 10 anos de cada carreira.</p>
+      </div>
+      <div class="painel">
+        <div class="tabela-rolagem"><table class="tabela-fixa tabela-orcamento" id="t-orcamento-carreiras"></table></div>
+        <p class="nota">Folha anual = 12 meses + 13º. “Sem novas entradas” aplica a taxa de saída dos últimos 5 anos; “repondo as saídas” mantém o efetivo atual. Não inclui encargos patronais, terço de férias, auxílios nem inativos. O método completo está na seção “Impacto orçamentário” de cada painel.</p>
+      </div>
+    </section>
   </main>
 
   <footer class="rodape">
@@ -58,6 +69,7 @@
     </p>
   </footer>
 
+  <script src="orcamento.js"></script>
   <script>
     "use strict";
     const fmtInt = new Intl.NumberFormat("pt-BR");
@@ -93,6 +105,54 @@
         }).catch(() => { a.querySelector(".cartao-numeros").textContent = "dados ainda não processados"; });
       }
     }
+    // Tabela comparativa: modelo de orcamento.js aplicado ao index.json de cada carreira.
+    const fmtPct1 = new Intl.NumberFormat("pt-BR", { style: "percent", minimumFractionDigits: 1, maximumFractionDigits: 1 });
+    const fmtDinheiro = (v) => {
+      const f = new Intl.NumberFormat("pt-BR", { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+      return v >= 1e9 ? `R$ ${f.format(v / 1e9)} bi` : `R$ ${f.format(v / 1e6)} mi`;
+    };
+    async function orcamento() {
+      const carreiras = await json("carreiras.json");
+      const linhas = (await Promise.all(Object.entries(carreiras).map(async ([slug, c]) => {
+        try {
+          const p = Orcamento.projetar((await json(`${slug}/index.json`)).meses);
+          return p && { slug, c, p };
+        } catch (e) { return null; }
+      }))).filter(Boolean);
+      if (!linhas.length) return;
+      const mesmoMes = linhas.every((l) => l.p.ultimo === linhas[0].p.ultimo);
+      if (mesmoMes) document.getElementById("orc-desc").textContent += ` Dados até ${fmtMes(refDeNum(linhas[0].p.ultimo))}.`;
+      const anoFim = linhas[0].p.anosProj.at(-1);
+      const anoIni = Math.floor(linhas[0].p.ultimo / 12) + 1;
+      const soma = (cen, p) => cen.valores.reduce((s, v, i) => s + (p.anosProj[i] >= anoIni ? v : 0), 0);
+      const t = document.getElementById("t-orcamento-carreiras");
+      t.innerHTML = `<thead><tr><th>Carreira</th><th class="num">Efetivo</th><th class="num">Folha anual hoje</th>` +
+        `<th class="num">Reajuste histórico</th><th class="num">${anoFim}<small>sem novas entradas</small></th>` +
+        `<th class="num">${anoFim}<small>repondo as saídas</small></th><th class="num">Soma ${anoIni}–${anoFim}<small>sem novas entradas</small></th></tr></thead>`;
+      const corpo = t.createTBody();
+      const tot = [0, 0, 0, 0, 0];
+      for (const { slug, c, p } of linhas) {
+        const [constante, semEntradas] = p.cenarios;
+        const v = [p.efetivoAtual, p.folhaMensalAtual * 13, semEntradas.valores.at(-1), constante.valores.at(-1), soma(semEntradas, p)];
+        v.forEach((x, i) => { tot[i] += x; });
+        const tr = corpo.insertRow();
+        tr.insertCell().innerHTML = `<a href="painel.html?carreira=${slug}#s-orcamento"></a><small></small>`;
+        tr.cells[0].firstChild.textContent = c.sigla;
+        // Mês de referência por linha só quando as carreiras estão em meses diferentes.
+        if (!mesmoMes) tr.cells[0].lastChild.textContent = `até ${fmtMes(refDeNum(p.ultimo))}`;
+        for (const txt of [fmtInt.format(v[0]), fmtDinheiro(v[1]), p.reajuste ? fmtPct1.format(p.reajuste.taxa) + " ao ano" : "–",
+          fmtDinheiro(v[2]), fmtDinheiro(v[3]), fmtDinheiro(v[4])]) {
+          const td = tr.insertCell(); td.className = "num"; td.textContent = txt;
+        }
+      }
+      const rodape = t.createTFoot().insertRow();
+      for (const txt of ["Total", fmtInt.format(tot[0]), fmtDinheiro(tot[1]), "", fmtDinheiro(tot[2]), fmtDinheiro(tot[3]), fmtDinheiro(tot[4])]) {
+        const td = rodape.insertCell(); td.textContent = txt; if (txt !== "Total") td.className = "num";
+      }
+      document.getElementById("s-orcamento").hidden = false;
+    }
+    orcamento().catch((e) => console.error(e));
+
     iniciar().catch((e) => {
       const el = document.getElementById("erro");
       el.textContent = `Não foi possível carregar as carreiras (${e.message}).`;

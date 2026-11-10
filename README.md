@@ -35,6 +35,8 @@ Os links curtos têm prévia própria para redes sociais e levam a
 
 - 📊 **Visão geral**: total de servidores, remuneração mediana, destaques do mês e histórico desde 2013.
 - 📉 **Tendência**: ritmo de saídas entre concursos e projeção sem novas turmas.
+- 🧾 **Impacto orçamentário**: folha anual estimada e projeção para os próximos 10 anos.
+  A página inicial compara as carreiras.
 - 🗺️ **Onde trabalham**: mapa com a sede de cada órgão de exercício, ranking de órgãos e UFs.
 - 🪜 **Carreira**: distribuição por classe e padrão, e funções comissionadas.
 - 💰 **Remuneração**: histograma, mediana e faixa P10–P90 da remuneração básica bruta.
@@ -201,6 +203,29 @@ Calculada no navegador, só com `data/<carreira>/index.json`:
 nos meses de entrada as saídas ficam escondidas. Saída inclui exoneração,
 aposentadoria e falecimento. A projeção não considera demanda, novas vagas nem
 mudanças na carreira.
+
+</details>
+
+<details>
+<summary><strong>Impacto orçamentário</strong></summary>
+
+Calculado no navegador por `site/orcamento.js`, usado pelo painel e pela página
+inicial, a partir de `n` e `media` do `index.json` de cada carreira:
+
+- **Folha mensal** = servidores com remuneração no mês × remuneração básica bruta
+  média. **Folha anual** = 12 meses + 13º (igual a dezembro). Meses sem arquivo
+  são interpolados.
+- **Efetivo**: "sem novas entradas" usa a taxa de saída líquida dos últimos 5
+  anos (a mesma da Tendência); "repondo as saídas" mantém o efetivo atual.
+- **Remuneração média**: com reajuste, cresce no ritmo anual dos últimos 10 anos
+  (média dos últimos 12 meses contra a de 12 meses dez anos antes; com menos
+  histórico, usa o que houver, no mínimo 3 anos). Esse ritmo junta reajustes,
+  progressões e o efeito das turmas novas. O painel também mostra a estimativa em
+  valores de hoje, sem reajuste.
+
+**Limitações:** é só a remuneração básica bruta. Não inclui contribuição patronal,
+terço de férias, auxílios, funções pagas à parte, nem aposentados e pensionistas.
+Reajustes futuros dependem de negociação e de lei.
 
 </details>
 

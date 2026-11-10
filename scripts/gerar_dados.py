@@ -314,6 +314,9 @@ def atualizar_indice(carreira: str) -> None:
             "arquivo": arq.name,
             "total": d["total"],
             "mediana": d["remuneracao_basica_bruta"]["mediana"],
+            # n e media permitem estimar a folha mensal (n × media) sem abrir cada arquivo.
+            "n": d["remuneracao_basica_bruta"]["n"],
+            "media": d["remuneracao_basica_bruta"]["media"],
         })
     if not meses:
         return

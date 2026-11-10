@@ -46,6 +46,7 @@
       <nav class="barra-nav" aria-label="Seções">
         <a href="#s-geral" data-secao="geral">Visão geral</a>
         <a href="#s-tendencia" data-secao="geral">Tendência</a>
+        <a href="#s-orcamento" data-secao="remuneracao">Orçamento</a>
         <a href="#s-onde" data-secao="onde">Onde trabalham</a>
         <a href="#s-carreira" data-secao="carreira">Carreira</a>
         <a href="#s-remuneracao" data-secao="remuneracao">Remuneração</a>
@@ -171,6 +172,58 @@
       </details>
     </section>
 
+    <section class="secao" id="s-orcamento" data-secao="remuneracao" aria-labelledby="t-orcamento">
+      <div class="secao-cabecalho">
+        <h2 id="t-orcamento">Impacto orçamentário</h2>
+        <p id="orc-desc"></p>
+      </div>
+
+      <div class="cards">
+        <div class="card" data-tema="remuneracao">
+          <span class="rotulo">Folha anual hoje</span>
+          <span class="valor" id="orc-atual">–</span>
+          <span class="detalhe" id="orc-atual-det"></span>
+        </div>
+        <div class="card" data-tema="remuneracao">
+          <span class="rotulo" id="orc-fim-rotulo">Folha anual ao fim do período</span>
+          <span class="valor" id="orc-fim">–</span>
+          <span class="detalhe" id="orc-fim-det"></span>
+        </div>
+        <div class="card" data-tema="remuneracao">
+          <span class="rotulo" id="orc-soma-rotulo">Soma no período</span>
+          <span class="valor" id="orc-soma">–</span>
+          <span class="detalhe" id="orc-soma-det"></span>
+        </div>
+      </div>
+
+      <figure class="painel orc-painel">
+        <figcaption>
+          <div class="orc-cabecalho">
+            <h3>Folha anual de remuneração básica bruta</h3>
+            <div class="alternador" role="group" aria-label="Como mostrar os valores">
+              <button type="button" data-reajuste="sim" aria-pressed="true">Com reajuste histórico</button>
+              <button type="button" data-reajuste="nao" aria-pressed="false">Em valores de hoje</button>
+            </div>
+          </div>
+          <p id="orc-sub"></p>
+        </figcaption>
+        <div class="grafico grafico-alto" id="g-orcamento"></div>
+        <p class="nota" id="orc-nota"></p>
+      </figure>
+
+      <details class="metodo">
+        <summary>Como a estimativa é feita e o que ela não considera</summary>
+        <ul>
+          <li><strong>Folha mensal</strong> = número de servidores com remuneração no mês × remuneração básica bruta média. <strong>Folha anual</strong> = soma dos 12 meses + o 13º salário (igual à folha de dezembro). Os anos antes do mês mais recente usam os dados reais; meses sem arquivo processado são interpolados.</li>
+          <li><strong>Efetivo</strong>: “sem novas entradas” aplica a taxa de saída líquida dos últimos 5 anos, a mesma da seção Tendência; “repondo as saídas” mantém o efetivo atual, como se cada saída fosse reposta por concurso.</li>
+          <li><strong>Remuneração média</strong>: com reajuste, cresce no ritmo anual observado nos últimos 10 anos (média dos últimos 12 meses contra a de 12 meses dez anos antes). Esse ritmo junta reajustes, progressões e o efeito das turmas novas, que entram ganhando menos. Em valores de hoje, a média fica congelada no valor do mês mais recente.</li>
+          <li>Ao repor saídas, o novato entra ganhando menos que quem sai; a estimativa usa a média atual, então tende a superestimar um pouco o cenário “repondo as saídas”.</li>
+          <li><strong>Não inclui</strong> contribuição patronal à previdência, terço de férias, verbas indenizatórias (auxílios), funções comissionadas pagas à parte, nem aposentados e pensionistas. O impacto orçamentário real é maior que a folha mostrada aqui.</li>
+          <li>Reajustes futuros dependem de negociação e de lei; o ritmo histórico é só uma referência, não uma previsão de política salarial.</li>
+        </ul>
+      </details>
+    </section>
+
     <section class="secao" id="s-onde" data-secao="onde" aria-labelledby="t-onde">
       <div class="secao-cabecalho">
         <h2 id="t-onde">Onde trabalham</h2>
@@ -252,6 +305,7 @@
     </p>
   </footer>
 
+  <script src="orcamento.js"></script>
   <script src="app.js"></script>
 </body>
 </html>
