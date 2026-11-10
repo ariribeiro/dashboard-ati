@@ -239,6 +239,19 @@ Reajustes futuros dependem de negociação e de lei.
 2. Em **Settings → Pages → Build and deployment → Source**, escolha **GitHub Actions**.
 3. Em **Actions → Dados das carreiras → Run workflow**, rode o primeiro deploy.
 
+### Homologação (Cloudflare Pages)
+
+A produção é o GitHub Pages. Para testar uma versão antes de levá-la ao `main`,
+o repositório também está ligado a um projeto no Cloudflare Pages
+(`dashboard-carreiras`), que só lê o código:
+
+- Cada push em um branch que não seja o `main` gera um link de pré-visualização
+  próprio, no formato `<branch>.dashboard-carreiras.pages.dev`. O link aparece em
+  **Workers & Pages → dashboard-carreiras → Deployments**.
+- Configuração do projeto: framework `None`, build `cp -r data site/data`, saída `site`.
+- O GoatCounter só conta acessos a `ariribeiro.github.io`; visitas à homologação
+  não entram nas estatísticas.
+
 ### Rodar o workflow manualmente
 
 Em **Actions → Dados das carreiras → Run workflow**:
