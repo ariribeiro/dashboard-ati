@@ -21,7 +21,8 @@
   <script>
     try { const t = localStorage.getItem("tema"); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
   </script>
-  <!-- Estatísticas de acesso anônimas, sem cookies (GoatCounter). -->
+  <!-- Estatísticas de acesso anônimas, sem cookies (GoatCounter). Só conta no domínio de produção. -->
+  <script>window.goatcounter = { no_onload: location.hostname !== "ariribeiro.github.io" };</script>
   <script data-goatcounter="https://ariribeiro.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 </head>
 <body>

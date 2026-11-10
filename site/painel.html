@@ -31,7 +31,8 @@
   <!-- Estatísticas de acesso anônimas, sem cookies (GoatCounter). Visitas que chegam por um
        link curto (/ace/, /ati/…) já foram contadas lá, com a origem original. -->
   <script>
-    window.goatcounter = { no_onload: (() => {
+    // Só conta no domínio de produção (a homologação e cópias locais ficam de fora).
+    window.goatcounter = { no_onload: location.hostname !== "ariribeiro.github.io" || (() => {
       try { const r = new URL(document.referrer); return r.origin === location.origin && /^\/[\w-]+\/[a-z]+\/$/.test(r.pathname); }
       catch (e) { return false; }
     })() };
