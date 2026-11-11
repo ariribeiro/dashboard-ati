@@ -598,3 +598,24 @@ code { font-size: 0.8125rem; overflow-wrap: anywhere; }
 .voltar-home:hover { color: #fff; text-decoration: underline; }
 .voltar-home:focus-visible { outline: 2px solid var(--marca-amarelo); outline-offset: 2px; border-radius: 2px; }
 .rodape-home { font-weight: 600; }
+
+/* Página de auditoria */
+.aud-ok { color: var(--positivo); font-weight: 600; }
+.aud-ruim { color: var(--negativo); font-weight: 600; }
+.aud-neutro { color: var(--texto-3); }
+.tabela-auditoria { min-width: 560px; }
+.tabela-auditoria td, .tabela-auditoria th { vertical-align: top; }
+.aud-cobertura { margin-top: 12px; }
+.aud-cobertura summary { cursor: pointer; font-weight: 600; }
+.aud-grade { border-collapse: separate; border-spacing: 3px; font-size: 0.75rem; margin-top: 8px; width: auto; }
+.aud-grade th { color: var(--texto-3); font-weight: 600; padding: 0 4px; text-align: center; border: 0; }
+.aud-grade th[scope="row"] { text-align: right; }
+.aud-grade td { width: 26px; height: 22px; padding: 0; text-align: center; border: 0; border-radius: 4px; background: var(--grade); color: var(--texto-3); }
+.aud-grade td.vazio { background: transparent; }
+.aud-grade td.ok { background: var(--positivo); }
+.aud-grade td.ruim { background: var(--negativo); }
+.aud-grade td a { display: block; color: #fff; text-decoration: none; font-weight: 700; line-height: 22px; }
+.aud-legenda { display: flex; flex-wrap: wrap; gap: 6px 16px; margin: 10px 0 0; padding: 0; list-style: none; color: var(--texto-2); font-size: 0.8125rem; }
+.aud-legenda span { display: inline-block; width: 14px; height: 12px; border-radius: 3px; margin-right: 6px; vertical-align: -1px; background: var(--grade); }
+.aud-legenda .ok { background: var(--positivo); }
+.aud-legenda .ruim { background: var(--negativo); }

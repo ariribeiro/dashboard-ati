@@ -950,6 +950,8 @@ function renderizar() {
   document.getElementById("gerado").textContent = new Date(d.gerado_em).toLocaleDateString("pt-BR");
   document.getElementById("filtro").textContent = d.filtro_cargo;
   document.getElementById("fonte").href = d.fonte.url;
+  // Situação da auditoria da carreira e do mês selecionado (auditoria.js).
+  Auditoria.painel(document.getElementById("auditoria"), SLUG, d.referencia, fmtMes(d.referencia));
 }
 
 // ---------------------------------------------------------------- dados
@@ -1004,7 +1006,7 @@ async function iniciar() {
   const carreiras = await json("carreiras.json");
   if (!carreiras[SLUG]) SLUG = Object.keys(carreiras)[0];
   aplicarCarreira(carreiras);
-  [indice] = await Promise.all([dadosCarreira("index.json"), carregarCoordenadas()]);
+  [indice] = await Promise.all([dadosCarreira("index.json"), carregarCoordenadas(), Auditoria.carregar()]);
   // Os seletores existem no cabeçalho e na barra fixa; ficam sempre sincronizados.
   const selAnos = [...document.querySelectorAll('select[data-campo="ano"]')];
   const selMeses = [...document.querySelectorAll('select[data-campo="mes"]')];
