@@ -115,6 +115,7 @@ flowchart LR
 | `sigla`, `plural`, `nome`, `nome_plural` | Textos do painel |
 | `padrao_cargo` | Regex do cargo no SIAPE (texto sem acentos, maiúsculo) |
 | `marca` | `"ati"` usa a marca oficial da ATI; `"neutra"`, a sigla em texto |
+| `grupo` | Bloco da página inicial: `"transversais"` (carreiras do MGI) ou `"outras"`. Sem o campo, entra em "Outras carreiras" |
 | `ingresso` | Classe e padrão de entrada (`{"classe": "A", "padrao": "I"}`), ou `null` se não confirmado. Sem ele, o painel omite o destaque "no início da carreira" |
 | `classes` | Opcional. Rótulo de exibição por código do SIAPE (ex.: `{"S": "Especial"}`) |
 | `faixas` | Opcional. Limites (R$) do histograma, para carreiras em outro patamar salarial |

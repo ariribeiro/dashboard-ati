@@ -39,10 +39,7 @@
 
   <main>
     <p id="erro" class="erro" hidden></p>
-    <section class="secao" aria-labelledby="t-carreiras">
-      <div class="secao-cabecalho"><h2 id="t-carreiras">Escolha uma carreira</h2></div>
-      <div class="cartoes-carreira" id="carreiras"></div>
-    </section>
+    <div id="grupos"></div>
 
     <section class="secao" id="s-orcamento" data-secao="remuneracao" aria-labelledby="t-orcamento" hidden>
       <div class="secao-cabecalho">
@@ -84,12 +81,31 @@
       return r.json();
     });
 
+    // Blocos da página inicial; cada carreira escolhe o seu em data/carreiras.json ("grupo"). Sem grupo, vai em "outras".
+    const GRUPOS = [
+      { id: "transversais", titulo: "Carreiras transversais",
+        desc: "Carreiras do Ministério da Gestão e da Inovação em Serviços Públicos (MGI), com servidores em vários órgãos." },
+      { id: "outras", titulo: "Outras carreiras", desc: "Carreiras que não são do MGI." },
+    ];
+
     // Um cartão por carreira de data/carreiras.json, com os números do mês mais recente.
     async function iniciar() {
       const carreiras = await json("carreiras.json");
-      const lista = document.getElementById("carreiras");
       const faixa = document.getElementById("faixa");
+      const listas = {};
+      for (const g of GRUPOS) {
+        const sec = document.createElement("section");
+        sec.className = "secao"; sec.hidden = true; sec.setAttribute("aria-labelledby", `t-${g.id}`);
+        sec.innerHTML = `<div class="secao-cabecalho"><h2 id="t-${g.id}"></h2><p></p></div><div class="cartoes-carreira"></div>`;
+        sec.querySelector("h2").textContent = g.titulo;
+        sec.querySelector("p").textContent = g.desc;
+        document.getElementById("grupos").appendChild(sec);
+        listas[g.id] = sec;
+      }
       for (const [slug, c] of Object.entries(carreiras)) {
+        const sec = listas[c.grupo] ?? listas.outras;
+        sec.hidden = false;
+        const lista = sec.querySelector(".cartoes-carreira");
         const span = document.createElement("span");
         span.style.setProperty("--cor", c.cores?.destaque ?? "#F4C400");
         faixa.appendChild(span);
