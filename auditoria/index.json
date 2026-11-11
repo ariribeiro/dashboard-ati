@@ -9,6 +9,56 @@
       "divergencias": 0,
       "meses": "todos",
       "arquivo": "registros/20261111-175239-coerencia.json"
+    },
+    {
+      "id": "20261111-175638-coerencia",
+      "data": "2026-11-11T17:56:38+00:00",
+      "metodo": "coerencia",
+      "resultado": "ok",
+      "verificacoes": 2147,
+      "divergencias": 0,
+      "meses": "todos",
+      "arquivo": "registros/20261111-175638-coerencia.json"
+    },
+    {
+      "id": "20261111-175638-recontagem",
+      "data": "2026-11-11T17:56:38+00:00",
+      "metodo": "recontagem",
+      "resultado": "ok",
+      "verificacoes": 42,
+      "divergencias": 0,
+      "meses": [
+        "202509",
+        "202601",
+        "202607"
+      ],
+      "arquivo": "registros/20261111-175638-recontagem.json"
     }
-  ]
+  ],
+  "cobertura_recontagem": {
+    "202509": {
+      "data": "2026-11-11T17:56:38+00:00",
+      "registro": "20261111-175638-recontagem",
+      "carreiras": [
+        "ati"
+      ],
+      "resultado": "ok"
+    },
+    "202601": {
+      "data": "2026-11-11T17:56:38+00:00",
+      "registro": "20261111-175638-recontagem",
+      "carreiras": [
+        "ati"
+      ],
+      "resultado": "ok"
+    },
+    "202607": {
+      "data": "2026-11-11T17:56:38+00:00",
+      "registro": "20261111-175638-recontagem",
+      "carreiras": [
+        "ati"
+      ],
+      "resultado": "ok"
+    }
+  }
 }

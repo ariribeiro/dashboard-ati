@@ -1,0 +1,302 @@
+{
+  "id": "20261111-175638-recontagem",
+  "data": "2026-11-11T17:56:38+00:00",
+  "metodo": {
+    "id": "recontagem",
+    "descricao": "Recontagem independente: ZIP Servidores_SIAPE baixado do Portal da Transparência e agregados recalculados por scripts/auditar.py (biblioteca padrão, sem código de gerar_dados.py), comparados com data/<carreira>/AAAAMM.json."
+  },
+  "resultado": "ok",
+  "commit": "103f630bf849ee30f8c5cf01ca1f2e79d8c81203",
+  "execucao": {
+    "origem": "github-actions",
+    "evento": "workflow_dispatch",
+    "url": "https://github.com/ariribeiro/dashboard-carreiras/actions/runs/43072939130"
+  },
+  "auditado": {
+    "carreiras": [
+      "ati"
+    ],
+    "meses": {
+      "202607": {
+        "carreiras": [
+          "ati"
+        ],
+        "divergencias": 0
+      },
+      "202509": {
+        "carreiras": [
+          "ati"
+        ],
+        "divergencias": 0
+      },
+      "202601": {
+        "carreiras": [
+          "ati"
+        ],
+        "divergencias": 0
+      }
+    },
+    "sorteio": {
+      "semente": 1969340701,
+      "quantidade": 2,
+      "candidatos": 164,
+      "criterio": "meses publicados ainda sem recontagem; se todos já tiverem, qualquer mês publicado"
+    },
+    "fontes": [
+      {
+        "mes": "202607",
+        "url": "https://portaldatransparencia.gov.br/download-de-dados/servidores/202607_Servidores_SIAPE",
+        "sha256": "6bc1d4d79cd4328e836439b9c566e1128f1b8c7aa6b09a7f1791bea7c05eb90d",
+        "bytes": 83363033,
+        "origem": "download"
+      },
+      {
+        "mes": "202509",
+        "url": "https://portaldatransparencia.gov.br/download-de-dados/servidores/202509_Servidores_SIAPE",
+        "sha256": "8168f47995600d1223d79f2b57baf8191902de2e1d745304a5b17ce6a36d3770",
+        "bytes": 82573893,
+        "origem": "download"
+      },
+      {
+        "mes": "202601",
+        "url": "https://portaldatransparencia.gov.br/download-de-dados/servidores/202601_Servidores_SIAPE",
+        "sha256": "87b12b30f642e49c54971d423fbac013f2f65dfb1adf4e0f893ed5c2e74d1745",
+        "bytes": 82063399,
+        "origem": "download"
+      }
+    ]
+  },
+  "verificacoes": 42,
+  "divergencias": [],
+  "avisos": [],
+  "diagnosticos": {
+    "202607": {
+      "ati": {
+        "cargos_aceitos_pelo_filtro": [
+          {
+            "cargo": "ANALISTA EM TECNOL DA INFORMACAO",
+            "linhas": 616
+          }
+        ],
+        "cargos_parecidos_rejeitados": [
+          {
+            "cargo": "ANALISTA TECNICO EXECUTIVO",
+            "linhas": 5718
+          },
+          {
+            "cargo": "ANALISTA DE TEC DA INFORMACAO",
+            "linhas": 2989
+          },
+          {
+            "cargo": "ANALISTA EM CIENCIA E TECNOLOGIA",
+            "linhas": 1795
+          },
+          {
+            "cargo": "ANALISTA TECN EM POLITICAS SOCIAIS",
+            "linhas": 1230
+          },
+          {
+            "cargo": "ANALISTA PLAN GEST INF INFOR GEOG ESTATI",
+            "linhas": 879
+          },
+          {
+            "cargo": "ANALISTA DE TECNOL DA INFORMACAO - 40H",
+            "linhas": 400
+          },
+          {
+            "cargo": "ANALISTA TECNICO DA SUSEP",
+            "linhas": 332
+          },
+          {
+            "cargo": "ANALISTA DESENV TECN NUCLEAR E DEFESA",
+            "linhas": 182
+          },
+          {
+            "cargo": "ANALISTA TECNICO ADMINISTRATIVO",
+            "linhas": 100
+          },
+          {
+            "cargo": "ANALISTA - ANALISTA DE TECNOL DA INFORM",
+            "linhas": 80
+          },
+          {
+            "cargo": "ANALISTA TECNICO EXECUTIVO - 25H",
+            "linhas": 49
+          },
+          {
+            "cargo": "ANALISTA DE TECNOLOGIA MILITAR",
+            "linhas": 34
+          },
+          {
+            "cargo": "ANALISTA TECNICO ADMINISTRATIVO III",
+            "linhas": 12
+          },
+          {
+            "cargo": "ANALISTA - ANALISTA DE DOC E INFORMACAO",
+            "linhas": 6
+          },
+          {
+            "cargo": "ANALISTA DE INFORMACOES",
+            "linhas": 6
+          }
+        ],
+        "servidores_com_mais_de_uma_linha_de_remuneracao": 0,
+        "servidores_sem_linha_de_remuneracao": 14,
+        "mediana_com_funcao": 21303.12,
+        "mediana_sem_funcao": 11150.8
+      }
+    },
+    "202509": {
+      "ati": {
+        "cargos_aceitos_pelo_filtro": [
+          {
+            "cargo": "ANALISTA EM TECNOL DA INFORMACAO",
+            "linhas": 427
+          }
+        ],
+        "cargos_parecidos_rejeitados": [
+          {
+            "cargo": "ANALISTA DE TEC DA INFORMACAO",
+            "linhas": 2934
+          },
+          {
+            "cargo": "ANALISTA EM CIENCIA E TECNOLOGIA",
+            "linhas": 1622
+          },
+          {
+            "cargo": "ANALISTA TECNICO ADMINISTRATIVO",
+            "linhas": 1458
+          },
+          {
+            "cargo": "ANALISTA PLAN GEST INF INFOR GEOG ESTATI",
+            "linhas": 829
+          },
+          {
+            "cargo": "ANALISTA TECN EM POLITICAS SOCIAIS",
+            "linhas": 729
+          },
+          {
+            "cargo": "ANALISTA DE TECNOL DA INFORMACAO - 40H",
+            "linhas": 353
+          },
+          {
+            "cargo": "ANALISTA TECNICO DA SUSEP",
+            "linhas": 263
+          },
+          {
+            "cargo": "ANALISTA TECNICO-ADMINISTRATIVO",
+            "linhas": 185
+          },
+          {
+            "cargo": "ANALISTA DESENV TECN NUCLEAR E DEFESA",
+            "linhas": 176
+          },
+          {
+            "cargo": "ANALISTA - ANALISTA DE TECNOL DA INFORM",
+            "linhas": 70
+          },
+          {
+            "cargo": "ANALISTA DE TECNOLOGIA MILITAR",
+            "linhas": 34
+          },
+          {
+            "cargo": "ANALISTA TECNICO ADMINISTRATIVO III",
+            "linhas": 12
+          },
+          {
+            "cargo": "ANALISTA DE INFORMACOES",
+            "linhas": 6
+          },
+          {
+            "cargo": "ANALISTA - ANALISTA DE DOC E INFORMACAO",
+            "linhas": 5
+          },
+          {
+            "cargo": "ANALISTA TECNICO",
+            "linhas": 2
+          }
+        ],
+        "servidores_com_mais_de_uma_linha_de_remuneracao": 0,
+        "servidores_sem_linha_de_remuneracao": 18,
+        "mediana_com_funcao": 21103.98,
+        "mediana_sem_funcao": 15215.15
+      }
+    },
+    "202601": {
+      "ati": {
+        "cargos_aceitos_pelo_filtro": [
+          {
+            "cargo": "ANALISTA EM TECNOL DA INFORMACAO",
+            "linhas": 570
+          }
+        ],
+        "cargos_parecidos_rejeitados": [
+          {
+            "cargo": "ANALISTA DE TEC DA INFORMACAO",
+            "linhas": 2939
+          },
+          {
+            "cargo": "ANALISTA EM CIENCIA E TECNOLOGIA",
+            "linhas": 1645
+          },
+          {
+            "cargo": "ANALISTA TECNICO ADMINISTRATIVO",
+            "linhas": 1643
+          },
+          {
+            "cargo": "ANALISTA TECN EM POLITICAS SOCIAIS",
+            "linhas": 1159
+          },
+          {
+            "cargo": "ANALISTA PLAN GEST INF INFOR GEOG ESTATI",
+            "linhas": 809
+          },
+          {
+            "cargo": "ANALISTA DE TECNOL DA INFORMACAO - 40H",
+            "linhas": 375
+          },
+          {
+            "cargo": "ANALISTA TECNICO DA SUSEP",
+            "linhas": 334
+          },
+          {
+            "cargo": "ANALISTA DESENV TECN NUCLEAR E DEFESA",
+            "linhas": 180
+          },
+          {
+            "cargo": "ANALISTA TECNICO-ADMINISTRATIVO",
+            "linhas": 176
+          },
+          {
+            "cargo": "ANALISTA - ANALISTA DE TECNOL DA INFORM",
+            "linhas": 70
+          },
+          {
+            "cargo": "ANALISTA DE TECNOLOGIA MILITAR",
+            "linhas": 33
+          },
+          {
+            "cargo": "ANALISTA TECNICO ADMINISTRATIVO III",
+            "linhas": 11
+          },
+          {
+            "cargo": "ANALISTA DE INFORMACOES",
+            "linhas": 7
+          },
+          {
+            "cargo": "ANALISTA - ANALISTA DE DOC E INFORMACAO",
+            "linhas": 5
+          },
+          {
+            "cargo": "ANALISTA TECNICO",
+            "linhas": 2
+          }
+        ],
+        "servidores_com_mais_de_uma_linha_de_remuneracao": 0,
+        "servidores_sem_linha_de_remuneracao": 15,
+        "mediana_com_funcao": 21303.12,
+        "mediana_sem_funcao": 11150.8
+      }
+    }
+  }
+}
