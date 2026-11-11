@@ -1,0 +1,27 @@
+{
+  "id": "20261111-175239-coerencia",
+  "data": "2026-11-11T17:52:39+00:00",
+  "metodo": {
+    "id": "coerencia",
+    "descricao": "Coerência interna: todos os arquivos de data/ conferidos entre si (somas, índice, latest, filtro de cargo), sem consulta ao portal."
+  },
+  "resultado": "ok",
+  "commit": "c85a1b636f8409a3843ddb2e715eaa587f8f23fb",
+  "execucao": {
+    "origem": "github-actions",
+    "evento": "workflow_dispatch",
+    "url": "https://github.com/ariribeiro/dashboard-carreiras/actions/runs/43072311898"
+  },
+  "auditado": {
+    "carreiras": {
+      "ati": {
+        "arquivos": 165,
+        "de": "201301",
+        "ate": "202609"
+      }
+    }
+  },
+  "verificacoes": 2147,
+  "divergencias": [],
+  "avisos": []
+}

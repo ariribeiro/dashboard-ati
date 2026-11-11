@@ -1,0 +1,14 @@
+{
+  "registros": [
+    {
+      "id": "20261111-175239-coerencia",
+      "data": "2026-11-11T17:52:39+00:00",
+      "metodo": "coerencia",
+      "resultado": "ok",
+      "verificacoes": 2147,
+      "divergencias": 0,
+      "meses": "todos",
+      "arquivo": "registros/20261111-175239-coerencia.json"
+    }
+  ]
+}
