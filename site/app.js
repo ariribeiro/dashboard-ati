@@ -383,7 +383,22 @@ const TILES = "https://tile.openstreetmap.org/{z}/{x}/{y}.png";
 // Retângulo do DF. Sem usar o Leaflet aqui: se a biblioteca não carregar, iniciar() mostra o erro.
 const noDF = ([lat, lon]) => lat >= -16.06 && lat <= -15.49 && lon >= -48.29 && lon <= -47.30;
 
+// Capital de cada UF: a visão "Por UF" põe a bolha da UF de exercício aqui (o SIAPE não traz a cidade).
+const CAPITAIS = {
+  AC: ["Acre", -9.9747, -67.81], AL: ["Alagoas", -9.6658, -35.7353], AP: ["Amapá", 0.0349, -51.0694],
+  AM: ["Amazonas", -3.119, -60.0217], BA: ["Bahia", -12.9714, -38.5014], CE: ["Ceará", -3.7319, -38.5267],
+  DF: ["Distrito Federal", -15.7939, -47.8828], ES: ["Espírito Santo", -20.3155, -40.3128], GO: ["Goiás", -16.6869, -49.2648],
+  MA: ["Maranhão", -2.5307, -44.3068], MT: ["Mato Grosso", -15.6014, -56.0979], MS: ["Mato Grosso do Sul", -20.4697, -54.6201],
+  MG: ["Minas Gerais", -19.9167, -43.9345], PA: ["Pará", -1.4558, -48.4902], PB: ["Paraíba", -7.1195, -34.845],
+  PR: ["Paraná", -25.4284, -49.2733], PE: ["Pernambuco", -8.0476, -34.877], PI: ["Piauí", -5.0892, -42.8019],
+  RJ: ["Rio de Janeiro", -22.9068, -43.1729], RN: ["Rio Grande do Norte", -5.7945, -35.211], RS: ["Rio Grande do Sul", -30.0346, -51.2177],
+  RO: ["Rondônia", -8.7612, -63.9004], RR: ["Roraima", 2.8235, -60.6758], SC: ["Santa Catarina", -27.5954, -48.548],
+  SP: ["São Paulo", -23.5505, -46.6333], SE: ["Sergipe", -10.9472, -37.0731], TO: ["Tocantins", -10.1689, -48.3317],
+};
+
 let mapa = null;
+let modoMapa = "orgao"; // "orgao" (sede de cada órgão) ou "uf" (UF de exercício, na capital)
+let dadosMapa = null;
 let camadaBolhas = null;
 let legendaBolhas = null;
 let limites = { brasilia: null, brasil: null };
@@ -425,6 +440,24 @@ function criarMapa() {
     },
   });
   new Vistas().addTo(mapa);
+
+  const Modos = L.Control.extend({
+    options: { position: "topleft" },
+    onAdd() {
+      const div = L.DomUtil.create("div", "vistas modos leaflet-bar");
+      div.innerHTML = '<button type="button" data-modo="orgao">Por órgão (sede)</button><button type="button" data-modo="uf">Por UF</button>';
+      L.DomEvent.disableClickPropagation(div);
+      div.addEventListener("click", (e) => {
+        const modo = e.target.dataset.modo;
+        if (!modo || modo === modoMapa || !dadosMapa) return;
+        modoMapa = modo;
+        mapaOrgaos(dadosMapa.orgaos, dadosMapa.porUF);
+        if (limites.brasil?.isValid()) mapa.fitBounds(limites.brasil, { padding: [24, 24] });
+      });
+      return div;
+    },
+  });
+  new Modos().addTo(mapa);
 }
 
 function atualizarLegenda(max) {
@@ -444,14 +477,24 @@ function atualizarLegenda(max) {
   legendaBolhas = new Legenda().addTo(mapa);
 }
 
-function mapaOrgaos(orgaos) {
+function mapaOrgaos(orgaos, porUF = []) {
   if (!mapa) criarMapa();
+  dadosMapa = { orgaos, porUF };
+  const porUf = modoMapa === "uf";
+  document.querySelectorAll(".modos button").forEach((b) => b.classList.toggle("ativo", b.dataset.modo === modoMapa));
 
   // Agrupa por coordenada: vários órgãos dividem o mesmo prédio (ex.: blocos da Esplanada).
   const locais = new Map();
   let semLocal = 0;
   const semLocalNomes = [];
-  for (const o of orgaos) {
+  if (porUf) {
+    for (const u of porUF) {
+      const c = CAPITAIS[u.nome];
+      if (!c) { semLocal += u.qtd; semLocalNomes.push(`${u.nome} (${fmtInt.format(u.qtd)})`); continue; }
+      locais.set(u.nome, { local: c[0], lat: c[1], lon: c[2], precisao: "uf", qtd: u.qtd, orgaos: [] });
+    }
+  }
+  for (const o of porUf ? [] : orgaos) {
     const c = coordenadas.get(o.nome);
     if (!c || Number.isNaN(c.lat)) {
       semLocal += o.qtd;
@@ -469,7 +512,7 @@ function mapaOrgaos(orgaos) {
   camadaBolhas?.remove();
   camadaBolhas = L.markerClusterGroup({
     showCoverageOnHover: false,
-    maxClusterRadius: 60,
+    maxClusterRadius: porUf ? 22 : 60,
     iconCreateFunction: (cluster) =>
       iconeBolha(cluster.getAllChildMarkers().reduce((s, m) => s + m.options.qtd, 0), max, true),
   });
@@ -479,10 +522,10 @@ function mapaOrgaos(orgaos) {
     const linhas = l.orgaos.map((o) =>
       `<tr><td title="${escapar(o.completo)}"><strong>${escapar(o.sigla || o.curto)}</strong> ${o.sigla && o.curto !== o.sigla ? escapar(o.curto) : ""}</td>` +
       `<td class="num">${fmtInt.format(o.qtd)}</td></tr>`).join("");
-    const aviso = l.precisao === "edificio" ? "" : `<p class="popup-aviso">Localização aproximada (${l.precisao === "rua" ? "rua" : "quadra"}).</p>`;
+    const aviso = l.precisao === "edificio" || l.precisao === "uf" ? "" : `<p class="popup-aviso">Localização aproximada (${l.precisao === "rua" ? "rua" : "quadra"}).</p>`;
     L.marker([l.lat, l.lon], { icon: iconeBolha(l.qtd, max), qtd: l.qtd, title: `${l.local}: ${l.qtd} ${P}`, riseOnHover: true })
-      .bindPopup(`<strong>${escapar(l.local)}</strong><table>${linhas}</table>` +
-        (l.orgaos.length > 1 ? `<p class="popup-total">${fmtInt.format(l.qtd)} ${P} no prédio</p>` : "") + aviso)
+      .bindPopup(`<strong>${escapar(l.local)}</strong>` + (porUf ? `<p class="popup-total">${fmtInt.format(l.qtd)} ${P} com exercício na UF</p>` : `<table>${linhas}</table>`) +
+        (!porUf && l.orgaos.length > 1 ? `<p class="popup-total">${fmtInt.format(l.qtd)} ${P} no prédio</p>` : "") + aviso)
       .addTo(camadaBolhas);
   }
   camadaBolhas.addTo(mapa);
@@ -498,13 +541,16 @@ function mapaOrgaos(orgaos) {
 
   const fora = [...locais.values()].filter((l) => !noDF([l.lat, l.lon])).reduce((s, l) => s + l.qtd, 0);
   const partes = [];
-  if (fora) partes.push(`${fmtInt.format(fora)} ${P} em órgãos com sede fora do DF: use o botão “Brasil” para vê-los.`);
+  if (fora) partes.push(`${fmtInt.format(fora)} ${P} ${porUf ? "fora do DF" : "em órgãos com sede fora do DF"}: use o botão “Brasil” para vê-los.`);
   if (semLocal) partes.push(`${fmtInt.format(semLocal)} sem localização: ${semLocalNomes.join(", ")}.`);
-  partes.push("A posição é a da sede do órgão; o servidor pode trabalhar em um anexo ou unidade regional.");
+  partes.push(porUf
+    ? "Cada bolinha é a UF de exercício informada no SIAPE, posta na capital do estado; o servidor pode trabalhar em outra cidade."
+    : "A posição é a da sede do órgão; o servidor pode trabalhar em um anexo ou unidade regional. Para ver onde estão pela UF de exercício, use “Por UF”.");
   document.getElementById("mapa-nota").textContent = partes.join(" ");
 
-  tabela("mapa-orgaos", ["Local", "Órgãos", P], [...locais.values()].sort((a, b) => b.qtd - a.qtd)
-    .map((l) => [l.local, l.orgaos.map((o) => o.sigla || o.curto).join(", "), fmtInt.format(l.qtd)]));
+  const ordenados = [...locais.values()].sort((a, b) => b.qtd - a.qtd);
+  tabela("mapa-orgaos", porUf ? ["UF", P] : ["Local", "Órgãos", P], ordenados
+    .map((l) => porUf ? [l.local, fmtInt.format(l.qtd)] : [l.local, l.orgaos.map((o) => o.sigla || o.curto).join(", "), fmtInt.format(l.qtd)]));
 }
 
 // ---------------------------------------------------------------- textos
@@ -918,7 +964,7 @@ function renderizar() {
     : lot.qtd / d.total >= 0.9
       ? `A carreira é centralizada: ${fmtInt.format(lot.qtd)} dos ${fmtInt.format(d.total)} ${P} estão lotados ${ondeLot} e têm exercício em ${nExercicio}.`
       : `Os ${fmtInt.format(d.total)} ${P} estão lotados em ${fmtInt.format(d.por_orgao_lotacao.length)} órgãos (${fmtPct.format(lot.qtd / d.total)} ${ondeLot}) e têm exercício em ${nExercicio}.`;
-  mapaOrgaos(d.por_orgao_exercicio);
+  mapaOrgaos(d.por_orgao_exercicio, d.por_uf);
   barrasHorizontais("g-exercicio", topComOutros(d.por_orgao_exercicio, TOP_ORGAOS).map((o) => {
     const n = coordenadas.has(o.nome) ? orgao(o.nome) : null;
     return { nome: n?.curto ?? o.nome, completo: n ? `${n.completo}${n.sigla ? ` (${n.sigla})` : ""}` : o.nome, qtd: o.qtd };
