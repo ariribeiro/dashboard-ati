@@ -380,7 +380,8 @@ function tabela(id, cabecalho, linhas) {
 
 // Tiles padrão do OpenStreetMap (sem chave). No modo escuro, o CSS inverte as cores do mapa.
 const TILES = "https://tile.openstreetmap.org/{z}/{x}/{y}.png";
-const DF = L.latLngBounds([-16.06, -48.29], [-15.49, -47.30]);
+// Retângulo do DF. Sem usar o Leaflet aqui: se a biblioteca não carregar, iniciar() mostra o erro.
+const noDF = ([lat, lon]) => lat >= -16.06 && lat <= -15.49 && lon >= -48.29 && lon <= -47.30;
 
 let mapa = null;
 let camadaBolhas = null;
@@ -489,13 +490,13 @@ function mapaOrgaos(orgaos) {
 
   const pontos = [...locais.values()].map((l) => [l.lat, l.lon]);
   limites.brasil = L.latLngBounds(pontos);
-  limites.brasilia = L.latLngBounds(pontos.filter((p) => DF.contains(p)));
+  limites.brasilia = L.latLngBounds(pontos.filter(noDF));
   if (!mapa._vistaInicial && limites.brasil.isValid()) {
     mapa.fitBounds(limites.brasilia.isValid() ? limites.brasilia : limites.brasil, { padding: [24, 24] });
     mapa._vistaInicial = true;
   }
 
-  const fora = [...locais.values()].filter((l) => !DF.contains([l.lat, l.lon])).reduce((s, l) => s + l.qtd, 0);
+  const fora = [...locais.values()].filter((l) => !noDF([l.lat, l.lon])).reduce((s, l) => s + l.qtd, 0);
   const partes = [];
   if (fora) partes.push(`${fmtInt.format(fora)} ${P} em órgãos com sede fora do DF: use o botão “Brasil” para vê-los.`);
   if (semLocal) partes.push(`${fmtInt.format(semLocal)} sem localização: ${semLocalNomes.join(", ")}.`);
@@ -620,8 +621,11 @@ function analisarFluxo() {
   const cenarios = [
     { id: "recente", nome: "Ritmo dos últimos 5 anos", taxa: taxa(recentes), cor: "--cenario-1" },
     { id: "historico", nome: "Média de toda a série", taxa: taxa(comuns), cor: "--cenario-2" },
-    { id: "pior", nome: `Pior período (${fmtMes(refDeNum(pior.ini - 1))} a ${fmtMes(refDeNum(pior.fim))})`, taxa: pior.taxa, cor: "--cenario-3" },
   ];
+  // Só existe quando alguma janela de 24 meses tem dados suficientes e perda líquida.
+  if (pior.ini != null) {
+    cenarios.push({ id: "pior", nome: `Pior período (${fmtMes(refDeNum(pior.ini - 1))} a ${fmtMes(refDeNum(pior.fim))})`, taxa: pior.taxa, cor: "--cenario-3" });
+  }
 
   // Intervalos entre turmas: perda líquida desde o fim da entrada até a próxima turma (ou o mês mais recente).
   const totalEm = new Map(ms.map((m) => [numMes(m.mes), m.total]));
@@ -727,7 +731,7 @@ function renderizarTendencia() {
   if (!suficiente) return;
   const { cenarios, turmas, intervalos, totalAtual, ultimo } = fluxo;
   const refAtual = fmtMes(refDeNum(ultimo));
-  const [recente, historico, pior] = cenarios;
+  const [recente] = cenarios;
 
   document.getElementById("m-limiar").textContent = LIMIAR_ENTRADA;
   document.getElementById("tendencia-desc").textContent =
@@ -841,15 +845,15 @@ function renderizarOrcamento() {
   const [constante, semEntradas] = proj.cenarios;
   const somaDe = (c) => c.valores.reduce((s, v, i) => s + (proj.anosProj[i] >= anoIni ? v : 0), 0);
   const reajuste = proj.reajuste;
-  const txtReajuste = reajuste ? `${fmtPct1.format(reajuste.taxa)} ao ano na média dos últimos ${reajuste.anos} anos` : "sem histórico suficiente";
-  const modo = orcComReajuste && reajuste ? `com a remuneração média crescendo ${fmtPct1.format(reajuste.taxa)} ao ano` : "em valores de hoje, sem reajuste";
+  const txtReajuste = reajuste ? `${fmtPct1.format(reajuste.taxa)} ao ano nos últimos ${reajuste.anos} anos` : "sem histórico suficiente";
+  const modo = orcComReajuste && reajuste ? `com a remuneração média crescendo ${fmtPct1.format(reajuste.taxa)} ao ano` : "em valores de hoje, com a remuneração média congelada";
 
   document.getElementById("orc-desc").textContent =
     `Quanto a carreira custa por ano em remuneração básica bruta e quanto pode custar até ${anoFim}. ` +
     `A estimativa combina a tendência do efetivo com o crescimento histórico da remuneração média: ${txtReajuste}.`;
   document.getElementById("orc-atual").textContent = fmtDinheiro(proj.folhaMensalAtual * 13);
   document.getElementById("orc-atual-det").textContent =
-    `${fmtDinheiro(proj.folhaMensalAtual)} por mês em ${refAtual}, × 13 com o 13º`;
+    `${fmtDinheiro(proj.folhaMensalAtual)} por mês em ${refAtual}, × 13 (12 meses + 13º)`;
   document.getElementById("orc-fim-rotulo").textContent = `Folha anual em ${anoFim}`;
   document.getElementById("orc-fim").textContent = fmtDinheiro(semEntradas.valores.at(-1));
   document.getElementById("orc-fim-det").textContent =

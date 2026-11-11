@@ -166,10 +166,10 @@
         <ul>
           <li>Um mês com alta de <span id="m-limiar">10</span> ou mais <span data-plural>ATIs</span> é tratado como mês de entrada de turma. Todos os outros meses servem para medir a <strong>taxa de saída líquida</strong>: quantos <span data-plural>ATIs</span> a carreira perde por mês, em proporção ao total do mês anterior.</li>
           <li>A projeção aplica essa taxa ao total mais recente, mês a mês, sem novas entradas. Como a taxa é proporcional, a perda em números absolutos diminui conforme o total cai.</li>
-          <li>Os três cenários usam a taxa de períodos diferentes: os últimos 5 anos, toda a série e a pior janela de 24 meses já registrada.</li>
+          <li>Os cenários usam a taxa de períodos diferentes: os últimos 5 anos, toda a série e, quando há dados suficientes, a pior janela de 24 meses já registrada.</li>
           <li>O SIAPE só permite ver o saldo de cada mês, não quem entrou e quem saiu. Nos meses de entrada de turma, as saídas ficam escondidas no saldo, então a taxa pode estar um pouco subestimada.</li>
           <li>Conta como saída tudo o que tira o servidor do cargo: exoneração (inclusive posse em outro concurso), aposentadoria, falecimento. A projeção não sabe o motivo.</li>
-          <li>Não considera crescimento da demanda por TI, criação de vagas, nem mudanças de remuneração ou de regras da carreira que possam mudar o ritmo de saída.</li>
+          <li>Não considera crescimento da demanda pelo trabalho da carreira, criação de vagas, nem mudanças de remuneração ou de regras da carreira que possam mudar o ritmo de saída.</li>
         </ul>
       </details>
     </section>
@@ -203,7 +203,7 @@
           <div class="orc-cabecalho">
             <h3>Folha anual de remuneração básica bruta</h3>
             <div class="alternador" role="group" aria-label="Como mostrar os valores">
-              <button type="button" data-reajuste="sim" aria-pressed="true">Com reajuste histórico</button>
+              <button type="button" data-reajuste="sim" aria-pressed="true">Com crescimento histórico</button>
               <button type="button" data-reajuste="nao" aria-pressed="false">Em valores de hoje</button>
             </div>
           </div>
@@ -216,9 +216,9 @@
       <details class="metodo">
         <summary>Como a estimativa é feita e o que ela não considera</summary>
         <ul>
-          <li><strong>Folha mensal</strong> = número de servidores com remuneração no mês × remuneração básica bruta média. <strong>Folha anual</strong> = soma dos 12 meses + o 13º salário (igual à folha de dezembro). Os anos antes do mês mais recente usam os dados reais; meses sem arquivo processado são interpolados.</li>
+          <li><strong>Folha mensal</strong> = número de servidores com remuneração no mês × remuneração básica bruta média. <strong>Folha anual</strong> de cada ano = soma dos 12 meses + o 13º salário (igual à folha de dezembro). <strong>Folha anual hoje</strong> é outra conta: a folha do mês mais recente × 13, ou seja, quanto a carreira custaria em um ano inteiro com o efetivo e a remuneração de agora; por isso pode ser bem maior que a do último ano completo quando houve entrada de turma ou reajuste. Os anos antes do mês mais recente usam os dados reais; meses sem arquivo processado são interpolados.</li>
           <li><strong>Efetivo</strong>: “sem novas entradas” aplica a taxa de saída líquida dos últimos 5 anos, a mesma da seção Tendência; “repondo as saídas” mantém o efetivo atual, como se cada saída fosse reposta por concurso.</li>
-          <li><strong>Remuneração média</strong>: com reajuste, cresce no ritmo anual observado nos últimos 10 anos (média dos últimos 12 meses contra a de 12 meses dez anos antes). Esse ritmo junta reajustes, progressões e o efeito das turmas novas, que entram ganhando menos. Em valores de hoje, a média fica congelada no valor do mês mais recente.</li>
+          <li><strong>Remuneração média</strong>: com crescimento histórico, cresce no ritmo anual observado nos últimos 10 anos (média dos últimos 12 meses contra a de 12 meses dez anos antes; com série mais curta, usa de 3 a 9 anos). Esse ritmo é o da média de toda a carreira, sem separar classe e padrão: não é o reajuste da tabela. Ele junta reajustes (mesmo os que só alcançam parte das posições), progressões e o efeito das turmas novas, que entram ganhando menos. Em valores de hoje, a média fica congelada no valor do mês mais recente.</li>
           <li>Ao repor saídas, o novato entra ganhando menos que quem sai; a estimativa usa a média atual, então tende a superestimar um pouco o cenário “repondo as saídas”.</li>
           <li><strong>Não inclui</strong> contribuição patronal à previdência, terço de férias, verbas indenizatórias (auxílios), funções comissionadas pagas à parte, nem aposentados e pensionistas. O impacto orçamentário real é maior que a folha mostrada aqui.</li>
           <li>Reajustes futuros dependem de negociação e de lei; o ritmo histórico é só uma referência, não uma previsão de política salarial.</li>
