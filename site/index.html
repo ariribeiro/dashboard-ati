@@ -158,7 +158,7 @@
       }
       document.getElementById("s-orcamento").hidden = false;
     }
-    orcamento().catch((e) => console.error(e));
+    if (ORCAMENTO_VISIVEL) orcamento().catch((e) => console.error(e));
 
     iniciar().catch((e) => {
       const el = document.getElementById("erro");

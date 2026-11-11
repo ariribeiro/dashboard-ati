@@ -3,6 +3,10 @@
 // Modelo compartilhado por painel.html (seções Tendência e Orçamento) e index.html (comparação entre carreiras).
 // Entrada: `meses` de data/<carreira>/index.json ({ mes, total, n, media }).
 
+// Os painéis de impacto orçamentário (página inicial e painel de cada carreira) ficam ocultos
+// até a auditoria dos dados (auditoria/) confirmar os números. Para reexibir, troque para true.
+const ORCAMENTO_VISIVEL = false;
+
 // Alta mensal a partir da qual o mês conta como entrada de turma.
 const LIMIAR_ENTRADA = 10;
 const numMes = (ref) => { const [a, m] = ref.split("-").map(Number); return a * 12 + m - 1; };

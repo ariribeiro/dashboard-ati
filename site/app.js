@@ -833,7 +833,7 @@ function graficoOrcamento(id, proj) {
 function renderizarOrcamento() {
   const proj = Orcamento.projetar(indice.meses, { comReajuste: orcComReajuste });
   const secao = document.getElementById("s-orcamento");
-  const ok = proj && proj.historico.length >= 2;
+  const ok = ORCAMENTO_VISIVEL && proj && proj.historico.length >= 2;
   secao.hidden = !ok;
   document.querySelector('.barra-nav a[href="#s-orcamento"]').hidden = !ok;
   if (!ok) return;
