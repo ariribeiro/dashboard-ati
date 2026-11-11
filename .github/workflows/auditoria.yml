@@ -1,0 +1,114 @@
+name: Auditoria dos dados
+
+on:
+  # Depois de cada execução de "Dados das carreiras" (agendada ou manual).
+  workflow_run:
+    workflows: ["Dados das carreiras"]
+    types: [completed]
+  workflow_dispatch:
+    inputs:
+      metodo:
+        description: "Método"
+        type: choice
+        default: ambos
+        options:
+          - ambos
+          - coerencia
+          - recontagem
+      meses:
+        description: "Recontagem: meses AAAAMM separados por espaço (em branco: mês mais recente + sorteio)"
+        type: string
+        default: ""
+      sortear:
+        description: "Recontagem: quantos meses sortear (cada um baixa ~85 MB)"
+        type: string
+        default: "2"
+      carreira:
+        description: "Carreira (padrão: todas de data/carreiras.json)"
+        type: choice
+        default: todas
+        options:
+          - todas
+          - ati
+          - atps
+          - eppgg
+          - ace
+          - aie
+
+permissions:
+  contents: write
+
+concurrency:
+  group: auditoria
+  cancel-in-progress: false
+
+jobs:
+  auditar:
+    # Só audita depois de uma geração de dados que terminou bem.
+    if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: requirements.txt
+
+      - name: Instalar dependências
+        run: pip install -r requirements.txt
+
+      - name: Auditar
+        id: auditar
+        env:
+          METODO: ${{ inputs.metodo || 'ambos' }}
+          MESES: ${{ inputs.meses }}
+          SORTEAR: ${{ inputs.sortear || '2' }}
+          CARREIRA: ${{ inputs.carreira }}
+        run: |
+          if ! [[ "$SORTEAR" =~ ^[0-9]+$ ]]; then
+            echo "::error::'sortear' deve ser um número inteiro."
+            exit 1
+          fi
+          comum=()
+          [ -n "$CARREIRA" ] && [ "$CARREIRA" != "todas" ] && comum+=(--carreira "$CARREIRA")
+          falhou=0
+          if [ "$METODO" != "recontagem" ]; then
+            python scripts/auditar.py coerencia "${comum[@]}" || falhou=1
+          fi
+          if [ "$METODO" != "coerencia" ]; then
+            args=()
+            if [ -n "$MESES" ]; then
+              for m in $MESES; do args+=(--mes "$m"); done
+            else
+              args+=(--mais-recente)
+            fi
+            [ "$SORTEAR" -gt 0 ] && args+=(--sortear "$SORTEAR")
+            python scripts/auditar.py recontagem "${comum[@]}" "${args[@]}" || falhou=1
+          fi
+          echo "falhou=$falhou" >> "$GITHUB_OUTPUT"
+
+      - name: Commitar o registro da auditoria
+        # Grava o registro mesmo quando há divergência: é ele que documenta o que foi encontrado.
+        if: ${{ !cancelled() }}
+        run: |
+          git add auditoria/
+          if git diff --cached --quiet; then
+            echo "Nenhum registro novo."
+          else
+            resumo=$(git diff --cached --name-only -- 'auditoria/registros/*.json' | sed -E 's#.*-([a-z]+)(-[0-9]+)?\.json$#\1#' | sort -u | paste -sd ',' -)
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git commit -m "auditoria $(date -u +%Y-%m-%d)${resumo:+ ($resumo)}"
+            # Um push feito enquanto o job rodava rejeitaria este; integra antes.
+            git pull --rebase
+            git push
+          fi
+
+      - name: Falhar se houve divergência ou erro
+        if: ${{ steps.auditar.outputs.falhou == '1' }}
+        run: |
+          echo "::error::A auditoria encontrou divergências ou não conseguiu auditar. Veja o registro em auditoria/registros/."
+          exit 1

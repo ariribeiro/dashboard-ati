@@ -35,6 +35,10 @@ Os links curtos têm prévia própria para redes sociais e levam a
 
 - 📊 **Visão geral**: total de servidores, remuneração mediana, destaques do mês e histórico desde 2013.
 - 📉 **Tendência**: ritmo de saídas entre concursos e projeção sem novas turmas.
+- 🧾 **Impacto orçamentário** (oculto por enquanto): folha anual estimada e projeção para os
+  próximos 10 anos, com comparação entre carreiras na página inicial. Fica oculto até a
+  [auditoria dos dados](#auditoria) confirmar os números; a chave é `ORCAMENTO_VISIVEL` em
+  `site/orcamento.js`.
 - 🗺️ **Onde trabalham**: mapa com a sede de cada órgão de exercício, ranking de órgãos e UFs.
 - 🪜 **Carreira**: distribuição por classe e padrão, e funções comissionadas.
 - 💰 **Remuneração**: histograma, mediana e faixa P10–P90 da remuneração básica bruta.
@@ -100,6 +104,7 @@ flowchart LR
 | [`data/orgaos_coordenadas.csv`](data/orgaos_coordenadas.csv) | Sede de cada órgão de exercício, para o mapa. |
 | [`site/`](site/) | HTML, CSS e JS puros, sem build. `painel.html` lê a carreira do endereço. |
 | [`.github/workflows/atis.yml`](.github/workflows/atis.yml) | Roda no dia 15 de cada mês (12h UTC) ou manualmente: gera os dados, commita `data/` e publica no Pages. |
+| [`scripts/auditar.py`](scripts/auditar.py) e [`.github/workflows/auditoria.yml`](.github/workflows/auditoria.yml) | Conferem os dados publicados e gravam um registro em `auditoria/`. Veja [Auditoria](#auditoria). |
 
 <details>
 <summary><strong>Campos de <code>data/carreiras.json</code></strong></summary>
@@ -130,12 +135,12 @@ Conferido no arquivo de ago/2026:
   - **ATI**: deixa de fora cargos parecidos que não são da carreira, como
     `ANALISTA DE TEC DA INFORMACAO` (PCCTAE), `ANALISTA DE TECNOL DA INFORMACAO - 40H`
     (EBSERH) e `ANALISTA - ANALISTA DE TECNOL DA INFORM` (Conab).
-  - **ATPS**: aparece no SIAPE a partir de jul/2013, com a primeira turma (toda em A-I); por isso `inicio` é `2013-07`. A lotação só ficou centralizada no MGI em 2024. Classes A–C e padrões I–VI, como a ATI.
-  - **EPPGG**: classes B, C e S. Pela remuneração, a ordem é B → C → S, e S é
-    exibida como "Especial". Não há classe A nos dados e o ingresso não está
-    configurado. Faixas próprias no histograma.
-  - **ACE**: a maioria no MDIC. Classes B, C e S ("Especial"); ingresso não
-    configurado. Usa as mesmas faixas da EPPGG.
+  - **ATPS**: aparece no SIAPE a partir de jul/2013, com a primeira turma (toda em A-I); por isso `inicio` é `2013-07`. A lotação só ficou centralizada no MGI em 2024. Classes A–C e padrões I–VI, como a ATI. De ago a dez/2023 o SIAPE traz até 4 servidores em classe S, publicados como vieram.
+  - **EPPGG**: hoje classes B, C e S. Pela remuneração, a ordem é B → C → S, e S é
+    exibida como "Especial". A classe A aparece de 2013 a nov/2025 e não existe
+    mais nos dados recentes; o ingresso não está configurado. Faixas próprias no histograma.
+  - **ACE**: a maioria no MDIC. Hoje classes B, C e S ("Especial"); a classe A
+    aparece até mai/2024. Ingresso não configurado. Usa as mesmas faixas da EPPGG.
   - **AIE**: espalhados pelos ministérios de infraestrutura. Classes A, B, C e S
     ("Especial"); ingresso não configurado. Não inclui
     `ESPECIALISTA EM INFRA-ESTRUTURA SENIOR` nem
@@ -195,7 +200,9 @@ Calculada no navegador, só com `data/<carreira>/index.json`:
   janela de 24 meses.
 - A projeção aplica cada taxa ao total mais recente por 15 anos, sem novas
   entradas, e estima quando o total voltaria ao nível de antes das duas últimas turmas.
-- A seção fica oculta enquanto a carreira tiver menos de 24 meses processados.
+- A seção fica oculta enquanto a carreira tiver menos de 24 meses processados ou
+  nenhuma entrada de turma na série. O cenário da pior janela só aparece quando
+  alguma janela de 24 meses tem dados suficientes.
 
 **Limitações:** o dado agregado só mostra o saldo, não quem entrou ou saiu, e
 nos meses de entrada as saídas ficam escondidas. Saída inclui exoneração,
@@ -203,6 +210,80 @@ aposentadoria e falecimento. A projeção não considera demanda, novas vagas ne
 mudanças na carreira.
 
 </details>
+
+<details>
+<summary><strong>Impacto orçamentário</strong></summary>
+
+Calculado no navegador por `site/orcamento.js`, usado pelo painel e pela página
+inicial, a partir de `n` e `media` do `index.json` de cada carreira:
+
+- **Folha mensal** = servidores com remuneração no mês × remuneração básica bruta
+  média. **Folha anual** de um ano = 12 meses + 13º (igual a dezembro). Meses sem
+  arquivo são interpolados. **Folha anual hoje** é outra conta: o mês mais recente
+  × 13, o custo de um ano inteiro com o efetivo e a remuneração de agora.
+- **Efetivo**: "sem novas entradas" usa a taxa de saída líquida dos últimos 5
+  anos (a mesma da Tendência); "repondo as saídas" mantém o efetivo atual.
+- **Crescimento da remuneração média**: ritmo anual dos últimos 10 anos (média dos
+  últimos 12 meses contra a de 12 meses dez anos antes; com menos histórico, usa o
+  que houver, no mínimo 3 anos). É o ritmo da média de toda a carreira, sem separar
+  classe e padrão, e não o reajuste da tabela: junta reajustes (mesmo os que só
+  alcançam parte das posições), progressões e o efeito das turmas novas. O painel
+  também mostra a estimativa em valores de hoje, com a média congelada.
+- **Página inicial**: as carreiras são comparadas no mês mais recente que todas têm.
+
+**Limitações:** é só a remuneração básica bruta. Não inclui contribuição patronal,
+terço de férias, auxílios, funções pagas à parte, nem aposentados e pensionistas.
+Reajustes futuros dependem de negociação e de lei.
+
+</details>
+
+---
+
+<a id="auditoria"></a>
+## Auditoria
+
+O workflow **Auditoria dos dados** roda depois de cada execução de "Dados das carreiras"
+e também manualmente. Cada execução grava um registro em `auditoria/registros/` e
+atualiza `auditoria/index.json`; os dois ficam versionados, então o histórico do git
+mostra quando cada auditoria foi feita.
+
+| Método | O que confere | Fonte |
+|---|---|---|
+| `coerencia` | Todos os arquivos de `data/` entre si: somas por órgão, UF, situação e classe iguais ao total; histograma igual a `n`; `index.json` e `latest.json` iguais aos arquivos mensais; filtro de cargo igual ao de `carreiras.json`. | Só o repositório |
+| `recontagem` | Baixa o ZIP do mês no portal e recalcula total, órgãos, UFs, classes, funções e remuneração (n, média, mediana, P10, P90, histograma) de cada carreira, comparando com o arquivo publicado. | Portal da Transparência |
+
+A recontagem usa [`scripts/auditar.py`](scripts/auditar.py), que **não compartilha código**
+com `gerar_dados.py` nem usa pandas: lê os CSV linha a linha com a biblioteca padrão. Os
+dois só têm em comum `data/carreiras.json` e as regras descritas acima. Contagens têm de
+bater exatamente; valores em reais, com tolerância de R$ 0,01.
+
+**O que cada registro guarda:** data e hora, método, commit auditado, link da execução,
+carreiras e meses conferidos, SHA-256 e tamanho de cada ZIP baixado (mostra contra qual
+versão do arquivo do portal a comparação foi feita), número de verificações, cada
+divergência com o valor publicado e o recalculado, e avisos. Só agregados entram no registro.
+
+**Amostra:** por padrão a recontagem confere o mês mais recente e sorteia mais dois entre
+os que ainda não foram recontados (a semente do sorteio fica no registro).
+`cobertura_recontagem`, em `auditoria/index.json`, lista os meses já conferidos.
+
+**Diagnósticos:** a recontagem também registra, por carreira, os cargos aceitos pelo
+filtro, cargos parecidos que ele rejeitou, quantos servidores têm mais de uma linha de
+remuneração e a mediana de quem tem e de quem não tem função. Não são divergências;
+servem para revisar o filtro e entender o que a remuneração somada contém.
+
+**Quando há divergência**, o workflow fica vermelho e grava o registro, mas não altera
+`data/`: o portal pode ter republicado o arquivo, ou pode haver erro em um dos scripts, e
+isso se decide caso a caso (reprocessar o mês com `force`, ou corrigir o script).
+
+**Limite do método:** a auditoria compara com o arquivo de download do portal. Não
+confere com o Painel Estatístico de Pessoal nem com a página individual de cada servidor.
+
+```bash
+python scripts/auditar.py coerencia
+python scripts/auditar.py recontagem --mes 202609                   # pode repetir --mes
+python scripts/auditar.py recontagem --mais-recente --sortear 2
+python scripts/auditar.py recontagem --mes 202609 --cache .cache    # usa o ZIP guardado por --manter-zip
+```
 
 ---
 
@@ -213,6 +294,19 @@ mudanças na carreira.
 1. Envie o repositório para o GitHub.
 2. Em **Settings → Pages → Build and deployment → Source**, escolha **GitHub Actions**.
 3. Em **Actions → Dados das carreiras → Run workflow**, rode o primeiro deploy.
+
+### Homologação (Cloudflare Pages)
+
+A produção é o GitHub Pages. Para testar uma versão antes de levá-la ao `main`,
+o repositório também está ligado a um projeto no Cloudflare Pages
+(`dashboard-carreiras`), que só lê o código:
+
+- Cada push em um branch que não seja o `main` gera um link de pré-visualização
+  próprio, no formato `<branch>.dashboard-carreiras.pages.dev`. O link aparece em
+  **Workers & Pages → dashboard-carreiras → Deployments**.
+- Configuração do projeto: framework `None`, build `cp -r data site/data`, saída `site`.
+- O GoatCounter só conta acessos a `ariribeiro.github.io`; visitas à homologação
+  não entram nas estatísticas.
 
 ### Rodar o workflow manualmente
 

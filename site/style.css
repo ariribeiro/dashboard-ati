@@ -564,3 +564,37 @@ code { font-size: 0.8125rem; overflow-wrap: anywhere; }
 @media (max-width: 760px) {
   .grafico-alto { height: 320px; }
 }
+
+/* ---------------------------------------------------------------- orçamento */
+
+.orc-painel { margin-top: 14px; }
+.orc-cabecalho { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: center; justify-content: space-between; }
+.alternador { display: inline-flex; border: 1px solid var(--borda); border-radius: 8px; overflow: hidden; }
+.alternador button {
+  border: 0;
+  border-radius: 0;
+  background: var(--superficie);
+  color: var(--texto-2);
+  font-size: 0.8125rem;
+  padding: 6px 12px;
+  min-width: 0;
+}
+.alternador button + button { border-left: 1px solid var(--borda); }
+.alternador button[aria-pressed="true"] { background: var(--remuneracao-lavado); color: var(--texto); font-weight: 600; }
+.tabela-orcamento { min-width: 640px; }
+.tabela-orcamento tfoot td { font-weight: 600; border-bottom: 0; border-top: 1px solid var(--borda); }
+.tabela-orcamento a { font-weight: 700; color: var(--texto); }
+.tabela-orcamento td.num, .tabela-orcamento th.num { white-space: nowrap; }
+
+/* Link do painel para a página inicial (lista de carreiras). */
+.voltar-home {
+  flex-basis: 100%;
+  margin-bottom: -8px;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+.voltar-home:hover { color: #fff; text-decoration: underline; }
+.voltar-home:focus-visible { outline: 2px solid var(--marca-amarelo); outline-offset: 2px; border-radius: 2px; }
+.rodape-home { font-weight: 600; }

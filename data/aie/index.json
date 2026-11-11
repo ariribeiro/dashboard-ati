@@ -1,995 +1,1325 @@
 {
-  "atualizado_em": "2026-11-09T01:24:12+00:00",
+  "atualizado_em": "2026-11-10T16:18:41+00:00",
   "meses": [
     {
       "mes": "2013-01",
       "arquivo": "201301.json",
       "total": 741,
-      "mediana": 9070.22
+      "mediana": 9070.22,
+      "n": 733,
+      "media": 9548.19
     },
     {
       "mes": "2013-02",
       "arquivo": "201302.json",
       "total": 740,
-      "mediana": 9220.89
+      "mediana": 9220.89,
+      "n": 730,
+      "media": 9523.11
     },
     {
       "mes": "2013-03",
       "arquivo": "201303.json",
       "total": 740,
-      "mediana": 9260.61
+      "mediana": 9260.61,
+      "n": 731,
+      "media": 9570.01
     },
     {
       "mes": "2013-04",
       "arquivo": "201304.json",
       "total": 740,
-      "mediana": 9267.97
+      "mediana": 9267.97,
+      "n": 730,
+      "media": 9622.25
     },
     {
       "mes": "2013-05",
       "arquivo": "201305.json",
       "total": 753,
-      "mediana": 9746.82
+      "mediana": 9746.82,
+      "n": 745,
+      "media": 10053.78
     },
     {
       "mes": "2013-06",
       "arquivo": "201306.json",
       "total": 768,
-      "mediana": 9551.94
+      "mediana": 9551.94,
+      "n": 761,
+      "media": 10049.59
     },
     {
       "mes": "2013-07",
       "arquivo": "201307.json",
       "total": 763,
-      "mediana": 9716.4
+      "mediana": 9716.4,
+      "n": 752,
+      "media": 10038.2
     },
     {
       "mes": "2013-08",
       "arquivo": "201308.json",
       "total": 774,
-      "mediana": 9537.0
+      "mediana": 9537.0,
+      "n": 764,
+      "media": 10018.8
     },
     {
       "mes": "2013-09",
       "arquivo": "201309.json",
       "total": 783,
-      "mediana": 9537.0
+      "mediana": 9537.0,
+      "n": 771,
+      "media": 10030.18
     },
     {
       "mes": "2013-10",
       "arquivo": "201310.json",
       "total": 774,
-      "mediana": 9751.05
+      "mediana": 9751.05,
+      "n": 762,
+      "media": 10097.31
     },
     {
       "mes": "2013-11",
       "arquivo": "201311.json",
       "total": 770,
-      "mediana": 9751.05
+      "mediana": 9751.05,
+      "n": 759,
+      "media": 10105.33
     },
     {
       "mes": "2013-12",
       "arquivo": "201312.json",
       "total": 771,
-      "mediana": 9971.3
+      "mediana": 9971.3,
+      "n": 758,
+      "media": 10302.14
     },
     {
       "mes": "2014-01",
       "arquivo": "201401.json",
       "total": 774,
-      "mediana": 10459.35
+      "mediana": 10459.35,
+      "n": 758,
+      "media": 10833.84
     },
     {
       "mes": "2014-02",
       "arquivo": "201402.json",
       "total": 757,
-      "mediana": 10459.35
+      "mediana": 10459.35,
+      "n": 745,
+      "media": 10865.31
     },
     {
       "mes": "2014-03",
       "arquivo": "201403.json",
       "total": 755,
-      "mediana": 10459.35
+      "mediana": 10459.35,
+      "n": 743,
+      "media": 10909.16
     },
     {
       "mes": "2014-04",
       "arquivo": "201404.json",
       "total": 751,
-      "mediana": 10459.35
+      "mediana": 10459.35,
+      "n": 737,
+      "media": 10888.87
     },
     {
       "mes": "2014-05",
       "arquivo": "201405.json",
       "total": 739,
-      "mediana": 10459.35
+      "mediana": 10459.35,
+      "n": 727,
+      "media": 10901.61
     },
     {
       "mes": "2014-06",
       "arquivo": "201406.json",
       "total": 742,
-      "mediana": 10459.35
+      "mediana": 10459.35,
+      "n": 730,
+      "media": 10949.2
     },
     {
       "mes": "2014-07",
       "arquivo": "201407.json",
       "total": 778,
-      "mediana": 10459.35
+      "mediana": 10459.35,
+      "n": 764,
+      "media": 10852.61
     },
     {
       "mes": "2014-08",
       "arquivo": "201408.json",
       "total": 769,
-      "mediana": 10459.35
+      "mediana": 10459.35,
+      "n": 756,
+      "media": 10860.25
     },
     {
       "mes": "2014-09",
       "arquivo": "201409.json",
       "total": 758,
-      "mediana": 10459.35
+      "mediana": 10459.35,
+      "n": 745,
+      "media": 10934.85
     },
     {
       "mes": "2014-10",
       "arquivo": "201410.json",
       "total": 761,
-      "mediana": 10459.35
+      "mediana": 10459.35,
+      "n": 749,
+      "media": 11122.18
     },
     {
       "mes": "2014-11",
       "arquivo": "201411.json",
       "total": 761,
-      "mediana": 10459.35
+      "mediana": 10459.35,
+      "n": 748,
+      "media": 11142.9
     },
     {
       "mes": "2014-12",
       "arquivo": "201412.json",
       "total": 757,
-      "mediana": 10697.37
+      "mediana": 10697.37,
+      "n": 743,
+      "media": 11305.6
     },
     {
       "mes": "2015-01",
       "arquivo": "201501.json",
       "total": 758,
-      "mediana": 11619.06
+      "mediana": 11619.06,
+      "n": 744,
+      "media": 12284.16
     },
     {
       "mes": "2015-02",
       "arquivo": "201502.json",
       "total": 757,
-      "mediana": 11619.06
+      "mediana": 11619.06,
+      "n": 742,
+      "media": 12203.05
     },
     {
       "mes": "2015-03",
       "arquivo": "201503.json",
       "total": 755,
-      "mediana": 11619.06
+      "mediana": 11619.06,
+      "n": 741,
+      "media": 12213.26
     },
     {
       "mes": "2015-04",
       "arquivo": "201504.json",
       "total": 755,
-      "mediana": 11619.06
+      "mediana": 11619.06,
+      "n": 741,
+      "media": 12224.29
     },
     {
       "mes": "2015-05",
       "arquivo": "201505.json",
       "total": 755,
-      "mediana": 11619.06
+      "mediana": 11619.06,
+      "n": 741,
+      "media": 12277.46
     },
     {
       "mes": "2015-06",
       "arquivo": "201506.json",
       "total": 753,
-      "mediana": 11619.06
+      "mediana": 11619.06,
+      "n": 741,
+      "media": 12311.41
     },
     {
       "mes": "2015-07",
       "arquivo": "201507.json",
       "total": 750,
-      "mediana": 11804.72
+      "mediana": 11804.72,
+      "n": 739,
+      "media": 12352.74
     },
     {
       "mes": "2015-08",
       "arquivo": "201508.json",
       "total": 738,
-      "mediana": 11836.29
+      "mediana": 11836.29,
+      "n": 728,
+      "media": 12366.51
     },
     {
       "mes": "2015-09",
       "arquivo": "201509.json",
       "total": 738,
-      "mediana": 11868.52
+      "mediana": 11868.52,
+      "n": 727,
+      "media": 12427.22
     },
     {
       "mes": "2015-10",
       "arquivo": "201510.json",
       "total": 736,
-      "mediana": 11868.52
+      "mediana": 11868.52,
+      "n": 726,
+      "media": 12428.08
     },
     {
       "mes": "2015-11",
       "arquivo": "201511.json",
       "total": 734,
-      "mediana": 11868.52
+      "mediana": 11868.52,
+      "n": 721,
+      "media": 12442.7
     },
     {
       "mes": "2015-12",
       "arquivo": "201512.json",
       "total": 734,
-      "mediana": 11868.52
+      "mediana": 11868.52,
+      "n": 722,
+      "media": 12442.95
     },
     {
       "mes": "2016-01",
       "arquivo": "201601.json",
       "total": 732,
-      "mediana": 11868.52
+      "mediana": 11868.52,
+      "n": 720,
+      "media": 12482.6
     },
     {
       "mes": "2016-02",
       "arquivo": "201602.json",
       "total": 731,
-      "mediana": 11868.52
+      "mediana": 11868.52,
+      "n": 720,
+      "media": 12514.3
     },
     {
       "mes": "2016-03",
       "arquivo": "201603.json",
       "total": 728,
-      "mediana": 11868.52
+      "mediana": 11868.52,
+      "n": 716,
+      "media": 12502.64
     },
     {
       "mes": "2016-04",
       "arquivo": "201604.json",
       "total": 727,
-      "mediana": 11868.52
+      "mediana": 11868.52,
+      "n": 718,
+      "media": 12539.09
     },
     {
       "mes": "2016-05",
       "arquivo": "201605.json",
       "total": 726,
-      "mediana": 11868.52
+      "mediana": 11868.52,
+      "n": 715,
+      "media": 12631.27
     },
     {
       "mes": "2016-06",
       "arquivo": "201606.json",
       "total": 726,
-      "mediana": 12202.1
+      "mediana": 12202.1,
+      "n": 715,
+      "media": 12682.03
     },
     {
       "mes": "2016-07",
       "arquivo": "201607.json",
       "total": 725,
-      "mediana": 12260.4
+      "mediana": 12260.4,
+      "n": 715,
+      "media": 12731.0
     },
     {
       "mes": "2016-08",
       "arquivo": "201608.json",
       "total": 725,
-      "mediana": 12390.83
+      "mediana": 12390.83,
+      "n": 715,
+      "media": 12857.05
     },
     {
       "mes": "2016-09",
       "arquivo": "201609.json",
       "total": 725,
-      "mediana": 12390.83
+      "mediana": 12390.83,
+      "n": 713,
+      "media": 12860.7
     },
     {
       "mes": "2016-10",
       "arquivo": "201610.json",
       "total": 725,
-      "mediana": 12390.83
+      "mediana": 12390.83,
+      "n": 714,
+      "media": 12806.78
     },
     {
       "mes": "2016-11",
       "arquivo": "201611.json",
       "total": 724,
-      "mediana": 12390.83
+      "mediana": 12390.83,
+      "n": 710,
+      "media": 12874.11
     },
     {
       "mes": "2016-12",
       "arquivo": "201612.json",
       "total": 725,
-      "mediana": 12390.83
+      "mediana": 12390.83,
+      "n": 711,
+      "media": 12880.23
     },
     {
       "mes": "2017-01",
       "arquivo": "201701.json",
       "total": 722,
-      "mediana": 13984.39
+      "mediana": 13984.39,
+      "n": 708,
+      "media": 14448.72
     },
     {
       "mes": "2017-02",
       "arquivo": "201702.json",
       "total": 719,
-      "mediana": 13984.39
+      "mediana": 13984.39,
+      "n": 706,
+      "media": 14409.43
     },
     {
       "mes": "2017-03",
       "arquivo": "201703.json",
       "total": 718,
-      "mediana": 13984.39
+      "mediana": 13984.39,
+      "n": 704,
+      "media": 14438.21
     },
     {
       "mes": "2017-04",
       "arquivo": "201704.json",
       "total": 718,
-      "mediana": 13984.39
+      "mediana": 13984.39,
+      "n": 703,
+      "media": 14468.34
     },
     {
       "mes": "2017-05",
       "arquivo": "201705.json",
       "total": 718,
-      "mediana": 13735.96
+      "mediana": 13735.96,
+      "n": 702,
+      "media": 14516.38
     },
     {
       "mes": "2017-06",
       "arquivo": "201706.json",
       "total": 716,
-      "mediana": 13837.91
+      "mediana": 13837.91,
+      "n": 699,
+      "media": 14546.86
     },
     {
       "mes": "2017-07",
       "arquivo": "201707.json",
       "total": 715,
-      "mediana": 13984.39
+      "mediana": 13984.39,
+      "n": 698,
+      "media": 14603.73
     },
     {
       "mes": "2017-08",
       "arquivo": "201708.json",
       "total": 714,
-      "mediana": 13984.39
+      "mediana": 13984.39,
+      "n": 697,
+      "media": 14651.28
     },
     {
       "mes": "2017-09",
       "arquivo": "201709.json",
       "total": 712,
-      "mediana": 13984.39
+      "mediana": 13984.39,
+      "n": 696,
+      "media": 14629.33
     },
     {
       "mes": "2017-10",
       "arquivo": "201710.json",
       "total": 712,
-      "mediana": 13984.39
+      "mediana": 13984.39,
+      "n": 696,
+      "media": 14690.07
     },
     {
       "mes": "2017-11",
       "arquivo": "201711.json",
       "total": 712,
-      "mediana": 13984.39
+      "mediana": 13984.39,
+      "n": 696,
+      "media": 14733.46
     },
     {
       "mes": "2017-12",
       "arquivo": "201712.json",
       "total": 712,
-      "mediana": 14063.01
+      "mediana": 14063.01,
+      "n": 695,
+      "media": 14770.22
     },
     {
       "mes": "2018-01",
       "arquivo": "201801.json",
       "total": 711,
-      "mediana": 15056.3
+      "mediana": 15056.3,
+      "n": 694,
+      "media": 15786.46
     },
     {
       "mes": "2018-02",
       "arquivo": "201802.json",
       "total": 711,
-      "mediana": 15188.06
+      "mediana": 15188.06,
+      "n": 694,
+      "media": 15919.24
     },
     {
       "mes": "2018-03",
       "arquivo": "201803.json",
       "total": 711,
-      "mediana": 15245.1
+      "mediana": 15245.1,
+      "n": 695,
+      "media": 15921.06
     },
     {
       "mes": "2018-04",
       "arquivo": "201804.json",
       "total": 711,
-      "mediana": 15245.1
+      "mediana": 15245.1,
+      "n": 696,
+      "media": 15910.29
     },
     {
       "mes": "2018-05",
       "arquivo": "201805.json",
       "total": 710,
-      "mediana": 15245.1
+      "mediana": 15245.1,
+      "n": 693,
+      "media": 15946.98
     },
     {
       "mes": "2018-06",
       "arquivo": "201806.json",
       "total": 710,
-      "mediana": 15245.1
+      "mediana": 15245.1,
+      "n": 692,
+      "media": 15995.04
     },
     {
       "mes": "2018-07",
       "arquivo": "201807.json",
       "total": 710,
-      "mediana": 15245.1
+      "mediana": 15245.1,
+      "n": 692,
+      "media": 16054.26
     },
     {
       "mes": "2018-08",
       "arquivo": "201808.json",
       "total": 710,
-      "mediana": 15245.1
+      "mediana": 15245.1,
+      "n": 693,
+      "media": 16051.04
     },
     {
       "mes": "2018-09",
       "arquivo": "201809.json",
       "total": 710,
-      "mediana": 15245.1
+      "mediana": 15245.1,
+      "n": 693,
+      "media": 16099.5
     },
     {
       "mes": "2018-10",
       "arquivo": "201810.json",
       "total": 710,
-      "mediana": 15245.1
+      "mediana": 15245.1,
+      "n": 694,
+      "media": 16123.34
     },
     {
       "mes": "2018-11",
       "arquivo": "201811.json",
       "total": 710,
-      "mediana": 15245.1
+      "mediana": 15245.1,
+      "n": 694,
+      "media": 16125.82
     },
     {
       "mes": "2018-12",
       "arquivo": "201812.json",
       "total": 709,
-      "mediana": 15245.1
+      "mediana": 15245.1,
+      "n": 695,
+      "media": 16111.67
     },
     {
       "mes": "2019-01",
       "arquivo": "201901.json",
       "total": 708,
-      "mediana": 16207.27
+      "mediana": 16207.27,
+      "n": 696,
+      "media": 17081.89
     },
     {
       "mes": "2019-02",
       "arquivo": "201902.json",
       "total": 708,
-      "mediana": 16109.99
+      "mediana": 16109.99,
+      "n": 696,
+      "media": 16830.41
     },
     {
       "mes": "2019-03",
       "arquivo": "201903.json",
       "total": 708,
-      "mediana": 16207.27
+      "mediana": 16207.27,
+      "n": 696,
+      "media": 17162.62
     },
     {
       "mes": "2019-04",
       "arquivo": "201904.json",
       "total": 708,
-      "mediana": 16429.72
+      "mediana": 16429.72,
+      "n": 697,
+      "media": 17275.91
     },
     {
       "mes": "2019-05",
       "arquivo": "201905.json",
       "total": 708,
-      "mediana": 16568.4
+      "mediana": 16568.4,
+      "n": 696,
+      "media": 17390.54
     },
     {
       "mes": "2019-06",
       "arquivo": "201906.json",
       "total": 707,
-      "mediana": 16568.4
+      "mediana": 16568.4,
+      "n": 694,
+      "media": 17474.0
     },
     {
       "mes": "2019-07",
       "arquivo": "201907.json",
       "total": 707,
-      "mediana": 16620.81
+      "mediana": 16620.81,
+      "n": 693,
+      "media": 17514.31
     },
     {
       "mes": "2019-08",
       "arquivo": "201908.json",
       "total": 707,
-      "mediana": 16568.48
+      "mediana": 16568.48,
+      "n": 693,
+      "media": 17570.06
     },
     {
       "mes": "2019-09",
       "arquivo": "201909.json",
       "total": 705,
-      "mediana": 16673.85
+      "mediana": 16673.85,
+      "n": 691,
+      "media": 17615.73
     },
     {
       "mes": "2019-10",
       "arquivo": "201910.json",
       "total": 705,
-      "mediana": 16981.94
+      "mediana": 16981.94,
+      "n": 691,
+      "media": 17642.63
     },
     {
       "mes": "2019-11",
       "arquivo": "201911.json",
       "total": 705,
-      "mediana": 16981.94
+      "mediana": 16981.94,
+      "n": 691,
+      "media": 17643.39
     },
     {
       "mes": "2019-12",
       "arquivo": "201912.json",
       "total": 705,
-      "mediana": 17027.86
+      "mediana": 17027.86,
+      "n": 689,
+      "media": 17716.43
     },
     {
       "mes": "2020-01",
       "arquivo": "202001.json",
       "total": 705,
-      "mediana": 17027.86
+      "mediana": 17027.86,
+      "n": 689,
+      "media": 17676.85
     },
     {
       "mes": "2020-02",
       "arquivo": "202002.json",
       "total": 705,
-      "mediana": 16981.94
+      "mediana": 16981.94,
+      "n": 692,
+      "media": 17645.76
     },
     {
       "mes": "2020-03",
       "arquivo": "202003.json",
       "total": 705,
-      "mediana": 16981.94
+      "mediana": 16981.94,
+      "n": 693,
+      "media": 17589.2
     },
     {
       "mes": "2020-04",
       "arquivo": "202004.json",
       "total": 704,
-      "mediana": 16981.94
+      "mediana": 16981.94,
+      "n": 691,
+      "media": 17532.17
     },
     {
       "mes": "2020-05",
       "arquivo": "202005.json",
       "total": 704,
-      "mediana": 16780.28
+      "mediana": 16780.28,
+      "n": 691,
+      "media": 17509.02
     },
     {
       "mes": "2020-06",
       "arquivo": "202006.json",
       "total": 704,
-      "mediana": 16780.28
+      "mediana": 16780.28,
+      "n": 691,
+      "media": 17538.34
     },
     {
       "mes": "2020-07",
       "arquivo": "202007.json",
       "total": 704,
-      "mediana": 16860.67
+      "mediana": 16860.67,
+      "n": 692,
+      "media": 17567.3
     },
     {
       "mes": "2020-08",
       "arquivo": "202008.json",
       "total": 704,
-      "mediana": 16978.74
+      "mediana": 16978.74,
+      "n": 693,
+      "media": 17572.21
     },
     {
       "mes": "2020-09",
       "arquivo": "202009.json",
       "total": 704,
-      "mediana": 17007.56
+      "mediana": 17007.56,
+      "n": 693,
+      "media": 17594.36
     },
     {
       "mes": "2020-10",
       "arquivo": "202010.json",
       "total": 704,
-      "mediana": 17027.86
+      "mediana": 17027.86,
+      "n": 693,
+      "media": 17667.55
     },
     {
       "mes": "2020-11",
       "arquivo": "202011.json",
       "total": 703,
-      "mediana": 17027.86
+      "mediana": 17027.86,
+      "n": 692,
+      "media": 17722.46
     },
     {
       "mes": "2020-12",
       "arquivo": "202012.json",
       "total": 703,
-      "mediana": 17097.1
+      "mediana": 17097.1,
+      "n": 692,
+      "media": 17836.19
     },
     {
       "mes": "2021-01",
       "arquivo": "202101.json",
       "total": 703,
-      "mediana": 17280.33
+      "mediana": 17280.33,
+      "n": 691,
+      "media": 17945.96
     },
     {
       "mes": "2021-02",
       "arquivo": "202102.json",
       "total": 703,
-      "mediana": 17368.69
+      "mediana": 17368.69,
+      "n": 691,
+      "media": 17980.27
     },
     {
       "mes": "2021-03",
       "arquivo": "202103.json",
       "total": 703,
-      "mediana": 17368.69
+      "mediana": 17368.69,
+      "n": 691,
+      "media": 18008.79
     },
     {
       "mes": "2021-04",
       "arquivo": "202104.json",
       "total": 701,
-      "mediana": 17388.99
+      "mediana": 17388.99,
+      "n": 689,
+      "media": 18065.94
     },
     {
       "mes": "2021-05",
       "arquivo": "202105.json",
       "total": 701,
-      "mediana": 17388.99
+      "mediana": 17388.99,
+      "n": 688,
+      "media": 18154.14
     },
     {
       "mes": "2021-06",
       "arquivo": "202106.json",
       "total": 702,
-      "mediana": 17483.05
+      "mediana": 17483.05,
+      "n": 689,
+      "media": 18209.61
     },
     {
       "mes": "2021-07",
       "arquivo": "202107.json",
       "total": 701,
-      "mediana": 17483.05
+      "mediana": 17483.05,
+      "n": 689,
+      "media": 18226.79
     },
     {
       "mes": "2021-08",
       "arquivo": "202108.json",
       "total": 700,
-      "mediana": 17483.05
+      "mediana": 17483.05,
+      "n": 690,
+      "media": 18242.31
     },
     {
       "mes": "2021-09",
       "arquivo": "202109.json",
       "total": 700,
-      "mediana": 17483.05
+      "mediana": 17483.05,
+      "n": 690,
+      "media": 18227.7
     },
     {
       "mes": "2021-10",
       "arquivo": "202110.json",
       "total": 700,
-      "mediana": 17727.09
+      "mediana": 17727.09,
+      "n": 688,
+      "media": 18353.8
     },
     {
       "mes": "2021-11",
       "arquivo": "202111.json",
       "total": 700,
-      "mediana": 17745.79
+      "mediana": 17745.79,
+      "n": 688,
+      "media": 18389.02
     },
     {
       "mes": "2021-12",
       "arquivo": "202112.json",
       "total": 700,
-      "mediana": 17766.09
+      "mediana": 17766.09,
+      "n": 688,
+      "media": 18475.93
     },
     {
       "mes": "2022-01",
       "arquivo": "202201.json",
       "total": 699,
-      "mediana": 17776.61
+      "mediana": 17776.61,
+      "n": 687,
+      "media": 18534.43
     },
     {
       "mes": "2022-02",
       "arquivo": "202202.json",
       "total": 699,
-      "mediana": 17766.09
+      "mediana": 17766.09,
+      "n": 686,
+      "media": 18545.61
     },
     {
       "mes": "2022-03",
       "arquivo": "202203.json",
       "total": 699,
-      "mediana": 17812.24
+      "mediana": 17812.24,
+      "n": 686,
+      "media": 18571.29
     },
     {
       "mes": "2022-04",
       "arquivo": "202204.json",
       "total": 699,
-      "mediana": 17812.24
+      "mediana": 17812.24,
+      "n": 687,
+      "media": 18655.72
     },
     {
       "mes": "2022-05",
       "arquivo": "202205.json",
       "total": 698,
-      "mediana": 17812.24
+      "mediana": 17812.24,
+      "n": 686,
+      "media": 18703.99
     },
     {
       "mes": "2022-06",
       "arquivo": "202206.json",
       "total": 698,
-      "mediana": 18109.16
+      "mediana": 18109.16,
+      "n": 685,
+      "media": 18786.31
     },
     {
       "mes": "2022-07",
       "arquivo": "202207.json",
       "total": 698,
-      "mediana": 18189.34
+      "mediana": 18189.34,
+      "n": 683,
+      "media": 18969.84
     },
     {
       "mes": "2022-08",
       "arquivo": "202208.json",
       "total": 698,
-      "mediana": 18189.34
+      "mediana": 18189.34,
+      "n": 685,
+      "media": 18970.0
     },
     {
       "mes": "2022-09",
       "arquivo": "202209.json",
       "total": 698,
-      "mediana": 18189.34
+      "mediana": 18189.34,
+      "n": 684,
+      "media": 19040.59
     },
     {
       "mes": "2022-10",
       "arquivo": "202210.json",
       "total": 696,
-      "mediana": 18189.35
+      "mediana": 18189.35,
+      "n": 685,
+      "media": 19013.41
     },
     {
       "mes": "2022-11",
       "arquivo": "202211.json",
       "total": 696,
-      "mediana": 18443.99
+      "mediana": 18443.99,
+      "n": 685,
+      "media": 19104.26
     },
     {
       "mes": "2022-12",
       "arquivo": "202212.json",
       "total": 696,
-      "mediana": 18473.41
+      "mediana": 18473.41,
+      "n": 684,
+      "media": 19148.05
     },
     {
       "mes": "2023-01",
       "arquivo": "202301.json",
       "total": 695,
-      "mediana": 18150.56
+      "mediana": 18150.56,
+      "n": 681,
+      "media": 18689.74
     },
     {
       "mes": "2023-02",
       "arquivo": "202302.json",
       "total": 696,
-      "mediana": 17451.11
+      "mediana": 17451.11,
+      "n": 681,
+      "media": 18215.86
     },
     {
       "mes": "2023-03",
       "arquivo": "202303.json",
       "total": 694,
-      "mediana": 17766.09
+      "mediana": 17766.09,
+      "n": 679,
+      "media": 18502.91
     },
     {
       "mes": "2023-04",
       "arquivo": "202304.json",
       "total": 694,
-      "mediana": 17766.09
+      "mediana": 17766.09,
+      "n": 679,
+      "media": 18527.21
     },
     {
       "mes": "2023-05",
       "arquivo": "202305.json",
       "total": 693,
-      "mediana": 19408.4
+      "mediana": 19408.4,
+      "n": 677,
+      "media": 20352.88
     },
     {
       "mes": "2023-06",
       "arquivo": "202306.json",
       "total": 692,
-      "mediana": 19761.67
+      "mediana": 19761.67,
+      "n": 675,
+      "media": 20462.23
     },
     {
       "mes": "2023-07",
       "arquivo": "202307.json",
       "total": 691,
-      "mediana": 19783.81
+      "mediana": 19783.81,
+      "n": 676,
+      "media": 20532.53
     },
     {
       "mes": "2023-08",
       "arquivo": "202308.json",
       "total": 691,
-      "mediana": 20014.31
+      "mediana": 20014.31,
+      "n": 675,
+      "media": 20617.34
     },
     {
       "mes": "2023-09",
       "arquivo": "202309.json",
       "total": 690,
-      "mediana": 20136.06
+      "mediana": 20136.06,
+      "n": 674,
+      "media": 20695.69
     },
     {
       "mes": "2023-10",
       "arquivo": "202310.json",
       "total": 690,
-      "mediana": 20237.49
+      "mediana": 20237.49,
+      "n": 674,
+      "media": 20751.68
     },
     {
       "mes": "2023-11",
       "arquivo": "202311.json",
       "total": 690,
-      "mediana": 20443.05
+      "mediana": 20443.05,
+      "n": 671,
+      "media": 20887.7
     },
     {
       "mes": "2023-12",
       "arquivo": "202312.json",
       "total": 689,
-      "mediana": 20522.29
+      "mediana": 20522.29,
+      "n": 671,
+      "media": 20986.31
     },
     {
       "mes": "2024-01",
       "arquivo": "202401.json",
       "total": 687,
-      "mediana": 20653.34
+      "mediana": 20653.34,
+      "n": 670,
+      "media": 21061.72
     },
     {
       "mes": "2024-02",
       "arquivo": "202402.json",
       "total": 687,
-      "mediana": 20656.12
+      "mediana": 20656.12,
+      "n": 667,
+      "media": 21170.07
     },
     {
       "mes": "2024-03",
       "arquivo": "202403.json",
       "total": 686,
-      "mediana": 20675.48
+      "mediana": 20675.48,
+      "n": 663,
+      "media": 21223.83
     },
     {
       "mes": "2024-04",
       "arquivo": "202404.json",
       "total": 685,
-      "mediana": 20675.48
+      "mediana": 20675.48,
+      "n": 662,
+      "media": 21290.4
     },
     {
       "mes": "2024-05",
       "arquivo": "202405.json",
       "total": 684,
-      "mediana": 20751.68
+      "mediana": 20751.68,
+      "n": 661,
+      "media": 21379.92
     },
     {
       "mes": "2024-06",
       "arquivo": "202406.json",
       "total": 685,
-      "mediana": 20848.03
+      "mediana": 20848.03,
+      "n": 660,
+      "media": 21405.46
     },
     {
       "mes": "2024-07",
       "arquivo": "202407.json",
       "total": 685,
-      "mediana": 20915.83
+      "mediana": 20915.83,
+      "n": 661,
+      "media": 21382.46
     },
     {
       "mes": "2024-08",
       "arquivo": "202408.json",
       "total": 684,
-      "mediana": 20915.83
+      "mediana": 20915.83,
+      "n": 660,
+      "media": 21507.57
     },
     {
       "mes": "2024-09",
       "arquivo": "202409.json",
       "total": 684,
-      "mediana": 20915.83
+      "mediana": 20915.83,
+      "n": 660,
+      "media": 21533.93
     },
     {
       "mes": "2024-10",
       "arquivo": "202410.json",
       "total": 684,
-      "mediana": 20962.41
+      "mediana": 20962.41,
+      "n": 661,
+      "media": 21562.63
     },
     {
       "mes": "2024-11",
       "arquivo": "202411.json",
       "total": 684,
-      "mediana": 20915.83
+      "mediana": 20915.83,
+      "n": 661,
+      "media": 21566.11
     },
     {
       "mes": "2024-12",
       "arquivo": "202412.json",
       "total": 684,
-      "mediana": 21326.7
+      "mediana": 21326.7,
+      "n": 660,
+      "media": 21665.86
     },
     {
       "mes": "2025-01",
       "arquivo": "202501.json",
       "total": 684,
-      "mediana": 21128.54
+      "mediana": 21128.54,
+      "n": 660,
+      "media": 21659.42
     },
     {
       "mes": "2025-02",
       "arquivo": "202502.json",
       "total": 683,
-      "mediana": 21188.87
+      "mediana": 21188.87,
+      "n": 659,
+      "media": 21614.18
     },
     {
       "mes": "2025-03",
       "arquivo": "202503.json",
       "total": 683,
-      "mediana": 21088.77
+      "mediana": 21088.77,
+      "n": 658,
+      "media": 21586.92
     },
     {
       "mes": "2025-04",
       "arquivo": "202504.json",
       "total": 684,
-      "mediana": 25802.25
+      "mediana": 25802.25,
+      "n": 658,
+      "media": 26393.65
     },
     {
       "mes": "2025-05",
       "arquivo": "202505.json",
       "total": 684,
-      "mediana": 25802.25
+      "mediana": 25802.25,
+      "n": 658,
+      "media": 26355.02
     },
     {
       "mes": "2025-06",
       "arquivo": "202506.json",
       "total": 683,
-      "mediana": 25802.25
+      "mediana": 25802.25,
+      "n": 657,
+      "media": 26410.43
     },
     {
       "mes": "2025-07",
       "arquivo": "202507.json",
       "total": 683,
-      "mediana": 25802.25
+      "mediana": 25802.25,
+      "n": 659,
+      "media": 26447.17
     },
     {
       "mes": "2025-08",
       "arquivo": "202508.json",
       "total": 681,
-      "mediana": 25802.25
+      "mediana": 25802.25,
+      "n": 657,
+      "media": 26499.18
     },
     {
       "mes": "2025-09",
       "arquivo": "202509.json",
       "total": 681,
-      "mediana": 25802.25
+      "mediana": 25802.25,
+      "n": 657,
+      "media": 26530.06
     },
     {
       "mes": "2025-10",
       "arquivo": "202510.json",
       "total": 940,
-      "mediana": 24055.12
+      "mediana": 24055.12,
+      "n": 916,
+      "media": 23587.94
     },
     {
       "mes": "2025-11",
       "arquivo": "202511.json",
       "total": 951,
-      "mediana": 24055.12
+      "mediana": 24055.12,
+      "n": 926,
+      "media": 23775.32
     },
     {
       "mes": "2025-12",
       "arquivo": "202512.json",
       "total": 950,
-      "mediana": 24055.12
+      "mediana": 24055.12,
+      "n": 928,
+      "media": 23757.61
     },
     {
       "mes": "2026-01",
       "arquivo": "202601.json",
       "total": 951,
-      "mediana": 24622.93
+      "mediana": 24622.93,
+      "n": 927,
+      "media": 24352.78
     },
     {
       "mes": "2026-02",
       "arquivo": "202602.json",
       "total": 953,
-      "mediana": 24622.93
+      "mediana": 24622.93,
+      "n": 930,
+      "media": 24452.46
     },
     {
       "mes": "2026-03",
       "arquivo": "202603.json",
       "total": 953,
-      "mediana": 24788.8
+      "mediana": 24788.8,
+      "n": 930,
+      "media": 24483.06
     },
     {
       "mes": "2026-04",
       "arquivo": "202604.json",
       "total": 949,
-      "mediana": 26086.1
+      "mediana": 26086.1,
+      "n": 925,
+      "media": 25671.52
     },
     {
       "mes": "2026-05",
       "arquivo": "202605.json",
       "total": 949,
-      "mediana": 26086.1
+      "mediana": 26086.1,
+      "n": 924,
+      "media": 25761.3
     },
     {
       "mes": "2026-06",
       "arquivo": "202606.json",
       "total": 949,
-      "mediana": 26086.1
+      "mediana": 26086.1,
+      "n": 926,
+      "media": 25827.3
     },
     {
       "mes": "2026-07",
       "arquivo": "202607.json",
       "total": 1019,
-      "mediana": 25708.64
+      "mediana": 25708.64,
+      "n": 996,
+      "media": 25242.11
     },
     {
       "mes": "2026-08",
       "arquivo": "202608.json",
       "total": 1033,
-      "mediana": 25314.02
+      "mediana": 25314.02,
+      "n": 1009,
+      "media": 25251.68
     },
     {
       "mes": "2026-09",
       "arquivo": "202609.json",
       "total": 1032,
-      "mediana": 25314.02
+      "mediana": 25314.02,
+      "n": 1009,
+      "media": 25253.14
     }
   ]
 }

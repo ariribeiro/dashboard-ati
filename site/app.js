@@ -380,7 +380,8 @@ function tabela(id, cabecalho, linhas) {
 
 // Tiles padrão do OpenStreetMap (sem chave). No modo escuro, o CSS inverte as cores do mapa.
 const TILES = "https://tile.openstreetmap.org/{z}/{x}/{y}.png";
-const DF = L.latLngBounds([-16.06, -48.29], [-15.49, -47.30]);
+// Retângulo do DF. Sem usar o Leaflet aqui: se a biblioteca não carregar, iniciar() mostra o erro.
+const noDF = ([lat, lon]) => lat >= -16.06 && lat <= -15.49 && lon >= -48.29 && lon <= -47.30;
 
 let mapa = null;
 let camadaBolhas = null;
@@ -489,13 +490,13 @@ function mapaOrgaos(orgaos) {
 
   const pontos = [...locais.values()].map((l) => [l.lat, l.lon]);
   limites.brasil = L.latLngBounds(pontos);
-  limites.brasilia = L.latLngBounds(pontos.filter((p) => DF.contains(p)));
+  limites.brasilia = L.latLngBounds(pontos.filter(noDF));
   if (!mapa._vistaInicial && limites.brasil.isValid()) {
     mapa.fitBounds(limites.brasilia.isValid() ? limites.brasilia : limites.brasil, { padding: [24, 24] });
     mapa._vistaInicial = true;
   }
 
-  const fora = [...locais.values()].filter((l) => !DF.contains([l.lat, l.lon])).reduce((s, l) => s + l.qtd, 0);
+  const fora = [...locais.values()].filter((l) => !noDF([l.lat, l.lon])).reduce((s, l) => s + l.qtd, 0);
   const partes = [];
   if (fora) partes.push(`${fmtInt.format(fora)} ${P} em órgãos com sede fora do DF: use o botão “Brasil” para vê-los.`);
   if (semLocal) partes.push(`${fmtInt.format(semLocal)} sem localização: ${semLocalNomes.join(", ")}.`);
@@ -587,30 +588,17 @@ function destaques(d, ant) {
 
 // ---------------------------------------------------------------- tendência
 
-// Alta mensal a partir da qual o mês conta como entrada de turma.
-const LIMIAR_ENTRADA = 10;
+// LIMIAR_ENTRADA, numMes, refDeNum, anual, paresMensais e taxaSaida vêm de orcamento.js.
 const HORIZONTE_MESES = 15 * 12;
 const JANELA_PIOR = 24;
-const numMes = (ref) => { const [a, m] = ref.split("-").map(Number); return a * 12 + m - 1; };
-const refDeNum = (n) => `${Math.floor(n / 12)}-${String((n % 12) + 1).padStart(2, "0")}`;
-const anual = (r) => 1 - (1 - r) ** 12;
 const fmtPct1 = new Intl.NumberFormat("pt-BR", { style: "percent", minimumFractionDigits: 1, maximumFractionDigits: 1 });
 
 // Variações entre meses consecutivos, separadas em meses de entrada e meses comuns.
 function analisarFluxo() {
   const ms = indice.meses;
-  const pares = [];
-  for (let i = 1; i < ms.length; i++) {
-    const n = numMes(ms[i].mes);
-    if (n - numMes(ms[i - 1].mes) !== 1) continue;
-    pares.push({ n, base: ms[i - 1].total, total: ms[i].total, dif: ms[i].total - ms[i - 1].total });
-  }
+  const pares = paresMensais(ms);
   const comuns = pares.filter((p) => p.dif < LIMIAR_ENTRADA);
-  // Taxa mensal de saída líquida: perda somada ÷ estoque exposto somado.
-  const taxa = (lista) => {
-    const base = lista.reduce((s, p) => s + p.base, 0);
-    return base ? Math.max(0, lista.reduce((s, p) => s - p.dif, 0) / base) : 0;
-  };
+  const taxa = taxaSaida;
 
   // Turmas: meses de entrada separados por no máximo 2 meses viram uma só.
   const turmas = [];
@@ -633,8 +621,11 @@ function analisarFluxo() {
   const cenarios = [
     { id: "recente", nome: "Ritmo dos últimos 5 anos", taxa: taxa(recentes), cor: "--cenario-1" },
     { id: "historico", nome: "Média de toda a série", taxa: taxa(comuns), cor: "--cenario-2" },
-    { id: "pior", nome: `Pior período (${fmtMes(refDeNum(pior.ini - 1))} a ${fmtMes(refDeNum(pior.fim))})`, taxa: pior.taxa, cor: "--cenario-3" },
   ];
+  // Só existe quando alguma janela de 24 meses tem dados suficientes e perda líquida.
+  if (pior.ini != null) {
+    cenarios.push({ id: "pior", nome: `Pior período (${fmtMes(refDeNum(pior.ini - 1))} a ${fmtMes(refDeNum(pior.fim))})`, taxa: pior.taxa, cor: "--cenario-3" });
+  }
 
   // Intervalos entre turmas: perda líquida desde o fim da entrada até a próxima turma (ou o mês mais recente).
   const totalEm = new Map(ms.map((m) => [numMes(m.mes), m.total]));
@@ -740,7 +731,7 @@ function renderizarTendencia() {
   if (!suficiente) return;
   const { cenarios, turmas, intervalos, totalAtual, ultimo } = fluxo;
   const refAtual = fmtMes(refDeNum(ultimo));
-  const [recente, historico, pior] = cenarios;
+  const [recente] = cenarios;
 
   document.getElementById("m-limiar").textContent = LIMIAR_ENTRADA;
   document.getElementById("tendencia-desc").textContent =
@@ -791,6 +782,96 @@ function renderizarTendencia() {
   }
 }
 
+// ---------------------------------------------------------------- orçamento
+
+let orcComReajuste = true;
+// R$ em milhões ou bilhões, com uma casa decimal.
+const fmtDinheiro = (v) => {
+  const f = new Intl.NumberFormat("pt-BR", { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+  return v >= 1e9 ? `R$ ${f.format(v / 1e9)} bi` : `R$ ${f.format(v / 1e6)} mi`;
+};
+
+function graficoOrcamento(id, proj) {
+  const anos = [...proj.historico.map((h) => h.ano), ...proj.anosProj];
+  const nHist = proj.historico.length;
+  // As projeções partem do último ano real, para a linha encostar na barra.
+  const linha = (c) => anos.map((a, i) => (i < nHist - 1 ? null : i === nHist - 1 ? proj.historico[i].valor : c.valores[i - nHist]));
+  const cores = ["--cenario-2", "--cenario-1"];
+  grafico(id, {
+    tooltip: { ...temaBase().tooltip, trigger: "axis", axisPointer: { type: "shadow" },
+      formatter: (ps) => `${ps[0].name}${ps[0].dataIndex >= nHist ? " (projeção)" : ""}<br>` + ps
+        .filter((p) => p.value != null && !(p.seriesIndex > 0 && p.dataIndex === nHist - 1))
+        .map((p) => `${p.marker}${p.seriesName}: <b>${fmtDinheiro(p.value)}</b>`).join("<br>") },
+    legend: { bottom: 0, icon: "roundRect", itemWidth: 14, itemHeight: 3, textStyle: { color: cor("--texto-2"), fontSize: 12 } },
+    grid: { ...temaBase().grid, right: 16, top: 24, bottom: estreito() ? 60 : 40 },
+    xAxis: eixoCategoria(anos.map(String), { axisLabel: { color: cor("--texto-2"), interval: estreito() ? 3 : 1 } }),
+    yAxis: eixoValor({ min: 0, axisLabel: { color: cor("--texto-3"), formatter: (v) => (v ? fmtDinheiro(v).replace(",0 ", " ") : "0") } }),
+    series: [
+      {
+        name: "Real",
+        type: "bar",
+        data: anos.map((a, i) => (i < nHist ? proj.historico[i].valor : null)),
+        barMaxWidth: 22,
+        itemStyle: { color: cor("--real"), borderRadius: [3, 3, 0, 0] },
+      },
+      ...proj.cenarios.map((c, j) => ({
+        name: c.nome,
+        type: "line",
+        data: linha(c),
+        symbol: "circle",
+        symbolSize: 5,
+        lineStyle: { width: 2, type: "dashed", color: cor(cores[j]) },
+        itemStyle: { color: cor(cores[j]) },
+      })),
+    ],
+  });
+  tabela(id, ["Ano", "Real", ...proj.cenarios.map((c) => c.nome)], anos.map((a, i) => [String(a),
+    i < nHist ? fmtDinheiro(proj.historico[i].valor) : "–",
+    ...proj.cenarios.map((c) => (i < nHist ? "–" : fmtDinheiro(c.valores[i - nHist])))]));
+}
+
+function renderizarOrcamento() {
+  const proj = Orcamento.projetar(indice.meses, { comReajuste: orcComReajuste });
+  const secao = document.getElementById("s-orcamento");
+  const ok = ORCAMENTO_VISIVEL && proj && proj.historico.length >= 2;
+  secao.hidden = !ok;
+  document.querySelector('.barra-nav a[href="#s-orcamento"]').hidden = !ok;
+  if (!ok) return;
+  for (const b of secao.querySelectorAll("[data-reajuste]")) b.setAttribute("aria-pressed", String((b.dataset.reajuste === "sim") === orcComReajuste));
+
+  const refAtual = fmtMes(refDeNum(proj.ultimo));
+  const anoFim = proj.anosProj.at(-1);
+  const anoIni = Math.floor(proj.ultimo / 12) + 1;
+  const [constante, semEntradas] = proj.cenarios;
+  const somaDe = (c) => c.valores.reduce((s, v, i) => s + (proj.anosProj[i] >= anoIni ? v : 0), 0);
+  const reajuste = proj.reajuste;
+  const txtReajuste = reajuste ? `${fmtPct1.format(reajuste.taxa)} ao ano nos últimos ${reajuste.anos} anos` : "sem histórico suficiente";
+  const modo = orcComReajuste && reajuste ? `com a remuneração média crescendo ${fmtPct1.format(reajuste.taxa)} ao ano` : "em valores de hoje, com a remuneração média congelada";
+
+  document.getElementById("orc-desc").textContent =
+    `Quanto a carreira custa por ano em remuneração básica bruta e quanto pode custar até ${anoFim}. ` +
+    `A estimativa combina a tendência do efetivo com o crescimento histórico da remuneração média: ${txtReajuste}.`;
+  document.getElementById("orc-atual").textContent = fmtDinheiro(proj.folhaMensalAtual * 13);
+  document.getElementById("orc-atual-det").textContent =
+    `${fmtDinheiro(proj.folhaMensalAtual)} por mês em ${refAtual}, × 13 (12 meses + 13º)`;
+  document.getElementById("orc-fim-rotulo").textContent = `Folha anual em ${anoFim}`;
+  document.getElementById("orc-fim").textContent = fmtDinheiro(semEntradas.valores.at(-1));
+  document.getElementById("orc-fim-det").textContent =
+    `sem novas entradas (~${fmtInt.format(semEntradas.efetivoFinal)} ${P}); repondo as saídas: ${fmtDinheiro(constante.valores.at(-1))}`;
+  document.getElementById("orc-soma-rotulo").textContent = `Soma de ${anoIni} a ${anoFim}`;
+  document.getElementById("orc-soma").textContent = fmtDinheiro(somaDe(semEntradas));
+  document.getElementById("orc-soma-det").textContent =
+    `sem novas entradas; repondo as saídas: ${fmtDinheiro(somaDe(constante))}, ${fmtDinheiro(somaDe(constante) - somaDe(semEntradas))} a mais`;
+
+  graficoOrcamento("g-orcamento", proj);
+  document.getElementById("orc-sub").textContent =
+    `Barras: anos completos com dados reais. Linhas: estimativa ${modo}. ` +
+    `${Math.floor(proj.ultimo / 12)} já mistura meses reais (até ${refAtual}) e estimados.`;
+  document.getElementById("orc-nota").textContent =
+    `Saída líquida usada no cenário sem novas entradas: ${fmtPct1.format(proj.saidaAnual)} do efetivo por ano. ` +
+    "Não inclui encargos patronais, terço de férias, auxílios nem inativos: o custo total para o orçamento é maior.";
+}
+
 // ---------------------------------------------------------------- render
 
 function renderizar() {
@@ -825,6 +906,7 @@ function renderizar() {
     ["Os números marcam as entradas de turma (soma dos meses seguidos com alta); a linha vertical é o mês selecionado.", lacunas(serieTotal)].join(" ").trim();
 
   renderizarTendencia();
+  renderizarOrcamento();
 
   // Onde trabalham
   const lot = d.por_orgao_lotacao[0];
@@ -983,6 +1065,10 @@ document.getElementById("tema").addEventListener("click", () => {
   renderizar();
 });
 matchMedia("(prefers-color-scheme: dark)").addEventListener("change", renderizar);
+
+for (const b of document.querySelectorAll("[data-reajuste]")) {
+  b.addEventListener("click", () => { orcComReajuste = b.dataset.reajuste === "sim"; renderizarOrcamento(); });
+}
 
 let espera;
 window.addEventListener("resize", () => {
