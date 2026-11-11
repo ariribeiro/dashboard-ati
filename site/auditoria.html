@@ -126,6 +126,15 @@
     </p>
   </footer>
 
+  <dialog id="modal-registro" class="aud-modal" aria-labelledby="modal-titulo">
+    <div class="aud-modal-topo">
+      <h2 id="modal-titulo">Registro da auditoria</h2>
+      <button type="button" class="aud-modal-fechar" aria-label="Fechar">×</button>
+    </div>
+    <pre id="modal-conteudo" class="aud-modal-json" tabindex="0"></pre>
+    <p class="aud-modal-rodape"><a id="modal-github" target="_blank" rel="noopener">Abrir o arquivo no GitHub</a></p>
+  </dialog>
+
   <script src="auditoria.js"></script>
   <script>
     "use strict";
@@ -149,7 +158,35 @@
       for (const [k, v] of Object.entries(attrs)) e.setAttribute(k, v);
       return e;
     };
-    const externo = (texto, url) => el("a", texto, { href: url, target: "_blank", rel: "noopener" });
+    // Abre o registro (JSON) num modal em vez de levar ao GitHub; o link continua valendo sem JavaScript
+    // ou com clique do meio / Ctrl+clique.
+    const modal = document.getElementById("modal-registro");
+    modal.querySelector(".aud-modal-fechar").addEventListener("click", () => modal.close());
+    modal.addEventListener("click", (e) => { if (e.target === modal) modal.close(); });
+    async function abrirRegistro(id, urlGithub) {
+      const pre = document.getElementById("modal-conteudo");
+      document.getElementById("modal-titulo").textContent = `Registro ${id}`;
+      document.getElementById("modal-github").href = urlGithub;
+      pre.textContent = "Carregando…";
+      if (!modal.open) modal.showModal();
+      try {
+        const raw = urlGithub.replace("https://github.com/", "https://raw.githubusercontent.com/").replace("/blob/", "/");
+        const r = await fetch(raw);
+        if (!r.ok) throw new Error(`HTTP ${r.status}`);
+        pre.textContent = JSON.stringify(await r.json(), null, 2);
+      } catch (e) {
+        pre.textContent = `Não foi possível carregar o registro (${e.message}). Use o link abaixo para abri-lo no GitHub.`;
+      }
+    }
+    const externo = (texto, url) => {
+      const a = el("a", texto, { href: url, target: "_blank", rel: "noopener" });
+      const m = url.match(/\/auditoria\/registros\/([^/]+)\.json$/);
+      if (m) a.addEventListener("click", (e) => {
+        if (e.ctrlKey || e.metaKey || e.shiftKey || e.button) return;
+        e.preventDefault(); abrirRegistro(m[1], url);
+      });
+      return a;
+    };
     const cabecalho = (tabela, colunas) => {
       const tr = tabela.createTHead().insertRow();
       for (const [texto, num] of colunas) { const th = el("th", texto); if (num) th.className = "num"; tr.appendChild(th); }
