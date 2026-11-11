@@ -120,5 +120,34 @@
       "clara": "#F5A83A",
       "forte": "#9A5600"
     }
+  },
+  "affc": {
+    "sigla": "AFFC",
+    "plural": "AFFCs",
+    "nome": "Auditor Federal de Finanças e Controle",
+    "padrao_cargo": "^AUDITOR FEDERAL (DE )?FINANC(AS)? (E )?CONTROLE$",
+    "marca": "neutra",
+    "nome_plural": "Auditores Federais de Finanças e Controle",
+    "ingresso": null,
+    "classes": {
+      "S": "Especial"
+    },
+    "cores": {
+      "destaque": "#7B4BC4",
+      "clara": "#A98BE0",
+      "forte": "#5B35A0"
+    },
+    "faixas": [
+      0,
+      25000,
+      30000,
+      32500,
+      35000,
+      37500,
+      40000,
+      42500,
+      45000,
+      50000
+    ]
   }
 }

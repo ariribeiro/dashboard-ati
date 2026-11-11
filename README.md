@@ -27,6 +27,7 @@ Painéis estáticos de carreiras do Executivo Federal, atualizados todo mês com
 | ![](https://img.shields.io/badge/-EPPGG-229136) | Especialista em Políticas Públicas e Gestão Governamental | [`/eppgg/`](https://ariribeiro.github.io/dashboard-carreiras/eppgg/) | `ESP POL PUBL GESTAO GOVERNAMENTAL` |
 | ![](https://img.shields.io/badge/-ACE-F4DA27) | Analista de Comércio Exterior | [`/ace/`](https://ariribeiro.github.io/dashboard-carreiras/ace/) | `ANALISTA DE COMERCIO EXTERIOR` |
 | ![](https://img.shields.io/badge/-AIE-EFA22A) | Analista de Infraestrutura | [`/aie/`](https://ariribeiro.github.io/dashboard-carreiras/aie/) | `ANALISTA DE INFRA-ESTRUTURA` |
+| ![](https://img.shields.io/badge/-AFFC-7B4BC4) | Auditor Federal de Finanças e Controle | [`/affc/`](https://ariribeiro.github.io/dashboard-carreiras/affc/) | `AUDITOR FEDERAL DE FINANCAS E CONTROLE` |
 
 Os links curtos têm prévia própria para redes sociais e levam a
 `/painel.html?carreira=<sigla>`. A página inicial (`/`) lista todas as carreiras.
@@ -145,6 +146,12 @@ Conferido no arquivo de ago/2026:
     ("Especial"); ingresso não configurado. Não inclui
     `ESPECIALISTA EM INFRA-ESTRUTURA SENIOR` nem
     `ANALISTA EM INFRA-ESTRUT DE TRANSPORTES` (DNIT), que são outros cargos.
+  - **AFFC**: carreira única de Finanças e Controle, com servidores em vários órgãos
+    (set/2026: ~60% na CGU e ~27% no Ministério da Fazenda, onde está a STN). Entram todos os
+    AFFC, sem recorte por órgão; o mapa mostra onde cada um tem exercício. Classes B, C e S
+    ("Especial"); ingresso não configurado. Remuneração em patamar mais alto (mediana ~R$ 36,7 mil
+    em set/2026), por isso tem faixas próprias no histograma. Não inclui
+    `TECNICO FEDERAL DE FINANCAS E CONTROLE`, que é outro cargo da mesma carreira.
 - **Função comissionada**: fica numa linha separada do mesmo
   `Id_SERVIDOR_PORTAL`, com `DESCRICAO_CARGO` "Sem informação" e `SIGLA_FUNCAO`
   preenchida (FEX, CCX…). O servidor conta como "com função" quando essa linha existe.
