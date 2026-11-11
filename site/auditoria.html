@@ -131,8 +131,8 @@
       <h2 id="modal-titulo">Registro da auditoria</h2>
       <button type="button" class="aud-modal-fechar" aria-label="Fechar">×</button>
     </div>
-    <pre id="modal-conteudo" class="aud-modal-json" tabindex="0"></pre>
-    <p class="aud-modal-rodape"><a id="modal-github" target="_blank" rel="noopener">Abrir o arquivo no GitHub</a></p>
+    <div id="modal-conteudo" class="aud-modal-json" tabindex="0"></div>
+    <p class="aud-modal-rodape"><a id="modal-github" target="_blank" rel="noopener">Ver o JSON original no GitHub</a></p>
   </dialog>
 
   <script src="auditoria.js"></script>
@@ -163,19 +163,124 @@
     const modal = document.getElementById("modal-registro");
     modal.querySelector(".aud-modal-fechar").addEventListener("click", () => modal.close());
     modal.addEventListener("click", (e) => { if (e.target === modal) modal.close(); });
+    const fmtBytes = (n) => n >= 1e6 ? `${(n / 1e6).toLocaleString("pt-BR", { maximumFractionDigits: 1 })} MB` : `${fmtInt.format(n)} bytes`;
+    const fmtVal = (v) => typeof v === "number" ? fmtInt.format(v) : v === null || v === undefined ? "–" : String(v);
+    const ORIGENS = { "github-actions": "GitHub Actions", download: "baixado do portal", cache: "cópia em cache" };
+    const EVENTOS = { workflow_dispatch: "execução manual", schedule: "execução agendada", push: "push" };
+    // Item de divergência/aviso: texto ou objeto qualquer, mostrado como "chave: valor".
+    const textoItem = (it) => typeof it === "object" && it !== null
+      ? Object.entries(it).map(([k, v]) => `${k.replace(/_/g, " ")}: ${typeof v === "object" ? JSON.stringify(v) : fmtVal(v)}`).join(" · ")
+      : String(it);
+    const secao = (pai, titulo) => { pai.appendChild(el("h3", titulo)); };
+    const dl = (pai, pares) => {
+      const d = el("dl", "", { class: "aud-dl" });
+      for (const [k, v] of pares) {
+        if (v === undefined || v === null || v === "") continue;
+        d.appendChild(el("dt", k));
+        const dd = el("dd");
+        if (v instanceof Node) dd.appendChild(v); else dd.textContent = v;
+        d.appendChild(dd);
+      }
+      pai.appendChild(d);
+    };
+    const tabelaSimples = (pai, colunas, linhas) => {
+      const t = el("table", "", { class: "aud-modal-tabela" });
+      const corpo = cabecalho(t, colunas);
+      for (const l of linhas) l.forEach((v, i) => {
+        if (!i) corpo.insertRow();
+        const c = corpo.lastChild.insertCell();
+        if (v instanceof Node) c.appendChild(v); else c.textContent = v;
+        if (colunas[i][1]) c.className = "num";
+      });
+      const w = el("div", "", { class: "tabela-rolagem" }); w.appendChild(t); pai.appendChild(w);
+    };
+    const nomeCarreira = (slug) => carreirasPorSlug[slug]?.sigla ?? slug;
+    let carreirasPorSlug = {};
+
+    function renderizarRegistro(r, alvo) {
+      alvo.replaceChildren();
+      const aud = r.auditado ?? {};
+      const exec = r.execucao ?? {};
+      dl(alvo, [
+        ["Data", dataHora(r.data)],
+        ["Método", METODOS[r.metodo?.id] ?? r.metodo?.id],
+        ["Resultado", resultado(r.resultado)],
+        ["Verificações feitas", r.verificacoes !== undefined ? fmtInt.format(r.verificacoes) : null],
+        ["Versão dos dados", r.commit ? el("code", r.commit.slice(0, 7)) : null],
+        ["Execução", exec.url ? externo(`${ORIGENS[exec.origem] ?? exec.origem ?? "execução"}${exec.evento ? ` (${EVENTOS[exec.evento] ?? exec.evento})` : ""}`, exec.url)
+          : (ORIGENS[exec.origem] ?? exec.origem)],
+      ]);
+      if (r.metodo?.descricao) alvo.appendChild(el("p", r.metodo.descricao, { class: "aud-modal-desc" }));
+
+      const divs = r.divergencias ?? [], avisos = r.avisos ?? [];
+      secao(alvo, "Divergências");
+      if (!divs.length) alvo.appendChild(el("p", "Nenhuma divergência encontrada.", { class: "aud-ok" }));
+      else { const ul = el("ul", "", { class: "aud-ruim" }); divs.forEach((d) => ul.appendChild(el("li", textoItem(d)))); alvo.appendChild(ul); }
+      if (avisos.length) { secao(alvo, "Avisos"); const ul = el("ul"); avisos.forEach((d) => ul.appendChild(el("li", textoItem(d)))); alvo.appendChild(ul); }
+
+      // Coerência: carreiras como { slug: { arquivos, de, ate } }. Recontagem: carreiras como lista.
+      if (aud.carreiras && !Array.isArray(aud.carreiras)) {
+        secao(alvo, "O que foi conferido");
+        tabelaSimples(alvo, [["Carreira"], ["Arquivos mensais", true], ["Período"]],
+          Object.entries(aud.carreiras).map(([slug, c]) => [nomeCarreira(slug), fmtInt.format(c.arquivos), c.de && c.ate ? `${fmtMes(c.de)} a ${fmtMes(c.ate)}` : "–"]));
+      } else if (Array.isArray(aud.carreiras)) {
+        secao(alvo, "O que foi recontado");
+        const meses = Object.entries(aud.meses ?? {});
+        tabelaSimples(alvo, [["Mês"], ["Carreiras"], ["Divergências", true]],
+          meses.map(([m, v]) => [fmtMes(m), (v.carreiras ?? []).map(nomeCarreira).join(", "), fmtInt.format(v.divergencias ?? 0)]));
+      }
+      if (aud.sorteio) {
+        const s = aud.sorteio;
+        secao(alvo, "Escolha dos meses");
+        dl(alvo, [["Meses sorteados", fmtVal(s.quantidade)], ["Candidatos", fmtVal(s.candidatos)], ["Critério", s.criterio], ["Semente do sorteio", s.semente != null ? String(s.semente) : null]]);
+      }
+      if (aud.fontes?.length) {
+        secao(alvo, "Arquivos do portal usados");
+        tabelaSimples(alvo, [["Mês"], ["Origem"], ["Tamanho", true], ["Arquivo"]],
+          aud.fontes.map((f) => [fmtMes(f.mes), ORIGENS[f.origem] ?? f.origem ?? "–", f.bytes ? fmtBytes(f.bytes) : "–",
+            f.url ? el("a", "portal", { href: f.url, target: "_blank", rel: "noopener" }) : "–"]));
+        const sha = el("details", "", { class: "aud-cobertura" });
+        sha.appendChild(el("summary", "Impressões digitais (SHA-256) dos arquivos"));
+        const ul = el("ul", "", { class: "aud-sha" });
+        aud.fontes.forEach((f) => { const li = el("li", `${fmtMes(f.mes)}: `); li.appendChild(el("code", f.sha256 ?? "–")); ul.appendChild(li); });
+        sha.appendChild(ul); alvo.appendChild(sha);
+      }
+      if (r.diagnosticos) {
+        secao(alvo, "Diagnóstico do filtro de cargos");
+        for (const [mes, porCarreira] of Object.entries(r.diagnosticos)) for (const [slug, d] of Object.entries(porCarreira)) {
+          const det = el("details", "", { class: "aud-cobertura" });
+          det.appendChild(el("summary", `${nomeCarreira(slug)} em ${fmtMes(mes)}`));
+          const aceitos = (d.cargos_aceitos_pelo_filtro ?? []).map((c) => `${c.cargo} (${fmtInt.format(c.linhas)})`).join("; ");
+          dl(det, [
+            ["Cargos aceitos", aceitos || "–"],
+            ["Servidores com mais de uma linha de remuneração", fmtVal(d.servidores_com_mais_de_uma_linha_de_remuneracao)],
+            ["Servidores sem linha de remuneração", fmtVal(d.servidores_sem_linha_de_remuneracao)],
+            ["Mediana com função", d.mediana_com_funcao != null ? fmtMoeda.format(d.mediana_com_funcao) : null],
+            ["Mediana sem função", d.mediana_sem_funcao != null ? fmtMoeda.format(d.mediana_sem_funcao) : null],
+          ]);
+          if (d.cargos_parecidos_rejeitados?.length) {
+            det.appendChild(el("p", "Cargos parecidos que ficaram de fora do filtro:", { class: "aud-modal-desc" }));
+            tabelaSimples(det, [["Cargo"], ["Linhas", true]], d.cargos_parecidos_rejeitados.map((c) => [c.cargo, fmtInt.format(c.linhas)]));
+          }
+          alvo.appendChild(det);
+        }
+      }
+    }
+    const fmtMoeda = new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" });
+
     async function abrirRegistro(id, urlGithub) {
-      const pre = document.getElementById("modal-conteudo");
+      const alvo = document.getElementById("modal-conteudo");
       document.getElementById("modal-titulo").textContent = `Registro ${id}`;
       document.getElementById("modal-github").href = urlGithub;
-      pre.textContent = "Carregando…";
+      alvo.textContent = "Carregando…";
       if (!modal.open) modal.showModal();
       try {
         const raw = urlGithub.replace("https://github.com/", "https://raw.githubusercontent.com/").replace("/blob/", "/");
         const r = await fetch(raw);
         if (!r.ok) throw new Error(`HTTP ${r.status}`);
-        pre.textContent = JSON.stringify(await r.json(), null, 2);
+        renderizarRegistro(await r.json(), alvo);
       } catch (e) {
-        pre.textContent = `Não foi possível carregar o registro (${e.message}). Use o link abaixo para abri-lo no GitHub.`;
+        alvo.textContent = `Não foi possível carregar o registro (${e.message}). Use o link abaixo para abri-lo no GitHub.`;
       }
     }
     const externo = (texto, url) => {
@@ -196,6 +301,7 @@
 
     async function iniciar() {
       const carreiras = await json("carreiras.json");
+      carreirasPorSlug = carreiras;
       const faixa = document.getElementById("faixa");
       for (const c of Object.values(carreiras)) {
         const span = document.createElement("span");
