@@ -5,10 +5,11 @@
 const Auditoria = (() => {
   let resumo = null;
   const dia = (iso) => new Date(iso).toLocaleDateString("pt-BR");
-  const urlRegistro = (id) => `${resumo.repositorio}/blob/main/auditoria/registros/${id}.json`;
+  // Abre a página de auditoria já com o modal do registro (auditoria.html trata ?registro=).
+  const urlRegistro = (id) => `auditoria.html?registro=${encodeURIComponent(id)}`;
   const link = (texto, url) => {
     const a = document.createElement("a");
-    a.textContent = texto; a.href = url; a.target = "_blank"; a.rel = "noopener";
+    a.textContent = texto; a.href = url;
     return a;
   };
 
@@ -26,7 +27,6 @@ const Auditoria = (() => {
     el.replaceChildren("Auditoria: ");
     partes.forEach((p, i) => { if (i) el.append(" "); el.append(...p); });
     const pagina = link("Ver auditorias", "auditoria.html");
-    pagina.removeAttribute("target"); pagina.removeAttribute("rel");
     el.append(" ", pagina, ".");
     el.hidden = false;
   }

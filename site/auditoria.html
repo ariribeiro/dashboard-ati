@@ -317,6 +317,9 @@
         return;
       }
       const registro = (id) => `${resumo.repositorio}/blob/main/auditoria/registros/${id}.json`;
+      // ?registro=ID (links do rodapé dos painéis): abre direto o modal desse registro.
+      const pedido = new URLSearchParams(location.search).get("registro");
+      if (pedido && /^[\w-]+$/.test(pedido)) abrirRegistro(pedido, registro(pedido));
       document.getElementById("link-readme").href = `${resumo.repositorio}#auditoria`;
 
       // Meses publicados de cada carreira, para medir a cobertura da recontagem.
