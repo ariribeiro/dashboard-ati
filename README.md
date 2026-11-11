@@ -35,8 +35,10 @@ Os links curtos têm prévia própria para redes sociais e levam a
 
 - 📊 **Visão geral**: total de servidores, remuneração mediana, destaques do mês e histórico desde 2013.
 - 📉 **Tendência**: ritmo de saídas entre concursos e projeção sem novas turmas.
-- 🧾 **Impacto orçamentário**: folha anual estimada e projeção para os próximos 10 anos.
-  A página inicial compara as carreiras.
+- 🧾 **Impacto orçamentário** (oculto por enquanto): folha anual estimada e projeção para os
+  próximos 10 anos, com comparação entre carreiras na página inicial. Fica oculto até a
+  [auditoria dos dados](#auditoria) confirmar os números; a chave é `ORCAMENTO_VISIVEL` em
+  `site/orcamento.js`.
 - 🗺️ **Onde trabalham**: mapa com a sede de cada órgão de exercício, ranking de órgãos e UFs.
 - 🪜 **Carreira**: distribuição por classe e padrão, e funções comissionadas.
 - 💰 **Remuneração**: histograma, mediana e faixa P10–P90 da remuneração básica bruta.
@@ -102,6 +104,7 @@ flowchart LR
 | [`data/orgaos_coordenadas.csv`](data/orgaos_coordenadas.csv) | Sede de cada órgão de exercício, para o mapa. |
 | [`site/`](site/) | HTML, CSS e JS puros, sem build. `painel.html` lê a carreira do endereço. |
 | [`.github/workflows/atis.yml`](.github/workflows/atis.yml) | Roda no dia 15 de cada mês (12h UTC) ou manualmente: gera os dados, commita `data/` e publica no Pages. |
+| [`scripts/auditar.py`](scripts/auditar.py) e [`.github/workflows/auditoria.yml`](.github/workflows/auditoria.yml) | Conferem os dados publicados e gravam um registro em `auditoria/`. Veja [Auditoria](#auditoria). |
 
 <details>
 <summary><strong>Campos de <code>data/carreiras.json</code></strong></summary>
@@ -233,6 +236,54 @@ terço de férias, auxílios, funções pagas à parte, nem aposentados e pensio
 Reajustes futuros dependem de negociação e de lei.
 
 </details>
+
+---
+
+<a id="auditoria"></a>
+## Auditoria
+
+O workflow **Auditoria dos dados** roda depois de cada execução de "Dados das carreiras"
+e também manualmente. Cada execução grava um registro em `auditoria/registros/` e
+atualiza `auditoria/index.json`; os dois ficam versionados, então o histórico do git
+mostra quando cada auditoria foi feita.
+
+| Método | O que confere | Fonte |
+|---|---|---|
+| `coerencia` | Todos os arquivos de `data/` entre si: somas por órgão, UF, situação e classe iguais ao total; histograma igual a `n`; `index.json` e `latest.json` iguais aos arquivos mensais; filtro de cargo igual ao de `carreiras.json`. | Só o repositório |
+| `recontagem` | Baixa o ZIP do mês no portal e recalcula total, órgãos, UFs, classes, funções e remuneração (n, média, mediana, P10, P90, histograma) de cada carreira, comparando com o arquivo publicado. | Portal da Transparência |
+
+A recontagem usa [`scripts/auditar.py`](scripts/auditar.py), que **não compartilha código**
+com `gerar_dados.py` nem usa pandas: lê os CSV linha a linha com a biblioteca padrão. Os
+dois só têm em comum `data/carreiras.json` e as regras descritas acima. Contagens têm de
+bater exatamente; valores em reais, com tolerância de R$ 0,01.
+
+**O que cada registro guarda:** data e hora, método, commit auditado, link da execução,
+carreiras e meses conferidos, SHA-256 e tamanho de cada ZIP baixado (mostra contra qual
+versão do arquivo do portal a comparação foi feita), número de verificações, cada
+divergência com o valor publicado e o recalculado, e avisos. Só agregados entram no registro.
+
+**Amostra:** por padrão a recontagem confere o mês mais recente e sorteia mais dois entre
+os que ainda não foram recontados (a semente do sorteio fica no registro).
+`cobertura_recontagem`, em `auditoria/index.json`, lista os meses já conferidos.
+
+**Diagnósticos:** a recontagem também registra, por carreira, os cargos aceitos pelo
+filtro, cargos parecidos que ele rejeitou, quantos servidores têm mais de uma linha de
+remuneração e a mediana de quem tem e de quem não tem função. Não são divergências;
+servem para revisar o filtro e entender o que a remuneração somada contém.
+
+**Quando há divergência**, o workflow fica vermelho e grava o registro, mas não altera
+`data/`: o portal pode ter republicado o arquivo, ou pode haver erro em um dos scripts, e
+isso se decide caso a caso (reprocessar o mês com `force`, ou corrigir o script).
+
+**Limite do método:** a auditoria compara com o arquivo de download do portal. Não
+confere com o Painel Estatístico de Pessoal nem com a página individual de cada servidor.
+
+```bash
+python scripts/auditar.py coerencia
+python scripts/auditar.py recontagem --mes 202609                   # pode repetir --mes
+python scripts/auditar.py recontagem --mais-recente --sortear 2
+python scripts/auditar.py recontagem --mes 202609 --cache .cache    # usa o ZIP guardado por --manter-zip
+```
 
 ---
 
