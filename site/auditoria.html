@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="pt-BR" data-marca="neutra" style="--cor-destaque: transparent">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Auditoria dos dados · Painéis de carreiras</title>
+  <meta name="description" content="Registro das auditorias dos dados dos painéis de carreiras: o que foi conferido, quando, por qual método e com que resultado.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Auditoria dos dados dos painéis de carreiras">
+  <meta property="og:description" content="O que foi conferido, quando, por qual método e com que resultado.">
+  <meta property="og:url" content="https://ariribeiro.github.io/dashboard-carreiras/auditoria.html">
+  <meta property="og:image" content="https://ariribeiro.github.io/dashboard-carreiras/og-carreiras.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2317393B'/%3E%3Crect x='14' y='34' width='8' height='16' rx='2' fill='%23fff'/%3E%3Crect x='28' y='24' width='8' height='26' rx='2' fill='%23fff'/%3E%3Crect x='42' y='14' width='8' height='36' rx='2' fill='%23F4C400'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&display=swap">
+  <link rel="stylesheet" href="style.css">
+  <script>
+    try { const t = localStorage.getItem("tema"); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
+  </script>
+  <!-- Estatísticas de acesso anônimas, sem cookies (GoatCounter). Só conta no domínio de produção. -->
+  <script>window.goatcounter = { no_onload: location.hostname !== "ariribeiro.github.io" };</script>
+  <script data-goatcounter="https://ariribeiro.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+</head>
+<body>
+  <header class="topo">
+    <div class="topo-conteudo">
+      <a class="voltar-home" href="./">← Todas as carreiras</a>
+      <div class="marca-texto inicio-marca">
+        <p class="sobretitulo">Painéis de carreiras</p>
+        <h1>Auditoria dos dados</h1>
+        <p class="sub">O que foi conferido nos dados publicados, quando, por qual método e com que resultado.</p>
+      </div>
+    </div>
+    <div class="faixa-marca faixa-carreiras" id="faixa" aria-hidden="true"></div>
+  </header>
+
+  <main>
+    <p id="erro" class="erro" hidden></p>
+
+    <section class="secao" aria-labelledby="t-situacao">
+      <div class="secao-cabecalho">
+        <h2 id="t-situacao">Situação atual</h2>
+        <p id="situacao-desc"></p>
+      </div>
+      <div class="cards">
+        <div class="card">
+          <span class="rotulo">Última auditoria</span>
+          <span class="valor valor-menor" id="c-ultima">–</span>
+          <span class="detalhe" id="c-ultima-det"></span>
+        </div>
+        <div class="card">
+          <span class="rotulo">Execuções registradas</span>
+          <span class="valor" id="c-execucoes">–</span>
+          <span class="detalhe" id="c-execucoes-det"></span>
+        </div>
+        <div class="card">
+          <span class="rotulo">Meses recontados</span>
+          <span class="valor" id="c-recontados">–</span>
+          <span class="detalhe" id="c-recontados-det"></span>
+        </div>
+        <div class="card">
+          <span class="rotulo">Divergências em aberto</span>
+          <span class="valor" id="c-divergencias">–</span>
+          <span class="detalhe" id="c-divergencias-det"></span>
+        </div>
+      </div>
+    </section>
+
+    <section class="secao" aria-labelledby="t-carreiras">
+      <div class="secao-cabecalho">
+        <h2 id="t-carreiras">Por carreira</h2>
+        <p>Resultado mais recente de cada método. Um mês conta como recontado quando seus números foram recalculados a partir do arquivo do Portal da Transparência e comparados com os publicados.</p>
+      </div>
+      <div class="painel">
+        <div class="tabela-rolagem"><table class="tabela-fixa tabela-auditoria" id="t-por-carreira"></table></div>
+        <div id="cobertura"></div>
+        <ul class="aud-legenda" aria-hidden="true">
+          <li><span class="ok"></span>recontado, sem divergências</li>
+          <li><span class="ruim"></span>recontado, com divergências</li>
+          <li><span></span>publicado, ainda não recontado</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="secao" aria-labelledby="t-execucoes">
+      <div class="secao-cabecalho">
+        <h2 id="t-execucoes">Execuções</h2>
+        <p>Todas as auditorias registradas, da mais recente para a mais antiga. O registro completo de cada uma, com as verificações e as divergências, fica versionado no repositório.</p>
+      </div>
+      <div class="painel">
+        <div class="tabela-rolagem"><table class="tabela-fixa tabela-auditoria" id="t-lista"></table></div>
+      </div>
+    </section>
+
+    <section class="secao" aria-labelledby="t-metodo">
+      <div class="secao-cabecalho"><h2 id="t-metodo">Como a auditoria é feita</h2></div>
+      <div class="metodo">
+        <ul>
+          <li><strong>Coerência interna</strong>: confere todos os arquivos publicados entre si, sem consultar o portal. As somas por órgão, UF, situação e classe têm de ser iguais ao total; o histograma, igual ao número de servidores com remuneração; e o índice de cada carreira, igual aos arquivos mensais.</li>
+          <li><strong>Recontagem</strong>: baixa o arquivo do mês no Portal da Transparência e recalcula os números de cada carreira com um programa separado do que gera os dados, para que um erro em um deles apareça como divergência. Contagens têm de bater exatamente; valores em reais, com tolerância de R$ 0,01.</li>
+          <li>A cada execução, a recontagem confere o mês mais recente e sorteia outros entre os que ainda não foram conferidos; por isso a cobertura cresce aos poucos.</li>
+          <li>A auditoria compara com o arquivo de download do portal. Não confere com outras fontes, como o Painel Estatístico de Pessoal ou a página individual de cada servidor.</li>
+          <li>Uma divergência não altera os dados automaticamente: ela fica registrada e visível aqui até ser analisada e resolvida.</li>
+        </ul>
+        <p class="nota">Descrição completa do método, do conteúdo de cada registro e dos comandos: <a id="link-readme" href="https://github.com/ariribeiro/dashboard-carreiras#auditoria" target="_blank" rel="noopener">documentação da auditoria no repositório</a>.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="rodape">
+    <p><a class="rodape-home" href="./">← Voltar para todas as carreiras</a></p>
+    <p>
+      Fonte: <a href="https://portaldatransparencia.gov.br/download-de-dados/servidores">Portal da Transparência — Servidores SIAPE</a>.
+      Somente dados agregados; nenhum dado individual é publicado. Estatísticas de acesso anônimas, sem cookies.
+    </p>
+    <p class="autoria">
+      Desenvolvido por <strong>Ari Ribeiro</strong>, Analista em Tecnologia da Informação ·
+      <a href="mailto:contato@ariribeiro.dev">contato@ariribeiro.dev</a>
+      <a class="linkedin" href="https://www.linkedin.com/in/arivaldo-ribeiro-26472823/" target="_blank" rel="noopener" aria-label="LinkedIn de Ari Ribeiro" title="LinkedIn">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>
+      </a>
+    </p>
+  </footer>
+
+  <script src="auditoria.js"></script>
+  <script>
+    "use strict";
+    const fmtInt = new Intl.NumberFormat("pt-BR");
+    // Uma casa decimal: no início a cobertura é de poucos meses e "0%" esconderia o avanço.
+    const fmtPct = new Intl.NumberFormat("pt-BR", { style: "percent", maximumFractionDigits: 1 });
+    const MESES = ["jan", "fev", "mar", "abr", "mai", "jun", "jul", "ago", "set", "out", "nov", "dez"];
+    const fmtMes = (m) => `${MESES[+m.slice(4) - 1]}/${m.slice(0, 4)}`;
+    const dataHora = (iso) => new Date(iso).toLocaleString("pt-BR", { dateStyle: "short", timeStyle: "short" });
+    const dia = (iso) => new Date(iso).toLocaleDateString("pt-BR");
+    const METODOS = { coerencia: "Coerência interna", recontagem: "Recontagem" };
+    const RESULTADOS = { ok: ["sem divergências", "aud-ok"], divergente: ["com divergências", "aud-ruim"], erro: ["não concluída", "aud-neutro"] };
+    const json = (c) => fetch(`data/${c}`, { cache: "no-cache" }).then((r) => {
+      if (!r.ok) throw new Error(`${c}: HTTP ${r.status}`);
+      return r.json();
+    });
+    // Cria um elemento com texto (nunca HTML) e atributos.
+    const el = (tag, texto = "", attrs = {}) => {
+      const e = document.createElement(tag);
+      e.textContent = texto;
+      for (const [k, v] of Object.entries(attrs)) e.setAttribute(k, v);
+      return e;
+    };
+    const externo = (texto, url) => el("a", texto, { href: url, target: "_blank", rel: "noopener" });
+    const cabecalho = (tabela, colunas) => {
+      const tr = tabela.createTHead().insertRow();
+      for (const [texto, num] of colunas) { const th = el("th", texto); if (num) th.className = "num"; tr.appendChild(th); }
+      return tabela.createTBody();
+    };
+    const resultado = (r) => el("span", RESULTADOS[r][0], { class: RESULTADOS[r][1] });
+
+    async function iniciar() {
+      const carreiras = await json("carreiras.json");
+      const faixa = document.getElementById("faixa");
+      for (const c of Object.values(carreiras)) {
+        const span = document.createElement("span");
+        span.style.setProperty("--cor", c.cores?.destaque ?? "#F4C400");
+        faixa.appendChild(span);
+      }
+      const resumo = await Auditoria.carregar();
+      const execucoes = resumo?.execucoes ?? [];
+      if (!resumo || !execucoes.length) {
+        document.getElementById("situacao-desc").textContent = "Nenhuma auditoria foi registrada ainda.";
+        for (const s of document.querySelectorAll("main .secao")) if (!s.querySelector("#t-situacao, #t-metodo")) s.hidden = true;
+        document.querySelector(".cards").hidden = true;
+        return;
+      }
+      const registro = (id) => `${resumo.repositorio}/blob/main/auditoria/registros/${id}.json`;
+      document.getElementById("link-readme").href = `${resumo.repositorio}#auditoria`;
+
+      // Meses publicados de cada carreira, para medir a cobertura da recontagem.
+      const publicados = Object.fromEntries(await Promise.all(Object.keys(carreiras).map(async (slug) => {
+        try { return [slug, (await json(`${slug}/index.json`)).meses.map((m) => m.mes.replace("-", ""))]; }
+        catch (e) { return [slug, []]; }
+      })));
+      const slugs = Object.keys(carreiras);
+      const recontados = (slug) => resumo.recontagem?.[slug] ?? {};
+
+      // ---- Cartões
+      const ultima = execucoes.at(-1);
+      document.getElementById("c-ultima").textContent = dia(ultima.data);
+      document.getElementById("c-ultima-det").textContent = `${METODOS[ultima.metodo]}: ${RESULTADOS[ultima.resultado][0]}`;
+      document.getElementById("c-execucoes").textContent = fmtInt.format(execucoes.length);
+      document.getElementById("c-execucoes-det").textContent =
+        `${fmtInt.format(execucoes.reduce((s, e) => s + e.verificacoes, 0))} verificações desde ${dia(execucoes[0].data)}`;
+      const totalPub = slugs.reduce((s, c) => s + publicados[c].length, 0);
+      const totalRec = slugs.reduce((s, c) => s + publicados[c].filter((m) => recontados(c)[m]).length, 0);
+      document.getElementById("c-recontados").textContent = fmtInt.format(totalRec);
+      document.getElementById("c-recontados-det").textContent =
+        `de ${fmtInt.format(totalPub)} meses publicados, somando as carreiras (${fmtPct.format(totalPub ? totalRec / totalPub : 0)})`;
+      const abertas = slugs.reduce((s, c) => s + (resumo.coerencia?.[c]?.resultado === "divergente" ? 1 : 0) +
+        Object.values(recontados(c)).filter((m) => m.resultado === "divergente").length, 0);
+      const cDiv = document.getElementById("c-divergencias");
+      cDiv.textContent = fmtInt.format(abertas);
+      cDiv.classList.add(abertas ? "aud-ruim" : "aud-ok");
+      document.getElementById("c-divergencias-det").textContent = abertas
+        ? "carreiras ou meses cuja conferência mais recente apontou diferença"
+        : "nenhuma conferência mais recente apontou diferença";
+      const semCoerencia = slugs.filter((c) => !resumo.coerencia?.[c]).map((c) => carreiras[c].sigla);
+      document.getElementById("situacao-desc").textContent = semCoerencia.length
+        ? `Ainda sem nenhuma conferência: ${semCoerencia.join(", ")}.`
+        : "Todas as carreiras já passaram pela conferência de coerência interna.";
+
+      // ---- Por carreira
+      const corpo = cabecalho(document.getElementById("t-por-carreira"),
+        [["Carreira"], ["Coerência interna"], ["Meses recontados", true], ["Cobertura", true], ["Com divergências", true]]);
+      const cobertura = document.getElementById("cobertura");
+      for (const slug of slugs) {
+        const c = carreiras[slug];
+        const rec = recontados(slug);
+        const feitos = publicados[slug].filter((m) => rec[m]);
+        const tr = corpo.insertRow();
+        tr.insertCell().appendChild(el("a", c.sigla, { href: `painel.html?carreira=${slug}` }));
+        const co = resumo.coerencia?.[slug];
+        const td = tr.insertCell();
+        if (co) { const a = externo("", registro(co.registro)); a.appendChild(resultado(co.resultado)); td.append(a, el("small", `em ${dia(co.data)}`)); }
+        else td.appendChild(el("span", "ainda não conferida", { class: "aud-neutro" }));
+        const ruins = feitos.filter((m) => rec[m].resultado === "divergente").length;
+        for (const txt of [`${fmtInt.format(feitos.length)} de ${fmtInt.format(publicados[slug].length)}`,
+          fmtPct.format(publicados[slug].length ? feitos.length / publicados[slug].length : 0), fmtInt.format(ruins)]) {
+          const n = tr.insertCell(); n.className = "num"; n.textContent = txt;
+        }
+        if (ruins) tr.lastChild.classList.add("aud-ruim");
+
+        // Grade ano × mês: cada mês publicado, marcado quando já foi recontado.
+        if (!publicados[slug].length) continue;
+        const det = el("details", "", { class: "aud-cobertura" });
+        det.appendChild(el("summary", `${c.sigla}: meses recontados (${fmtInt.format(feitos.length)})`));
+        const grade = el("table", "", { class: "aud-grade" });
+        const topo = grade.createTHead().insertRow();
+        topo.appendChild(el("th"));
+        for (const m of MESES) topo.appendChild(el("th", m, { scope: "col" }));
+        const pub = new Set(publicados[slug]);
+        const anos = [...new Set(publicados[slug].map((m) => m.slice(0, 4)))].sort().reverse();
+        const gb = grade.createTBody();
+        for (const ano of anos) {
+          const linha = gb.insertRow();
+          linha.appendChild(el("th", ano, { scope: "row" }));
+          for (let i = 1; i <= 12; i++) {
+            const mes = `${ano}${String(i).padStart(2, "0")}`;
+            const celula = linha.insertCell();
+            if (!pub.has(mes)) { celula.className = "vazio"; continue; }
+            const r = rec[mes];
+            if (!r) { celula.title = `${fmtMes(mes)}: ainda não recontado`; continue; }
+            celula.className = r.resultado === "ok" ? "ok" : "ruim";
+            const rotulo = `${fmtMes(mes)}: recontado em ${dia(r.data)}, ${RESULTADOS[r.resultado][0]}`;
+            const a = externo(r.resultado === "ok" ? "✓" : "!", registro(r.registro));
+            a.title = rotulo; a.setAttribute("aria-label", rotulo);
+            celula.appendChild(a);
+          }
+        }
+        const rolagem = el("div", "", { class: "tabela-rolagem" });
+        rolagem.appendChild(grade);
+        det.appendChild(rolagem);
+        if (feitos.length) det.open = slugs.filter((s) => Object.keys(recontados(s)).length).length === 1;
+        cobertura.appendChild(det);
+      }
+
+      // ---- Execuções
+      const lista = cabecalho(document.getElementById("t-lista"),
+        [["Data"], ["Método"], ["O que foi auditado"], ["Verificações", true], ["Resultado"], ["Registro"]]);
+      for (const e of [...execucoes].reverse()) {
+        const tr = lista.insertRow();
+        tr.insertCell().textContent = dataHora(e.data);
+        tr.insertCell().textContent = METODOS[e.metodo] ?? e.metodo;
+        const escopo = tr.insertCell();
+        escopo.textContent = e.carreiras.map((s) => carreiras[s]?.sigla ?? s).join(", ");
+        escopo.appendChild(el("small", e.metodo === "coerencia" ? "todos os meses publicados"
+          : e.meses ? e.meses.map(fmtMes).join(", ") : "nenhum mês conferido"));
+        const n = tr.insertCell(); n.className = "num"; n.textContent = fmtInt.format(e.verificacoes);
+        const res = tr.insertCell();
+        res.appendChild(resultado(e.resultado));
+        if (e.divergencias) res.appendChild(el("small", `${fmtInt.format(e.divergencias)} ${e.divergencias === 1 ? "divergência" : "divergências"}`));
+        const links = tr.insertCell();
+        links.appendChild(externo("ver registro", registro(e.id)));
+        if (e.execucao) { const s = el("small"); s.appendChild(externo("log da execução", e.execucao)); links.appendChild(s); }
+      }
+    }
+
+    iniciar().catch((e) => {
+      const erro = document.getElementById("erro");
+      erro.textContent = `Não foi possível carregar a auditoria (${e.message}).`;
+      erro.hidden = false;
+    });
+  </script>
+</body>
+</html>

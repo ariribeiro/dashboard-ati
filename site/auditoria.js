@@ -25,7 +25,9 @@ const Auditoria = (() => {
     if (!resumo || !partes.length) { el.hidden = true; return; }
     el.replaceChildren("Auditoria: ");
     partes.forEach((p, i) => { if (i) el.append(" "); el.append(...p); });
-    el.append(" ", link("Como é feita", `${resumo.repositorio}#auditoria`), ".");
+    const pagina = link("Ver auditorias", "auditoria.html");
+    pagina.removeAttribute("target"); pagina.removeAttribute("rel");
+    el.append(" ", pagina, ".");
     el.hidden = false;
   }
 
@@ -77,7 +79,6 @@ const Auditoria = (() => {
     } else if (partes.length) {
       partes.push(["Nenhum mês foi recontado a partir do arquivo do portal ainda."]);
     }
-    if (partes.length) partes.push([link("Ver registros", `${resumo.repositorio}/tree/main/auditoria`), "."]);
     escrever(el, partes);
   }
 

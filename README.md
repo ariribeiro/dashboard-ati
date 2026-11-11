@@ -272,10 +272,12 @@ remuneração e a mediana de quem tem e de quem não tem função. Não são div
 servem para revisar o filtro e entender o que a remuneração somada contém.
 
 **No site:** cada execução também regrava `data/auditoria.json`, um resumo dos registros
-(última conferência de coerência de cada carreira e meses já recontados), e republica o
-site. O rodapé da página inicial mostra a situação de todas as carreiras; o do painel
-mostra a da carreira e diz se o mês selecionado já foi recontado, com link para o
-registro. Divergências aparecem no rodapé até serem resolvidas.
+(última conferência de coerência de cada carreira, meses já recontados e a lista de
+execuções), e republica o site. A página [`/auditoria.html`](https://ariribeiro.github.io/dashboard-carreiras/auditoria.html)
+mostra a situação por carreira, os meses recontados e todas as execuções, com link para
+cada registro. O rodapé da página inicial resume a situação de todas as carreiras; o do
+painel mostra a da carreira e diz se o mês selecionado já foi recontado. Divergências
+aparecem no site até serem resolvidas.
 
 **Quando há divergência**, o workflow fica vermelho e grava o registro, mas não altera
 `data/`: o portal pode ter republicado o arquivo, ou pode haver erro em um dos scripts, e

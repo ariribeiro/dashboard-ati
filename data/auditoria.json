@@ -25,5 +25,50 @@
         "resultado": "ok"
       }
     }
-  }
+  },
+  "execucoes": [
+    {
+      "id": "20261111-175239-coerencia",
+      "data": "2026-11-11T17:52:39+00:00",
+      "metodo": "coerencia",
+      "resultado": "ok",
+      "carreiras": [
+        "ati"
+      ],
+      "meses": null,
+      "verificacoes": 2147,
+      "divergencias": 0,
+      "execucao": "https://github.com/ariribeiro/dashboard-carreiras/actions/runs/43072311898"
+    },
+    {
+      "id": "20261111-175638-coerencia",
+      "data": "2026-11-11T17:56:38+00:00",
+      "metodo": "coerencia",
+      "resultado": "ok",
+      "carreiras": [
+        "ati"
+      ],
+      "meses": null,
+      "verificacoes": 2147,
+      "divergencias": 0,
+      "execucao": "https://github.com/ariribeiro/dashboard-carreiras/actions/runs/43072939130"
+    },
+    {
+      "id": "20261111-175638-recontagem",
+      "data": "2026-11-11T17:56:38+00:00",
+      "metodo": "recontagem",
+      "resultado": "ok",
+      "carreiras": [
+        "ati"
+      ],
+      "meses": [
+        "202509",
+        "202601",
+        "202607"
+      ],
+      "verificacoes": 42,
+      "divergencias": 0,
+      "execucao": "https://github.com/ariribeiro/dashboard-carreiras/actions/runs/43072939130"
+    }
+  ]
 }

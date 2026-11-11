@@ -25,7 +25,8 @@ Uso:
     python scripts/auditar.py resumo             # só regrava data/auditoria.json
 
 Além do registro, cada execução regrava data/auditoria.json, o resumo que o site mostra
-no rodapé (última conferência de cada carreira e meses já recontados).
+no rodapé e na página auditoria.html (última conferência de cada carreira, meses já
+recontados e a lista de execuções).
 """
 
 from __future__ import annotations
@@ -482,15 +483,24 @@ def gravar(metodo: str, agora: datetime, carreiras: dict, res: Resultado, detalh
 
 
 def gravar_resumo_site() -> None:
-    """Regrava data/auditoria.json a partir de todos os registros: o que o site mostra no rodapé.
+    """Regrava data/auditoria.json a partir de todos os registros: o que o site mostra.
 
-    Por carreira: a conferência de coerência mais recente e, por mês, a recontagem mais recente.
-    Registros com resultado "erro" (nada foi auditado) não entram.
+    Por carreira: a conferência de coerência mais recente e, por mês, a recontagem mais recente
+    (registros com resultado "erro", em que nada foi auditado, não contam aqui).
+    `execucoes` lista todas as execuções, inclusive as com erro, para a página auditoria.html.
     """
     coerencia: dict[str, dict] = {}
     recontagem: dict[str, dict[str, dict]] = {}
+    execucoes: list[dict] = []
     for arq in sorted(REGISTROS.glob("*.json")):  # o nome começa pela data: ordem cronológica
         r = ler_json(arq)
+        execucoes.append({
+            "id": r["id"], "data": r["data"], "metodo": r["metodo"]["id"], "resultado": r["resultado"],
+            "carreiras": sorted(r["auditado"]["carreiras"]),  # lista ou dicionário por carreira
+            "meses": sorted(m for m, info in r["auditado"].get("meses", {}).items() if info.get("carreiras")) or None,
+            "verificacoes": r["verificacoes"], "divergencias": len(r["divergencias"]),
+            "execucao": r["execucao"].get("url"),
+        })
         if r["resultado"] == "erro":
             continue
         base = {"data": r["data"], "registro": r["id"]}
@@ -508,6 +518,7 @@ def gravar_resumo_site() -> None:
                        f"{os.environ.get('GITHUB_REPOSITORY', 'ariribeiro/dashboard-carreiras')}",
         "coerencia": dict(sorted(coerencia.items())),
         "recontagem": {c: dict(sorted(meses.items())) for c, meses in sorted(recontagem.items())},
+        "execucoes": execucoes,
     }
     RESUMO_SITE.write_text(json.dumps(resumo, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
