@@ -1,27 +1,320 @@
 {
   "repositorio": "https://github.com/ariribeiro/dashboard-carreiras",
   "coerencia": {
+    "ace": {
+      "data": "2026-11-11T18:47:32+00:00",
+      "registro": "20261111-184732-coerencia",
+      "resultado": "ok"
+    },
+    "aie": {
+      "data": "2026-11-11T18:47:32+00:00",
+      "registro": "20261111-184732-coerencia",
+      "resultado": "ok"
+    },
     "ati": {
-      "data": "2026-11-11T17:56:38+00:00",
-      "registro": "20261111-175638-coerencia",
+      "data": "2026-11-11T18:47:32+00:00",
+      "registro": "20261111-184732-coerencia",
+      "resultado": "ok"
+    },
+    "atps": {
+      "data": "2026-11-11T18:47:32+00:00",
+      "registro": "20261111-184732-coerencia",
+      "resultado": "ok"
+    },
+    "eppgg": {
+      "data": "2026-11-11T18:47:32+00:00",
+      "registro": "20261111-184732-coerencia",
       "resultado": "ok"
     }
   },
   "recontagem": {
+    "ace": {
+      "201406": {
+        "data": "2026-11-11T18:47:32+00:00",
+        "registro": "20261111-184732-recontagem",
+        "resultado": "ok"
+      },
+      "202003": {
+        "data": "2026-11-11T18:47:32+00:00",
+        "registro": "20261111-184732-recontagem",
+        "resultado": "ok"
+      },
+      "202601": {
+        "data": "2026-11-11T18:47:32+00:00",
+        "registro": "20261111-184732-recontagem",
+        "resultado": "ok"
+      },
+      "202602": {
+        "data": "2026-11-11T18:47:32+00:00",
+        "registro": "20261111-184732-recontagem",
+        "resultado": "ok"
+      },
+      "202603": {
+        "data": "2026-11-11T18:47:32+00:00",
+        "registro": "20261111-184732-recontagem",
+        "resultado": "ok"
+      },
+      "202604": {
+        "data": "2026-11-11T18:47:32+00:00",
+        "registro": "20261111-184732-recontagem",
+        "resultado": "ok"
+      },
+      "202605": {
+        "data": "2026-11-11T18:47:32+00:00",
+        "registro": "20261111-184732-recontagem",
+        "resultado": "ok"
+      },
+      "202606": {
+        "data": "2026-11-11T18:47:32+00:00",
+        "registro": "20261111-184732-recontagem",
+        "resultado": "ok"
+      },
+      "202607": {
+        "data": "2026-11-11T18:47:32+00:00",
+        "registro": "20261111-184732-recontagem",
+        "resultado": "ok"
+      },
+      "202608": {
+        "data": "2026-11-11T18:47:32+00:00",
+        "registro": "20261111-184732-recontagem",
+        "resultado": "ok"
+      },
+      "202609": {
+        "data": "2026-11-11T18:47:32+00:00",
+        "registro": "20261111-184732-recontagem",
+        "resultado": "ok"
+      }
+    },
+    "aie": {
+      "201406": {
+        "data": "2026-11-11T18:47:32+00:00",
+        "registro": "20261111-184732-recontagem",
+        "resultado": "ok"
+      },
+      "202003": {
+        "data": "2026-11-11T18:47:32+00:00",
+        "registro": "20261111-184732-recontagem",
+        "resultado": "ok"
+      },
+      "202601": {
+        "data": "2026-11-11T18:47:32+00:00",
+        "registro": "20261111-184732-recontagem",
+        "resultado": "ok"
+      },
+      "202602": {
+        "data": "2026-11-11T18:47:32+00:00",
+        "registro": "20261111-184732-recontagem",
+        "resultado": "ok"
+      },
+      "202603": {
+        "data": "2026-11-11T18:47:32+00:00",
+        "registro": "20261111-184732-recontagem",
+        "resultado": "ok"
+      },
+      "202604": {
+        "data": "2026-11-11T18:47:32+00:00",
+        "registro": "20261111-184732-recontagem",
+        "resultado": "ok"
+      },
+      "202605": {
+        "data": "2026-11-11T18:47:32+00:00",
+        "registro": "20261111-184732-recontagem",
+        "resultado": "ok"
+      },
+      "202606": {
+        "data": "2026-11-11T18:47:32+00:00",
+        "registro": "20261111-184732-recontagem",
+        "resultado": "ok"
+      },
+      "202607": {
+        "data": "2026-11-11T18:47:32+00:00",
+        "registro": "20261111-184732-recontagem",
+        "resultado": "ok"
+      },
+      "202608": {
+        "data": "2026-11-11T18:47:32+00:00",
+        "registro": "20261111-184732-recontagem",
+        "resultado": "ok"
+      },
+      "202609": {
+        "data": "2026-11-11T18:47:32+00:00",
+        "registro": "20261111-184732-recontagem",
+        "resultado": "ok"
+      }
+    },
     "ati": {
+      "201406": {
+        "data": "2026-11-11T18:47:32+00:00",
+        "registro": "20261111-184732-recontagem",
+        "resultado": "ok"
+      },
+      "202003": {
+        "data": "2026-11-11T18:47:32+00:00",
+        "registro": "20261111-184732-recontagem",
+        "resultado": "ok"
+      },
       "202509": {
         "data": "2026-11-11T17:56:38+00:00",
         "registro": "20261111-175638-recontagem",
         "resultado": "ok"
       },
       "202601": {
-        "data": "2026-11-11T17:56:38+00:00",
-        "registro": "20261111-175638-recontagem",
+        "data": "2026-11-11T18:47:32+00:00",
+        "registro": "20261111-184732-recontagem",
+        "resultado": "ok"
+      },
+      "202602": {
+        "data": "2026-11-11T18:47:32+00:00",
+        "registro": "20261111-184732-recontagem",
+        "resultado": "ok"
+      },
+      "202603": {
+        "data": "2026-11-11T18:47:32+00:00",
+        "registro": "20261111-184732-recontagem",
+        "resultado": "ok"
+      },
+      "202604": {
+        "data": "2026-11-11T18:47:32+00:00",
+        "registro": "20261111-184732-recontagem",
+        "resultado": "ok"
+      },
+      "202605": {
+        "data": "2026-11-11T18:47:32+00:00",
+        "registro": "20261111-184732-recontagem",
+        "resultado": "ok"
+      },
+      "202606": {
+        "data": "2026-11-11T18:47:32+00:00",
+        "registro": "20261111-184732-recontagem",
         "resultado": "ok"
       },
       "202607": {
-        "data": "2026-11-11T17:56:38+00:00",
-        "registro": "20261111-175638-recontagem",
+        "data": "2026-11-11T18:47:32+00:00",
+        "registro": "20261111-184732-recontagem",
+        "resultado": "ok"
+      },
+      "202608": {
+        "data": "2026-11-11T18:47:32+00:00",
+        "registro": "20261111-184732-recontagem",
+        "resultado": "ok"
+      },
+      "202609": {
+        "data": "2026-11-11T18:47:32+00:00",
+        "registro": "20261111-184732-recontagem",
+        "resultado": "ok"
+      }
+    },
+    "atps": {
+      "201406": {
+        "data": "2026-11-11T18:47:32+00:00",
+        "registro": "20261111-184732-recontagem",
+        "resultado": "ok"
+      },
+      "202003": {
+        "data": "2026-11-11T18:47:32+00:00",
+        "registro": "20261111-184732-recontagem",
+        "resultado": "ok"
+      },
+      "202601": {
+        "data": "2026-11-11T18:47:32+00:00",
+        "registro": "20261111-184732-recontagem",
+        "resultado": "ok"
+      },
+      "202602": {
+        "data": "2026-11-11T18:47:32+00:00",
+        "registro": "20261111-184732-recontagem",
+        "resultado": "ok"
+      },
+      "202603": {
+        "data": "2026-11-11T18:47:32+00:00",
+        "registro": "20261111-184732-recontagem",
+        "resultado": "ok"
+      },
+      "202604": {
+        "data": "2026-11-11T18:47:32+00:00",
+        "registro": "20261111-184732-recontagem",
+        "resultado": "ok"
+      },
+      "202605": {
+        "data": "2026-11-11T18:47:32+00:00",
+        "registro": "20261111-184732-recontagem",
+        "resultado": "ok"
+      },
+      "202606": {
+        "data": "2026-11-11T18:47:32+00:00",
+        "registro": "20261111-184732-recontagem",
+        "resultado": "ok"
+      },
+      "202607": {
+        "data": "2026-11-11T18:47:32+00:00",
+        "registro": "20261111-184732-recontagem",
+        "resultado": "ok"
+      },
+      "202608": {
+        "data": "2026-11-11T18:47:32+00:00",
+        "registro": "20261111-184732-recontagem",
+        "resultado": "ok"
+      },
+      "202609": {
+        "data": "2026-11-11T18:47:32+00:00",
+        "registro": "20261111-184732-recontagem",
+        "resultado": "ok"
+      }
+    },
+    "eppgg": {
+      "201406": {
+        "data": "2026-11-11T18:47:32+00:00",
+        "registro": "20261111-184732-recontagem",
+        "resultado": "ok"
+      },
+      "202003": {
+        "data": "2026-11-11T18:47:32+00:00",
+        "registro": "20261111-184732-recontagem",
+        "resultado": "ok"
+      },
+      "202601": {
+        "data": "2026-11-11T18:47:32+00:00",
+        "registro": "20261111-184732-recontagem",
+        "resultado": "ok"
+      },
+      "202602": {
+        "data": "2026-11-11T18:47:32+00:00",
+        "registro": "20261111-184732-recontagem",
+        "resultado": "ok"
+      },
+      "202603": {
+        "data": "2026-11-11T18:47:32+00:00",
+        "registro": "20261111-184732-recontagem",
+        "resultado": "ok"
+      },
+      "202604": {
+        "data": "2026-11-11T18:47:32+00:00",
+        "registro": "20261111-184732-recontagem",
+        "resultado": "ok"
+      },
+      "202605": {
+        "data": "2026-11-11T18:47:32+00:00",
+        "registro": "20261111-184732-recontagem",
+        "resultado": "ok"
+      },
+      "202606": {
+        "data": "2026-11-11T18:47:32+00:00",
+        "registro": "20261111-184732-recontagem",
+        "resultado": "ok"
+      },
+      "202607": {
+        "data": "2026-11-11T18:47:32+00:00",
+        "registro": "20261111-184732-recontagem",
+        "resultado": "ok"
+      },
+      "202608": {
+        "data": "2026-11-11T18:47:32+00:00",
+        "registro": "20261111-184732-recontagem",
+        "resultado": "ok"
+      },
+      "202609": {
+        "data": "2026-11-11T18:47:32+00:00",
+        "registro": "20261111-184732-recontagem",
         "resultado": "ok"
       }
     }
@@ -69,6 +362,52 @@
       "verificacoes": 42,
       "divergencias": 0,
       "execucao": "https://github.com/ariribeiro/dashboard-carreiras/actions/runs/43072939130"
+    },
+    {
+      "id": "20261111-184732-coerencia",
+      "data": "2026-11-11T18:47:32+00:00",
+      "metodo": "coerencia",
+      "resultado": "ok",
+      "carreiras": [
+        "ace",
+        "aie",
+        "ati",
+        "atps",
+        "eppgg"
+      ],
+      "meses": null,
+      "verificacoes": 10657,
+      "divergencias": 0,
+      "execucao": "https://github.com/ariribeiro/dashboard-carreiras/actions/runs/43081062540"
+    },
+    {
+      "id": "20261111-184732-recontagem",
+      "data": "2026-11-11T18:47:32+00:00",
+      "metodo": "recontagem",
+      "resultado": "ok",
+      "carreiras": [
+        "ace",
+        "aie",
+        "ati",
+        "atps",
+        "eppgg"
+      ],
+      "meses": [
+        "201406",
+        "202003",
+        "202601",
+        "202602",
+        "202603",
+        "202604",
+        "202605",
+        "202606",
+        "202607",
+        "202608",
+        "202609"
+      ],
+      "verificacoes": 770,
+      "divergencias": 0,
+      "execucao": "https://github.com/ariribeiro/dashboard-carreiras/actions/runs/43081062540"
     }
   ]
 }

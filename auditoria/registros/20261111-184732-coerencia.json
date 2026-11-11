@@ -1,0 +1,49 @@
+{
+  "id": "20261111-184732-coerencia",
+  "data": "2026-11-11T18:47:32+00:00",
+  "metodo": {
+    "id": "coerencia",
+    "descricao": "Coerência interna: todos os arquivos de data/ conferidos entre si (somas, índice, latest, filtro de cargo), sem consulta ao portal."
+  },
+  "resultado": "ok",
+  "commit": "3576f80b75fe6ea5be2312ef9ba3fe8c620f1f61",
+  "execucao": {
+    "origem": "github-actions",
+    "evento": "workflow_dispatch",
+    "url": "https://github.com/ariribeiro/dashboard-carreiras/actions/runs/43081062540"
+  },
+  "auditado": {
+    "carreiras": {
+      "ati": {
+        "arquivos": 165,
+        "de": "201301",
+        "ate": "202609"
+      },
+      "atps": {
+        "arquivos": 159,
+        "de": "201307",
+        "ate": "202609"
+      },
+      "eppgg": {
+        "arquivos": 165,
+        "de": "201301",
+        "ate": "202609"
+      },
+      "ace": {
+        "arquivos": 165,
+        "de": "201301",
+        "ate": "202609"
+      },
+      "aie": {
+        "arquivos": 165,
+        "de": "201301",
+        "ate": "202609"
+      }
+    }
+  },
+  "verificacoes": 10657,
+  "divergencias": [],
+  "avisos": [
+    "Órgãos de exercício sem linha em orgaos_coordenadas.csv (arquivos mensais em que aparecem): Instituto Nacional de Metrologia, Qualidade e Tecnologia (120); Autoridade Pública Olímpica (108); Comando da Aeronáutica (100); Ministério da Pesca e Aquicultura (84); Casa da Moeda do Brasil (59); Companhia Energética de Brasília (47); Instituto Federal de São Paulo (42); Autoridade de Governança do Legado Olímpico (41); TELEBRAS - TELECOM. BRASILEIRAS S.A. (33); Telebras- Holding (29); Ministério Público do Trabalho (28); Tribunal Regional Eleitoral - GO (26); Empresa de Pesquisa Energética (19); Governo do Estado do Ceará (14); Banco Nacional de Desenvolvimento Econômico e Social (13); Governo do Estado de Rondônia (10); Instituto de Resseguros do Brasil (8); Companhia das Docas do Estado da Bahia (4)."
+  ]
+}
