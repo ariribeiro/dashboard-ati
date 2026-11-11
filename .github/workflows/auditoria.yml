@@ -16,7 +16,7 @@ on:
           - coerencia
           - recontagem
       meses:
-        description: "Recontagem: meses AAAAMM separados por espaço (em branco: mês mais recente + sorteio)"
+        description: "Recontagem: meses no formato AAAAMM, ex.: 202609 ou 202608 202609 (em branco: mês mais recente + sorteio)"
         type: string
         default: ""
       sortear:
@@ -37,10 +37,8 @@ on:
 
 permissions:
   contents: write
-
-concurrency:
-  group: auditoria
-  cancel-in-progress: false
+  pages: write
+  id-token: write
 
 jobs:
   auditar:
@@ -48,6 +46,9 @@ jobs:
     if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     timeout-minutes: 60
+    concurrency:
+      group: auditoria
+      cancel-in-progress: false
     steps:
       - uses: actions/checkout@v4
 
@@ -72,6 +73,16 @@ jobs:
             echo "::error::'sortear' deve ser um número inteiro."
             exit 1
           fi
+          # Meses: aceita 202609, 2026-09 ou 2026/09, separados por espaço ou vírgula.
+          meses=()
+          for m in ${MESES//,/ }; do
+            m=${m//[-\/]/}
+            if ! [[ "$m" =~ ^20[0-9]{2}(0[1-9]|1[0-2])$ ]]; then
+              echo "::error::Mês inválido em 'meses': '$m'. Escreva ano e mês juntos, por exemplo 202609 (ou 202608 202609 para dois meses)."
+              exit 1
+            fi
+            meses+=("$m")
+          done
           comum=()
           [ -n "$CARREIRA" ] && [ "$CARREIRA" != "todas" ] && comum+=(--carreira "$CARREIRA")
           falhou=0
@@ -80,8 +91,8 @@ jobs:
           fi
           if [ "$METODO" != "coerencia" ]; then
             args=()
-            if [ -n "$MESES" ]; then
-              for m in $MESES; do args+=(--mes "$m"); done
+            if [ ${#meses[@]} -gt 0 ]; then
+              for m in "${meses[@]}"; do args+=(--mes "$m"); done
             else
               args+=(--mais-recente)
             fi
@@ -94,7 +105,7 @@ jobs:
         # Grava o registro mesmo quando há divergência: é ele que documenta o que foi encontrado.
         if: ${{ !cancelled() }}
         run: |
-          git add auditoria/
+          git add auditoria/ data/auditoria.json
           if git diff --cached --quiet; then
             echo "Nenhum registro novo."
           else
@@ -112,3 +123,36 @@ jobs:
         run: |
           echo "::error::A auditoria encontrou divergências ou não conseguiu auditar. Veja o registro em auditoria/registros/."
           exit 1
+
+  # Republica o site para o rodapé mostrar a auditoria que acabou de rodar (inclusive com divergência).
+  # Só a partir do main, que é de onde o Pages é publicado.
+  publicar:
+    needs: auditar
+    if: ${{ !cancelled() && needs.auditar.result != 'skipped' && github.ref == 'refs/heads/main' }}
+    runs-on: ubuntu-latest
+    concurrency:
+      group: pages
+      cancel-in-progress: false
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main  # inclui o registro commitado pelo job anterior
+
+      - name: Montar site
+        # Mesmo passo de atis.yml.
+        run: |
+          cp -r data site/data
+          v=$(git rev-parse --short=7 HEAD)
+          sed -i "s/app\.js\"/app.js?v=$v\"/; s/style\.css\"/style.css?v=$v\"/; s/orcamento\.js\"/orcamento.js?v=$v\"/; s/auditoria\.js\"/auditoria.js?v=$v\"/" site/*.html
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+      - id: deployment
+        uses: actions/deploy-pages@v4

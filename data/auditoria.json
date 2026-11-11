@@ -1,0 +1,29 @@
+{
+  "repositorio": "https://github.com/ariribeiro/dashboard-carreiras",
+  "coerencia": {
+    "ati": {
+      "data": "2026-11-11T17:56:38+00:00",
+      "registro": "20261111-175638-coerencia",
+      "resultado": "ok"
+    }
+  },
+  "recontagem": {
+    "ati": {
+      "202509": {
+        "data": "2026-11-11T17:56:38+00:00",
+        "registro": "20261111-175638-recontagem",
+        "resultado": "ok"
+      },
+      "202601": {
+        "data": "2026-11-11T17:56:38+00:00",
+        "registro": "20261111-175638-recontagem",
+        "resultado": "ok"
+      },
+      "202607": {
+        "data": "2026-11-11T17:56:38+00:00",
+        "registro": "20261111-175638-recontagem",
+        "resultado": "ok"
+      }
+    }
+  }
+}

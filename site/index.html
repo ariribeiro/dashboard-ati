@@ -61,6 +61,7 @@
       Fonte: <a href="https://portaldatransparencia.gov.br/download-de-dados/servidores">Portal da Transparência — Servidores SIAPE</a>.
       Somente dados agregados; nenhum dado individual é publicado. Estatísticas de acesso anônimas, sem cookies.
     </p>
+    <p id="auditoria" hidden></p>
     <p class="autoria">
       Desenvolvido por <strong>Ari Ribeiro</strong>, Analista em Tecnologia da Informação ·
       <a href="mailto:contato@ariribeiro.dev">contato@ariribeiro.dev</a>
@@ -71,6 +72,7 @@
   </footer>
 
   <script src="orcamento.js"></script>
+  <script src="auditoria.js"></script>
   <script>
     "use strict";
     const fmtInt = new Intl.NumberFormat("pt-BR");
@@ -105,6 +107,8 @@
             `${fmtInt.format(d.total)} ${c.plural} · mediana ${fmtReal.format(d.remuneracao_basica_bruta.mediana)} · ${fmtMes(d.referencia)}`;
         }).catch(() => { a.querySelector(".cartao-numeros").textContent = "dados ainda não processados"; });
       }
+      // Situação da auditoria dos dados, no rodapé.
+      if (await Auditoria.carregar()) Auditoria.geral(document.getElementById("auditoria"), carreiras);
     }
     // Tabela comparativa: modelo de orcamento.js aplicado ao index.json de cada carreira.
     const fmtPct1 = new Intl.NumberFormat("pt-BR", { style: "percent", minimumFractionDigits: 1, maximumFractionDigits: 1 });

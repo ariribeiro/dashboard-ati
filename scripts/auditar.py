@@ -22,6 +22,10 @@ Uso:
     python scripts/auditar.py recontagem --mes 202609          # pode repetir --mes
     python scripts/auditar.py recontagem --mais-recente --sortear 2
     python scripts/auditar.py recontagem --mes 202609 --cache .cache   # usa ZIP local
+    python scripts/auditar.py resumo             # só regrava data/auditoria.json
+
+Além do registro, cada execução regrava data/auditoria.json, o resumo que o site mostra
+no rodapé (última conferência de cada carreira e meses já recontados).
 """
 
 from __future__ import annotations
@@ -49,6 +53,7 @@ RAIZ = Path(__file__).resolve().parent.parent
 DADOS = RAIZ / "data"
 AUDITORIA = RAIZ / "auditoria"
 REGISTROS = AUDITORIA / "registros"
+RESUMO_SITE = DADOS / "auditoria.json"
 
 URL_ZIP = "https://portaldatransparencia.gov.br/download-de-dados/servidores/{mes}_Servidores_SIAPE"
 AGENTE = "Mozilla/5.0 (dashboard-carreiras auditoria; +https://github.com/ariribeiro/dashboard-carreiras)"
@@ -476,10 +481,41 @@ def gravar(metodo: str, agora: datetime, carreiras: dict, res: Resultado, detalh
     return destino
 
 
+def gravar_resumo_site() -> None:
+    """Regrava data/auditoria.json a partir de todos os registros: o que o site mostra no rodapé.
+
+    Por carreira: a conferência de coerência mais recente e, por mês, a recontagem mais recente.
+    Registros com resultado "erro" (nada foi auditado) não entram.
+    """
+    coerencia: dict[str, dict] = {}
+    recontagem: dict[str, dict[str, dict]] = {}
+    for arq in sorted(REGISTROS.glob("*.json")):  # o nome começa pela data: ordem cronológica
+        r = ler_json(arq)
+        if r["resultado"] == "erro":
+            continue
+        base = {"data": r["data"], "registro": r["id"]}
+        if r["metodo"]["id"] == "coerencia":
+            com_problema = {d.get("carreira") for d in r["divergencias"]}
+            for c in r["auditado"]["carreiras"]:
+                coerencia[c] = {**base, "resultado": "divergente" if c in com_problema else "ok"}
+        else:
+            com_problema = {(d.get("carreira"), d.get("mes")) for d in r["divergencias"]}
+            for mes, info in r["auditado"]["meses"].items():
+                for c in info.get("carreiras", []):
+                    recontagem.setdefault(c, {})[mes] = {**base, "resultado": "divergente" if (c, mes) in com_problema else "ok"}
+    resumo = {
+        "repositorio": f"{os.environ.get('GITHUB_SERVER_URL', 'https://github.com')}/"
+                       f"{os.environ.get('GITHUB_REPOSITORY', 'ariribeiro/dashboard-carreiras')}",
+        "coerencia": dict(sorted(coerencia.items())),
+        "recontagem": {c: dict(sorted(meses.items())) for c, meses in sorted(recontagem.items())},
+    }
+    RESUMO_SITE.write_text(json.dumps(resumo, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
+
 def main() -> int:
     todas = ler_json(DADOS / "carreiras.json")
     p = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    p.add_argument("metodo", choices=list(METODOS))
+    p.add_argument("metodo", choices=[*METODOS, "resumo"])
     p.add_argument("--carreira", action="append", choices=list(todas), help="só esta carreira (pode repetir)")
     p.add_argument("--mes", action="append", help="recontagem: mês AAAAMM (pode repetir)")
     p.add_argument("--mais-recente", action="store_true", help="recontagem: inclui o mês mais recente publicado")
@@ -491,6 +527,11 @@ def main() -> int:
         if not re.fullmatch(r"20\d{2}(0[1-9]|1[0-2])", mes):
             p.error(f"--mes deve ter o formato AAAAMM (recebido: {mes})")
 
+    if args.metodo == "resumo":
+        gravar_resumo_site()
+        print(f"Resumo regravado: {RESUMO_SITE.relative_to(RAIZ)}")
+        return 0
+
     carreiras = {c: todas[c] for c in (args.carreira or todas)}
     arq_indice = AUDITORIA / "index.json"
     indice = ler_json(arq_indice) if arq_indice.exists() else {}
@@ -498,6 +539,7 @@ def main() -> int:
     agora = datetime.now(timezone.utc)
     detalhes = auditar_coerencia(carreiras, res) if args.metodo == "coerencia" else auditar_recontagem(args, carreiras, res, indice)
     destino = gravar(args.metodo, agora, carreiras, res, detalhes, indice)
+    gravar_resumo_site()
 
     resultado = ler_json(destino)["resultado"]
     print(f"{args.metodo}: {resultado} — {res.verificacoes} verificações, {len(res.divergencias)} divergências, "
