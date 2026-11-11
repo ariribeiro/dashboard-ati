@@ -47,11 +47,11 @@
     <section class="secao" id="s-orcamento" data-secao="remuneracao" aria-labelledby="t-orcamento" hidden>
       <div class="secao-cabecalho">
         <h2 id="t-orcamento">Impacto orçamentário estimado</h2>
-        <p id="orc-desc">Folha anual de remuneração básica bruta de cada carreira hoje e a estimativa para os próximos anos, com a remuneração média crescendo no ritmo dos últimos 10 anos de cada carreira.</p>
+        <p id="orc-desc">Folha anual de remuneração básica bruta de cada carreira hoje e a estimativa para os próximos anos, com a remuneração média crescendo no ritmo histórico de cada carreira (últimos 10 anos, ou menos se a série for mais curta).</p>
       </div>
       <div class="painel">
         <div class="tabela-rolagem"><table class="tabela-fixa tabela-orcamento" id="t-orcamento-carreiras"></table></div>
-        <p class="nota">Folha anual = 12 meses + 13º. “Sem novas entradas” aplica a taxa de saída dos últimos 5 anos; “repondo as saídas” mantém o efetivo atual. Não inclui encargos patronais, terço de férias, auxílios nem inativos. O método completo está na seção “Impacto orçamentário” de cada painel.</p>
+        <p class="nota">Folha anual hoje = folha do mês mais recente × 13 (12 meses + 13º); nas estimativas, soma dos 12 meses do ano + 13º. O crescimento da remuneração média é o da média de toda a carreira, sem separar classe e padrão: junta reajustes, progressões e a entrada de turmas, e não é o reajuste da tabela. “Sem novas entradas” aplica a taxa de saída dos últimos 5 anos; “repondo as saídas” mantém o efetivo atual. Não inclui encargos patronais, terço de férias, auxílios nem inativos. O método completo está na seção “Impacto orçamentário” de cada painel.</p>
       </div>
     </section>
   </main>
@@ -114,21 +114,28 @@
     };
     async function orcamento() {
       const carreiras = await json("carreiras.json");
-      const linhas = (await Promise.all(Object.entries(carreiras).map(async ([slug, c]) => {
+      const series = (await Promise.all(Object.entries(carreiras).map(async ([slug, c]) => {
         try {
-          const p = Orcamento.projetar((await json(`${slug}/index.json`)).meses);
-          return p && { slug, c, p };
+          const meses = (await json(`${slug}/index.json`)).meses;
+          return meses.length ? { slug, c, meses } : null;
         } catch (e) { return null; }
       }))).filter(Boolean);
+      if (!series.length) return;
+      // Todas as carreiras são comparadas no mesmo mês: o mais recente que todas têm.
+      // Assim os anos do cabeçalho e a linha Total valem para todas as linhas.
+      const comum = Math.min(...series.map((s) => numMes(s.meses.at(-1).mes)));
+      const linhas = series.map(({ slug, c, meses }) => {
+        const p = Orcamento.projetar(meses.filter((m) => numMes(m.mes) <= comum));
+        return p && { slug, c, p };
+      }).filter(Boolean);
       if (!linhas.length) return;
-      const mesmoMes = linhas.every((l) => l.p.ultimo === linhas[0].p.ultimo);
-      if (mesmoMes) document.getElementById("orc-desc").textContent += ` Dados até ${fmtMes(refDeNum(linhas[0].p.ultimo))}.`;
+      document.getElementById("orc-desc").textContent += ` Dados até ${fmtMes(refDeNum(comum))}.`;
       const anoFim = linhas[0].p.anosProj.at(-1);
       const anoIni = Math.floor(linhas[0].p.ultimo / 12) + 1;
       const soma = (cen, p) => cen.valores.reduce((s, v, i) => s + (p.anosProj[i] >= anoIni ? v : 0), 0);
       const t = document.getElementById("t-orcamento-carreiras");
       t.innerHTML = `<thead><tr><th>Carreira</th><th class="num">Efetivo</th><th class="num">Folha anual hoje</th>` +
-        `<th class="num">Reajuste histórico</th><th class="num">${anoFim}<small>sem novas entradas</small></th>` +
+        `<th class="num">Crescimento<small>da remuneração média</small></th><th class="num">${anoFim}<small>sem novas entradas</small></th>` +
         `<th class="num">${anoFim}<small>repondo as saídas</small></th><th class="num">Soma ${anoIni}–${anoFim}<small>sem novas entradas</small></th></tr></thead>`;
       const corpo = t.createTBody();
       const tot = [0, 0, 0, 0, 0];
@@ -137,11 +144,10 @@
         const v = [p.efetivoAtual, p.folhaMensalAtual * 13, semEntradas.valores.at(-1), constante.valores.at(-1), soma(semEntradas, p)];
         v.forEach((x, i) => { tot[i] += x; });
         const tr = corpo.insertRow();
-        tr.insertCell().innerHTML = `<a href="painel.html?carreira=${slug}#s-orcamento"></a><small></small>`;
+        tr.insertCell().innerHTML = `<a href="painel.html?carreira=${slug}#s-orcamento"></a>`;
         tr.cells[0].firstChild.textContent = c.sigla;
-        // Mês de referência por linha só quando as carreiras estão em meses diferentes.
-        if (!mesmoMes) tr.cells[0].lastChild.textContent = `até ${fmtMes(refDeNum(p.ultimo))}`;
-        for (const txt of [fmtInt.format(v[0]), fmtDinheiro(v[1]), p.reajuste ? fmtPct1.format(p.reajuste.taxa) + " ao ano" : "–",
+        for (const txt of [fmtInt.format(v[0]), fmtDinheiro(v[1]), // Indica o período só quando a série não alcança os 10 anos.
+          p.reajuste ? `${fmtPct1.format(p.reajuste.taxa)} ao ano${p.reajuste.anos < 10 ? ` (${p.reajuste.anos} anos)` : ""}` : "–",
           fmtDinheiro(v[2]), fmtDinheiro(v[3]), fmtDinheiro(v[4])]) {
           const td = tr.insertCell(); td.className = "num"; td.textContent = txt;
         }

@@ -254,6 +254,10 @@ def agregar(atis: pd.DataFrame, rem: pd.Series, mes: str, cfg: dict) -> dict:
     valores = rem.reindex(atis.index)
     valores = valores[valores > 0]
 
+    # Sem ninguém com remuneração no mês, as estatísticas são NaN; grava null para o JSON continuar válido.
+    def valor(v) -> float | None:
+        return None if pd.isna(v) else round(float(v), 2)
+
     return {
         "referencia": f"{mes[:4]}-{mes[4:]}",
         "gerado_em": datetime.now(timezone.utc).isoformat(timespec="seconds"),
@@ -278,10 +282,10 @@ def agregar(atis: pd.DataFrame, rem: pd.Series, mes: str, cfg: dict) -> dict:
         },
         "remuneracao_basica_bruta": {
             "n": int(len(valores)),
-            "media": round(float(valores.mean()), 2),
-            "mediana": round(float(valores.median()), 2),
-            "p10": round(float(valores.quantile(0.10)), 2),
-            "p90": round(float(valores.quantile(0.90)), 2),
+            "media": valor(valores.mean()),
+            "mediana": valor(valores.median()),
+            "p10": valor(valores.quantile(0.10)),
+            "p90": valor(valores.quantile(0.90)),
             "histograma": histograma(valores, cfg.get("faixas", FAIXAS)),
         },
     }
@@ -382,8 +386,9 @@ def processar_mes(s: requests.Session, mes: str, carreiras: dict[str, dict], for
             resultado = "vazio"
             continue
         salvar(resumo, c, mes)
+        mediana = resumo["remuneracao_basica_bruta"]["mediana"]
         print(f"Salvo data/{c}/{mes}.json — {resumo['total']} {carreiras[c]['plural']}, "
-              f"mediana R$ {resumo['remuneracao_basica_bruta']['mediana']:,.2f}")
+              + (f"mediana R$ {mediana:,.2f}" if mediana is not None else "sem remuneração no mês"))
     return resultado
 
 
