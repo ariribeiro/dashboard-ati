@@ -15,7 +15,24 @@
       "clara": "#F4C400",
       "forte": "#0D2B5C"
     },
-    "grupo": "transversais"
+    "grupo": "transversais",
+    "atribuicoes": {
+      "intro": "Além das atividades especializadas de planejamento, supervisão, coordenação e controle dos recursos de tecnologia da informação relativos ao funcionamento da administração pública federal, são atribuições do cargo de Analista em Tecnologia da Informação da carreira de Tecnologia da Informação:",
+      "itens": [
+        "executar análises para desenvolvimento, implantação e suporte a sistemas de informação e a soluções tecnológicas específicas;",
+        "especificar e apoiar a formulação e o acompanhamento das políticas de planejamento relativas aos recursos de tecnologia da informação;",
+        "especificar, supervisionar e acompanhar as atividades de desenvolvimento, manutenção, integração e monitoramento do desempenho dos aplicativos de tecnologia da informação;",
+        "gerenciar a disseminação, a integração e o controle de qualidade dos dados;",
+        "organizar, manter e controlar o armazenamento, a administração e o acesso às bases de dados da informática de governo;",
+        "desenvolver, implementar, executar e supervisionar atividades relacionadas aos processos de configuração, segurança, conectividade, serviços compartilhados e adequações da infraestrutura de informática da administração pública federal;",
+        "executar ações necessárias à gestão da segurança da informação dos órgãos e das entidades da administração pública federal;",
+        "executar ações necessárias à governança de tecnologia da informação e à proteção de dados dos órgãos e das entidades da administração pública federal;",
+        "prospectar o uso de soluções para aumentar a eficiência e a capacidade de personalização da relação com os usuários de serviços públicos; e",
+        "promover a inovação e a melhoria de serviços públicos com o uso de tecnologia."
+      ],
+      "fonte": "Lei nº 14.875/2024, art. 30",
+      "url": "https://www2.camara.leg.br/legin/fed/lei/2024/lei-14875-31-maio-2024-795709-norma-pl.html"
+    }
   },
   "atps": {
     "sigla": "ATPS",
@@ -34,7 +51,21 @@
       "clara": "#F7867B",
       "forte": "#C02A1C"
     },
-    "grupo": "transversais"
+    "grupo": "transversais",
+    "atribuicoes": {
+      "intro": "São atribuições do cargo de Analista Técnico de Políticas Sociais:",
+      "itens": [
+        "executar atividades de assistência técnica em projetos e programas nas áreas de saúde, previdência, emprego e renda, segurança pública, desenvolvimento urbano, segurança alimentar, assistência social, educação, cultura, cidadania, direitos humanos, igualdade racial e proteção à infância, à juventude, à pessoa com deficiência, à pessoa idosa e aos povos indígenas que não sejam privativas de outras carreiras ou cargos isolados, no âmbito do Poder Executivo federal;",
+        "verificar, acompanhar e supervisionar os processos inerentes ao Sistema Único de Saúde, ao Sistema Único de Assistência Social e aos demais programas sociais do governo federal objeto de execução descentralizada;",
+        "identificar situações em desacordo com os padrões estabelecidos em normas e na legislação específica de atenção a saúde, previdência, emprego e renda, segurança pública, desenvolvimento urbano, segurança alimentar, assistência social, educação, cultura, cidadania, direitos humanos, igualdade racial e proteção à infância, à juventude, à pessoa com deficiência, à pessoa idosa e aos povos indígenas que não sejam privativas de outras carreiras ou cargos isolados, no âmbito do Poder Executivo federal, e proporcionar ações orientadoras e corretivas, de forma a promover a melhoria dos processos e a redução dos custos;",
+        "aferir os resultados da assistência a saúde, previdência, emprego e renda, segurança pública, desenvolvimento urbano, segurança alimentar, assistência social, educação, cultura, cidadania, direitos humanos, igualdade racial e proteção à infância, à juventude, à pessoa com deficiência, à pessoa idosa e aos povos indígenas, considerando os planos e os objetivos definidos no Sistema Único de Saúde, no Sistema Único de Assistência Social e nas demais políticas sociais;",
+        "proceder à análise e avaliação dos dados obtidos, gerando informações que contribuam para o planejamento e o aperfeiçoamento das ações e políticas sociais;",
+        "apoiar e subsidiar as atividades de controle e de auditoria; e",
+        "colaborar na definição de estratégias de execução das atividades de controle e avaliação, sob o aspecto da melhoria contínua e aperfeiçoamento das políticas sociais."
+      ],
+      "fonte": "Lei nº 12.094/2009, art. 3º (com a redação da Lei nº 14.875/2024)",
+      "url": "https://www2.camara.leg.br/legin/fed/lei/2009/lei-12094-19-novembro-2009-592880-norma-pl.html"
+    }
   },
   "eppgg": {
     "sigla": "EPPGG",
@@ -64,7 +95,13 @@
       "clara": "#54C36C",
       "forte": "#1B7A2E"
     },
-    "grupo": "transversais"
+    "grupo": "transversais",
+    "atribuicoes": {
+      "intro": "Segundo a lei de criação, a carreira é para",
+      "trecho": "execução de atividades de formulação, implementação e avaliação de políticas públicas, bem assim de direção e assessoramento em escalões superiores da Administração Direta e Autárquica.",
+      "fonte": "Lei nº 7.834/1989, art. 1º",
+      "url": "https://www2.camara.leg.br/legin/fed/lei/1989/lei-7834-6-outubro-1989-365496-norma-pl.html"
+    }
   },
   "ace": {
     "sigla": "ACE",
@@ -94,7 +131,13 @@
       "clara": "#F4DA27",
       "forte": "#7A6800"
     },
-    "grupo": "transversais"
+    "grupo": "transversais",
+    "atribuicoes": {
+      "intro": "Segundo a lei de criação, a carreira tem",
+      "trecho": "atribuições voltadas para as atividades de gestão governamental, relativas à formulação, implementação, controle e avaliação de políticas de comércio exterior.",
+      "fonte": "Lei nº 9.620/1998, art. 1º, II (com a redação da Lei nº 12.857/2013)",
+      "url": "https://www2.camara.leg.br/legin/fed/lei/1998/lei-9620-2-abril-1998-372136-norma-pl.html"
+    }
   },
   "aie": {
     "sigla": "AIE",
@@ -124,7 +167,13 @@
       "clara": "#F5A83A",
       "forte": "#9A5600"
     },
-    "grupo": "transversais"
+    "grupo": "transversais",
+    "atribuicoes": {
+      "intro": "Segundo a lei de criação, o cargo tem",
+      "trecho": "atribuições voltadas às atividades especializadas de planejamento, coordenação, fiscalização, assistência técnica e execução de projetos e obras de infra-estrutura de grande porte.",
+      "fonte": "Lei nº 11.539/2007, art. 1º, I",
+      "url": "https://www2.camara.leg.br/legin/fed/lei/2007/lei-11539-8-novembro-2007-562767-norma-pl.html"
+    }
   },
   "affc": {
     "sigla": "AFFC",
@@ -154,6 +203,22 @@
       45000,
       50000
     ],
-    "grupo": "outras"
+    "grupo": "outras",
+    "atribuicoes": {
+      "intro": "São atribuições do ocupante do cargo de Auditor Federal de Finanças e Controle o planejamento, a supervisão, a coordenação, a orientação e a execução:",
+      "itens": [
+        "no âmbito do Sistema de Controle Interno do Poder Executivo Federal, das atividades de avaliação do cumprimento das metas previstas no plano plurianual, da execução dos programas de governo e dos orçamentos da União, da análise da qualidade do gasto público e da avaliação da gestão dos administradores públicos federais, utilizando como instrumentos a auditoria e a fiscalização;",
+        "no âmbito do órgão central do Sistema de Contabilidade Federal, das atividades de registro, tratamento, controle e acompanhamento das operações patrimoniais e contábeis relativas à administração orçamentária, financeira e patrimonial da União, com vistas à elaboração de demonstrações contábeis do setor público nacional;",
+        "no âmbito do órgão central do Sistema de Administração Financeira Federal, das atividades de programação financeira da União, da administração de direitos e haveres, de garantias e de obrigações de responsabilidade do Tesouro Nacional, da orientação técnico-normativa referente à execução orçamentária e financeira e do monitoramento das finanças dos entes federativos;",
+        "no âmbito do órgão central do Sistema de Correição do Poder Executivo Federal, das atividades relacionadas à prevenção e à apuração de irregularidades na esfera do Poder Executivo federal;",
+        "das atividades de gestão das dívidas públicas mobiliária e contratual, interna e externa, de responsabilidade direta ou indireta do Tesouro Nacional;",
+        "das atividades relacionadas à análise e à disseminação de estatísticas fiscais, da gestão do patrimônio de fundos e programas sociais e das diretrizes de política fiscal do governo federal;",
+        "das atividades de monitoramento das finanças dos entes federativos, do controle das transferências financeiras constitucionais e da consolidação das contas dos entes da Federação;",
+        "das atividades de transparência pública e de ouvidoria no Ministério da Transparência, Fiscalização e Controladoria-Geral da União (CGU); e",
+        "de outras atividades necessárias ao cumprimento da missão institucional e ao funcionamento do Ministério da Fazenda e do Ministério da Transparência, Fiscalização e Controladoria-Geral da União (CGU)."
+      ],
+      "fonte": "Lei nº 9.625/1998, art. 22 (com a redação das Leis nº 13.327/2016 e nº 13.464/2017)",
+      "url": "https://www2.camara.leg.br/legin/fed/lei/1998/lei-9625-7-abril-1998-367753-norma-pl.html"
+    }
   }
 }

@@ -120,6 +120,7 @@ flowchart LR
 | `classes` | Opcional. Rótulo de exibição por código do SIAPE (ex.: `{"S": "Especial"}`) |
 | `faixas` | Opcional. Limites (R$) do histograma, para carreiras em outro patamar salarial |
 | `inicio` | Opcional. Primeiro mês (`AAAA-MM`) em que a carreira aparece no SIAPE; meses anteriores são ignorados em vez de falhar como "vazio" |
+| `atribuicoes` | Opcional. Atribuições do cargo copiadas da lei: `intro`, `itens` (lista) ou `trecho` (frase única), `fonte` (dispositivo legal) e `url` (texto da lei na base da Câmara). O painel mostra o bloco "Atribuições do cargo" na seção Carreira; sem o campo, ele fica oculto |
 | `cores` | `destaque` (cor da carreira: faixa, brilho do cabeçalho, cartão da página inicial), `clara` (acento sobre fundo escuro e no modo escuro) e `forte` (acento sobre fundo claro, contraste ≥ 4,5:1). A ATI mantém a identidade oficial no painel |
 
 </details>

@@ -561,6 +561,24 @@ function topComOutros(itens, n) {
   return [...itens.slice(0, n), { nome: `Outros (${itens.length - n} órgãos)`, qtd: resto }];
 }
 
+// Atribuições do cargo (carreiras.json "atribuicoes"): texto da lei, com link para a fonte.
+function renderAtribuicoes() {
+  const a = CFG.atribuicoes;
+  const bloco = document.getElementById("atribuicoes");
+  bloco.hidden = !a;
+  if (!a) return;
+  document.getElementById("atribuicoes-intro").textContent = a.trecho ? `${a.intro} ${a.trecho}` : a.intro;
+  const lista = document.getElementById("atribuicoes-lista");
+  lista.replaceChildren(...(a.itens ?? []).map((t) => {
+    const li = document.createElement("li");
+    li.textContent = t;
+    return li;
+  }));
+  const link = document.getElementById("atribuicoes-fonte");
+  link.textContent = a.fonte;
+  link.href = a.url;
+}
+
 function delta(el, atualV, anteriorV, formatar, rotulo, colorir = true) {
   el.className = "delta";
   if (anteriorV == null) { el.textContent = ""; return; }
@@ -979,6 +997,7 @@ function renderizar() {
   document.getElementById("carreira-desc").textContent =
     `Em ${fmtMes(d.referencia)}, os ${P} estão ${classesMes.length > 1 ? "nas classes" : "na classe"} ${listaClasses}, cada uma dividida em padrões.` +
     (CFG.ingresso ? ` O ingresso acontece na classe ${rotuloClasse(CFG.ingresso.classe)}, padrão ${CFG.ingresso.padrao}.` : "");
+  renderAtribuicoes();
   mapaClassePadrao("g-classe", d.por_classe_padrao);
   barrasHorizontais("g-funcao", d.funcao.por_sigla, "--carreira");
   document.getElementById("funcao-sub").textContent =
