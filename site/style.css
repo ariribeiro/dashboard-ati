@@ -510,7 +510,7 @@ code { font-size: 0.8125rem; overflow-wrap: anywhere; }
 /* ---------------------------------------------------------------- página inicial */
 
 .inicio-marca { border-left: 0; padding-left: 0; }
-.cartoes-carreira { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px; }
+.cartoes-carreira { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
 .cartao-carreira {
   display: flex;
   flex-direction: column;
@@ -640,3 +640,11 @@ code { font-size: 0.8125rem; overflow-wrap: anywhere; }
 .aud-modal-tabela th, .aud-modal-tabela td { padding: 4px 8px; text-align: left; border-bottom: 1px solid var(--borda); }
 .aud-modal-tabela .num { text-align: right; }
 .aud-sha { list-style: none; padding: 0; font-size: 0.75rem; word-break: break-all; }
+.vistas.modos button.ativo { background: var(--onde-forte); color: #fff; }
+
+.atribuicoes { margin-top: 14px; }
+.atribuicoes h3 { margin: 0 0 6px; font-size: 1rem; }
+.atribuicoes p { margin: 0; color: var(--texto-2); max-width: 100ch; }
+.atribuicoes ul { margin: 10px 0; padding-left: 20px; max-width: 100ch; }
+.atribuicoes li { margin: 4px 0; }
+.atribuicoes .atribuicoes-fonte { font-size: 0.8125rem; }

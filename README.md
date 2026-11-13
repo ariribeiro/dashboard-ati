@@ -27,6 +27,7 @@ Painéis estáticos de carreiras do Executivo Federal, atualizados todo mês com
 | ![](https://img.shields.io/badge/-EPPGG-229136) | Especialista em Políticas Públicas e Gestão Governamental | [`/eppgg/`](https://ariribeiro.github.io/dashboard-carreiras/eppgg/) | `ESP POL PUBL GESTAO GOVERNAMENTAL` |
 | ![](https://img.shields.io/badge/-ACE-F4DA27) | Analista de Comércio Exterior | [`/ace/`](https://ariribeiro.github.io/dashboard-carreiras/ace/) | `ANALISTA DE COMERCIO EXTERIOR` |
 | ![](https://img.shields.io/badge/-AIE-EFA22A) | Analista de Infraestrutura | [`/aie/`](https://ariribeiro.github.io/dashboard-carreiras/aie/) | `ANALISTA DE INFRA-ESTRUTURA` |
+| ![](https://img.shields.io/badge/-AFFC-7B4BC4) | Auditor Federal de Finanças e Controle | [`/affc/`](https://ariribeiro.github.io/dashboard-carreiras/affc/) | `AUDITOR FEDERAL DE FINANCAS E CONTROLE` |
 
 Os links curtos têm prévia própria para redes sociais e levam a
 `/painel.html?carreira=<sigla>`. A página inicial (`/`) lista todas as carreiras.
@@ -114,10 +115,12 @@ flowchart LR
 | `sigla`, `plural`, `nome`, `nome_plural` | Textos do painel |
 | `padrao_cargo` | Regex do cargo no SIAPE (texto sem acentos, maiúsculo) |
 | `marca` | `"ati"` usa a marca oficial da ATI; `"neutra"`, a sigla em texto |
+| `grupo` | Bloco da página inicial: `"transversais"` (carreiras do MGI) ou `"outras"`. Sem o campo, entra em "Outras carreiras" |
 | `ingresso` | Classe e padrão de entrada (`{"classe": "A", "padrao": "I"}`), ou `null` se não confirmado. Sem ele, o painel omite o destaque "no início da carreira" |
 | `classes` | Opcional. Rótulo de exibição por código do SIAPE (ex.: `{"S": "Especial"}`) |
 | `faixas` | Opcional. Limites (R$) do histograma, para carreiras em outro patamar salarial |
 | `inicio` | Opcional. Primeiro mês (`AAAA-MM`) em que a carreira aparece no SIAPE; meses anteriores são ignorados em vez de falhar como "vazio" |
+| `atribuicoes` | Opcional. Atribuições do cargo copiadas da lei: `intro`, `itens` (lista) ou `trecho` (frase única), `fonte` (dispositivo legal) e `url` (texto da lei na base da Câmara). O painel mostra o bloco "Atribuições do cargo" na seção Carreira; sem o campo, ele fica oculto |
 | `cores` | `destaque` (cor da carreira: faixa, brilho do cabeçalho, cartão da página inicial), `clara` (acento sobre fundo escuro e no modo escuro) e `forte` (acento sobre fundo claro, contraste ≥ 4,5:1). A ATI mantém a identidade oficial no painel |
 
 </details>
@@ -145,6 +148,12 @@ Conferido no arquivo de ago/2026:
     ("Especial"); ingresso não configurado. Não inclui
     `ESPECIALISTA EM INFRA-ESTRUTURA SENIOR` nem
     `ANALISTA EM INFRA-ESTRUT DE TRANSPORTES` (DNIT), que são outros cargos.
+  - **AFFC**: carreira única de Finanças e Controle, com servidores em vários órgãos
+    (set/2026: ~60% na CGU e ~27% no Ministério da Fazenda, onde está a STN). Entram todos os
+    AFFC, sem recorte por órgão; o mapa mostra onde cada um tem exercício. Classes B, C e S
+    ("Especial"); ingresso não configurado. Remuneração em patamar mais alto (mediana ~R$ 36,7 mil
+    em set/2026), por isso tem faixas próprias no histograma. Não inclui
+    `TECNICO FEDERAL DE FINANCAS E CONTROLE`, que é outro cargo da mesma carreira.
 - **Função comissionada**: fica numa linha separada do mesmo
   `Id_SERVIDOR_PORTAL`, com `DESCRICAO_CARGO` "Sem informação" e `SIGLA_FUNCAO`
   preenchida (FEX, CCX…). O servidor conta como "com função" quando essa linha existe.
