@@ -1,0 +1,774 @@
+{
+  "id": "20261113-134048-recontagem",
+  "data": "2026-11-13T13:40:48+00:00",
+  "metodo": {
+    "id": "recontagem",
+    "descricao": "Recontagem independente: ZIP Servidores_SIAPE baixado do Portal da Transparência e agregados recalculados por scripts/auditar.py (biblioteca padrão, sem código de gerar_dados.py), comparados com data/<carreira>/AAAAMM.json."
+  },
+  "resultado": "ok",
+  "commit": "2f959ca5754fe0de936d6453b2ce70ac9c08b1d3",
+  "execucao": {
+    "origem": "github-actions",
+    "evento": "workflow_run",
+    "url": "https://github.com/ariribeiro/dashboard-carreiras/actions/runs/43435718091"
+  },
+  "auditado": {
+    "carreiras": [
+      "ace",
+      "affc",
+      "aie",
+      "ati",
+      "atps",
+      "eppgg"
+    ],
+    "meses": {
+      "202609": {
+        "carreiras": [
+          "ace",
+          "affc",
+          "aie",
+          "ati",
+          "atps",
+          "eppgg"
+        ],
+        "divergencias": 0
+      },
+      "201906": {
+        "carreiras": [
+          "ace",
+          "aie",
+          "ati",
+          "atps",
+          "eppgg"
+        ],
+        "divergencias": 0
+      },
+      "202109": {
+        "carreiras": [
+          "ace",
+          "affc",
+          "aie",
+          "ati",
+          "atps",
+          "eppgg"
+        ],
+        "divergencias": 0
+      }
+    },
+    "sorteio": {
+      "semente": 1637385774,
+      "quantidade": 2,
+      "candidatos": 153,
+      "criterio": "meses publicados ainda sem recontagem; se todos já tiverem, qualquer mês publicado"
+    },
+    "fontes": [
+      {
+        "mes": "202609",
+        "url": "https://portaldatransparencia.gov.br/download-de-dados/servidores/202609_Servidores_SIAPE",
+        "sha256": "f6381c6f1dee32d9d1bc0ffd7e370498896ad7f752ae4102c45484df86bc5f1e",
+        "bytes": 83444278,
+        "origem": "download"
+      },
+      {
+        "mes": "201906",
+        "url": "https://portaldatransparencia.gov.br/download-de-dados/servidores/201906_Servidores_SIAPE",
+        "sha256": "5ea86363b85faf2846d627f41a8e5264e08a612ad1dd8094e3762c6d2b561aca",
+        "bytes": 87167975,
+        "origem": "download"
+      },
+      {
+        "mes": "202109",
+        "url": "https://portaldatransparencia.gov.br/download-de-dados/servidores/202109_Servidores_SIAPE",
+        "sha256": "2f8500e22d6c225b4f3d3c5354c30893907c2947654fd6156fe9133fa86ec246",
+        "bytes": 80335051,
+        "origem": "download"
+      }
+    ]
+  },
+  "verificacoes": 238,
+  "divergencias": [],
+  "avisos": [
+    "affc/201906: sem arquivo publicado em data/; não comparado."
+  ],
+  "diagnosticos": {
+    "202609": {
+      "ati": {
+        "cargos_aceitos_pelo_filtro": [
+          {
+            "cargo": "ANALISTA EM TECNOL DA INFORMACAO",
+            "linhas": 762
+          }
+        ],
+        "cargos_parecidos_rejeitados": [
+          {
+            "cargo": "ANALISTA TECNICO EXECUTIVO",
+            "linhas": 5907
+          },
+          {
+            "cargo": "ANALISTA DE TEC DA INFORMACAO",
+            "linhas": 3039
+          },
+          {
+            "cargo": "ANALISTA EM CIENCIA E TECNOLOGIA",
+            "linhas": 1781
+          },
+          {
+            "cargo": "ANALISTA TECN EM POLITICAS SOCIAIS",
+            "linhas": 1390
+          },
+          {
+            "cargo": "ANALISTA PLAN GEST INF INFOR GEOG ESTATI",
+            "linhas": 883
+          },
+          {
+            "cargo": "ANALISTA DE TECNOL DA INFORMACAO - 40H",
+            "linhas": 400
+          },
+          {
+            "cargo": "ANALISTA TECNICO DA SUSEP",
+            "linhas": 329
+          },
+          {
+            "cargo": "ANALISTA TECN DE JUSTICA E DEFESA",
+            "linhas": 231
+          },
+          {
+            "cargo": "ANALISTA TECN DE DESENV SOCIOECON",
+            "linhas": 195
+          },
+          {
+            "cargo": "ANALISTA DESENV TECN NUCLEAR E DEFESA",
+            "linhas": 177
+          },
+          {
+            "cargo": "ANALISTA TECNICO ADMINISTRATIVO",
+            "linhas": 96
+          },
+          {
+            "cargo": "ANALISTA - ANALISTA DE TECNOL DA INFORM",
+            "linhas": 82
+          },
+          {
+            "cargo": "ANALISTA DE TECNOLOGIA MILITAR",
+            "linhas": 35
+          },
+          {
+            "cargo": "ANALISTA TECNICO ADMINISTRATIVO III",
+            "linhas": 12
+          },
+          {
+            "cargo": "ANALISTA - ANALISTA DE DOC E INFORMACAO",
+            "linhas": 6
+          }
+        ],
+        "servidores_com_mais_de_uma_linha_de_remuneracao": 0,
+        "servidores_sem_linha_de_remuneracao": 12,
+        "mediana_com_funcao": 21222.33,
+        "mediana_sem_funcao": 11150.8
+      },
+      "atps": {
+        "cargos_aceitos_pelo_filtro": [
+          {
+            "cargo": "ANALISTA TECN EM POLITICAS SOCIAIS",
+            "linhas": 1390
+          }
+        ],
+        "cargos_parecidos_rejeitados": [
+          {
+            "cargo": "ANALISTA TECNICO EXECUTIVO",
+            "linhas": 5907
+          },
+          {
+            "cargo": "ANALISTA DO SEGURO SOCIAL",
+            "linhas": 4230
+          },
+          {
+            "cargo": "ANALISTA EM CIENCIA E TECNOLOGIA",
+            "linhas": 1781
+          },
+          {
+            "cargo": "ANALISTA EM TECNOL DA INFORMACAO",
+            "linhas": 762
+          },
+          {
+            "cargo": "ANALISTA DE TECNOL DA INFORMACAO - 40H",
+            "linhas": 400
+          },
+          {
+            "cargo": "ANALISTA TECNICO DA SUSEP",
+            "linhas": 329
+          },
+          {
+            "cargo": "ANALISTA TECN DE JUSTICA E DEFESA",
+            "linhas": 231
+          },
+          {
+            "cargo": "ANALISTA TECN DE DESENV SOCIOECON",
+            "linhas": 195
+          },
+          {
+            "cargo": "ANALISTA DESENV TECN NUCLEAR E DEFESA",
+            "linhas": 177
+          },
+          {
+            "cargo": "ANALISTA TECNICO ADMINISTRATIVO",
+            "linhas": 96
+          },
+          {
+            "cargo": "ANALISTA - ANALISTA DE TECNOL DA INFORM",
+            "linhas": 82
+          },
+          {
+            "cargo": "ANALISTA DE TECNOLOGIA MILITAR",
+            "linhas": 35
+          },
+          {
+            "cargo": "ANALISTA - ANALISTA DE COMUNIC SOCIAL",
+            "linhas": 16
+          },
+          {
+            "cargo": "ANALISTA TECNICO ADMINISTRATIVO III",
+            "linhas": 12
+          },
+          {
+            "cargo": "ANALISTA - ASSISTENTE SOCIAL",
+            "linhas": 4
+          }
+        ],
+        "servidores_com_mais_de_uma_linha_de_remuneracao": 0,
+        "servidores_sem_linha_de_remuneracao": 24,
+        "mediana_com_funcao": 19800.51,
+        "mediana_sem_funcao": 9711.0
+      },
+      "eppgg": {
+        "cargos_aceitos_pelo_filtro": [
+          {
+            "cargo": "ESP POL PUBL GESTAO GOVERNAMENTAL",
+            "linhas": 1064
+          }
+        ],
+        "cargos_parecidos_rejeitados": [
+          {
+            "cargo": "ESPEC GESTAO DE PROJETOS - 40H",
+            "linhas": 59
+          },
+          {
+            "cargo": "ESPECIALISTA CET PROD INOV SAUDE PUBLICA",
+            "linhas": 47
+          }
+        ],
+        "servidores_com_mais_de_uma_linha_de_remuneracao": 0,
+        "servidores_sem_linha_de_remuneracao": 75,
+        "mediana_com_funcao": 41887.87,
+        "mediana_sem_funcao": 36694.0
+      },
+      "ace": {
+        "cargos_aceitos_pelo_filtro": [
+          {
+            "cargo": "ANALISTA DE COMERCIO EXTERIOR",
+            "linhas": 434
+          }
+        ],
+        "cargos_parecidos_rejeitados": [],
+        "servidores_com_mais_de_uma_linha_de_remuneracao": 0,
+        "servidores_sem_linha_de_remuneracao": 24,
+        "mediana_com_funcao": 41149.87,
+        "mediana_sem_funcao": 35684.22
+      },
+      "aie": {
+        "cargos_aceitos_pelo_filtro": [
+          {
+            "cargo": "ANALISTA DE INFRA-ESTRUTURA",
+            "linhas": 1032
+          }
+        ],
+        "cargos_parecidos_rejeitados": [
+          {
+            "cargo": "ANALISTA EM INFRA-ESTRUT DE TRANSPORTES",
+            "linhas": 754
+          },
+          {
+            "cargo": "ANALISTA PLANEJ G INFRAEST PROP IND",
+            "linhas": 182
+          },
+          {
+            "cargo": "ANALISTA DE INFRAESTRUT DE TI - NS",
+            "linhas": 6
+          }
+        ],
+        "servidores_com_mais_de_uma_linha_de_remuneracao": 0,
+        "servidores_sem_linha_de_remuneracao": 23,
+        "mediana_com_funcao": 29259.54,
+        "mediana_sem_funcao": 17729.98
+      },
+      "affc": {
+        "cargos_aceitos_pelo_filtro": [
+          {
+            "cargo": "AUDITOR FEDERAL DE FINANCAS E CONTROLE",
+            "linhas": 2558
+          }
+        ],
+        "cargos_parecidos_rejeitados": [
+          {
+            "cargo": "AUDITOR-FISCAL DA RECEITA FEDERAL BRASIL",
+            "linhas": 6623
+          },
+          {
+            "cargo": "AUDITOR FISCAL FEDERAL AGROPEC",
+            "linhas": 2475
+          },
+          {
+            "cargo": "AUD FEDERAL FIN E CONTROLE - (EX-TER)",
+            "linhas": 22
+          }
+        ],
+        "servidores_com_mais_de_uma_linha_de_remuneracao": 0,
+        "servidores_sem_linha_de_remuneracao": 57,
+        "mediana_com_funcao": 39602.64,
+        "mediana_sem_funcao": 36694.0
+      }
+    },
+    "201906": {
+      "ati": {
+        "cargos_aceitos_pelo_filtro": [
+          {
+            "cargo": "ANALISTA EM TECNOLOGIA DA INFORMACAO",
+            "linhas": 465
+          }
+        ],
+        "cargos_parecidos_rejeitados": [
+          {
+            "cargo": "ANALISTA DE TEC DA INFORMACAO",
+            "linhas": 2786
+          },
+          {
+            "cargo": "ANALISTA EM CIENCIA E TECNOLOGIA",
+            "linhas": 1526
+          },
+          {
+            "cargo": "ANALISTA TECNICO ADMINISTRATIVO",
+            "linhas": 1248
+          },
+          {
+            "cargo": "ANALISTA PLAN GEST INF INFOR GEOG ESTATI",
+            "linhas": 768
+          },
+          {
+            "cargo": "ANALISTA TECNICO DE POLITICAS SOCIAIS",
+            "linhas": 765
+          },
+          {
+            "cargo": "ANALISTA TECNICO DA SUSEP",
+            "linhas": 282
+          },
+          {
+            "cargo": "ANALISTA TECNICO-ADMINISTRATIVO",
+            "linhas": 230
+          },
+          {
+            "cargo": "ANALISTA DE TECNOL DA INFORMACAO - 40H",
+            "linhas": 203
+          },
+          {
+            "cargo": "ANALISTA DESENV TECN NUCLEAR E DEFESA",
+            "linhas": 142
+          },
+          {
+            "cargo": "ANALISTA - ANALISTA DE TECNOL DA INFORM",
+            "linhas": 79
+          },
+          {
+            "cargo": "ANALISTA DE TECNOLOGIA MILITAR",
+            "linhas": 38
+          },
+          {
+            "cargo": "ANALISTA TECNICO ADMINISTRATIVO III",
+            "linhas": 23
+          },
+          {
+            "cargo": "ANALISTA DE INFORMACOES",
+            "linhas": 11
+          },
+          {
+            "cargo": "ANALISTA EM DESENV. TECN. E DEFESA",
+            "linhas": 6
+          },
+          {
+            "cargo": "ANALISTA TECNICO",
+            "linhas": 5
+          }
+        ],
+        "servidores_com_mais_de_uma_linha_de_remuneracao": 0,
+        "servidores_sem_linha_de_remuneracao": 12,
+        "mediana_com_funcao": 13760.59,
+        "mediana_sem_funcao": 10596.86
+      },
+      "atps": {
+        "cargos_aceitos_pelo_filtro": [
+          {
+            "cargo": "ANALISTA TECNICO DE POLITICAS SOCIAIS",
+            "linhas": 765
+          }
+        ],
+        "cargos_parecidos_rejeitados": [
+          {
+            "cargo": "ANALISTA DO SEGURO SOCIAL",
+            "linhas": 4466
+          },
+          {
+            "cargo": "ANALISTA EM CIENCIA E TECNOLOGIA",
+            "linhas": 1526
+          },
+          {
+            "cargo": "ANALISTA TECNICO ADMINISTRATIVO",
+            "linhas": 1248
+          },
+          {
+            "cargo": "ANALISTA EM TECNOLOGIA DA INFORMACAO",
+            "linhas": 465
+          },
+          {
+            "cargo": "ANALISTA TECNICO DA SUSEP",
+            "linhas": 282
+          },
+          {
+            "cargo": "ANALISTA TECNICO-ADMINISTRATIVO",
+            "linhas": 230
+          },
+          {
+            "cargo": "ANALISTA DE TECNOL DA INFORMACAO - 40H",
+            "linhas": 203
+          },
+          {
+            "cargo": "ANALISTA DESENV TECN NUCLEAR E DEFESA",
+            "linhas": 142
+          },
+          {
+            "cargo": "ANALISTA - ANALISTA DE TECNOL DA INFORM",
+            "linhas": 79
+          },
+          {
+            "cargo": "ANALISTA DE TECNOLOGIA MILITAR",
+            "linhas": 38
+          },
+          {
+            "cargo": "ANALISTA TECNICO ADMINISTRATIVO III",
+            "linhas": 23
+          },
+          {
+            "cargo": "ANALISTA - ANALISTA DE COMUNIC SOCIAL",
+            "linhas": 13
+          },
+          {
+            "cargo": "ANALISTA EM DESENV. TECN. E DEFESA",
+            "linhas": 6
+          },
+          {
+            "cargo": "ANALISTA TECNICO",
+            "linhas": 5
+          },
+          {
+            "cargo": "ANALISTA TECNICO ADMINISTRATIVO II",
+            "linhas": 5
+          }
+        ],
+        "servidores_com_mais_de_uma_linha_de_remuneracao": 0,
+        "servidores_sem_linha_de_remuneracao": 48,
+        "mediana_com_funcao": 11658.85,
+        "mediana_sem_funcao": 9594.4
+      },
+      "eppgg": {
+        "cargos_aceitos_pelo_filtro": [
+          {
+            "cargo": "ESP POL PUBL GESTAO GOVERNAMENTAL",
+            "linhas": 965
+          }
+        ],
+        "cargos_parecidos_rejeitados": [
+          {
+            "cargo": "ESPECIALISTA CET PROD INOV SAUDE PUBLICA",
+            "linhas": 54
+          }
+        ],
+        "servidores_com_mais_de_uma_linha_de_remuneracao": 0,
+        "servidores_sem_linha_de_remuneracao": 52,
+        "mediana_com_funcao": 30913.03,
+        "mediana_sem_funcao": 27369.67
+      },
+      "ace": {
+        "cargos_aceitos_pelo_filtro": [
+          {
+            "cargo": "ANALISTA DE COMERCIO EXTERIOR",
+            "linhas": 405
+          }
+        ],
+        "cargos_parecidos_rejeitados": [
+          {
+            "cargo": "ANALISTA COMERC INTERNACIONAL",
+            "linhas": 2
+          }
+        ],
+        "servidores_com_mais_de_uma_linha_de_remuneracao": 0,
+        "servidores_sem_linha_de_remuneracao": 10,
+        "mediana_com_funcao": 28155.58,
+        "mediana_sem_funcao": 23265.03
+      },
+      "aie": {
+        "cargos_aceitos_pelo_filtro": [
+          {
+            "cargo": "ANALISTA DE INFRA-ESTRUTURA",
+            "linhas": 707
+          }
+        ],
+        "cargos_parecidos_rejeitados": [
+          {
+            "cargo": "ANALISTA EM INFRA-ESTRUT DE TRANSPORTES",
+            "linhas": 726
+          }
+        ],
+        "servidores_com_mais_de_uma_linha_de_remuneracao": 0,
+        "servidores_sem_linha_de_remuneracao": 13,
+        "mediana_com_funcao": 19027.72,
+        "mediana_sem_funcao": 15386.67
+      }
+    },
+    "202109": {
+      "ati": {
+        "cargos_aceitos_pelo_filtro": [
+          {
+            "cargo": "ANALISTA EM TECNOLOGIA DA INFORMACAO",
+            "linhas": 445
+          }
+        ],
+        "cargos_parecidos_rejeitados": [
+          {
+            "cargo": "ANALISTA DE TEC DA INFORMACAO",
+            "linhas": 2781
+          },
+          {
+            "cargo": "ANALISTA EM CIENCIA E TECNOLOGIA",
+            "linhas": 1421
+          },
+          {
+            "cargo": "ANALISTA TECNICO ADMINISTRATIVO",
+            "linhas": 1249
+          },
+          {
+            "cargo": "ANALISTA TECNICO DE POLITICAS SOCIAIS",
+            "linhas": 760
+          },
+          {
+            "cargo": "ANALISTA PLAN GEST INF INFOR GEOG ESTATI",
+            "linhas": 746
+          },
+          {
+            "cargo": "ANALISTA TECNICO DA SUSEP",
+            "linhas": 276
+          },
+          {
+            "cargo": "ANALISTA TECNICO-ADMINISTRATIVO",
+            "linhas": 221
+          },
+          {
+            "cargo": "ANALISTA DE TECNOL DA INFORMACAO - 40H",
+            "linhas": 214
+          },
+          {
+            "cargo": "ANALISTA DESENV TECN NUCLEAR E DEFESA",
+            "linhas": 127
+          },
+          {
+            "cargo": "ANALISTA - ANALISTA DE TECNOL DA INFORM",
+            "linhas": 75
+          },
+          {
+            "cargo": "ANALISTA DE TECNOLOGIA MILITAR",
+            "linhas": 38
+          },
+          {
+            "cargo": "ANALISTA TECNICO ADMINISTRATIVO III",
+            "linhas": 14
+          },
+          {
+            "cargo": "ANALISTA DE INFORMACOES",
+            "linhas": 9
+          },
+          {
+            "cargo": "ANALISTA TECNICO",
+            "linhas": 5
+          },
+          {
+            "cargo": "ANALISTA - ANALISTA DE DOC E INFORMACAO",
+            "linhas": 5
+          }
+        ],
+        "servidores_com_mais_de_uma_linha_de_remuneracao": 0,
+        "servidores_sem_linha_de_remuneracao": 18,
+        "mediana_com_funcao": 14135.73,
+        "mediana_sem_funcao": 10947.77
+      },
+      "atps": {
+        "cargos_aceitos_pelo_filtro": [
+          {
+            "cargo": "ANALISTA TECNICO DE POLITICAS SOCIAIS",
+            "linhas": 760
+          }
+        ],
+        "cargos_parecidos_rejeitados": [
+          {
+            "cargo": "ANALISTA DO SEGURO SOCIAL",
+            "linhas": 4336
+          },
+          {
+            "cargo": "ANALISTA EM CIENCIA E TECNOLOGIA",
+            "linhas": 1421
+          },
+          {
+            "cargo": "ANALISTA TECNICO ADMINISTRATIVO",
+            "linhas": 1249
+          },
+          {
+            "cargo": "ANALISTA EM TECNOLOGIA DA INFORMACAO",
+            "linhas": 445
+          },
+          {
+            "cargo": "ANALISTA TECNICO DA SUSEP",
+            "linhas": 276
+          },
+          {
+            "cargo": "ANALISTA TECNICO-ADMINISTRATIVO",
+            "linhas": 221
+          },
+          {
+            "cargo": "ANALISTA DE TECNOL DA INFORMACAO - 40H",
+            "linhas": 214
+          },
+          {
+            "cargo": "ANALISTA DESENV TECN NUCLEAR E DEFESA",
+            "linhas": 127
+          },
+          {
+            "cargo": "ANALISTA - ANALISTA DE TECNOL DA INFORM",
+            "linhas": 75
+          },
+          {
+            "cargo": "ANALISTA DE TECNOLOGIA MILITAR",
+            "linhas": 38
+          },
+          {
+            "cargo": "ANALISTA TECNICO ADMINISTRATIVO III",
+            "linhas": 14
+          },
+          {
+            "cargo": "ANALISTA - ANALISTA DE COMUNIC SOCIAL",
+            "linhas": 13
+          },
+          {
+            "cargo": "ANALISTA TECNICO",
+            "linhas": 5
+          },
+          {
+            "cargo": "ANALISTA - ASSISTENTE SOCIAL",
+            "linhas": 4
+          },
+          {
+            "cargo": "ANALISTA TECNICO ADMINISTRATIVO II",
+            "linhas": 3
+          }
+        ],
+        "servidores_com_mais_de_uma_linha_de_remuneracao": 0,
+        "servidores_sem_linha_de_remuneracao": 43,
+        "mediana_com_funcao": 13519.99,
+        "mediana_sem_funcao": 10879.52
+      },
+      "eppgg": {
+        "cargos_aceitos_pelo_filtro": [
+          {
+            "cargo": "ESP POL PUBL GESTAO GOVERNAMENTAL",
+            "linhas": 938
+          }
+        ],
+        "cargos_parecidos_rejeitados": [
+          {
+            "cargo": "ESPECIALISTA GESTAO TELECOMUNICACOES",
+            "linhas": 267
+          },
+          {
+            "cargo": "ESPECIALISTA CET PROD INOV SAUDE PUBLICA",
+            "linhas": 54
+          },
+          {
+            "cargo": "ESPEC GESTAO DE PROJETOS - 40H",
+            "linhas": 51
+          }
+        ],
+        "servidores_com_mais_de_uma_linha_de_remuneracao": 0,
+        "servidores_sem_linha_de_remuneracao": 54,
+        "mediana_com_funcao": 30781.01,
+        "mediana_sem_funcao": 27369.67
+      },
+      "ace": {
+        "cargos_aceitos_pelo_filtro": [
+          {
+            "cargo": "ANALISTA DE COMERCIO EXTERIOR",
+            "linhas": 396
+          }
+        ],
+        "cargos_parecidos_rejeitados": [
+          {
+            "cargo": "ANALISTA COMERC INTERNACIONAL",
+            "linhas": 2
+          }
+        ],
+        "servidores_com_mais_de_uma_linha_de_remuneracao": 0,
+        "servidores_sem_linha_de_remuneracao": 13,
+        "mediana_com_funcao": 29434.12,
+        "mediana_sem_funcao": 26138.79
+      },
+      "aie": {
+        "cargos_aceitos_pelo_filtro": [
+          {
+            "cargo": "ANALISTA DE INFRA-ESTRUTURA",
+            "linhas": 700
+          }
+        ],
+        "cargos_parecidos_rejeitados": [
+          {
+            "cargo": "ANALISTA EM INFRA-ESTRUT DE TRANSPORTES",
+            "linhas": 721
+          }
+        ],
+        "servidores_com_mais_de_uma_linha_de_remuneracao": 0,
+        "servidores_sem_linha_de_remuneracao": 10,
+        "mediana_com_funcao": 19491.64,
+        "mediana_sem_funcao": 15853.26
+      },
+      "affc": {
+        "cargos_aceitos_pelo_filtro": [
+          {
+            "cargo": "AUDITOR FEDERAL DE FINANCAS E CONTROLE",
+            "linhas": 2412
+          }
+        ],
+        "cargos_parecidos_rejeitados": [
+          {
+            "cargo": "AUDITOR-FISCAL DA RECEITA FEDERAL BRASIL",
+            "linhas": 7950
+          },
+          {
+            "cargo": "AUDITOR FISCAL FEDERAL AGROPEC",
+            "linhas": 2514
+          },
+          {
+            "cargo": "AUDITOR FISCAL FEDERAL AGROPECUARIO",
+            "linhas": 1
+          }
+        ],
+        "servidores_com_mais_de_uma_linha_de_remuneracao": 0,
+        "servidores_sem_linha_de_remuneracao": 49,
+        "mediana_com_funcao": 29434.11,
+        "mediana_sem_funcao": 27369.67
+      }
+    }
+  }
+}

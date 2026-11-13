@@ -1,0 +1,54 @@
+{
+  "id": "20261113-134048-coerencia",
+  "data": "2026-11-13T13:40:48+00:00",
+  "metodo": {
+    "id": "coerencia",
+    "descricao": "Coerência interna: todos os arquivos de data/ conferidos entre si (somas, índice, latest, filtro de cargo), sem consulta ao portal."
+  },
+  "resultado": "ok",
+  "commit": "2f959ca5754fe0de936d6453b2ce70ac9c08b1d3",
+  "execucao": {
+    "origem": "github-actions",
+    "evento": "workflow_run",
+    "url": "https://github.com/ariribeiro/dashboard-carreiras/actions/runs/43435718091"
+  },
+  "auditado": {
+    "carreiras": {
+      "ati": {
+        "arquivos": 165,
+        "de": "201301",
+        "ate": "202609"
+      },
+      "atps": {
+        "arquivos": 159,
+        "de": "201307",
+        "ate": "202609"
+      },
+      "eppgg": {
+        "arquivos": 165,
+        "de": "201301",
+        "ate": "202609"
+      },
+      "ace": {
+        "arquivos": 165,
+        "de": "201301",
+        "ate": "202609"
+      },
+      "aie": {
+        "arquivos": 165,
+        "de": "201301",
+        "ate": "202609"
+      },
+      "affc": {
+        "arquivos": 81,
+        "de": "202001",
+        "ate": "202609"
+      }
+    }
+  },
+  "verificacoes": 11712,
+  "divergencias": [],
+  "avisos": [
+    "Órgãos de exercício sem linha em orgaos_coordenadas.csv (arquivos mensais em que aparecem): Instituto Nacional de Metrologia, Qualidade e Tecnologia (120); Autoridade Pública Olímpica (108); Comando da Aeronáutica (100); Ministério da Pesca e Aquicultura (84); Instituto Federal de São Paulo (42); Autoridade de Governança do Legado Olímpico (41); TELEBRAS - TELECOM. BRASILEIRAS S.A. (33); Telebras- Holding (29); Ministério Público do Trabalho (28); Tribunal Regional Eleitoral - GO (26); Companhia de Desenvolvimento dos Vales do São Francisco e do Parnaíba (16); Governo do Estado do Ceará (14); Assembléia Legislativa - Rio de Janeiro (13); Governo do Estado de Rondônia (10); Instituto de Resseguros do Brasil (8); Companhia das Docas do Estado da Bahia (4)."
+  ]
+}
