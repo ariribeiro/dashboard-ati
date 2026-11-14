@@ -971,6 +971,7 @@ function renderizar() {
 
   renderizarTendencia();
   renderizarOrcamento();
+  Economicidade.renderizar();
 
   // Onde trabalham
   const lot = d.por_orgao_lotacao[0];
@@ -1072,6 +1073,7 @@ async function iniciar() {
   if (!carreiras[SLUG]) SLUG = Object.keys(carreiras)[0];
   aplicarCarreira(carreiras);
   [indice] = await Promise.all([dadosCarreira("index.json"), carregarCoordenadas(), Auditoria.carregar()]);
+  await Economicidade.carregar(); // só a ATI tem; sem o arquivo, a seção fica oculta
   // Os seletores existem no cabeçalho e na barra fixa; ficam sempre sincronizados.
   const selAnos = [...document.querySelectorAll('select[data-campo="ano"]')];
   const selMeses = [...document.querySelectorAll('select[data-campo="mes"]')];
@@ -1136,6 +1138,8 @@ matchMedia("(prefers-color-scheme: dark)").addEventListener("change", renderizar
 for (const b of document.querySelectorAll("[data-reajuste]")) {
   b.addEventListener("click", () => { orcComReajuste = b.dataset.reajuste === "sim"; renderizarOrcamento(); });
 }
+
+Economicidade.ligar();
 
 let espera;
 window.addEventListener("resize", () => {

@@ -40,6 +40,9 @@ Os links curtos têm prévia própria para redes sociais e levam a
   próximos 10 anos, com comparação entre carreiras na página inicial. Fica oculto até a
   [auditoria dos dados](#auditoria) confirmar os números; a chave é `ORCAMENTO_VISIVEL` em
   `site/orcamento.js`.
+- 💡 **Economicidade** (só ATI): estima se órgãos com mais ATI para o volume de contratos de TIC
+  perdem menos com acréscimos de valor e preços acima da mediana, quanto isso representa em reais e
+  uma projeção para os próximos anos. É um pipeline próprio, veja [Economicidade da ATI](#economicidade).
 - 🗺️ **Onde trabalham**: mapa com a sede de cada órgão de exercício, ranking de órgãos e UFs.
 - 🪜 **Carreira**: distribuição por classe e padrão, e funções comissionadas.
 - 💰 **Remuneração**: histograma, mediana e faixa P10–P90 da remuneração básica bruta.
@@ -104,6 +107,7 @@ flowchart LR
 | `data/<carreira>/` | `AAAAMM.json` (agregados do mês), `latest.json` (mês mais recente) e `index.json` (série com total e mediana). |
 | [`data/orgaos_coordenadas.csv`](data/orgaos_coordenadas.csv) | Sede de cada órgão de exercício, para o mapa. |
 | [`site/`](site/) | HTML, CSS e JS puros, sem build. `painel.html` lê a carreira do endereço. |
+| [`scripts/economicidade_ati.py`](scripts/economicidade_ati.py) e [`.github/workflows/economicidade.yml`](.github/workflows/economicidade.yml) | Pipeline só da ATI: coleta contratos de TIC (Compras.gov.br e PNCP), estima o efeito do efetivo de ATI e grava `data/ati/economicidade.json`. Roda por trimestre. Veja [Economicidade da ATI](#economicidade). |
 | [`.github/workflows/atis.yml`](.github/workflows/atis.yml) | Roda no dia 15 de cada mês (12h UTC) ou manualmente: gera os dados, commita `data/` e publica no Pages. |
 | [`scripts/auditar.py`](scripts/auditar.py) e [`.github/workflows/auditoria.yml`](.github/workflows/auditoria.yml) | Conferem os dados publicados e gravam um registro em `auditoria/`. Veja [Auditoria](#auditoria). |
 
@@ -243,6 +247,72 @@ inicial, a partir de `n` e `media` do `index.json` de cada carreira:
 **Limitações:** é só a remuneração básica bruta. Não inclui contribuição patronal,
 terço de férias, auxílios, funções pagas à parte, nem aposentados e pensionistas.
 Reajustes futuros dependem de negociação e de lei.
+
+</details>
+
+---
+
+<a id="economicidade"></a>
+## Economicidade da ATI
+
+**Hipótese:** investir na carreira de ATI gera economicidade. O trabalho do ATI (planejar,
+fiscalizar e gerir contratos) é função de Estado e **não substitui a terceirização**, então a
+comparação não é "salário do ATI × preço de terceirizado". A pergunta é se o dinheiro que o órgão
+já gasta com terceiros rende mais quando há mais ATI para geri-lo.
+
+```bash
+python scripts/economicidade_ati.py coletar            # consulta as APIs e guarda em .cache/economicidade (retomável)
+python scripts/economicidade_ati.py analisar           # painel, regressão, projeção -> data/ati/economicidade.json
+python scripts/economicidade_ati.py tudo --orgao 44205 # os dois passos, só um órgão (código do Compras)
+python scripts/test_economicidade.py                   # testes, sem rede
+```
+
+| Arquivo | Conteúdo |
+|---|---|
+| [`data/ati/economicidade_orgaos.csv`](data/ati/economicidade_orgaos.csv) | Tabela mantida à mão: nome do órgão no SIAPE → código do Compras. `uso=painel` entra na análise. |
+| [`data/ati/economicidade_premissas.json`](data/ati/economicidade_premissas.json) | Encargos sobre a folha, carteira mínima, horizonte, último ano com acompanhamento de aditivos. |
+| `data/ati/economicidade.json` | Resultado agregado por órgão e ano, estimativas com intervalo de confiança, economia, projeção, custo e cobertura. |
+
+<details>
+<summary><strong>Como é medido</strong></summary>
+
+- **Fontes**: contratos e itens de contrato do [Compras.gov.br](https://dadosabertos.compras.gov.br)
+  (`modulo-contratos`), termos aditivos do [PNCP](https://pncp.gov.br) e o efetivo de ATI por órgão de
+  exercício dos arquivos mensais do SIAPE já em `data/ati/`.
+- **Contrato de TIC**: categoria "Informática (TIC)" **ou** objeto que cita software, nuvem, links,
+  licenças etc. O código de categoria `48` aparece com os rótulos "Informática (TIC)" e "Mão de Obra"
+  (limpeza), então o filtro usa o **nome** da categoria mais o texto do objeto.
+- **Perda**: (acréscimos de valor + excesso de preço acima da mediana do item) ÷ valor contratado.
+  Reajuste e repactuação não contam como acréscimo. O campo `valorAcumulado` do Compras **não** serve
+  para medir aditivos: chega a 187 vezes o valor global do contrato.
+- **Preço**: valor unitário de cada item do catálogo contra a mediana dos órgãos analisados no mesmo
+  ano (mínimo de 4 observações em 3 órgãos), sem precisar de deflator.
+- **Carga de gestão**: ATIs por R$ 100 milhões de contratos de TIC assinados nos últimos 3 anos.
+- **Estimação**: regressão da perda sobre a carga, com efeito fixo de órgão e de ano, ponderada pelo
+  valor contratado e com erro-padrão agrupado por órgão (CR1, t com G−1 graus de liberdade). Compara o
+  órgão com ele mesmo ao longo do tempo.
+- **Veredito**: `confirmada` se o intervalo de 95% fica todo abaixo de zero, `refutada` se fica todo
+  acima, `inconclusiva` se inclui zero. A regra é fixa no código.
+- **Economia em reais**: −β × carga × valor contratado, com os dois extremos do intervalo de confiança.
+  Custo da carreira: folha básica bruta × 13 × (1 + encargos).
+- **Projeção**: efetivo da seção Tendência (sem novas entradas e repondo saídas). O modelo é linear;
+  o crescimento do volume de contratos não altera a conta.
+
+</details>
+
+<details>
+<summary><strong>Limitações</strong></summary>
+
+- **Associação, não causa.** Outras mudanças no órgão podem coincidir com a chegada de ATIs.
+- **Amostra**: só entidades vinculadas (código estável). Ministérios mudaram de nome e código em
+  2019 e 2023 e ficaram fora; a versão "extrapolada" supõe o mesmo efeito por ATI neles.
+- **Período**: termos aditivos no PNCP são consistentes a partir de 2021; contratos recentes ainda não
+  tiveram tempo de receber aditivos (`ultimo_ano_com_acompanhamento_aditivos`).
+- **Só o que é registrado**: serviço mal entregue, glosa não aplicada e risco evitado não aparecem.
+- **Preço de referência interno**: a mediana vem dos órgãos analisados, não de pesquisa de mercado.
+- **Tabela de órgãos**: código errado vira "órgão sem contratos" (lista em `cobertura.orgaos_sem_contratos`).
+  Ao incluir um órgão, confira o código na [API de órgãos](https://dadosabertos.compras.gov.br/modulo-uasg/2_consultarOrgao).
+- **Encargos**: a premissa de 22% (contribuição patronal) precisa ser confirmada na lei antes de publicar.
 
 </details>
 

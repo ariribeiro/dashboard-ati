@@ -1,0 +1,92 @@
+name: Economicidade da ATI
+
+# Pipeline só da carreira de ATI. Contratos de TIC mudam em outro ritmo que o SIAPE, então
+# roda por trimestre (dia 20 de jan, abr, jul e out) ou manualmente.
+on:
+  schedule:
+    - cron: "0 12 20 1,4,7,10 *"
+  workflow_dispatch:
+    inputs:
+      forcar:
+        description: "Refazer as consultas mesmo com cache"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 240
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: requirements.txt
+
+      - name: Instalar dependências
+        run: pip install -r requirements.txt
+
+      - name: Testes
+        run: python scripts/test_economicidade.py
+
+      # As respostas das APIs ficam em .cache/; contratos de anos fechados não mudam, então o
+      # cache poupa quase toda a coleta. O ano mais recente é refeito quando o cache vence.
+      - name: Restaurar cache da coleta
+        uses: actions/cache@v4
+        with:
+          path: .cache/economicidade
+          key: economicidade-${{ github.run_id }}
+          restore-keys: economicidade-
+
+      - name: Coletar e analisar
+        env:
+          FORCAR: ${{ inputs.forcar }}
+        run: |
+          args=()
+          [ "$FORCAR" = "true" ] && args+=(--forcar)
+          python scripts/economicidade_ati.py tudo "${args[@]}"
+
+      - name: Commitar o resultado se houver mudança
+        run: |
+          git add data/ati/economicidade.json data/ati/economicidade_orgaos.csv
+          if git diff --cached --quiet; then
+            echo "Sem mudanças."
+          else
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git commit -m "economicidade ATI"
+            git pull --rebase
+            git push
+          fi
+
+      - name: Montar site
+        run: |
+          cp -r data site/data
+          sed -i "s/app\.js\"/app.js?v=${GITHUB_SHA::7}\"/; s/style\.css\"/style.css?v=${GITHUB_SHA::7}\"/; s/orcamento\.js\"/orcamento.js?v=${GITHUB_SHA::7}\"/; s/auditoria\.js\"/auditoria.js?v=${GITHUB_SHA::7}\"/; s/economicidade\.js\"/economicidade.js?v=${GITHUB_SHA::7}\"/" site/*.html
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
