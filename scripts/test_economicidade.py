@@ -120,6 +120,11 @@ def test_taxa_saida_ignora_meses_de_entrada():
     assert abs(taxa - 4 / (100 + 99 + 150 + 149)) < 1e-9
 
 
+def test_razao_de_preco_limite():
+    # Item 1000x acima da mediana é outra unidade, não sobrepreço: o limite precisa existir e ser estreito.
+    assert e.RAZAO_MIN < 1 < e.RAZAO_MAX <= 5
+
+
 def test_extrapolacao_da_amostra_e_proporcional():
     assert e.ef_amostra(500, 1000, 200) == 100
 

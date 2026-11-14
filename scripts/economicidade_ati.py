@@ -50,6 +50,10 @@ PAUSA = 0.12  # s entre chamadas
 TAMANHO_PAGINA = 500
 
 DIRETA = {"Dispensa", "Inexigibilidade"}
+# Preço de um item entre 1/3 e 3 vezes a mediana do mesmo item e ano é comparável. Fora disso, o mesmo
+# código de catálogo está sendo usado para outra unidade ou especificação (ex.: pacote x unidade) e o
+# item é excluído em vez de contado como sobrepreço.
+RAZAO_MIN, RAZAO_MAX = 1 / 3, 3.0
 # Objeto de contrato que é TIC mesmo quando a categoria do Compras diz "Serviços" ou "Mão de Obra".
 RE_TIC = re.compile(
     r"TECNOLOGIA DA INFORMA|SOFTWARE|SISTEMAS? DE INFORMA|NUVEM|CLOUD|DATA ?CENTER|FIREWALL|"
@@ -275,6 +279,7 @@ def montar_painel(orgaos: list[dict], anos: list[int], atis: dict, ano_limite_ad
                     if (i["codigoUnidadeGestora"], i["numeroContrato"]) in tic and i["valorUnitarioItem"] and i["codigoItem"]:
                         itens_tic.append({**i, "ano": ano, "orgao": o["codigo"]})
     ref = mediana_referencia_itens(itens_tic)
+    itens_comparaveis, itens_incomparaveis = [0], [0]
 
     painel = []
     for (cod, ano), cs in sorted(contratos_por.items()):
@@ -303,16 +308,24 @@ def montar_painel(orgaos: list[dict], anos: list[int], atis: dict, ano_limite_ad
                 base_ad += c["valorGlobal"]
                 n_ad += 1
 
-        # preço: sobrepreço em R$ = Σ valor do item × (preço / mediana do item no ano − 1)
+        # preço: sobrepreço em R$ = Σ valor do item × (preço / mediana do item − 1), só entre itens comparáveis
         sobre = base_pr = 0.0
         for i in itens_tic:
             if i["orgao"] != cod or i["ano"] != ano:
                 continue
             m = ref.get((i["codigoItem"], ano))
-            vt = i["valorTotalItem"] or i["valorUnitarioItem"] * (i["quantidadeItem"] or 0)
-            if m and vt and vt > 0:
-                sobre += vt * (i["valorUnitarioItem"] / m - 1)
-                base_pr += vt
+            if not m:
+                continue
+            razao = i["valorUnitarioItem"] / m
+            vt = i["valorUnitarioItem"] * (i["quantidadeItem"] or 0)
+            if vt <= 0:
+                continue
+            if not (RAZAO_MIN <= razao <= RAZAO_MAX):
+                itens_incomparaveis[0] += 1
+                continue
+            itens_comparaveis[0] += 1
+            sobre += vt * (razao - 1)
+            base_pr += vt
 
         painel.append({
             "codigo": cod, "orgao": nome_de[cod], "ano": ano,
@@ -328,6 +341,7 @@ def montar_painel(orgaos: list[dict], anos: list[int], atis: dict, ano_limite_ad
             "sobrepreco": round(sobre, 2),
             "sobrepreco_pct": sobre / base_pr if base_pr else None,
         })
+    montar_painel.itens = (itens_comparaveis[0], itens_incomparaveis[0])
     return painel
 
 
@@ -514,6 +528,8 @@ def analisar(premissas: dict) -> dict:
         "linhas_na_estimacao": sum(1 for l in painel if l["x"] is not None and l["perda_pct"] is not None),
         "contratos_tic": sum(l["n_tic"] for l in painel),
         "contratos_com_termos": sum(l["n_contratos_termos"] for l in painel),
+        "itens_preco_comparaveis": montar_painel.itens[0],
+        "itens_preco_incomparaveis": montar_painel.itens[1],
         "anos": [anos[0], anos[-1]] if anos else None,
         # Órgãos mapeados que não devolveram nenhum contrato de TIC: código errado ou órgão sem compras próprias.
         "orgaos_sem_contratos": sorted(o["orgao_siape"] for o in orgaos if o["codigo"] not in {l["codigo"] for l in painel}),

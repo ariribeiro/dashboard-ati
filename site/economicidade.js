@@ -29,6 +29,10 @@ const Economicidade = (() => {
     return v.length ? v.reduce((s, x) => s + x, 0) / v.length : null;
   }
 
+  // Sem significância, a manchete é a faixa (o que os dados permitem afirmar), não o valor central.
+  const incerto = () => dados.veredito !== "confirmada";
+  const faixaRs = (lo, hi) => `${fmtRs(lo)} a ${fmtRs(hi)}`;
+
   function linhaEvidencia(e) {
     const tr = document.createElement("tr");
     const [lo, hi] = e.ic95 ?? [null, null];
@@ -139,22 +143,31 @@ const Economicidade = (() => {
     const carreira = modo === "carreira";
     const f = ult ? (carreira ? efetivoNacional(ult.ano) / ult.atis : 1) : 1;
     document.getElementById("eco-ano-rotulo").textContent = ult ? `Economia estimada em ${ult.ano}` : "Economia estimada";
-    document.getElementById("eco-ano").textContent = ult ? fmtRs(ult.central * f) : "–";
-    document.getElementById("eco-ano-det").textContent = ult
-      ? `intervalo de confiança de 95%: ${fmtRs(ult.baixo * f)} a ${fmtRs(ult.alto * f)}. ` +
-        (carreira ? "Extrapolado ao efetivo nacional." : `Em ${cob.orgaos_no_painel} órgãos analisados.`)
-      : "";
+    const escopo = carreira ? "Extrapolado ao efetivo nacional." : `Em ${cob.orgaos_no_painel} órgãos analisados.`;
+    const elAno = document.getElementById("eco-ano");
+    elAno.classList.toggle("valor-menor", !!ult && incerto());
+    elAno.textContent = !ult ? "–" : incerto() ? faixaRs(ult.baixo * f, ult.alto * f) : fmtRs(ult.central * f);
+    document.getElementById("eco-ano-det").textContent = !ult ? ""
+      : incerto()
+        ? `Faixa do intervalo de confiança de 95%; inclui zero, então os dados não distinguem economia de perda. Estimativa central: ${fmtRs(ult.central * f)}. ${escopo}`
+        : `intervalo de confiança de 95%: ${faixaRs(ult.baixo * f, ult.alto * f)}. ${escopo}`;
     const r = c.retorno_por_real;
-    document.getElementById("eco-retorno").textContent = r ? `R$ ${new Intl.NumberFormat("pt-BR", { maximumFractionDigits: 1 }).format(r.central)}` : "–";
-    document.getElementById("eco-retorno-det").textContent = r
-      ? `para cada R$ 1 de folha com encargos (IC 95%: ${new Intl.NumberFormat("pt-BR", { maximumFractionDigits: 1 }).format(r.baixo)} a ${new Intl.NumberFormat("pt-BR", { maximumFractionDigits: 1 }).format(r.alto)})`
-      : "";
+    const n1 = (v) => new Intl.NumberFormat("pt-BR", { maximumFractionDigits: 1 }).format(v);
+    const elRet = document.getElementById("eco-retorno");
+    elRet.classList.toggle("valor-menor", !!r && incerto());
+    elRet.textContent = !r ? "–" : incerto() ? `R$ ${n1(r.baixo)} a ${n1(r.alto)}` : `R$ ${n1(r.central)}`;
+    document.getElementById("eco-retorno-det").textContent = !r ? ""
+      : incerto() ? `para cada R$ 1 de folha com encargos (IC 95%); inclui zero. Estimativa central: R$ ${n1(r.central)}.`
+        : `para cada R$ 1 de folha com encargos (IC 95%: ${n1(r.baixo)} a ${n1(r.alto)})`;
     const cenSem = dados.projecao.cenarios?.find((x) => x.id === "sem-entradas");
     if (cenSem) {
       const i = cenSem.anos.length - 1;
       const v = carreira ? cenSem.extrapolada_central[i] : cenSem.central[i];
       document.getElementById("eco-fim-rotulo").textContent = `Em ${cenSem.anos[i]}, sem novas entradas`;
-      document.getElementById("eco-fim").textContent = fmtRs(v);
+      const elFim = document.getElementById("eco-fim");
+      elFim.classList.toggle("valor-menor", incerto());
+      const lim = (campo) => (carreira ? cenSem[`extrapolada_${campo}`][i] : cenSem[campo][i]);
+      elFim.textContent = incerto() ? faixaRs(lim("baixo"), lim("alto")) : fmtRs(v);
       document.getElementById("eco-fim-det").textContent = `com ~${new Intl.NumberFormat("pt-BR").format(cenSem.efetivo[i])} ${P}; repondo as saídas: ${fmtRs(carreira ? dados.projecao.cenarios.find((x) => x.id === "repondo").extrapolada_central[i] : dados.projecao.cenarios.find((x) => x.id === "repondo").central[i])}`;
     }
 
