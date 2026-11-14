@@ -2,6 +2,7 @@
 *.zip
 *.csv
 !data/orgaos_coordenadas.csv
+!data/ati/economicidade_orgaos.csv
 *.part
 .cache/
 

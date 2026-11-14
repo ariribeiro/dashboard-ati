@@ -1,0 +1,12 @@
+{
+  "_leia": "Premissas do pipeline de economicidade da ATI (scripts/economicidade_ati.py). Mude aqui, não no código.",
+  "ultimo_ano_com_acompanhamento_aditivos": 2024,
+  "carteira_minima": 1000000,
+  "horizonte_anos": 10,
+  "encargos_pct": 0.22,
+  "encargos_fonte": "Contribuição patronal da União ao regime próprio, no dobro da do servidor (11% x 2). A confirmar no texto de lei antes de publicar; não inclui terço de férias nem benefícios.",
+  "notas": {
+    "ultimo_ano_com_acompanhamento_aditivos": "Contrato assinado depois deste ano ainda não teve tempo de receber aditivo; entra no preço e na modalidade, mas não na perda combinada.",
+    "carteira_minima": "Órgão-ano com menos de R$ 1 milhão de contratos de TIC nos últimos 3 anos fica fora da estimação (a razão ATI por valor contratado fica instável)."
+  }
+}

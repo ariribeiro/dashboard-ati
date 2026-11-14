@@ -120,7 +120,7 @@ jobs:
         run: |
           cp -r data site/data
           # Versiona JS/CSS pelo commit para o navegador não misturar versões em cache.
-          sed -i "s/app\.js\"/app.js?v=${GITHUB_SHA::7}\"/; s/style\.css\"/style.css?v=${GITHUB_SHA::7}\"/; s/orcamento\.js\"/orcamento.js?v=${GITHUB_SHA::7}\"/; s/auditoria\.js\"/auditoria.js?v=${GITHUB_SHA::7}\"/" site/*.html
+          sed -i "s/app\.js\"/app.js?v=${GITHUB_SHA::7}\"/; s/style\.css\"/style.css?v=${GITHUB_SHA::7}\"/; s/orcamento\.js\"/orcamento.js?v=${GITHUB_SHA::7}\"/; s/auditoria\.js\"/auditoria.js?v=${GITHUB_SHA::7}\"/; s/economicidade\.js\"/economicidade.js?v=${GITHUB_SHA::7}\"/" site/*.html
 
       - uses: actions/configure-pages@v5
 

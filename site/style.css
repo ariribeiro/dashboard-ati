@@ -586,6 +586,24 @@ code { font-size: 0.8125rem; overflow-wrap: anywhere; }
 .tabela-orcamento a { font-weight: 700; color: var(--texto); }
 .tabela-orcamento td.num, .tabela-orcamento th.num { white-space: nowrap; }
 
+/* ---------------------------------------------------------------- economicidade */
+
+.aviso-experimental {
+  margin: 0 0 14px;
+  padding: 10px 14px;
+  border: 1px solid var(--borda);
+  border-left: 4px solid var(--remuneracao);
+  border-radius: 10px;
+  background: var(--superficie);
+  color: var(--texto-2);
+  font-size: 0.875rem;
+}
+.metodo h4 { margin: 14px 0 4px; font-size: 0.9375rem; }
+.metodo p { margin: 4px 0; }
+#eco-veredito-card[data-veredito="confirmada"] { border-top: 3px solid var(--onde); }
+#eco-veredito-card[data-veredito="inconclusiva"] { border-top: 3px solid var(--remuneracao); }
+#eco-veredito-card[data-veredito="refutada"] { border-top: 3px solid #C0392B; }
+
 /* Link do painel para a página inicial (lista de carreiras). */
 .voltar-home {
   flex-basis: 100%;

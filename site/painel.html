@@ -48,6 +48,7 @@
         <a href="#s-geral" data-secao="geral">Visão geral</a>
         <a href="#s-tendencia" data-secao="geral">Tendência</a>
         <a href="#s-orcamento" data-secao="remuneracao" hidden>Orçamento</a>
+        <a href="#s-economicidade" data-secao="remuneracao" hidden>Economicidade</a>
         <a href="#s-onde" data-secao="onde">Onde trabalham</a>
         <a href="#s-carreira" data-secao="carreira">Carreira</a>
         <a href="#s-remuneracao" data-secao="remuneracao">Remuneração</a>
@@ -226,6 +227,95 @@
       </details>
     </section>
 
+    <section class="secao" id="s-economicidade" data-secao="remuneracao" aria-labelledby="t-economicidade" hidden>
+      <div class="secao-cabecalho">
+        <h2 id="t-economicidade">Economicidade</h2>
+        <p id="eco-desc"></p>
+      </div>
+
+      <p class="aviso-experimental"><strong>Estimativa experimental.</strong> Mede associação entre o efetivo de ATI e a perda nos contratos de TIC de uma amostra de órgãos, não uma relação de causa comprovada. Leia “Como medimos” antes de usar os números.</p>
+
+      <div class="cards">
+        <div class="card" id="eco-veredito-card" data-tema="geral">
+          <span class="rotulo">O que os dados dizem</span>
+          <span class="valor valor-menor" id="eco-veredito">–</span>
+          <span class="detalhe" id="eco-veredito-det"></span>
+        </div>
+        <div class="card" data-tema="geral">
+          <span class="rotulo" id="eco-ano-rotulo">Economia estimada</span>
+          <span class="valor" id="eco-ano">–</span>
+          <span class="detalhe" id="eco-ano-det"></span>
+        </div>
+        <div class="card" data-tema="geral">
+          <span class="rotulo">Retorno sobre o custo da carreira</span>
+          <span class="valor" id="eco-retorno">–</span>
+          <span class="detalhe" id="eco-retorno-det"></span>
+        </div>
+        <div class="card" data-tema="geral">
+          <span class="rotulo" id="eco-fim-rotulo">Projeção</span>
+          <span class="valor" id="eco-fim">–</span>
+          <span class="detalhe" id="eco-fim-det"></span>
+        </div>
+      </div>
+
+      <figure class="painel orc-painel">
+        <figcaption>
+          <div class="orc-cabecalho">
+            <h3>Economia estimada por ano e projeção</h3>
+            <div class="alternador" role="group" aria-label="Escala da estimativa">
+              <button type="button" data-eco-modo="amostra" aria-pressed="true">Órgãos analisados</button>
+              <button type="button" data-eco-modo="carreira" aria-pressed="false">Extrapolado à carreira</button>
+            </div>
+          </div>
+          <p id="eco-sub"></p>
+        </figcaption>
+        <div class="grafico grafico-alto" id="g-economia"></div>
+      </figure>
+
+      <div class="grade">
+        <div class="painel">
+          <h3>Evidências</h3>
+          <p class="painel-sub">Efeito estimado de ter +1 ATI para cada R$ 100 milhões de contratos de TIC (três últimos anos), em pontos percentuais. Sinal negativo em perda, acréscimo, preço, contratação direta e concentração significa melhora.</p>
+          <div class="tabela-rolagem"><table class="tabela-fixa" id="eco-evidencias"></table></div>
+        </div>
+        <figure class="painel" id="eco-tercis">
+          <figcaption><h3>Comparação sem modelo</h3><p>Perda nos contratos de TIC, dividindo os órgãos-ano em três grupos pela quantidade de ATI para o volume contratado.</p></figcaption>
+          <div class="grafico" id="g-tercis"></div>
+        </figure>
+      </div>
+
+      <details class="metodo" open>
+        <summary>Como medimos</summary>
+        <h4>A pergunta</h4>
+        <p>Fiscalizar e gerir contratos é função de Estado: contratar ATIs não elimina a terceirização de TIC. Por isso não comparamos o salário do ATI com o preço de um terceirizado. Perguntamos se o <strong>dinheiro que o órgão já gasta com terceiros rende mais</strong> quando há mais ATI para geri-lo.</p>
+        <h4>O que contamos como perda</h4>
+        <ul>
+          <li><strong>Acréscimo de valor</strong>: soma dos termos aditivos de acréscimo dos contratos de TIC, lida no PNCP, dividida pelo valor inicial. Reajuste e repactuação não entram, porque estão previstos no contrato; só o acréscimo de quantidade ou escopo e o prazo aditado.</li>
+          <li><strong>Preço acima da mediana</strong>: para cada item do catálogo (CATMAT/CATSER) contratado em um ano, comparamos o valor unitário com a mediana dos órgãos analisados no mesmo ano. Só valem itens com ao menos 4 observações em 3 órgãos. Só o excesso acima da mediana conta; preço abaixo não compensa preço acima.</li>
+          <li><strong>Perda evitável</strong> = (acréscimos + excesso de preço) ÷ valor contratado, nos anos em que há as duas medidas. É o resultado principal.</li>
+          <li>Também mostramos, sem somar ao valor em reais, a <strong>contratação direta</strong> (dispensa e inexigibilidade) e a <strong>concentração em fornecedores</strong> (índice de Herfindahl).</li>
+        </ul>
+        <h4>O que é contrato de TIC</h4>
+        <p>Contratos da categoria “Informática (TIC)” do Compras.gov.br, mais contratos de outras categorias cujo objeto cita software, nuvem, infraestrutura, licenças, links, segurança da informação e termos parecidos. A categoria sozinha não basta: o código “48” aparece rotulado como TIC e como “mão de obra” de limpeza. É uma regra aproximada e pode errar nos dois sentidos.</p>
+        <h4>Como relacionamos ATI e perda</h4>
+        <p>Para cada órgão e ano, calculamos <strong>quantos ATIs há para cada R$ 100 milhões</strong> de contratos de TIC assinados nos últimos três anos. Depois comparamos o <em>mesmo órgão</em> ao longo do tempo (efeito fixo de órgão) e descontamos o que mudou para todos no mesmo ano (efeito fixo de ano), numa regressão ponderada pelo valor contratado, com erro-padrão agrupado por órgão. Assim, o fato de órgãos grandes e maduros terem, ao mesmo tempo, mais ATI e melhor gestão pesa menos; o que importa é o que muda dentro de cada órgão.</p>
+        <h4>Da regressão à economia em reais</h4>
+        <p>Se mais ATI reduz a perda em β pontos percentuais por unidade de carga, a economia atribuída aos ATIs em um ano é −β × (ATIs por R$ 100 mi) × (valor contratado). A conta tem faixa: usamos os dois extremos do intervalo de confiança de 95%. Para comparar com o custo, usamos a folha básica bruta da carreira (SIAPE) mais <span id="eco-encargos">22%</span> de encargos patronais, premissa editável em <code>data/ati/economicidade_premissas.json</code>.</p>
+        <h4>Projeção</h4>
+        <p>O efetivo futuro vem da mesma taxa de saída líquida da seção Tendência, em dois cenários: sem novas entradas e repondo as saídas. O modelo é linear: cada ATI a mais ou a menos muda a economia na mesma proporção, e o crescimento do volume de contratos não altera a conta. Reajustes e inflação não entram; os valores são nominais do ano de cada contrato.</p>
+        <h4>O que a estimativa não faz</h4>
+        <ul>
+          <li><strong>Não prova causa.</strong> Mesmo comparando o órgão com ele mesmo, outras mudanças (nova gestão, fiscalização do TCU, troca de sistema de compras) podem andar junto com a chegada de ATIs.</li>
+          <li><strong>Amostra limitada.</strong> Entram só entidades vinculadas (autarquias, fundações, agências), cujo código é estável. Os ministérios, onde estão a maioria dos ATIs, mudaram de nome e de código em 2019 e 2023 e ficaram fora; a versão “extrapolada” supõe que o efeito por ATI seja o mesmo lá. Com poucos ATIs por órgão, o intervalo de confiança tende a ser largo.</li>
+          <li><strong>Período curto.</strong> O PNCP publica os termos aditivos de forma consistente só a partir de 2021. Contratos assinados depois de 2024 ainda não tiveram tempo de receber aditivos.</li>
+          <li><strong>Só o que é registrado.</strong> Perdas que não aparecem em aditivo nem em preço (serviço mal entregue, glosa não aplicada, risco evitado, contrato que deixou de ser feito) não são medidas. O efeito do ATI pode ser maior que o estimado, ou vir por canais que este quadro não vê.</li>
+          <li><strong>Preço de referência interno.</strong> A mediana vem dos próprios órgãos analisados, não de uma pesquisa de mercado; se todos pagam caro, o excesso não aparece.</li>
+        </ul>
+        <p class="nota" id="eco-cobertura"></p>
+        <p class="nota">Fontes: <a href="https://dadosabertos.compras.gov.br" target="_blank" rel="noopener">Compras.gov.br (dados abertos)</a>, <a href="https://pncp.gov.br" target="_blank" rel="noopener">PNCP</a> e Portal da Transparência (SIAPE). Código: <code>scripts/economicidade_ati.py</code>.</p>
+      </details>
+    </section>
+
     <section class="secao" id="s-onde" data-secao="onde" aria-labelledby="t-onde">
       <div class="secao-cabecalho">
         <h2 id="t-onde">Onde trabalham</h2>
@@ -316,6 +406,7 @@
   </footer>
 
   <script src="orcamento.js"></script>
+  <script src="economicidade.js"></script>
   <script src="auditoria.js"></script>
   <script src="app.js"></script>
 </body>
